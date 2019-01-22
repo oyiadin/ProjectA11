@@ -3,11 +3,14 @@
 {% block content %}
 
 <form method="POST" action="/register">
-    <label>Name: </label>
-    <input type="text" name="name" placeholder="Your Name" required />
+    <label>Username: </label>
+    <input type="text" name="username" placeholder="Your username" required />
 
     <label>Password: </label>
     <input type="password" name="password" placeholder="Your Password" required />
+
+    <label>Name</label>
+    <input type="text" name="name" placeholder="Your Name" required />
 
     <label>Role: </label>
     <input type="radio" name="role" value="0" />

@@ -32,8 +32,8 @@ if __name__ == '__main__':
 
     try:
         if args.server:
-            import projecta11
-            projecta11.startup(conf)
+            import projecta11.web
+            projecta11.web.startup(conf)
 
         if args.init:
             import projecta11.db

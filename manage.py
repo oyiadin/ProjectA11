@@ -4,7 +4,7 @@ import argparse
 parser = argparse.ArgumentParser(description='project_a11')
 
 parser.add_argument('--server', default=False, action='store_const', const=True)
-parser.add_argument('--db_init', default=False, action='store_const', const=True)
+parser.add_argument('--init', default=False, action='store_const', const=True)
 parser.add_argument('--debug', default=False, action='store_const', const=True)
 parser.add_argument('--config', default='config.json')
 
@@ -41,7 +41,7 @@ if __name__ == '__main__':
             import projecta11
             projecta11.startup(conf)
 
-        if args.db_init:
+        if args.init:
             import projecta11.db
             projecta11.db.init_db(conf)
 

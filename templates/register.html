@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action="/register">
+    <label>Name: </label>
+    <input type="text" name="name" placeholder="Your Name" required />
+
+    <label>Password: </label>
+    <input type="password" name="password" placeholder="Your Password" required />
+
+    <label>Role: </label>
+    <input type="radio" name="role" value="0" />
+    <input type="radio" name="role" value="1" />
+    <input type="radio" name="role" value="2" />
+
+    <hr />
+    <input type="submit" value="register!" />
+</form>
+
+{% end %}

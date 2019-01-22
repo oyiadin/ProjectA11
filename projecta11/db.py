@@ -2,7 +2,7 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, SmallInteger
+from sqlalchemy import Column, Integer, String, SmallInteger, CHAR
 from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()
@@ -12,9 +12,10 @@ Session = None
 
 class User(Base):
     __tablename__ = "users"
-    Id = Column(Integer, primary_key=True)
-    Name = Column(String(8))
-    Role = Column(SmallInteger)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(8))
+    password = Column(CHAR(64))  # only store sha256 hashed password
+    role = Column(SmallInteger)
 
     int2role = ['Admin', 'Teacher', 'Student']
 
@@ -26,7 +27,7 @@ def startup(conf):
 
     engine = create_engine(
         '{dialect}+{driver}://{user}:{password}@{host}/{dbname}'.format(
-            **conf.db), echo=conf.debug)
+            **conf.db), echo=conf.app.debug)
     Session = sessionmaker(bind=engine)
 
 

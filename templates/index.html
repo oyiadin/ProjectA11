@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>{{ page.page_title }}</title>
-<meta charset="utf-8" />
-</head>
-<body>
+{% extends 'base.html' %}
 
-Hello, World!
+{% block content %}
 
-</body>
-</html>
+<a href="/register">click me to register!</a>
+<a href="/login">click me to login!</a>
+
+{% end %}

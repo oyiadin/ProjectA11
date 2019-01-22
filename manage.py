@@ -19,14 +19,8 @@ class ObjectDict(dict):
 
 def load_config(filename):
     with open(filename) as f:
-        default_config = dict(
-            port=8888,
-            debug=False,
-            template_path='templates',
-        )
         loaded_config = json.load(f)
-        default_config.update(loaded_config)
-        return ObjectDict(default_config)
+        return ObjectDict(loaded_config)
 
 
 if __name__ == '__main__':
@@ -34,7 +28,7 @@ if __name__ == '__main__':
     conf = load_config(args.config)
 
     if args.debug:
-        conf.update({'debug': True})
+        conf.app.update({'debug': True})
 
     try:
         if args.server:

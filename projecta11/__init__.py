@@ -5,16 +5,29 @@ import projecta11.db as db
 import tornado.ioloop
 import tornado.web
 
+conf = None
 
-class MainHandler(tornado.web.RequestHandler):
+
+class BaseHandler(tornado.web.RequestHandler):
+    pass
+    # 为了以后拓展方便
+
+
+class IndexHandler(BaseHandler):
     def get(self):
-        self.write("Hello, world")
+        self.render("index.html", page=conf.page)
 
 
-def startup(conf):
+def startup(_conf):
+    global conf
+    conf = _conf
     db.startup(conf)
-    app = tornado.web.Application([
-        (r"/", MainHandler),
-    ])
+    routers = [
+        (r"/", IndexHandler),
+    ]
+    app = tornado.web.Application(
+        routers,
+        debug=conf.debug,
+        template_path=conf.template_path)
     app.listen(conf.port)
     tornado.ioloop.IOLoop.current().start()

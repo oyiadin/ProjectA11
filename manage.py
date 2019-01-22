@@ -5,6 +5,7 @@ parser = argparse.ArgumentParser(description='project_a11')
 
 parser.add_argument('--server', default=False, action='store_const', const=True)
 parser.add_argument('--db_init', default=False, action='store_const', const=True)
+parser.add_argument('--debug', default=False, action='store_const', const=True)
 parser.add_argument('--config', default='config.json')
 
 
@@ -20,6 +21,8 @@ def load_config(filename):
     with open(filename) as f:
         default_config = dict(
             port=8888,
+            debug=False,
+            template_path='templates',
         )
         loaded_config = json.load(f)
         default_config.update(loaded_config)
@@ -29,6 +32,9 @@ def load_config(filename):
 if __name__ == '__main__':
     args = parser.parse_args()
     conf = load_config(args.config)
+
+    if args.debug:
+        conf.update({'debug': True})
 
     try:
         if args.server:

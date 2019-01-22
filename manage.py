@@ -8,11 +8,11 @@ parser.add_argument('--db_init', default=False, action='store_const', const=True
 parser.add_argument('--config', default='config.json')
 
 
-class MyDict(dict):
+class ObjectDict(dict):
     def __getattr__(self, item):
         value = self[item]
         if isinstance(value, dict):
-            return MyDict(value)
+            return ObjectDict(value)
         return value
 
 
@@ -23,7 +23,7 @@ def load_config(filename):
         )
         loaded_config = json.load(f)
         default_config.update(loaded_config)
-        return MyDict(default_config)
+        return ObjectDict(default_config)
 
 
 if __name__ == '__main__':

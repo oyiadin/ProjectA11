@@ -49,7 +49,7 @@ class BaseHandler(tornado.web.RequestHandler):
             db.User.username == username).first()
 
     def render(self, *args, **kwargs):
-        kwargs.update(dict(page=conf.page))
+        kwargs.update(dict(page=conf.page, conf=conf))
         return super().render(*args, **kwargs)
 
     def hash_password(self, password):
@@ -126,6 +126,7 @@ class UserCenterHandler(BaseHandler):
 def startup(_conf):
     global conf
     conf = _conf
+
     db.startup(conf)
     routers = [
         (r"/", IndexHandler),
@@ -133,10 +134,16 @@ def startup(_conf):
         (r"/login", LoginHandler),
         (r"/user_center", UserCenterHandler),
     ]
+    if conf.app.use_static_handler:
+        routers.append((
+            r"/static/(.*)", tornado.web.StaticFileHandler,
+            {'path': conf.app.static_path}))
+
     app = tornado.web.Application(
         routers,
         debug=conf.app.debug,
+        cookie_secret=conf.app.cookie_secret,
         template_path=conf.app.template_path,
-        cookie_secret=conf.app.cookie_secret)
+        static_path=conf.app.static_path)
     app.listen(conf.app.port)
     tornado.ioloop.IOLoop.current().start()

@@ -4,7 +4,9 @@
     "debug": true,
     "cookie_secret": "[IMPORTANT] RESET ME BEFORE PUT IT IN PRODUCTION ENV",
     "password_salt": "[IMPORTANT} RESET ME!",
-    "template_path": "templates"
+    "template_path": "templates",
+    "static_path": "static",
+    "use_static_handler": "true"
   },
   "db": {
     "dialect": "mysql",

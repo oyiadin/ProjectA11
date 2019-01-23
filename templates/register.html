@@ -1,24 +1,39 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Register
+{% end %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ static_url('css/main.css') }}">
+{% end %}
+
 {% block content %}
-
-<form method="POST" action="/register">
-    <label>Username: </label>
-    <input type="text" name="username" placeholder="Your username" required />
-
-    <label>Password: </label>
-    <input type="password" name="password" placeholder="Your Password" required />
-
-    <label>Name</label>
-    <input type="text" name="name" placeholder="Your Name" required />
-
-    <label>Role: </label>
-    <input type="radio" name="role" value="0" />
-    <input type="radio" name="role" value="1" />
-    <input type="radio" name="role" value="2" />
-
-    <hr />
-    <input type="submit" value="register!" />
+<form class="container container-small" method="post">
+  <h1>用户注册</h1>
+  <div class="form-group">
+    <label>用户名</label>
+    <input type="text" class="form-control" placeholder="请输入用户名" id="UserName" name="username">
+    <div class="retrieve-password">
+      <label>登录密码</label>
+      <input type="password" class="form-control" placeholder="请输入6-15位密码" id="FirstPassword">
+      <label>确认登录密码</label>
+      <input type="password" class="form-control" placeholder="请重复输入一次密码" id="SecondPassword" name="password">
+    </div>
+  </div>
+  <label>姓名</label>
+  <input type="text" class="form-control" placeholder="姓名" id="name" name="name">
+  <label>Role: </label>
+  <input type="radio" name="role" value="0" />
+  <input type="radio" name="role" value="1" />
+  <input type="radio" name="role" value="2" />
+  <div class="MyButton" id="app">
+    <!--<button @click="CheckLogIn" type="button" class="btn btn-default btn-lg">提交</button>-->
+    <input type="submit" value="提交" />
+  </div>
 </form>
+{% end %}
 
+{% block footer %}
+<!-- <script src="{{ static_url('js/register.js') }}"></script> -->
 {% end %}

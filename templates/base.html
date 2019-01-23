@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>{% block title %}{{ page.page_title }}{% end %}</title>
-<meta charset="utf-8" />
+  <meta charset="utf-8">
+  <title>{% block title %}{{ page.page_title }}{% end %}</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+  {% block head %}{% end %}
 </head>
 <body>
-
-{% block content %}
-Hello, World!
-{% end %}
-
+  {% block content %}{% end %}
+  {% if conf.app.debug %}
+    <script src="https://vuejs.org/js/vue.js"></script>
+  {% else %}
+    <script src="https://vuejs.org/js/vue.min.js"></script>
+  {% end %}
+  {% block footer %}{% end %}
 </body>
 </html>

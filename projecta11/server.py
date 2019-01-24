@@ -6,6 +6,8 @@ import tornado.web
 import projecta11.utils.config as config
 import projecta11.utils.db as db
 import projecta11.routers as routers
+import projecta11.handlers
+
 
 def startup(conf):
     config.conf = conf

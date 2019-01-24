@@ -2,7 +2,10 @@
 
 from projecta11.handlers.base import BaseHandler
 import projecta11.utils.db as db
+from projecta11.routers import handling
 
+
+@handling(r"/login")
 class LoginHandler(BaseHandler):
     def get(self):
         self.render("login.html")

@@ -15,7 +15,7 @@
 
 5. 安装 `mysql`，自行百度
 
-6. 创建用户: `create user 'test'@'%' identified by 'password'` (用户名密码可以改，但是要修改 `config.json` 文件) (反正是本地数据库，直接这样不改它就行)
+6. 创建用户: `create user 'test'@'%' identified by 'password'` (用户名密码可以改，但是要修改 `config.json` 文件) (反正是本地数据库，直接这样不改它就行) (本行在 `mysql -u root -p` 里运行)
 
 7. 创建数据库: `create database project_a11_test;` (在 `mysql -u root -p` 里运行)
 
@@ -34,6 +34,6 @@
 
 `--server` 是运行服务器用的；`--init` 是建表用的，只需要第一次运行时跑一下。
 
-服务器跑起来之后，去 [http://localhost:8888](ttp://localhost:8888) 就可以看到了。
+服务器跑起来之后，去 [http://localhost:8888](http://localhost:8888) 就可以看到了。
 
 如果其他人修改了数据库的表结构，需要删了对应的表，然后重新运行一下 `--init` (可以直接改吗，我 mysql 不是很熟悉)

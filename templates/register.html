@@ -4,34 +4,43 @@
 Register
 {% end %}
 
-{% block head %}
+{% block css %}
 <link rel="stylesheet" href="{{ static_url('css/main.css') }}">
 {% end %}
 
 {% block content %}
-<form class="container container-small" method="post">
-  <h1>用户注册</h1>
+<div class="container">
+<div class="col-md-4 col-md-offset-4">
+<form class="form-register" method="post">
+  <h2 class="text-center">欢迎注册</h2>
   <div class="form-group">
     <label>用户名</label>
     <input type="text" class="form-control" placeholder="请输入用户名" id="UserName" name="username">
-    <div class="retrieve-password">
+  </div>
+  <div class="form-group">
       <label>登录密码</label>
       <input type="password" class="form-control" placeholder="请输入6-15位密码" id="FirstPassword">
+  </div>
+  <div class="form-group">
       <label>确认登录密码</label>
       <input type="password" class="form-control" placeholder="请重复输入一次密码" id="SecondPassword" name="password">
-    </div>
   </div>
-  <label>姓名</label>
-  <input type="text" class="form-control" placeholder="姓名" id="name" name="name">
-  <label>Role: </label>
-  <input type="radio" name="role" value="0" />
-  <input type="radio" name="role" value="1" />
-  <input type="radio" name="role" value="2" />
-  <div class="MyButton" id="app">
-    <!--<button @click="CheckLogIn" type="button" class="btn btn-default btn-lg">提交</button>-->
-    <input type="submit" value="提交" />
+  <div class="form-group">
+      <label>姓名</label>
+      <input type="text" class="form-control" placeholder="姓名" id="name" name="name">
   </div>
+  <div class="form-group">
+      <label>Role: </label>
+      <input type="radio" name="role" value="0" />
+      <input type="radio" name="role" value="1" />
+      <input type="radio" name="role" value="2" />
+  </div>
+
+  <button type="reset" class="btn btn-default pull-left">重置</button>
+  <button type="submit" class="btn btn-primary pull-right">提交</button>
 </form>
+</div>
+</div>
 {% end %}
 
 {% block footer %}

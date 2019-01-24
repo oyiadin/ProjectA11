@@ -1,6 +1,9 @@
 # ProjectA11
 基于微信的移动智能学习平台
 
+## 前端
+前端`Bootstrap`现在版本是3.3.7
+
 ## Usage
 
 ### Preparation

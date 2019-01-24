@@ -5,9 +5,9 @@ import enum
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (
-    Column, Integer, String, CHAR, Enum
+    Column, Integer, String, CHAR, Enum, SmallInteger, ForeignKey
 )
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 
 Base = declarative_base()
 engine = None
@@ -19,6 +19,8 @@ class UserRole(enum.Enum):
     student = 2
 
 int2role = [UserRole.admin, UserRole.teacher, UserRole.student]
+string2role = dict(
+    admin=UserRole.admin, teacher=UserRole.teacher, student=UserRole.student)
 
 
 class User(Base):
@@ -32,7 +34,7 @@ class User(Base):
 
     def __repr__(self):
         return '''<db.User
-    id = {id},
+    id={id},
     username={username},
     password={password},
     name={name},
@@ -40,6 +42,28 @@ class User(Base):
     description={description}>'''.format(
             id=self.id, username=self.username, password=self.password,
             name=self.name, role=self.role, description=self.description)
+
+
+class Class(Base):
+    __tablename__ = 'classes'
+    id = Column(Integer, primary_key=True)
+    class_name = Column(String(64))
+    class_time = relationship("ClassTime")
+
+
+class ClassTime(Base):
+    __tablename__ = 'classtime'
+    id = Column(Integer, primary_key=True)
+    class_id = Column(Integer, ForeignKey(Class.id))
+    weekday = Column(SmallInteger)  # 周几
+    period = Column(SmallInteger)  # 第几节课
+
+
+class RelationUserClass(Base):  # 用户(学生)与班级的关系表
+    __tablename__ = 'relation_user_class'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey(User.id))
+    class_id = Column(Integer, ForeignKey(Class.id))
 
 
 # class CourseStatus(enum.Enum):

@@ -5,7 +5,8 @@ import enum
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (
-    Column, Integer, String, CHAR, ARRAY, Enum, DateTime, Float)
+    Column, Integer, String, CHAR, Enum
+)
 from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()

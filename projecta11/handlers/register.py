@@ -1,0 +1,33 @@
+# coding=utf-8
+from projecta11.handlers.base import BaseHandler
+import projecta11.utils.db as db
+
+class RegisterHandler(BaseHandler):
+    def get(self):
+        self.render("register.html")
+
+    def post(self):
+        username = self.get_argument('username')
+        password = self.get_argument('password')
+        name = self.get_argument('name')
+        role = self.get_argument('role')
+
+        if not (username and password and name and role):
+            return self.write('all arguments are required!')
+        if not role.isdigit():
+            return self.write('role must be an integer!')
+        role = int(role)
+        if role >= len(db.UserRole.__members__):
+            return self.write('illegal role value!')
+        role = db.int2role[role]
+
+        # hash the password
+        password = self.hash_password(password)
+
+        new_user = db.User(username=username, password=password,
+                           name=name, role=role)
+        self.session_db.add(new_user)
+        self.session_db.commit()
+        self.session_db.close()
+
+        self.redirect('/login')

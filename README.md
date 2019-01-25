@@ -1,7 +1,9 @@
 # ProjectA11
+
 基于微信的移动智能学习平台
 
 ## 前端
+
 前端`Bootstrap`现在版本是3.3.7
 
 ## Usage
@@ -40,3 +42,13 @@
 服务器跑起来之后，去 [http://localhost:8888](http://localhost:8888) 就可以看到了。
 
 如果其他人修改了数据库的表结构，需要删了对应的表，然后重新运行一下 `--init` (可以直接改吗，我 mysql 不是很熟悉)
+
+## Dependent Libraries
+
+根据赛题文档，所使用的开源库必须进行标注：
+
+* [tornado](https://github.com/tornadoweb/tornado/blob/master/LICENSE) (Apache License 2.0)
+* [sqlalchemy](https://github.com/zzzeek/sqlalchemy/blob/master/LICENSE) (MIT)
+* [mysqlclient-python](https://github.com/PyMySQL/mysqlclient-python/blob/master/LICENSE) (GNU General Public License v2.0) (注意: 我们已经违反了 GNUv2 规定的"同协议"规则)
+* [vuejs](https://github.com/vuejs/vue/blob/dev/LICENSE) (MIT)
+* [bootstrap](https://getbootstrap.com/docs/4.2/about/license/) (MIT)

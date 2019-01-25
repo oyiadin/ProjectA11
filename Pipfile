@@ -9,6 +9,7 @@ verify_ssl = true
 tornado = "*"
 sqlalchemy = "*"
 mysqlclient = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.6"

@@ -19,6 +19,10 @@ def startup(conf):
         debug=conf.app.debug,
         cookie_secret=conf.app.cookie_secret,
         template_path=conf.app.template_path,
-        static_path=conf.app.static_path)
+        static_path=conf.app.static_path,
+        #cookie_secret = "4d46745a30d006b9cbbd90005f50075764ccc67c53fade810b4f43d644acab4d",
+        #xsrf_cookies = True,
+        #login_url = "/",
+        )
     app.listen(conf.app.port)
     tornado.ioloop.IOLoop.current().start()

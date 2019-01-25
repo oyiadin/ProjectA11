@@ -11,6 +11,7 @@ def handling(pattern):
         return handler
     return decorator
 
+
 def get_routers(conf):
     if conf.app.use_static_handler:
         routers.append((

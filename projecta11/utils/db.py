@@ -13,6 +13,7 @@ Base = declarative_base()
 engine = None
 Session = None
 
+
 class UserRole(enum.Enum):
     admin = 0
     teacher = 1

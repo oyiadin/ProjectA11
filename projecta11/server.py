@@ -7,6 +7,7 @@ import projecta11.utils.config as config
 import projecta11.utils.db as db
 import projecta11.routers as routers
 import projecta11.handlers
+# 不能删，handlers 得被载入才会注册好对应的 url pattern
 
 
 def startup(conf):

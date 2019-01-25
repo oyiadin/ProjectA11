@@ -3,7 +3,8 @@ import projecta11.utils.config as config
 
 parser = argparse.ArgumentParser(description='project_a11')
 
-parser.add_argument('--server', default=False, action='store_const', const=True)
+parser.add_argument('--server',
+                    default=False, action='store_const', const=True)
 parser.add_argument('--init', default=False, action='store_const', const=True)
 parser.add_argument('--debug', default=False, action='store_const', const=True)
 parser.add_argument(

@@ -4,6 +4,7 @@ import json
 
 conf = None
 
+
 class ObjectDict(dict):
     def __getattr__(self, item):
         value = self[item]

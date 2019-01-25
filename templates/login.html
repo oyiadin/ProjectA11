@@ -10,22 +10,22 @@ Login
 
 {% block content %}
 <div class="container">
-<div class="col-md-4 col-md-offset-4">
-<form class="form-login" method="post">
-  <h2 class="text-center">欢迎登录</h2>
-  <div class="form-group">
-    <label>用户名</label>
-    <input type="text" class="form-control" id='username' placeholder="请输入用户名" name="username">
-    <label>登录密码</label>
-    <input type="password" class="form-control" placeholder="请输入密码" id="StuPSW" name="password">
+  <div class="col-md-4 col-md-offset-4">
+    <form class="form-login" method="post">
+      <h2 class="text-center">欢迎登录</h2>
+      <div class="form-group">
+        <label>用户名</label>
+        <input type="text" class="form-control" id='username' placeholder="请输入用户名" name="username">
+        <label>登录密码</label>
+        <input type="password" class="form-control" placeholder="请输入密码" id="StuPSW" name="password">
+      </div>
+      <button type="reset" class="btn btn-default pull-left">重置</button>
+      <button type="submit" class="btn btn-primary pull-right">提交</button>
+    </form>
   </div>
-  <button type="reset" class="btn btn-default pull-left">重置</button>
-  <button type="submit" class="btn btn-primary pull-right">提交</button>
-</form>
-</div>
 </div>
 {% end %}
 
-{% block footer %}
+{% block script %}
 <!--<script src="{{ static_url('js/login.js') }}"></script>-->
 {% end %}

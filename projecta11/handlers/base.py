@@ -6,6 +6,7 @@ import tornado.web
 import projecta11.utils.db as db
 from projecta11.utils.config import conf
 
+
 class BaseHandler(tornado.web.RequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

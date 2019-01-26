@@ -20,7 +20,7 @@
 
 5. 安装 `mysql`，自行百度
 
-6. 创建用户: `create user 'test'@'%' identified by 'password'` (用户名密码可以改，但是要修改 `config.json` 文件) (反正是本地数据库，直接这样不改它就行) (本行在 `mysql -u root -p` 里运行)
+6. 创建用户: `create user 'test'@'%' identified by 'password';` (用户名密码可以改，但是要修改 `config.json` 文件) (反正是本地数据库，直接这样不改它就行) (本行在 `mysql -u root -p` 里运行)
 
 7. 创建数据库: `create database project_a11_test;` (在 `mysql -u root -p` 里运行)
 
@@ -49,6 +49,6 @@
 
 * [tornado](https://github.com/tornadoweb/tornado/blob/master/LICENSE) (Apache License 2.0)
 * [sqlalchemy](https://github.com/zzzeek/sqlalchemy/blob/master/LICENSE) (MIT)
-* [mysqlclient-python](https://github.com/PyMySQL/mysqlclient-python/blob/master/LICENSE) (GNU General Public License v2.0) (注意: 我们已经违反了 GNUv2 规定的"同协议"规则)
+* [pymysql](https://github.com/PyMySQL/PyMySQL/blob/master/LICENSE) (MIT)
 * [vuejs](https://github.com/vuejs/vue/blob/dev/LICENSE) (MIT)
 * [bootstrap](https://getbootstrap.com/docs/4.2/about/license/) (MIT)

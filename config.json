@@ -10,7 +10,7 @@
   },
   "db": {
     "dialect": "mysql",
-    "driver": "mysqldb",
+    "driver": "pymysql",
     "user": "test",
     "password": "password",
     "host": "localhost",

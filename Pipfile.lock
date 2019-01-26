@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "721447cc9222c0030450dd3a0be15224be7635ba8a03a1be7fe12df29fc961f1"
+            "sha256": "3766c799e8b85d6505ff860634bde23c4f63fcedbd3e74d6dc134187b53c376c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -10,21 +10,12 @@
         "sources": [
             {
                 "name": "pypi",
-                "url": "https://pypi.org/simple",
+                "url": "https://mirrors.aliyun.com/pypi/simple",
                 "verify_ssl": true
             }
         ]
     },
     "default": {
-        "mysqlclient": {
-            "hashes": [
-                "sha256:6883a4dd98903bad375c859ead1a480e1245ea3a8d9b038ea2c091c1865ba673",
-                "sha256:a62220410e26ce2d2ff94dd0138c3ecfb91db634464a9afb4c8e6b50f0a67e00",
-                "sha256:e1b9f3a8928ddb4985ca3e3c9f2aa81b19e831bbf6fabf5681ee356738dbbbb2"
-            ],
-            "index": "pypi",
-            "version": "==1.4.1"
-        },
         "pillow": {
             "hashes": [
                 "sha256:051de330a06c99d6f84bcf582960487835bcae3fc99365185dc2d4f65a390c0e",
@@ -61,12 +52,20 @@
             "index": "pypi",
             "version": "==5.4.1"
         },
-        "sqlalchemy": {
+        "pymysql": {
             "hashes": [
-                "sha256:6af3ca2f7f00844465ab4fa78337d487b39e53f516c51328aed4ed3a719d4264"
+                "sha256:3943fbbbc1e902f41daf7f9165519f140c4451c179380677e6a848587042561a",
+                "sha256:d8c059dcd81dedb85a9f034d5e22dcb4442c0b201908bede99e306d65ea7c8e7"
             ],
             "index": "pypi",
-            "version": "==1.2.16"
+            "version": "==0.9.3"
+        },
+        "sqlalchemy": {
+            "hashes": [
+                "sha256:52a42dbf02d0562d6e90e7af59f177f1cc027e72833cc29c3a821eefa009c71d"
+            ],
+            "index": "pypi",
+            "version": "==1.2.17"
         },
         "tornado": {
             "hashes": [

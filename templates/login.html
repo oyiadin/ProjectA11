@@ -24,7 +24,7 @@ Login
       <div class="form-group">
         <label>验证码</label>
         <input type="text" class="form-control" placeholder="验证码" name="code">
-        <img src="/check_code" onclick="changcode()" alt="" id="code">
+        <img src="/check_code" onclick="ChangCode();" id="code">
       </div>
       <button type="reset" class="btn btn-default pull-left">重置</button>
       <button type="submit" class="btn btn-primary pull-right">提交</button>
@@ -36,9 +36,9 @@ Login
 {% block script %}
 <!--<script src="{{ static_url('js/login.js') }}"></script>-->
 <script type="text/javascript">
-  function changcode() {
-      var code = document.getElementById('code')
-      code.src = "/check_code" + Math.random()
+  function ChangCode() {
+      var code = document.getElementById('code');
+      code.src = "/check_code" + Math.random();
   }
 </script>
 {% end %}

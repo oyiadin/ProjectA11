@@ -10,6 +10,7 @@ import io
 @handling(r"/check_code.*")
 class CheckCodeHandler(BaseHandler):
     def get(self, *args, **kwargs):
+        global CODE
         image, CODE = check_code.create_validate_code()
         # BytesIO操作二进制数据，将验证码图形写入内存
         mstream = io.BytesIO()

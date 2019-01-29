@@ -21,11 +21,11 @@ Login
         <label>登录密码</label>
         <input type="password" class="form-control" placeholder="请输入密码" id="StuPSW" name="password">
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>验证码</label>
         <input type="text" class="form-control" placeholder="验证码" name="code">
         <img src="/check_code" onclick="ChangCode();" id="code">
-      </div>
+      </div> -->
       <button type="reset" class="btn btn-default pull-left">重置</button>
       <button type="submit" class="btn btn-primary pull-right">提交</button>
     </form>
@@ -35,10 +35,10 @@ Login
 
 {% block script %}
 <!--<script src="{{ static_url('js/login.js') }}"></script>-->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   function ChangCode() {
       var code = document.getElementById('code');
       code.src = "/check_code" + Math.random();
   }
-</script>
+</script> -->
 {% end %}

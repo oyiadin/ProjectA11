@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ static_url('css/user_center.css') }}">
+{% end %}
+
+{% block content %}
+<div class="course">
+  <div class="col-md-6">
+    <div class="course-image">
+      <img src="..\static\pics\math.jpg" class="img-thumbnail" width="256" height="144">
+    </div>
+    <div class="course-info">
+      <label>高等数学（下）</label>
+      <p class="course-teacher">李一 . xxxx大学</p>
+      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+      <p>开课时间: 2019.xx.xx</p>
+      <p>结束时间: 2019.xx.xx</p>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg">我要参加</button>
+  </div>
+  <div class="col-md-6">
+    <div class="course-image">
+      <img src="..\static\pics\english.jpg" class="img-thumbnail" width="256" height="144">
+    </div>
+    <div class="course-info">
+      <label>大学生英语精读</label>
+      <p class="course-teacher">李二 . xxxx大学</p>
+      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+      <p>开课时间: 2019.xx.xx</p>
+      <p>结束时间: 2019.xx.xx</p>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg">我要参加</button>
+  </div>
+  <div class="col-md-6">
+    <div class="course-image">
+      <img src="..\static\pics\digit.jpg" class="img-thumbnail" width="256" height="144">
+    </div>
+    <div class="course-info">
+      <label>数字电路</label>
+      <p class="course-teacher">李三 . xxxx大学</p>
+      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+      <p>开课时间: 2019.xx.xx</p>
+      <p>结束时间: 2019.xx.xx</p>
+      </div>
+    <button type="button" class="btn btn-primary btn-lg">我要参加</button>
+  </div>
+  <div class="col-md-6">
+    <div class="course-image">
+      <img src="..\static\pics\physics.jpg" class="img-thumbnail" width="256" height="144">
+    </div>
+    <div class="course-info">
+      <label>大学物理</label>
+      <p class="course-teacher">李四 . xxxx大学</p>
+      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+      <p>开课时间: 2019.xx.xx</p>
+      <p>结束时间: 2019.xx.xx</p>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg">我要参加</button>
+  </div>
+</div>
+{% end %}

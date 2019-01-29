@@ -1,0 +1,18 @@
+.col-md-6{
+  border-style: dashed;
+  border-color: gray;
+}
+body{
+  background-color: gray;
+}
+.course-info{
+  padding-top: 10px;
+  padding-left: 10px;
+}
+.btn{
+  float: right;
+  padding-bottom: 10px;
+}
+.course-image{
+  padding-top: 10px;
+}

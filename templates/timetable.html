@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ static_url('css/timetable.css') }}">
+{% end %}
+
+{% block content %}
+<div class="container">
+  <table class="table table-bordered">
+    <caption>我的课表</caption>
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th style="width:20%" align="center">周一</th>
+        <th style="width:20%">周二</th>
+        <th style="width:20%">周三</th>
+        <th style="width:20%">周四</th>
+        <th style="width:20%">周五</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="width:7%">第一节</td>
+        <td rowspan="2" align="center">毛泽东思想和国特色社会主义理论体系概论</td>
+        <td rowspan="2">跨文化交际</td>
+        <td>&nbsp;</td>
+        <td rowspan="2">离散数学</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>第二节</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>第三节</td>
+        <td>&nbsp;</td>
+        <td rowspan="2">体育-乒乓球(男)</td>
+        <td rowspan="3">数字电路课程设计</td>
+        <td rowspan="3">概率论与数理统计</td>
+        <td rowspan="3">大学物理2</td>
+      </tr>
+      <tr>
+        <td>第四节</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>第五节</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>第六节</td>
+        <td rowspan="3">大学物理实验B</td>
+        <td rowspan="3">数据结构(甲)</td>
+        <td rowspan="2">大学生职业发展与就业指导1</td>
+        <td rowspan="3">数据结构课程实践</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>第七节</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>第八节</td>
+        <td rowspan="2">形势与政策（上）</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>第九节</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>第十节</td>
+        <td rowspan="3">数字电路设计</td>
+        <td rowspan="2">创新实践1</td>
+        <td>&nbsp;</td>
+        <td rowspan="3">ACM程序设计竞赛实训（甲）</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>第十一节</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>第十二节</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% end %}

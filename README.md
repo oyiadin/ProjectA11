@@ -52,3 +52,4 @@
 * [pymysql](https://github.com/PyMySQL/PyMySQL/blob/master/LICENSE) (MIT)
 * [vuejs](https://github.com/vuejs/vue/blob/dev/LICENSE) (MIT)
 * [bootstrap](https://getbootstrap.com/docs/4.2/about/license/) (MIT)
+* [jQuery](https://github.com/jquery/jquery/blob/master/LICENSE.txt)(MIT)

@@ -9,6 +9,8 @@
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,8 +44,18 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/login">登录</a></li>
           <li><a href="/register">注册</a></li>
-          <li><a href="/user_center">个人页面</a></li>
-          <li><a href="/select_class">课程一览</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              我的<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/user_center">个人页面</a></li>
+              <li><a href="/select_class">课程一览</a></li>
+              <li><a href="/timetable">我的课表</a></li>
+              <li><a href="/score">成绩查询</a></li>
+              <li><a href="/test_arrangement">考试安排</a></li>
+            </ul>
+          </li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

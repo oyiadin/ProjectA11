@@ -25,6 +25,7 @@ if __name__ == '__main__':
     try:
         if args.server:
             import projecta11.server
+            print('listening to http://localhost:{}/'.format(conf.app.port))
             projecta11.server.startup(conf)
 
         if args.init:

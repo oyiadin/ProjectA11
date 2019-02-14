@@ -6,3 +6,4 @@ from projecta11.handlers.login import LoginHandler
 from projecta11.handlers.logout import LogoutHandler
 from projecta11.handlers.user_center import UserCenterHandler
 from projecta11.handlers.classes import ClassShowHandler, ClassCreateHandler
+from projecta11.handlers.capture import CheckCodeHandler

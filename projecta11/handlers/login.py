@@ -2,13 +2,13 @@
 
 from projecta11.handlers.base import BaseHandler
 import projecta11.utils.db as db
-from projecta11.routers import handling
+from projecta11.routers import handling, url
 
 
-@handling(r"/login")
+@handling('login')
 class LoginHandler(BaseHandler):
     def get(self):
-        self.render("login.html")
+        self.render("users/login.html")
 
     def post(self):
         username = self.get_argument('username')
@@ -25,4 +25,4 @@ class LoginHandler(BaseHandler):
             return self.write('wrong username or password')
 
         self.set_secure_cookie('username', username)
-        self.redirect('/user_center')
+        self.redirect(url('user_center'))

@@ -5,6 +5,7 @@ import hashlib
 import tornado.web
 import projecta11.utils.db as db
 from projecta11.utils.config import conf
+from projecta11.routers import handling, url
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -38,7 +39,7 @@ class BaseHandler(tornado.web.RequestHandler):
             db.User.username == username).first()
 
     def render(self, *args, **kwargs):
-        kwargs.update(dict(page=conf.page, conf=conf))
+        kwargs.update(dict(page=conf.page, conf=conf, url=url))
         return super().render(*args, **kwargs)
 
     def hash_password(self, password):
@@ -46,3 +47,9 @@ class BaseHandler(tornado.web.RequestHandler):
         salted = hashed + conf.app.password_salt
         hashed_and_salted = hashlib.sha256(salted.encode()).hexdigest()
         return hashed_and_salted
+
+
+@handling('404')
+class Error404Handler(BaseHandler):
+    def get(self):
+        self.render('404.html')

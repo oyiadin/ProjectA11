@@ -15,7 +15,7 @@ def create_validate_code(size=(120, 30),
                          bg_color=(255, 255, 255),
                          fg_color=(0, 0, 255),
                          font_size=18,
-                         font_type="Monaco.ttf",
+                         font_type="projecta11/Monaco.ttf",
                          length=4,
                          draw_lines=True,
                          n_line=(1, 2),
@@ -102,4 +102,4 @@ def create_validate_code(size=(120, 30),
 
     img = img.filter(ImageFilter.EDGE_ENHANCE_MORE)  # 滤镜，边界加强（阈值更大）
 
-return img, strs
+    return img, strs

@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
-{% block ttitle %}
+{% block title %}
 404 Not Found
 {% end %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ static_url('css/404.css') }}">
+{% end %}
+
 {% block content %}
-<div class="container">
-  404 Not Found
+<div class="middle-box text-center animated fadeInDown" >
+  <h1>404</h1>
+  <h3> 页面未能够找到</h3>
+  <div>
+    抱歉，您访问的未授权。
+  </div>
 </div>
 {% end %}
 
-<!-- TODO: 前端把这个页面补一下 -->

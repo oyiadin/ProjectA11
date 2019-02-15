@@ -24,7 +24,7 @@ Login
       <div class="form-group">
         <label>验证码</label>
         <input type="text" class="form-control" placeholder="验证码" name="code">
-        <img src="{{ url('check_code') }}" onclick="ChangCode();" id="code">
+        <img class="img-rounded" src="{{ url('check_code') }}" onclick="ChangCode();" id="code">
       </div>
       <button type="reset" class="btn btn-default pull-left">重置</button>
       <button type="submit" class="btn btn-primary pull-right">提交</button>

@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ static_url('css/teachingEvaluation') }}">
+{% end %}
+
+{% block content %}
+<div class="container col-md-4 col-md-offset-3">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3 class="text-center">教学评估问卷</h3>
+      <div class="teacherList">
+        <label for="name">选择老师</label>
+        <select class="form-control">
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+          <option value="F">F</option>
+        </select>
+      </div>
+      <div class="content">
+        <div class="singleSelection">
+          <label>单项选择</label>
+          <ol>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question1" value="option1">很满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question1" value="option2">基本满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question1" value="option3">不满意
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question2" value="option1">很满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question2" value="option2">基本满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question2" value="option3">不满意
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question3" value="option1">很满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question3" value="option2">基本满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question3" value="option3">不满意
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question4" value="option1">很满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question4" value="option2">基本满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question4" value="option3">不满意
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question5" value="option1">很满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question5" value="option2">基本满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question5" value="option3">不满意
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question6" value="option1">很满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question6" value="option2">基本满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question6" value="option3">不满意
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question7" value="option1">很满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question7" value="option2">基本满意
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question7" value="option3">不满意
+                </label>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <div class="writeArea">
+          <label>其他建议：</label>
+          <form role="form" method="post">
+            <div class="form-group">
+              <textarea name="myTextarea" rows="8" class="form-control"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="myButton">
+          <button type="button" class="btn btn-primary">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% end %}

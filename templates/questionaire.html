@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ static_url('css/questionaire') }}">
+{% end %}
+
+{% block content %}
+<div class="container col-md-4 col-md-offset-3">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3 class="text-center">教学调查问卷</h3>
+      <div class="content">
+        <div class="singleSelection">
+          <label>单项选择</label>
+          <ol>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question1" value="option1" method="post">选项1
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question1" value="option2" method="post">选项2
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question1" value="option3" method="post">选项3
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question2" value="option1" method="post">选项1
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question2" value="option2" method="post">选项2
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question2" value="option3" method="post">选项3
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question3" value="option1" method="post">选项1
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question3" value="option2" method="post">选项2
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question3" value="option3" method="post">选项3
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question4" value="option1" method="post">选项1
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question4" value="option2" method="post">选项2
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question4" value="option3" method="post">选项3
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="radio">
+                <label class="radio-inline">
+                  <input type="radio" name="question5" value="option1" method="post">选项1
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question5" value="option2" method="post">选项2
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="question5" value="option3" method="post">选项3
+                </label>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <div class="multipleSelection">
+          <label>多项选择</label>
+          <ol>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="checkbox">
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question6" value="option1" method="post">选项1
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question6" value="option2" method="post">选项2
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question6" value="option3" method="post">选项3
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="checkbox">
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question7" value="option1" method="post">选项1
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question7" value="option2" method="post">选项2
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question7" value="option3" method="post">选项3
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="checkbox">
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question8" value="option1" method="post">选项1
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question8" value="option2" method="post">选项2
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question8" value="option3" method="post">选项3
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="checkbox">
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question9" value="option1" method="post">选项1
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question9" value="option2" method="post">选项2
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question9" value="option3" method="post">选项3
+                </label>
+              </div>
+            </li>
+            <li>
+              <label>xxxxxxxxxx?</label>
+              <div class="checkbox">
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question10" value="option1" method="post">选项1
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question10" value="option2" method="post">选项2
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" name="question10" value="option3" method="post">选项3
+                </label>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <div class="writeArea">
+          <label>其他建议：</label>
+          <form role="form" method="post">
+            <div class="form-group">
+              <textarea name="name" rows="8" class="form-control"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="myButton">
+          <button type="button" class="btn btn-primary">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% end %}

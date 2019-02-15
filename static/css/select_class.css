@@ -1,6 +1,7 @@
 .col-md-6{
   border-style: dashed;
   border-color: gray;
+  padding-bottom: 50px;
 }
 body{
   background-color: gray;
@@ -9,10 +10,10 @@ body{
   padding-top: 10px;
   padding-left: 10px;
 }
-.btn{
-  float: right;
-  padding-bottom: 10px;
-}
 .course-image{
   padding-top: 10px;
 }
+/* .myBtn{
+  text-align: right;
+  padding: 10px;
+} */

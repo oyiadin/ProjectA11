@@ -5,17 +5,17 @@ from projecta11.handlers.decorators import role_assert
 from projecta11.routers import handling
 
 
-@handling(r"/class/show/([0-9]+)")
+@handling('class_show')
 class ClassShowHandler(BaseHandler):
     def get(self, class_id):
         pass
 
 
-@handling(r"/class/create")
+@handling('class_create')
 class ClassCreateHandler(BaseHandler):
     @role_assert("teacher")
     def get(self):
-        self.render("class_create.html")
+        self.render("classes/create.html")
 
     @role_assert("teacher")
     def post(self):

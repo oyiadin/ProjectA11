@@ -5,7 +5,7 @@ import enum
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (
-    Column, Integer, String, CHAR, Enum, SmallInteger, ForeignKey
+    Column, Integer, String, Boolean, CHAR, Enum, SmallInteger, ForeignKey
 )
 from sqlalchemy.orm import sessionmaker, relationship
 
@@ -27,9 +27,11 @@ string2role = dict(
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
+    staff_id = Column(Integer)
     username = Column(String(16))
     password = Column(CHAR(64))  # only store sha256 hashed password
     name = Column(String(32))
+    is_male = Column(Boolean)
     role = Column(Enum(UserRole))
     description = Column(String(1024))
 

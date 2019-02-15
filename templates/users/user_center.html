@@ -1,11 +1,10 @@
-{% extends 'base.html' %}
+{% extends '../base.html' %}
 
 {% block css %}
 <link rel="stylesheet" href="{{ static_url('css/user_center.css') }}">
 {% end %}
 
 {% block content %}
-  {% if user==True %}
   <div class="col-md-4 col-md-offset-4">
     <h2 class="text-center">个人信息</h2>
     <div class="form-group">
@@ -14,7 +13,7 @@
     </div>
     <div class="form-group">
       <label>性别</label>
-      <p class="form-control-static">{{ user.sex }}</p>
+      <p class="form-control-static">{% if user.is_male %}男{% else %}女{% end %}</p>
     </div>
     <div class="form-group">
       <label>用户名</label>
@@ -22,20 +21,7 @@
     </div>
     <div class="form-group">
       <label>学号</label>
-      <p class="form-control-static">{{ user.student-number }}</p>
-    </div>
-    <div class="form-group">
-      <label>学院</label>
-      <p class="form-control-static">{{ user.college }}</p>
-    </div>
-    <div class="form-group">
-      <label>专业</label>
-      <p class="form-control-static">{{ user.major }}</p>
+      <p class="form-control-static">{{ user.staff_id }}</p>
     </div>
   </div>
-  {% else %}
-  <script>
-    window.location.href="/login";
-  </script>
-  {% end %}
 {% end %}

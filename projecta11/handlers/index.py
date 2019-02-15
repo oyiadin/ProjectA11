@@ -4,7 +4,7 @@ from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
 
 
-@handling(r"/")
+@handling('index')
 class IndexHandler(BaseHandler):
     def get(self):
         self.render("index.html")

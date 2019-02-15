@@ -53,3 +53,4 @@
 * [vuejs](https://github.com/vuejs/vue/blob/dev/LICENSE) (MIT)
 * [bootstrap](https://getbootstrap.com/docs/4.2/about/license/) (MIT)
 * [jQuery](https://github.com/jquery/jquery/blob/master/LICENSE.txt)(MIT)
+* [pillow](https://github.com/python-pillow/Pillow/blob/master/LICENSE) (PIL协议，类似MIT)

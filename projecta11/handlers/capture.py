@@ -7,9 +7,9 @@ from projecta11.handlers import check_code
 import io
 
 
-@handling(r"/check_code.*")
+@handling('check_code')
 class CheckCodeHandler(BaseHandler):
-    def get(self, *args, **kwargs):
+    def get(self):
         global CODE
         image, CODE = check_code.create_validate_code()
         # BytesIO操作二进制数据，将验证码图形写入内存

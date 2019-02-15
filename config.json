@@ -12,7 +12,7 @@
     "dialect": "mysql",
     "driver": "pymysql",
     "user": "test",
-    "password": "123456",
+    "password": "password",
     "host": "localhost",
     "dbname": "project_a11_test"
   },

@@ -48,8 +48,7 @@ class BaseHandler(tornado.web.RequestHandler):
         hashed_and_salted = hashlib.sha256(salted.encode()).hexdigest()
         return hashed_and_salted
 
-
-@handling('404')
-class Error404Handler(BaseHandler):
-    def get(self):
-        self.render('404.html')
+def register_error_handler(status_code):
+    def decorator(func):
+        return func # TODO
+    return decorator

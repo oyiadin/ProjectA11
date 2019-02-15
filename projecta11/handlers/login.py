@@ -5,7 +5,7 @@ import projecta11.utils.db as db
 from projecta11.routers import handling, url
 
 
-@handling('login')
+@handling('login', r"/login")
 class LoginHandler(BaseHandler):
     def get(self):
         self.render("users/login.html")

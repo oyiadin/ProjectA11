@@ -5,7 +5,7 @@ from projecta11.handlers.decorators import login_needed
 from projecta11.routers import handling
 
 
-@handling('user_center')
+@handling('user_center', r"/user_center")
 class UserCenterHandler(BaseHandler):
     @login_needed
     def get(self):

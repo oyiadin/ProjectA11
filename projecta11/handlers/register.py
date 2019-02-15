@@ -5,7 +5,7 @@ import projecta11.utils.db as db
 from projecta11.routers import handling, url
 
 
-@handling('register')
+@handling('register', r"/register")
 class RegisterHandler(BaseHandler):
     def get(self):
         self.render("users/register.html")

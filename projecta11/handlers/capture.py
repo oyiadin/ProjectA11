@@ -7,7 +7,7 @@ from projecta11.handlers import check_code
 import io
 
 
-@handling('check_code')
+@handling('check_code', r"/check_code")
 class CheckCodeHandler(BaseHandler):
     def get(self):
         global CODE

@@ -1,10 +1,5 @@
 .col-md-6{
-  border-style: dashed;
-  border-color: gray;
   padding-bottom: 50px;
-}
-body{
-  background-color: gray;
 }
 .course-info{
   padding-top: 10px;
@@ -13,7 +8,7 @@ body{
 .course-image{
   padding-top: 10px;
 }
-/* .myBtn{
-  text-align: right;
-  padding: 10px;
-} */
+.myBtn{
+  float: right;
+  padding: 20px;
+}

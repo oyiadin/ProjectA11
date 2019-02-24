@@ -1,0 +1,91 @@
+{% extends '../base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ static_url('css/teacherInformation.css') }}">
+{% end %}
+
+{% block content %}
+<div class="container">
+  <div class="searchBar">
+    <div class="input-group" style="text-align:center">
+      <span class="glyphicon glyphicon-search input-group-addon"></span>
+      <input type="text" class="form-control" placeholder="请输入老师的姓名...">
+    </div>
+  </div>
+  <div class="teacherInformation">
+    <div class="detailInformation">
+      <div class="media-left media-top">
+        <img src="{{ static_url('pics/userIcon.jpg') }}"  style="width:80px">
+      </div>
+      <div class="media-body">
+        <h2>XXX</h2>
+        <p>教学科目：xxx</p>
+        <p>教师学历：xxx</p>
+        <p>所属学院：xxx</p>
+        <p>座右铭：xxx</p>
+      </div>
+    </div>
+    <div class="detailInformation">
+      <div class="media-left media-top">
+        <img src="{{ static_url('pics/userIcon.jpg') }}"  style="width:80px">
+      </div>
+      <div class="media-body">
+        <h2>XXX</h2>
+        <p>教学科目：xxx</p>
+        <p>教师学历：xxx</p>
+        <p>所属学院：xxx</p>
+        <p>座右铭：xxx</p>
+      </div>
+    </div>
+    <div class="detailInformation">
+      <div class="media-left media-top">
+        <img src="{{ static_url('pics/userIcon.jpg') }}"  style="width:80px">
+      </div>
+      <div class="media-body">
+        <h2>XXX</h2>
+        <p>教学科目：xxx</p>
+        <p>教师学历：xxx</p>
+        <p>所属学院：xxx</p>
+        <p>座右铭：xxx</p>
+      </div>
+    </div>
+    <div class="detailInformation">
+      <div class="media-left media-top">
+        <img src="{{ static_url('pics/userIcon.jpg') }}"  style="width:80px">
+      </div>
+      <div class="media-body">
+        <h2>XXX</h2>
+        <p>教学科目：xxx</p>
+        <p>教师学历：xxx</p>
+        <p>所属学院：xxx</p>
+        <p>座右铭：xxx</p>
+      </div>
+    </div>
+    <div class="detailInformation">
+      <div class="media-left media-top">
+        <img src="{{ static_url('pics/userIcon.jpg') }}"  style="width:80px">
+      </div>
+      <div class="media-body">
+        <h2>XXX</h2>
+        <p>教学科目：xxx</p>
+        <p>教师学历：xxx</p>
+        <p>所属学院：xxx</p>
+        <p>座右铭：xxx</p>
+      </div>
+    </div>
+  </div>
+  <div class="pageChange">
+    <nav style="text-align:center">
+      <ul class="pagination pagination-centered">
+        <li><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+{% end %}

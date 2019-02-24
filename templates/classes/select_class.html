@@ -1,11 +1,17 @@
 {% extends '../base.html' %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ static_url('css/user_center.css') }}">
+<link rel="stylesheet" href="{{ static_url('css/select_class.css') }}">
 {% end %}
 
 {% block content %}
-<div class="course">
+<div class="container">
+  <div class="searchBar">
+    <div class="input-group" style="text-align:center">
+      <span class="glyphicon glyphicon-search input-group-addon"></span>
+      <input type="text" class="form-control" placeholder="请输入课程名称...">
+    </div>
+  </div>
   <div class="col-md-6">
     <div class="course-image">
       <img src="{{ static_url('pics/math.jpg') }}" class="img-thumbnail" width="256" height="144"/>
@@ -13,7 +19,7 @@
     <div class="course-info">
       <label>高等数学（下）</label>
       <p class="course-teacher">李一 . xxxx大学</p>
-      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxx</p>
       <p>开课时间: 2019.xx.xx</p>
       <p>结束时间: 2019.xx.xx</p>
     </div>
@@ -28,7 +34,7 @@
     <div class="course-info">
       <label>大学生英语精读</label>
       <p class="course-teacher">李二 . xxxx大学</p>
-      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxx</p>
       <p>开课时间: 2019.xx.xx</p>
       <p>结束时间: 2019.xx.xx</p>
     </div>
@@ -43,7 +49,7 @@
     <div class="course-info">
       <label>数字电路</label>
       <p class="course-teacher">李三 . xxxx大学</p>
-      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxx</p>
       <p>开课时间: 2019.xx.xx</p>
       <p>结束时间: 2019.xx.xx</p>
       </div>
@@ -57,13 +63,26 @@
     <div class="course-info">
       <label>大学物理</label>
       <p class="course-teacher">李四 . xxxx大学</p>
-      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxx</p>
       <p>开课时间: 2019.xx.xx</p>
       <p>结束时间: 2019.xx.xx</p>
     </div>
     <div class="myBtn">
       <button type="button" class="btn btn-primary">我要参加</button>
     </div>
+  </div>
+  <div class="pageChange">
+    <nav style="text-align:center">
+      <ul class="pagination pagination-centered">
+        <li><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ul>
+    </nav>
   </div>
 </div>
 {% end %}

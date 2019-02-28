@@ -28,6 +28,9 @@
 
 9. 建表: `python manage.py --init` (在shell里运行)
 
+10. 安装 `redis`，自行百度，装完把 `redis-server` 打开 (默认配置即可，反正只是本地测试环境)
+
+
 ### Run
 
 程序入口在 `manage.py`，有两个运行模式:
@@ -54,3 +57,4 @@
 * [bootstrap](https://getbootstrap.com/docs/4.2/about/license/) (MIT)
 * [jQuery](https://github.com/jquery/jquery/blob/master/LICENSE.txt)(MIT)
 * [pillow](https://github.com/python-pillow/Pillow/blob/master/LICENSE) (PIL协议，类似MIT)
+* [redis](https://redis.io/topics/license/) (BSD)

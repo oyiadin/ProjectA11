@@ -16,6 +16,14 @@
     "host": "localhost",
     "dbname": "project_a11_test"
   },
+  "session": {
+    "connection": {
+      "host": "localhost",
+      "port": 6379,
+      "db": 0
+    },
+    "expires_after": 604800
+  },
   "page": {
     "page_title": "Welcome to project A11!"
   }

@@ -4,6 +4,7 @@ import hashlib
 
 import tornado.web
 import projecta11.utils.db as db
+import projecta11.utils.session as session
 from projecta11.utils.config import conf
 from projecta11.routers import handling, url
 
@@ -11,7 +12,24 @@ from projecta11.routers import handling, url
 class BaseHandler(tornado.web.RequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self._session = None
         self._session_db = None
+
+    def _get_session(self):
+        if self._session:
+            return self._session
+        self._session = session.Session(self)
+        return self._session
+
+    def _set_session(self, value):
+        raise PermissionError("no manual session replacement")
+
+    def _del_session(self):
+        if self._session:
+            del self._session
+        self._session = None
+
+    sess = property(_get_session, _set_session, _del_session)
 
     def _get_session_db(self):
         if self._session_db:
@@ -20,26 +38,23 @@ class BaseHandler(tornado.web.RequestHandler):
         return self._session_db
 
     def _set_session_db(self, value):
-        if self._session_db:
-            self._session_db.close()
-        self._session_db = value
+        raise PermissionError("no manual db-session replacement")
 
     def _del_session_db(self):
         if self._session_db:
             self._session_db.close()
         self._session_db = None
 
-    session_db = property(_get_session_db, _set_session_db, _del_session_db)
+    db_sess = property(_get_session_db, _set_session_db, _del_session_db)
 
     def get_current_user(self):
-        username = self.get_secure_cookie('username')
-        if username is None:
+        if not self.sess['is_login']:
             return None
-        return self.session_db.query(db.User).filter(
-            db.User.username == username).first()
+        return self.db_sess.query(db.User).filter(
+            db.User.username == self.sess['username']).first()
 
     def render(self, *args, **kwargs):
-        kwargs.update(dict(page=conf.page, conf=conf, url=url))
+        kwargs.update(dict(page=conf.page, conf=conf, url=url, sess=self.sess))
         return super().render(*args, **kwargs)
 
     def hash_password(self, password):

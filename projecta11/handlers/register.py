@@ -30,8 +30,8 @@ class RegisterHandler(BaseHandler):
 
         new_user = db.User(username=username, password=password,
                            name=name, role=role)
-        self.session_db.add(new_user)
-        self.session_db.commit()
-        self.session_db.close()
+        self.db_sess.add(new_user)
+        self.db_sess.commit()
+        self.db_sess.close()
 
         self.redirect(url('login'))

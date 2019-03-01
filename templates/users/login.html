@@ -12,22 +12,22 @@
 <div class="container">
   <div class="col-md-4 col-md-offset-4">
     <form class="form-login" method="post">
-      <h2 class="text-center">欢迎登录</h2>
+      <h2 class="text-center">{{ _('Login') }}</h2>
       <div class="form-group">
         <label>{{ _("Username") }}</label>
         <input type="text" class="form-control" id="username" placeholder="{{ _('Please fill in your username') }}" name="username">
       </div>
       <div class="form-group">
-        <label>登录密码</label>
-        <input type="password" class="form-control" placeholder="请输入密码" id="StuPSW" name="password">
+        <label>{{ _('Password') }}</label>
+        <input type="password" class="form-control" placeholder="{{ _('Please fill in your password') }}" id="StuPSW" name="password">
       </div>
       <div class="form-group">
-        <label>验证码</label>
-        <input type="text" class="form-control" placeholder="验证码" name="code">
+        <label>{{ _('Captcha') }}</label>
+        <input type="text" class="form-control" placeholder="{{ _('Captcha') }}" name="code">
         <img class="img-rounded" src="{{ url('check_code') }}" onclick="ChangCode();" id="code">
       </div>
-      <button type="reset" class="btn btn-default pull-left">重置</button>
-      <button type="submit" class="btn btn-primary pull-right">提交</button>
+      <button type="reset" class="btn btn-default pull-left">{{ _('Reset') }}</button>
+      <button type="submit" class="btn btn-primary pull-right">{{ _('Submit') }}</button>
     </form>
   </div>
 </div>

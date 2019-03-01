@@ -8,10 +8,10 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-body">
-      <h3 class="text-center">教学调查问卷</h3>
+      <h3 class="text-center">{{ _('Questionnaire') }}</h3>
       <div class="content">
         <div class="singleSelection">
-          <label>单项选择</label>
+          <label>{{ _('One-Choice Questions') }}</label>
           <ol>
             <li>
               <label>xxxxxxxxxx?</label>
@@ -86,7 +86,7 @@
           </ol>
         </div>
         <div class="multipleSelection">
-          <label>多项选择</label>
+          <label>{{ _('Multiple-Choice Questions') }}</label>
           <ol>
             <li>
               <label>xxxxxxxxxx?</label>
@@ -161,7 +161,7 @@
           </ol>
         </div>
         <div class="writeArea">
-          <label>其他建议：</label>
+          <label>{{ _('Other Advice') }}：</label>
           <form role="form" method="post">
             <div class="form-group">
               <textarea name="name" rows="8" class="form-control"></textarea>
@@ -169,7 +169,7 @@
           </form>
         </div>
         <div class="myButton">
-          <button type="button" class="btn btn-primary">提交</button>
+          <button type="button" class="btn btn-primary">{{ _('Submit') }}</button>
         </div>
       </div>
     </div>

@@ -12,31 +12,31 @@
 <div class="container">
   <div class="col-md-4 col-md-offset-4">
     <form class="form-register" method="post">
-      <h2 class="text-center">欢迎注册</h2>
+      <h2 class="text-center">{{ _('Register') }}</h2>
       <div class="form-group">
         <label>{{ _("Username") }}</label>
-        <input type="text" class="form-control" placeholder="请输入用户名" id="UserName" name="username">
+        <input type="text" class="form-control" placeholder="{{ _('Please fill in your username') }}" id="UserName" name="username">
       </div>
       <div class="form-group">
         <label>{{ _("Password") }}</label>
-        <input type="password" class="form-control" placeholder="请输入6-15位密码" id="FirstPassword">
+        <input type="password" class="form-control" placeholder="{{ _('Please fill in your password') }}" id="FirstPassword">
       </div>
       <div class="form-group">
         <label>{{ _("Confirm") }}</label>
-        <input type="password" class="form-control" placeholder="请重复输入一次密码" id="SecondPassword" name="password">
+        <input type="password" class="form-control" placeholder="{{ _('Please confirm your password') }}" id="SecondPassword" name="password">
       </div>
       <div class="form-group">
         <label>{{ _("Name") }}</label>
-        <input type="text" class="form-control" placeholder="姓名" id="name" name="name">
+        <input type="text" class="form-control" placeholder="{{ _('Name') }}" id="name" name="name">
       </div>
       <div class="form-group">
         <label>{{ _("Sex") }}</label>
-        <input type="radio" name="is_male" value="1">♂
-        <input type="radio" name="is_male" value="0">♀
+        <input type="radio" name="is_male" value="1">{{ _('Male') }}
+        <input type="radio" name="is_male" value="0">{{ _('Female') }}
       </div>
       <div class="form-group">
-        <label>{{ _("Student ID") }}</label>
-        <input type="text" class="form-control" placeholder="学号" id="student-number" name="staff_id">
+        <label>{{ _("Student ID") }} / {{ _("Staff ID") }}</label>
+        <input type="text" class="form-control" placeholder="{{ _('Student ID') }} / {{ _('Staff ID') }}" id="student-number" name="staff_id">
       </div>
       <div class="form-group">
         <label>{{ _("Role") }}: </label>
@@ -45,12 +45,12 @@
         <input type="radio" name="role" value="2" />
       </div>
       <div class="form-group">
-        <label>验证码</label>
-        <input type="text" class="form-control" placeholder="验证码" name="code">
+        <label>{{ _('Captcha') }}</label>
+        <input type="text" class="form-control" placeholder="{{ _('Captcha') }}" name="code">
         <img src="{{ url('check_code') }}" onclick="ChangCode();" id="code">
       </div>
-      <button type="reset" class="btn btn-default pull-left">重置</button>
-      <button type="submit" class="btn btn-primary pull-right">提交</button>
+      <button type="reset" class="btn btn-default pull-left">{{ _('Reset') }}</button>
+      <button type="submit" class="btn btn-primary pull-right">{{ _('Submit') }}</button>
     </form>
   </div>
 </div>

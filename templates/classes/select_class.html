@@ -9,7 +9,7 @@
   <div class="searchBar">
     <div class="input-group" style="text-align:center">
       <span class="glyphicon glyphicon-search input-group-addon"></span>
-      <input type="text" class="form-control" placeholder="请输入课程名称...">
+      <input type="text" class="form-control" placeholder="{{ _('Please fill in the course name') }}">
     </div>
   </div>
   <div class="col-md-6">
@@ -19,12 +19,12 @@
     <div class="course-info">
       <label>高等数学（下）</label>
       <p class="course-teacher">李一 . xxxx大学</p>
-      <p>课程介绍: xxxxxxxxxxxxxxxxxxxxx</p>
-      <p>开课时间: 2019.xx.xx</p>
-      <p>结束时间: 2019.xx.xx</p>
+      <p>{{ _('Course Introduction') }}: xxxxxxxxxxxxxxxxxxxxx</p>
+      <p>{{ _('Start from') }}: 2019.xx.xx</p>
+      <p>{{ _('End at') }}: 2019.xx.xx</p>
     </div>
     <div class="myBtn">
-      <button type="button" class="btn btn-primary">我要参加</button>
+      <button type="button" class="btn btn-primary">{{ _('Sign up for the class') }}</button>
     </div>
   </div>
   <div class="col-md-6">

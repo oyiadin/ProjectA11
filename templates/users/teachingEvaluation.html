@@ -8,9 +8,9 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-body">
-      <h3 class="text-center">教学评估问卷</h3>
+      <h3 class="text-center">Teaching Evaluation</h3>
       <div class="teacherList">
-        <label for="name">选择老师</label>
+        <label for="name">{{ _('Choose a teacher') }}</label>
         <select class="form-control">
           <option value="A">A</option>
           <option value="B">B</option>
@@ -22,19 +22,19 @@
       </div>
       <div class="content">
         <div class="singleSelection">
-          <label>单项选择</label>
+          <label>{{ _('Single-Choice Questions') }}</label>
           <ol>
             <li>
               <label>xxxxxxxxxx?</label>
               <div class="radio">
                 <label class="radio-inline" style="width:33%;">
-                  <input type="radio" name="question1" value="option1">很满意
+                  <input type="radio" name="question1" value="option1">{{ _('Very satisfied') }}
                 </label>
                 <label class="radio-inline" style="width:33%;">
-                  <input type="radio" name="question1" value="option2">基本满意
+                  <input type="radio" name="question1" value="option2">{{ _('Quite satisfied') }}
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="question1" value="option3">不满意
+                  <input type="radio" name="question1" value="option3">{{ _('Not satisfied') }}
                 </label>
               </div>
             </li>
@@ -125,7 +125,7 @@
           </ol>
         </div>
         <div class="writeArea">
-          <label>其他建议：</label>
+          <label>{{ _('Other Advice') }}：</label>
           <form role="form" method="post">
             <div class="form-group">
               <textarea name="myTextarea" rows="8" class="form-control"></textarea>
@@ -133,7 +133,7 @@
           </form>
         </div>
         <div class="myButton">
-          <button type="button" class="btn btn-primary">提交</button>
+          <button type="button" class="btn btn-primary">{{ _('Submit') }}</button>
         </div>
       </div>
     </div>

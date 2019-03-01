@@ -48,7 +48,7 @@ class BaseHandler(tornado.web.RequestHandler):
     db_sess = property(_get_session_db, _set_session_db, _del_session_db)
 
     def get_current_user(self):
-        if not self.sess['is_login']:
+        if not int(self.sess['is_login']):
             return None
         return self.db_sess.query(db.User).filter(
             db.User.username == self.sess['username']).first()

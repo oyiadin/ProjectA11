@@ -6,21 +6,21 @@
 
 {% block content %}
   <div class="col-md-4 col-md-offset-4">
-    <h2 class="text-center">个人信息</h2>
+    <h2 class="text-center">{{ _("User Information") }}</h2>
     <div class="form-group">
-      <label>姓名</label>
+      <label>{{ _("Name") }}</label>
       <p class="form-control-static">{{ user.name }}</p>
     </div>
     <div class="form-group">
-      <label>性别</label>
+      <label>{{ _("Sex") }}</label>
       <p class="form-control-static">{% if user.is_male %}男{% else %}女{% end %}</p>
     </div>
     <div class="form-group">
-      <label>用户名</label>
+      <label>{{ _("Username") }}</label>
       <p class="form-control-static">{{ user.username }}</p>
     </div>
     <div class="form-group">
-      <label>学号</label>
+      <label>{{ _("Staff ID") }}</label>
       <p class="form-control-static">{{ user.staff_id }}</p>
     </div>
   </div>

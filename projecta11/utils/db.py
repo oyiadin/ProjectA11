@@ -35,17 +35,6 @@ class User(Base):
     role = Column(Enum(UserRole))
     description = Column(String(1024))
 
-    def __repr__(self):
-        return '''<db.User
-    id={id},
-    username={username},
-    password={password},
-    name={name},
-    role={role},
-    description={description}>'''.format(
-            id=self.id, username=self.username, password=self.password,
-            name=self.name, role=self.role, description=self.description)
-
 
 class Class(Base):
     __tablename__ = 'classes'

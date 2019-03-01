@@ -18,7 +18,7 @@ class Session(object):
                 self.key = self._generate_new_session_id()
                 handler.set_cookie(
                     'session', self.key,
-                    expire=time.time() + conf.session.expires_after)
+                    expires=time.time() + conf.session.expires_after)
             else:
                 self.key = sess_str
         else:

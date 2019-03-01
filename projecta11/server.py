@@ -1,7 +1,10 @@
 # coding=utf-8
 
+import os
+
 import tornado.ioloop
 import tornado.web
+import tornado.locale
 
 import projecta11.utils.config as config
 import projecta11.utils.db as db
@@ -13,6 +16,11 @@ import projecta11.handlers
 def startup(conf):
     config.conf = conf
     db.startup(conf)
+
+    prev_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+    locales_dir = os.path.join(prev_dir, 'locales')
+    tornado.locale.load_translations(locales_dir)
+    tornado.locale.set_default_locale('zh_CN')
 
     app = tornado.web.Application(
         routers.get_routers(conf),

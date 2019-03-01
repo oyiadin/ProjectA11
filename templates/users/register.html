@@ -1,7 +1,7 @@
 {% extends '../base.html' %}
 
 {% block title %}
-Register
+{{ _("Register") }}
 {% end %}
 
 {% block css %}
@@ -14,32 +14,32 @@ Register
     <form class="form-register" method="post">
       <h2 class="text-center">欢迎注册</h2>
       <div class="form-group">
-        <label>用户名</label>
+        <label>{{ _("Username") }}</label>
         <input type="text" class="form-control" placeholder="请输入用户名" id="UserName" name="username">
       </div>
       <div class="form-group">
-        <label>登录密码</label>
+        <label>{{ _("Password") }}</label>
         <input type="password" class="form-control" placeholder="请输入6-15位密码" id="FirstPassword">
       </div>
       <div class="form-group">
-        <label>确认登录密码</label>
+        <label>{{ _("Confirm") }}</label>
         <input type="password" class="form-control" placeholder="请重复输入一次密码" id="SecondPassword" name="password">
       </div>
       <div class="form-group">
-        <label>姓名</label>
+        <label>{{ _("Name") }}</label>
         <input type="text" class="form-control" placeholder="姓名" id="name" name="name">
       </div>
       <div class="form-group">
-        <label>性别</label>
+        <label>{{ _("Sex") }}</label>
         <input type="radio" name="is_male" value="1">♂
         <input type="radio" name="is_male" value="0">♀
       </div>
       <div class="form-group">
-        <label>学号</label>
+        <label>{{ _("Student ID") }}</label>
         <input type="text" class="form-control" placeholder="学号" id="student-number" name="staff_id">
       </div>
       <div class="form-group">
-        <label>Role: </label>
+        <label>{{ _("Role") }}: </label>
         <input type="radio" name="role" value="0" />
         <input type="radio" name="role" value="1" />
         <input type="radio" name="role" value="2" />

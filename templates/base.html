@@ -28,34 +28,39 @@
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
-          <span class="sr-only">切换导航条</span>
+          <span class="sr-only">{{ _("Toggle navbar") }}</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Welcome</a>
+        <a class="navbar-brand" href="{{ url('index') }}">{{ _("Welcome") }}</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="my-nav">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="{{ url('index') }}">主页</a></li>
+          <li class="active"><a href="{{ url('index') }}">{{ _("Index") }}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="{{ url('login') }}">登录</a></li>
-          <li><a href="{{ url('register') }}">注册</a></li>
+          {% if current_user %}
+          <li><a href="{{ url('user_center') }}">{{ current_user.name }}</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              我的<span class="caret"></span>
+              {{ _("My") }}<span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="{{ url('user_center') }}">个人页面</a></li>
               <li><a href="{{ url('class_list') }}">课程一览</a></li>
               <li><a href="{{ url('user_timetable') }}">我的课表</a></li>
               <li><a href="{{ url('user_score') }}">成绩查询</a></li>
               <li><a href="{{ url('test_arrangement') }}">考试安排</a></li>
+              <hr/>
+              <li><a href="{{ url('logout') }}">{{ _("Logout") }}</a></li>
             </ul>
           </li>
+          {% else %}
+          <li><a href="{{ url('login') }}">{{ _("Login") }}</a></li>
+          <li><a href="{{ url('register') }}">{{ _("Register") }}</a></li>
+          {% end %}
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

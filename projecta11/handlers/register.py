@@ -15,8 +15,9 @@ class RegisterHandler(BaseHandler):
         password = self.get_argument('password')
         name = self.get_argument('name')
         role = self.get_argument('role')
+        is_male = self.get_argument('is_male')
 
-        if not (username and password and name and role):
+        if not (username and password and name and role and is_male is not None):
             return self.write('all arguments are required!')
         if not role.isdigit():
             return self.write('role must be an integer!')
@@ -29,7 +30,7 @@ class RegisterHandler(BaseHandler):
         password = self.hash_password(password)
 
         new_user = db.User(username=username, password=password,
-                           name=name, role=role)
+                           name=name, role=role, is_male=bool(is_male))
         self.db_sess.add(new_user)
         self.db_sess.commit()
         self.db_sess.close()

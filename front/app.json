@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/register/register",
+    "pages/login/login",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/users/users",
+    "pages/classes/classes"
+  ],
+
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+
+  "tabBar": {
+    "selectedColor": "#000000",
+    "list": [
+      {
+        "pagePath": "pages/register/register",
+        "text": "注册",
+        "iconPath": "images/icons/register.png",
+        "selectedIconPath": "images/icons/register_active.png"
+      },
+      {
+        "pagePath": "pages/login/login",
+        "text": "登录",
+        "iconPath": "images/icons/login.png",
+        "selectedIconPath": "images/icons/login_active.png"
+      }
+    ]
+  }
+}

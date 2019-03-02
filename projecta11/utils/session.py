@@ -2,28 +2,22 @@
 
 import base64
 import redis
-import time
 import os
 from projecta11.utils.config import conf
 
 
 class Session(object):
-    def __init__(self, handler, *args, **kwargs):
+    def __init__(self, sess_str=None, *args, **kwargs):
         self.r = redis.Redis(*args, **kwargs, **conf.session.connection)
         self.key = None
 
-        sess_str = handler.get_cookie('session')
         if sess_str:
-            if not self.r.exists(sess_str):
-                self.key = self._generate_new_session_id()
-                handler.set_cookie(
-                    'session', self.key,
-                    expires=time.time() + conf.session.expires_after)
-            else:
+            if self.r.exists(sess_str):
                 self.key = sess_str
+            else:
+                raise FileNotFoundError('no specific session_id')
         else:
             self.key = self._generate_new_session_id()
-            handler.set_cookie('session', self.key)
 
     def _generate_new_session_id(self):
         key = base64.b64encode(os.urandom(48))

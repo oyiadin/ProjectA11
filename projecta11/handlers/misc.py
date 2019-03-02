@@ -7,7 +7,7 @@ from projecta11.handlers import check_code
 import io
 
 
-@handling(r"/captcha")
+@handling(r"/misc/captcha")
 class CaptchaHandler(BaseHandler):
     def get(self):
         global CODE

@@ -1,12 +1,12 @@
 # coding=utf-8
 
 import hashlib
-
+from json.decoder import JSONDecodeError
+from tornado.escape import json_decode, json_encode
 import tornado.web
 import projecta11.utils.db as db
 import projecta11.utils.session as session
 from projecta11.utils.config import conf
-from projecta11.routers import handling
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -47,6 +47,10 @@ class BaseHandler(tornado.web.RequestHandler):
 
     db_sess = property(_get_session_db, _set_session_db, _del_session_db)
 
+    def finish(self, code=200, msg='OK', **kwargs):
+        kwargs.update(msg=msg, code=code)
+        return super().finish(json_encode(kwargs))
+
     def get_current_user(self):
         if not int(self.sess['is_login']):
             return None
@@ -58,6 +62,14 @@ class BaseHandler(tornado.web.RequestHandler):
         salted = hashed + conf.app.password_salt
         hashed_and_salted = hashlib.sha256(salted.encode()).hexdigest()
         return hashed_and_salted
+
+    def parse_json_body(self):
+        try:
+            data = json_decode(self.request.body)
+        except JSONDecodeError:
+            self.finish(400, 'bad request')
+            return None
+        return data
 
 def register_error_handler(status_code):
     def decorator(func):

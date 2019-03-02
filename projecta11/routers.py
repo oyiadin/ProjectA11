@@ -8,7 +8,7 @@ routers = []
 
 def handling(pattern):
     def decorator(handler):
-        routers.append((pattern, handler))
+        routers.append(('/api/v1' + pattern, handler))
         return handler
     return decorator
 

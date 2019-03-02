@@ -12,6 +12,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (app.appData.userInfo == null) {
+      wx.redirectTo({ url: "../login/login" })
+    }
+    else{
+      this.setData({username:app.appData.userInfo.username})
+    }
 
   },
 
@@ -65,7 +71,7 @@ Page({
   },
 
   appDate : {
-    userinfo : null,
+    userInfo : null,
   }
 
 })

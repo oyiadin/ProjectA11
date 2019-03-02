@@ -1,26 +1,20 @@
 <!--pages/login/login.wxml-->
-<!-- 用户名 -->
-<view class='row'>
-    <view class='info'>
-    <input  class='info-input' bindinput="handleInputUsername" placeholder="用户名" />
+<view class="item">
+  <view class="login-item">
+    <view class="login-item-info">用户名</view>
+    <view><input bindinput="usernameInput" /></view>
+  </view>
+  <view class="login-item">
+    <view class="login-item-info">密码</view>
+    <view class="login-pwd">
+      <input style="flex-grow:1" password="true" bindinput="passwordInput" /> 
+      <text> 忘记密码 </text>
     </view>
-</view>
-
-<!-- 密码 -->
-<view class='row'>
-  <view class='info'>
-    <input  type='password' class='info-input' bindinput="handleNewChangesAgain" placeholder="密码" />
   </view>
-</view>
-
-<!-- 重复密码 -->
-<view class='row'>
-  <view class='info'>
-    <input  type='password' class= 'info-input' bindinput="handleNewChangesAgain" placeholder="重复密码" />
+  <view class="login-item bottom">
+    <button class="login-btn" bindtap="loginBtnClick">登录</button>
   </view>
-</view>
-
-<!-- 提交 -->
-<view>
- <button class='submit' bindtap='submit'>提交</button>
+  <view class="login-item bottom">
+    <button class="login-btn" bindtap="registerBtnClick">注册</button>
+  </view>
 </view>

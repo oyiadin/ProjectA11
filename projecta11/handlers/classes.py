@@ -5,18 +5,15 @@ from projecta11.handlers.decorators import role_assert
 from projecta11.routers import handling
 
 
-@handling('class_show', r"/classes/show/([0-9]+)")
+@handling(r"/classes/(\d+)")
 class ClassShowHandler(BaseHandler):
-    def get(self, class_id):
+    def get(self):
+        class_id = self.get_argument('class_id')
         pass
 
 
-@handling('class_create', r"/classes/create")
+@handling(r"/classes")
 class ClassCreateHandler(BaseHandler):
     @role_assert("teacher")
-    def get(self):
-        self.render("classes/create.html")
-
-    @role_assert("teacher")
-    def post(self):
+    def put(self):
         raise NotImplementedError

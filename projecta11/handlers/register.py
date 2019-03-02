@@ -5,12 +5,9 @@ import projecta11.utils.db as db
 from projecta11.routers import handling, url
 
 
-@handling('register', r"/register")
+@handling(r"/user/register")
 class RegisterHandler(BaseHandler):
-    def get(self):
-        self.render("users/register.html")
-
-    def post(self):
+    def put(self):
         username = self.get_argument('username')
         password = self.get_argument('password')
         name = self.get_argument('name')

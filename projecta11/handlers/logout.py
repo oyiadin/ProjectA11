@@ -4,8 +4,8 @@ from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling, url
 
 
-@handling('logout', r"/logout")
+@handling(r"/user/logout")
 class LogoutHandler(BaseHandler):
-    def get(self):
+    def post(self):
         self.clear_all_cookies()
         self.redirect(url('index'))

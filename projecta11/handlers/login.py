@@ -6,11 +6,8 @@ from projecta11.utils.config import conf
 import projecta11.utils.db as db
 
 
-@handling('login', r"/login")
+@handling(r"/user/login")
 class LoginHandler(BaseHandler):
-    def get(self):
-        self.render("users/login.html")
-
     def post(self):
         username = self.get_argument('username')
         password = self.get_argument('password')

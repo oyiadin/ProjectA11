@@ -6,7 +6,7 @@ import tornado.web
 import projecta11.utils.db as db
 import projecta11.utils.session as session
 from projecta11.utils.config import conf
-from projecta11.routers import handling, url
+from projecta11.routers import handling
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -52,10 +52,6 @@ class BaseHandler(tornado.web.RequestHandler):
             return None
         return self.db_sess.query(db.User).filter(
             db.User.username == self.sess['username']).first()
-
-    def render(self, *args, **kwargs):
-        kwargs.update(dict(page=conf.page, conf=conf, url=url, sess=self.sess))
-        return super().render(*args, **kwargs)
 
     def hash_password(self, password):
         hashed = hashlib.sha256(password.encode()).hexdigest()

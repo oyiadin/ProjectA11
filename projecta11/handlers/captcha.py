@@ -7,8 +7,8 @@ from projecta11.handlers import check_code
 import io
 
 
-@handling('check_code', r"/check_code")
-class CheckCodeHandler(BaseHandler):
+@handling(r"/captcha")
+class CaptchaHandler(BaseHandler):
     def get(self):
         global CODE
         image, CODE = check_code.create_validate_code()

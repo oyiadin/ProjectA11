@@ -1,0 +1,33 @@
+<!--pages/login/login.wxml-->
+<!-- 用户名 -->
+<view class='row'>
+    <view class='info'>
+    <input  class='info-input' bindinput="handleInputUsername" placeholder="用户名" />
+    </view>
+</view>
+
+<!-- 密码 -->
+<view class='row'>
+  <view class='info'>
+    <input  type='password' class='info-input' bindinput="handleNewChangesAgain" placeholder="密码" />
+  </view>
+</view>
+
+<!-- 重复密码 -->
+<view class='row'>
+  <view class='info'>
+    <input  type='password' class= 'info-input' bindinput="handleNewChangesAgain" placeholder="重复密码" />
+  </view>
+</view>
+
+<!-- 姓名 -->
+<view class='row'>
+  <view class='info'>
+    <input class= 'info-input' bindinput="handleNewName" placeholder="请输入姓名" />
+  </view>
+</view>
+
+<!-- 提交 -->
+<view>
+ <button class='submit' bindtap='submit'>提交</button>
+</view>

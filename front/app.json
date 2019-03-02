@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/register/register",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/login/login",
+    "pages/users/users",
+    "pages/classes/classes"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tarBar": {
+    "list": [
+      {
+        "pagePath": "pages/register/register",
+        "text": "注册",
+        "iconPath": "images/icons/register.png",
+        "selectedIconPath": "images/icons/register_active.png"
+      }
+    ]
+  }
+}

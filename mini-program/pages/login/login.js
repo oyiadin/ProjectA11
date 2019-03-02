@@ -1,18 +1,26 @@
 // pages/login/login.js
+var app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    username: null,
+    password: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if(app.appData.userInfo == null ){
+      wx.redirectTo("../register/register");
+    }
+    else {
+      this.setDate({username:app.appData.username})
+    }
   },
 
   /**
@@ -62,5 +70,22 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  loginBtnClick:function() {
+    app.appData.userInfo = {username:this.data.username,password:this.data.password}
+  },
+
+  registerBtnClick:function() {
+    
+  },
+
+  usernameInput:function(event) {
+    this.setDate({username:event.detail.value})
+  },
+
+  passwordInput: function (event) {
+    this.setDate({ password: event.detail.value })
   }
+  
 })

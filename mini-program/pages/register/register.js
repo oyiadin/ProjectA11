@@ -10,11 +10,21 @@ Page({
     username: '用户名',
   },
 
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log('hi');
+    console.log(wx.request({
+      url: 'http://localhost:8887/',
+      data: {
+        hello: "world!"
+      },
+      success(res) {
+        console.log(res.data)
+      }
+    }));
   },
 
   /**

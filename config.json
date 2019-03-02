@@ -4,8 +4,8 @@
     "port": 8888,
     "debug": true,
     "cookie_secret": "[IMPORTANT] RESET ME BEFORE PUT IT IN PRODUCTION ENV",
-    "password_salt": "[IMPORTANT} RESET ME!",
-    "common_salt": "[IMPORTANT} RESET ME!",
+    "password_salt": "[IMPORTANT] RESET ME!",
+    "common_salt": "[IMPORTANT] RESET ME!",
     "template_path": "templates",
     "static_path": "static",
     "use_static_handler": "true"

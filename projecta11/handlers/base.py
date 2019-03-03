@@ -1,12 +1,11 @@
 # coding=utf-8
 
 import hashlib
-from json.decoder import JSONDecodeError
-from tornado.escape import json_decode, json_encode
+from tornado.escape import json_encode
 import tornado.web
-import projecta11.utils.db as db
-import projecta11.utils.session as session
-from projecta11.utils.config import conf
+import projecta11.db as db
+import projecta11.session as session
+from projecta11.config import conf
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -63,13 +62,6 @@ class BaseHandler(tornado.web.RequestHandler):
         hashed_and_salted = hashlib.sha256(salted.encode()).hexdigest()
         return hashed_and_salted
 
-    def parse_json_body(self):
-        try:
-            data = json_decode(self.request.body)
-        except JSONDecodeError:
-            self.finish(400, 'bad request')
-            return None
-        return data
 
 def register_error_handler(status_code):
     def decorator(func):

@@ -1,5 +1,5 @@
 import argparse
-import projecta11.utils.config as config
+import projecta11.config as config
 
 parser = argparse.ArgumentParser(description='project_a11')
 
@@ -38,8 +38,8 @@ if __name__ == '__main__':
             projecta11.server.startup(conf)
 
         if args.init:
-            import projecta11.utils.db
-            projecta11.utils.db.init_db(conf)
+            import projecta11.db
+            projecta11.db.init_db(conf)
 
     except KeyboardInterrupt:
         print('goodbye')

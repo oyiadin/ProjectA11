@@ -13,6 +13,7 @@ pillow = "*"
 redis = "*"
 swagger-ui-py = "*"
 pyyaml = ">=4.2b1"
+captcha = "*"
 
 [requires]
 python_version = "3.6"

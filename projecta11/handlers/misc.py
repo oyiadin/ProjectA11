@@ -1,18 +1,38 @@
 # coding=utf-8
 
+import io
+import random
+import time
+
+from captcha.image import ImageCaptcha
+
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
-from projecta11.handlers import check_code
+from projecta11.config import conf
+from projecta11.utils import require_session
 
-import io
+
+
+_letter_cases = "abcdefghjkmnpqrstuvwxy"
+_upper_cases = _letter_cases.upper()
+_numbers = '3456789'
+candidates = ''.join((_letter_cases, _upper_cases, _numbers))
+
+captcha = ImageCaptcha()
 
 
 @handling(r"/misc/captcha")
 class CaptchaHandler(BaseHandler):
-    def get(self):
-        global CODE
-        image, CODE = check_code.create_validate_code()
-        # BytesIO操作二进制数据，将验证码图形写入内存
-        mstream = io.BytesIO()
-        image.save(mstream, 'GIF')
-        self.write(mstream.getvalue())
+    @require_session
+    def get(self, sess=None):
+        code = ''.join(random.choices(candidates, k=4)).lower()
+        image = captcha.generate_image(code)
+
+        sess['captcha'] = code
+        sess['captcha_expire'] = \
+            int(time.time() + conf.session.captcha_expires_after)
+
+        stream = io.BytesIO()
+        image.save(stream, 'GIF')
+        self.set_header('Content-Type', 'image/gif')
+        self.write(stream.getvalue())

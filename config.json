@@ -25,7 +25,8 @@
       "port": 6379,
       "db": 0
     },
-    "expires_after": 604800
+    "expires_after": 604800,
+    "captcha_expires_after": 300
   },
   "page": {
     "page_title": "Welcome to project A11!"

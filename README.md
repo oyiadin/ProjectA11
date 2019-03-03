@@ -61,3 +61,4 @@
 * [pillow](https://github.com/python-pillow/Pillow/blob/master/LICENSE) (PIL协议，类似MIT)
 * [redis](https://redis.io/topics/license/) (BSD)
 * [swagger-ui-py](https://github.com/PWZER/swagger-ui-py) (Apache License 2.0)
+* [captcha](https://github.com/lepture/captcha) (BSD)

@@ -3,7 +3,7 @@
 import base64
 import redis
 import os
-from projecta11.utils.config import conf
+from projecta11.config import conf
 
 
 class Session(object):
@@ -30,7 +30,9 @@ class Session(object):
         return key
 
     def __getitem__(self, item):
-        return self.r.hget(self.key, item)
+        if not isinstance(item, tuple):
+            return self.r.hget(self.key, item)
+        return self.r.hmget(self.key, *item)
 
     def __setitem__(self, key, value):
         return self.r.hset(self.key, key, value)

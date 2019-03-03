@@ -10,6 +10,7 @@ tags:
   - name: users
   - name: classes
   - name: courses
+  - name: score
   - name: misc
 schemes:
   - http
@@ -124,6 +125,22 @@ paths:
             $ref: '#/definitions/user-show-others'
         '404':
           description: no specific user
+    delete:
+      tags:
+        -users
+      summary: to delete a user
+      operationId: delete_users
+      parameters:
+        - in: path
+          name: staff_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: no specific user
+
   '/classes/{class_id}':
     get:
       tags:
@@ -140,6 +157,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/class'
+        '404':
+          description: no specific class
   '/courses/{course_id}':
     get:
       tags:
@@ -156,6 +175,53 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/course'
+        '404':
+          description: no specific courese
+  '/score/{staff_id}':
+    get:
+      tags:
+        - score
+      summary: to fetch the score of the specific user
+      operationId: score_fetch_specific
+      parameters:
+        - in: path
+          name: score
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/score'
+        '404':
+          decription: no specific user
+    post:
+      tags:
+        - score
+      summary: to update the score of the specific user
+      operationId: update_score_with_staff_id
+      parameters:
+        - in: body
+          name: staff_id
+          required: true
+          type: integer
+          schema:
+            type: object
+            properties:
+              staff_id:
+                type: string
+                example: 12345678
+              class_id:
+                type: string
+                example: 12345678
+              score:
+                type: integer
+                example: 95
+            responses:
+              '200':
+                description: OK
+              '404':
+                decription: no specific user
   /misc/captcha:
     get:
       tags:
@@ -187,6 +253,7 @@ definitions:
         type: string
         example: p@ssword
 
+
   user-show-self:
     type: object
     properties:
@@ -210,6 +277,24 @@ definitions:
       class_name:
         type: string
         example: Example-Class
+      weekday:
+        type: integer
+        format: int16
+        example: 1
+      start:
+        type: integer
+        format: int16
+        example: 3
+      end:
+        type: integer
+        format: int16
+        example: 5
+      teacher_id:
+        type: integer
+        example: 12345678
+      course_id:
+        type: integer
+        example: 12345678
 
   course:
     type: object
@@ -220,3 +305,24 @@ definitions:
       course_name:
         type: string
         example: Example-Course
+      start:
+        type: string
+        format: data-time
+        example: 10_00
+      end:
+        type: string
+        format: data-time
+        example: 12_25
+
+  score:
+    type: object
+    properties:
+      course_score:
+        type: integer
+        format: int16
+      staff_id:
+        type: integer
+        format: int
+      class_id:
+        type: integer
+        format: int

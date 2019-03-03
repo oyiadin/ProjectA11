@@ -1,12 +1,11 @@
 # coding=utf-8
-
 import hashlib
-from json.decoder import JSONDecodeError
-from tornado.escape import json_decode, json_encode
+import traceback
+
+from tornado.escape import json_encode
 import tornado.web
-import projecta11.utils.db as db
-import projecta11.utils.session as session
-from projecta11.utils.config import conf
+import projecta11.db as db
+from projecta11.config import conf
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -15,21 +14,9 @@ class BaseHandler(tornado.web.RequestHandler):
         self._session = None
         self._session_db = None
 
-    def _get_session(self):
-        if self._session:
-            return self._session
-        self._session = session.Session(self)
-        return self._session
-
-    def _set_session(self, value):
-        raise PermissionError("no manual session replacement")
-
-    def _del_session(self):
-        if self._session:
-            del self._session
-        self._session = None
-
-    sess = property(_get_session, _set_session, _del_session)
+    def prepare(self):
+        super().prepare()
+        self.set_header('Content-Type', 'application/json')
 
     def _get_session_db(self):
         if self._session_db:
@@ -48,14 +35,19 @@ class BaseHandler(tornado.web.RequestHandler):
     db_sess = property(_get_session_db, _set_session_db, _del_session_db)
 
     def finish(self, code=200, msg='OK', **kwargs):
+        self.set_status(code)
         kwargs.update(msg=msg, code=code)
         return super().finish(json_encode(kwargs))
 
-    def get_current_user(self):
-        if not int(self.sess['is_login']):
-            return None
-        return self.db_sess.query(db.User).filter(
-            db.User.username == self.sess['username']).first()
+    def write_error(self, status_code, **kwargs):
+        self.set_header('Content-Type', 'application/json')
+        if self.settings.get("serve_traceback") and "exc_info" in kwargs:
+            # in debug mode, try to send a traceback
+            self.set_header("Content-Type", "text/plain")
+            lines = list(traceback.format_exception(*kwargs["exc_info"]))
+            self.finish(status_code, self._reason, traceback=lines)
+        else:
+            self.finish(status_code, self._reason)
 
     def hash_password(self, password):
         hashed = hashlib.sha256(password.encode()).hexdigest()
@@ -63,15 +55,7 @@ class BaseHandler(tornado.web.RequestHandler):
         hashed_and_salted = hashlib.sha256(salted.encode()).hexdigest()
         return hashed_and_salted
 
-    def parse_json_body(self):
-        try:
-            data = json_decode(self.request.body)
-        except JSONDecodeError:
-            self.finish(400, 'bad request')
-            return None
-        return data
 
-def register_error_handler(status_code):
-    def decorator(func):
-        return func # TODO
-    return decorator
+class Error404Handler(BaseHandler):
+    def prepare(self):
+        self.write_error(404)

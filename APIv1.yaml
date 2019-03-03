@@ -1,0 +1,222 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Project A11 RESTful API
+host: localhost:8888
+basePath: /api/v1
+tags:
+  - name: credential
+  - name: user
+  - name: users
+  - name: classes
+  - name: courses
+  - name: misc
+schemes:
+  - http
+
+paths:
+  /credential/account:
+    post:
+      tags:
+        - credential
+      summary: to login
+      operationId: account_login
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              staff_id:
+                type: string
+                example: 12345678
+              password:
+                type: string
+                example: p@ssword
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              session_id:
+                type: string
+                example: 7I+OyQhMCaMTpdU7W1VZ+0PFETZbaTTPU/UfW3nf0c/vDNj1oewNF3Z+tms0nwbK
+        '400':
+          description: bad request (maybe the body contains illegal json data)
+        '403':
+          description: all arguments are required
+        '404':
+          description: wrong staff_id or password
+    delete:
+      tags:
+        - credential
+      summary: to logout
+      description: clear the session of the logged user, remember to clear the local `session_id`
+      operationId: account_logout
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: all arguments are required
+        '404':
+          description: no specific session_id
+    put:
+      tags:
+        - credential
+      summary: to register
+      description: register a new user
+      operationId: account_register
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/user-whole'
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: all arguments are required
+        '409':
+          description: conflict staff_id
+  /user:
+    get:
+      tags:
+        - user
+      summary: to fetch the info of current logged user
+      operationId: user_fetch
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/user-show-self'
+        '403':
+          description: all arguments are required
+        '404':
+          description: no specific session_id
+  '/users/{staff_id}':
+    get:
+      tags:
+        - users
+      summary: to fetch the info of the specific user
+      operationId: user_fetch_specific
+      parameters:
+        - in: path
+          name: staff_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/user-show-others'
+        '404':
+          description: no specific user
+  '/classes/{class_id}':
+    get:
+      tags:
+        - classes
+      summary: to fetch the info of the specific class
+      operationId: class_fetch_specific
+      parameters:
+        - in: path
+          name: class_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/class'
+  '/courses/{course_id}':
+    get:
+      tags:
+        - courses
+      summary: to fetch the info of the specific course
+      operationId: course_fetch_specific
+      parameters:
+        - in: path
+          name: course_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/course'
+  /misc/captcha:
+    get:
+      tags:
+        - misc
+      summary: to fetch a captcha image
+      operationId: captcha_fetch
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: file
+            example: (the binary data of the captcha image)
+        '403':
+          description: all arguments are required
+
+definitions:
+  user-whole:
+    type: object
+    properties:
+      staff_id:
+        type: integer
+        example: 12345678
+      password:
+        type: string
+        example: p@ssword
+
+  user-show-self:
+    type: object
+    properties:
+      staff_id:
+        type: integer
+        example: 12345678
+
+  user-show-others:
+    type: object
+    properties:
+      staff_id:
+        type: integer
+        example: 12345678
+
+  class:
+    type: object
+    properties:
+      class_id:
+        type: integer
+        example: 12345
+      class_name:
+        type: string
+        example: Example-Class
+
+  course:
+    type: object
+    properties:
+      course_id:
+        type: integer
+        example: 12345
+      course_name:
+        type: string
+        example: Example-Course

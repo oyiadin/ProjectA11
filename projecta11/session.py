@@ -1,9 +1,8 @@
 # coding=utf-8
 
-import base64
 import redis
 import os
-from projecta11.utils.config import conf
+from projecta11.config import conf
 
 
 class Session(object):
@@ -20,9 +19,9 @@ class Session(object):
             self.key = self._generate_new_session_id()
 
     def _generate_new_session_id(self):
-        key = base64.b64encode(os.urandom(48))
+        key = os.urandom(48).hex()
         while self.r.exists(key):
-            key = base64.b64encode(os.urandom(48))
+            key = os.urandom(48).hex()
 
         self.r.hset(key, "is_login", 0)
         self.r.expire(key, conf.session.expires_after)
@@ -30,7 +29,9 @@ class Session(object):
         return key
 
     def __getitem__(self, item):
-        return self.r.hget(self.key, item)
+        if not isinstance(item, tuple):
+            return self.r.hget(self.key, item)
+        return self.r.hmget(self.key, *item)
 
     def __setitem__(self, key, value):
         return self.r.hset(self.key, key, value)

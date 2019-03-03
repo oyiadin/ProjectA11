@@ -8,7 +8,8 @@
     "common_salt": "[IMPORTANT] RESET ME!",
     "template_path": "templates",
     "static_path": "static",
-    "use_static_handler": "true"
+    "use_static_handler": true,
+    "swagger_ui": true
   },
   "db": {
     "dialect": "mysql",
@@ -24,7 +25,8 @@
       "port": 6379,
       "db": 0
     },
-    "expires_after": 604800
+    "expires_after": 604800,
+    "captcha_expires_after": 300
   },
   "page": {
     "page_title": "Welcome to project A11!"

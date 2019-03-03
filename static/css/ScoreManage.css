@@ -1,0 +1,7 @@
+.grade-select, .academy-select, .class-select, .search-student, .myButton{
+  padding: 20px
+}
+
+.myButton{
+  float: right;
+}

@@ -1,0 +1,24 @@
+page {
+  font-size: 14px;
+  color: #333;
+}
+.table {
+  border:1px solid #dadada;
+  border-right: 0;
+  border-bottom: 0;
+}
+.tr {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.th,.td {
+  padding: 10px;
+  border-bottom: 1px solid #dadada; 
+  width:100%
+}
+.th {
+  font-weight: 400;
+  background-color: #dadada;
+  text-align: center;
+}

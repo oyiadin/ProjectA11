@@ -1,0 +1,46 @@
+{% extends '../base_manage.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ static_url('css/InformationManage.css') }}">
+{% end %}
+
+{% block content %}
+<div class="container">
+  <div class="col-md-8 col-md-offset-1">
+    <div class="informationCreate">
+      <div class="caption">
+        <form role="form">
+        	<div class="form-group">
+        		<label for="name">标题</label>
+        		<input type="text" class="form-control" placeholder="请输入通知标题...">
+        	</div>
+         </form>
+      </div>
+      <div class="detail">
+        <form role="form">
+        	<div class="form-group">
+        		<label for="name">通知信息</label>
+        		<textarea class="form-control" rows="3" placeholder="请输入通知信息..."></textarea>
+        	</div>
+        </form>
+      </div>
+      <div class="classify">
+        <form role="form">
+        	<div class="form-group">
+        		<label for="name">通知类别</label>
+        		<select class="form-control">
+        			<option>考试通知</option>
+        			<option>新闻通知</option>
+        			<option>活动通知</option>
+        			<option>其他</option>
+        		</select>
+        	</div>
+        </form>
+      </div>
+      <div class="myButton">
+        <button type="button" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% end %}

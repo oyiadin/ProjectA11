@@ -1,0 +1,61 @@
+<view class="container">
+  <view class="table">
+    <view class="tr">
+      <view class="th">Rank</view>
+      <view class="th">Name</view>
+      <view class="th">ID</view>
+      <view class="th">Participation</view>
+      <view class="th">Online time</view>
+      <view class="th">Amount of assignments</view>
+    </view>
+    <view class="tr">
+      <view class="td">1</view>
+      <view class="td">A</view>
+      <view class="td">001</view>
+      <view class="td">Active</view>
+      <view class="td">52</view>
+      <view class="td">52</view>
+    </view>
+    <view class="tr">
+      <view class="td">1</view>
+      <view class="td">A</view>
+      <view class="td">001</view>
+      <view class="td">Active</view>
+      <view class="td">52</view>
+      <view class="td">52</view>
+    </view>
+    <view class="tr">
+      <view class="td">1</view>
+      <view class="td">A</view>
+      <view class="td">001</view>
+      <view class="td">Active</view>
+      <view class="td">52</view>
+      <view class="td">52</view>
+    </view>
+    <view class="tr">
+      <view class="td">1</view>
+      <view class="td">A</view>
+      <view class="td">001</view>
+      <view class="td">Active</view>
+      <view class="td">52</view>
+      <view class="td">52</view>
+    </view>
+    <view class="tr">
+      <view class="td">1</view>
+      <view class="td">A</view>
+      <view class="td">001</view>
+      <view class="td">Active</view>
+      <view class="td">52</view>
+      <view class="td">52</view>
+    </view>
+    <view class="tr">
+      <view class="td">1</view>
+      <view class="td">A</view>
+      <view class="td">001</view>
+      <view class="td">Active</view>
+      <view class="td">52</view>
+      <view class="td">52</view>
+    </view>
+  </view>
+
+</view>

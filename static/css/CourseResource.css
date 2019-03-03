@@ -1,0 +1,7 @@
+.sourceTypeSelect, .sourceSubjectSelect, .uploadFile{
+  padding: 20px;
+}
+
+.myButton{
+  float: right;
+}

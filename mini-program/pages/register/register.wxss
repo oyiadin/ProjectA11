@@ -41,7 +41,7 @@ page{
   margin-top: 50rpx;
   margin-left: 20rpx;
   margin-right: 20rpx;
-  background: #00CCFF;
+  background: green;
    color: #FFFFFF;
 }
 .success{

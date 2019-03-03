@@ -1,32 +1,37 @@
 {% extends '../base.html' %}
 
 {% block content %}
-<table class="table table-striped">
-  <caption>{{ _('My Attendance') }}</caption>
-  <thead>
-    <tr>
-      <th>&nbsp;</th>
-      <th style="width:80%">{{ _('Reason') }}</th>
-      <th>{{ _('Times') }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>&nbsp;</th>
-      <td>{{ _('Leave') }}</td>
-      <td>2次</td>
-    </tr>
-    <tr>
-      <th>&nbsp;</th>
-      <td>{{ _('Late') }}</td>
-      <td>3次</td>
-    </tr>
-    <tr>
-      <th>&nbsp;</th>
-      <td>{{ _('Absentee') }}</td>
-      <td>3次</td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <div class="col-md-4 col-md-offset-4">
+    <table class="table table-striped">
+      <caption>我的出勤</caption>
+      <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th style="width:70%">原因</th>
+          <th>次数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>&nbsp;</th>
+          <td>请假</td>
+          <td>2次</td>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <td>迟到</td>
+          <td>3次</td>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <td>旷课</td>
+          <td>3次</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+>>>>>>> Stashed changes
 
 {% end %}

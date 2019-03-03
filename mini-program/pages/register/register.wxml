@@ -48,9 +48,8 @@
 <view>
  <button class='submit' bindtap='submit'>提交</button>
 </view>
-<!--
+<!-- 
 <view class='success' wx:if="{{success}}">
 <view class='cheer'><icon type="success" size="24"/>恭喜您注册成功!</view>
 <button type="default" class = 'return' bindtap='return_home'>返回首页</button>
-</view>
--->
+</view> -->

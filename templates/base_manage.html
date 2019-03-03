@@ -29,43 +29,66 @@
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
-          <span class="sr-only">{{ _("Toggle navbar") }}</span>
+          <span class="sr-only">切换导航条</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ url('index') }}">{{ _("Welcome") }}</a>
+        <a class="navbar-brand" href="#">Welcome</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="my-nav">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="{{ url('index') }}">{{ _("Index") }}</a></li>
+          <li class="active"><a href="{{ url('index') }}">主页</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          {% if current_user %}
-          <li><a href="{{ url('user_center') }}">{{ current_user.name }}</a></li>
+          <li><a href="{{ url('login') }}">登录</a></li>
+          <li><a href="{{ url('register') }}">注册</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              {{ _("My") }}<span class="caret"></span>
+              我的<span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="{{ url('class_list') }}">{{ _('Class List') }}</a></li>
-              <li><a href="{{ url('user_timetable') }}">{{ _('My Curriculum') }}</a></li>
-              <li><a href="{{ url('user_score') }}">{{ _('Score Inquiry') }}</a></li>
-              <li><a href="{{ url('test_arrangement') }}">{{ _('Exam Arrangement') }}</a></li>
-              <hr/>
-              <li><a href="{{ url('logout') }}">{{ _("Logout") }}</a></li>
+              <li><a href="{{ url('user_center') }}">个人页面</a></li>
+              <li><a href="{{ url('class_list') }}">课程一览</a></li>
+              <li><a href="{{ url('user_timetable') }}">我的课表</a></li>
+              <li><a href="{{ url('user_score') }}">成绩查询</a></li>
+              <li><a href="{{ url('test_arrangement') }}">考试安排</a></li>
             </ul>
           </li>
-          {% else %}
-          <li><a href="{{ url('login') }}">{{ _("Login") }}</a></li>
-          <li><a href="{{ url('register') }}">{{ _("Register") }}</a></li>
-          {% end %}
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+  <div class="sidebar">
+    <div class="col-md-1" style="width:12%">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="userPic">
+            <img src="{{ static_url('pics/userIcon.jpg') }}" style="width:80px">
+          </div>
+          <div class="functionList">
+            <ul class="nav nav-pills nav-stacked">
+              <li><a href="{{ url('MajorManage') }}">专业管理</a></li>
+              <li><a href="{{ url('ClassManage') }}">班级管理</a></li>
+              <li><a href="{{ url('TimetableManage') }}">课表管理</a></li>
+              <li><a href="{{ url('CourseManage') }}">课程管理</a></li>
+              <li><a href="{{ url('ScoreManage') }}">成绩管理</a></li>
+              <li><a href="{{ url('WorkAttendanceManage') }}">考勤管理</a></li>
+              <li><a href="{{ url('TestManage') }}">考试管理</a></li>
+              <li><a href="{{ url('InformationManage') }}">通知管理</a></li>
+              <li><a href="{{ url('CourseResource') }}">课程资源管理</a></li>
+              <li><a href="{{ url('StuInfoManage') }}">学生信息管理</a></li>
+              <li><a href="{{ url('TeacherInfoManage') }}">教师信息管理</a></li>
+              <li><a href="{{ url('ClassroomManage') }}">教室信息管理</a></li>
+              <li><a href="{{ url('AIRecommendCourse') }}">智能推荐课程</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="main-container">
     {% block content %}{% end %}
   </div>

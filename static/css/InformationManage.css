@@ -1,0 +1,7 @@
+.caption, .detail, .classify, .myButton{
+  padding: 20px;
+}
+
+.myButton{
+  float: right;
+}

@@ -1,0 +1,41 @@
+{% extends '../base_manage.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ static_url('css/CourseResource.css') }}">
+{% end %}
+
+{% block content %}
+<div class="container">
+  <div class="col-md-8 col-md-offset-1">
+    <div class="sourceTypeSelect">
+      <form role="form">
+        <label for="name">课程资源类别</label>
+        <select class="form-control">
+          <option>PPT</option>
+          <option>视频</option>
+          <option>试题</option>
+        </select>
+      </form>
+    </div>
+    <div class="sourceSubjectSelect">
+      <form role="form">
+        <label for="name">资源所属学科</label>
+        <select class="form-control">
+          <option>大学物理</option>
+          <option>高等数学</option>
+          <option>数字电路</option>
+        </select>
+      </form>
+    </div>
+    <div class="uploadFile">
+      <div class="form-group">
+    		<label class="sr-only" for="inputfile">文件输入</label>
+    		<input type="file" id="inputfile">
+    	</div>
+      <div class="myButton">
+        <button type="button" class="btn btn-primary">上传</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% end %}

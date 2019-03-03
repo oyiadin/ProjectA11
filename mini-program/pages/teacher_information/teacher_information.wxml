@@ -1,0 +1,83 @@
+<view class="page__hd">
+    <view class="page__title">教师信息</view>
+</view>
+<view class="weui-panel weui-panel_access">
+    <view class="weui-panel__bd">
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{icon60}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">XXX</view>
+                <view class="weui-media-box__desc">自我介绍自我介绍自我介绍</view>
+                <view class="weui-media-box__info">
+                    <view class="weui-media-box__info__meta">教学科目</view>
+                    <view class="weui-media-box__info__meta">时间</view>
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+                </view>
+            </view>
+        </navigator>
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{icon60}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">XXX</view>
+                <view class="weui-media-box__desc">自我介绍自我介绍自我介绍</view>
+                <view class="weui-media-box__info">
+                    <view class="weui-media-box__info__meta">教学科目</view>
+                    <view class="weui-media-box__info__meta">时间</view>
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+                </view>
+            </view>
+        </navigator>
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{icon60}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">XXX</view>
+                <view class="weui-media-box__desc">自我介绍自我介绍自我介绍</view>
+                <view class="weui-media-box__info">
+                    <view class="weui-media-box__info__meta">教学科目</view>
+                    <view class="weui-media-box__info__meta">时间</view>
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+                </view>
+            </view>
+        </navigator>
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{icon60}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">XXX</view>
+                <view class="weui-media-box__desc">自我介绍自我介绍自我介绍</view>
+                <view class="weui-media-box__info">
+                    <view class="weui-media-box__info__meta">教学科目</view>
+                    <view class="weui-media-box__info__meta">时间</view>
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+                </view>
+            </view>
+        </navigator>
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{icon60}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">XXX</view>
+                <view class="weui-media-box__desc">自我介绍自我介绍自我介绍</view>
+                <view class="weui-media-box__info">
+                    <view class="weui-media-box__info__meta">教学科目</view>
+                    <view class="weui-media-box__info__meta">时间</view>
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="weui-panel__ft">
+        <view class="weui-cell weui-cell_access weui-cell_link">
+            <view class="weui-cell__bd">查看更多</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+    </view>
+</view>

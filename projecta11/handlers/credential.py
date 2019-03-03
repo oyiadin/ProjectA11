@@ -31,7 +31,6 @@ class AccountHandler(BaseHandler):
         sess['is_login'] = 1
         sess['staff_id'] = staff_id
         sess.expire(conf.session.expires_after)
-        # TODO: 加上其他检测，防止 session 被盗用，以及保证仅单 session 有效
 
         self.finish(session_id=sess.key)
 
@@ -43,19 +42,19 @@ class AccountHandler(BaseHandler):
 
     @parse_json_body
     def put(self, data=None):
-        keys = ['staff_id', 'password', 'name', 'is_male']
-        data = dict(filter(lambda x: x[0] in keys, data))
+        print(data)
+        keys = ['staff_id', 'password']
+        data = dict(filter(lambda x: x[0] in keys, data.items()))
 
         if not reduce(lambda a, b: a and (b is not None), data):
             return self.finish(403, 'all arguments are required')
 
         selected_user = self.db_sess.query(db.User).filter(
             db.User.staff_id == data['staff_id']).first()
-        if selected_user is None:
+        if selected_user is not None:
             return self.finish(409, 'conflict user information')
 
         data['password'] = self.hash_password(data['password'])
-        data['is_male'] = bool(data['is_male'])
 
         new_user = db.User(**data)
         self.db_sess.add(new_user)

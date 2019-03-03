@@ -10,6 +10,7 @@ import projecta11.config as config
 import projecta11.db as db
 import projecta11.routers as routers
 import projecta11.handlers
+from projecta11.handlers.base import Error404Handler
 # 不能删，handlers 得被载入才会注册好对应的 url pattern
 
 
@@ -27,7 +28,8 @@ def startup(conf):
         debug=conf.app.debug,
         cookie_secret=conf.app.cookie_secret,
         template_path=conf.app.template_path,
-        static_path=conf.app.static_path)
+        static_path=conf.app.static_path,
+        default_handler_class=Error404Handler)
 
     if conf.app.swagger_ui:
         from swagger_ui import tornado_api_doc

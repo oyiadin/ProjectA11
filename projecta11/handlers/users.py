@@ -1,14 +1,20 @@
 # coding=utf-8
 
+from projecta11 import db
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
-from projecta11.utils import require_session
 
 
 @handling(r"/users/(\d+)")
 class SpecificUserInformationHandler(BaseHandler):
-    @require_session
-    def get(self, sess=None):
-        keys = ('staff_id',)
-        ret = dict(zip(keys, sess[keys]))
+    def get(self, staff_id):
+        selected_user = self.db_sess.query(db.User).filter(
+            db.User.staff_id == staff_id).first()
+        if selected_user is None:
+            self.finish(404, 'wrong staff_id')
+            return
+
+        ret = dict(
+            staff_id=selected_user.staff_id,
+        )
         self.finish(**ret)

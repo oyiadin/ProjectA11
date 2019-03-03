@@ -12,10 +12,9 @@ from projecta11.config import conf
 from projecta11.utils import require_session
 
 
-
-_letter_cases = "abcdefghjkmnpqrstuvwxy"
+_letter_cases = "acdefjkmprtwxy"
 _upper_cases = _letter_cases.upper()
-_numbers = '3456789'
+_numbers = '2348'
 candidates = ''.join((_letter_cases, _upper_cases, _numbers))
 
 captcha = ImageCaptcha()
@@ -25,10 +24,10 @@ captcha = ImageCaptcha()
 class CaptchaHandler(BaseHandler):
     @require_session
     def get(self, sess=None):
-        code = ''.join(random.choices(candidates, k=4)).lower()
+        code = ''.join(random.choices(candidates, k=4))
         image = captcha.generate_image(code)
 
-        sess['captcha'] = code
+        sess['captcha'] = code.lower()
         sess['captcha_expire'] = \
             int(time.time() + conf.session.captcha_expires_after)
 

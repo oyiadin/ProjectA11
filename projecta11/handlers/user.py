@@ -10,5 +10,7 @@ class UserInformationHandler(BaseHandler):
     @require_session
     def get(self, sess=None):
         keys = ('staff_id',)
-        ret = dict(zip(keys, sess[keys]))
+        ret = dict(zip(keys, map(
+            lambda x: x.decode() if isinstance(x, bytes) else x,
+            sess[keys])))
         self.finish(**ret)

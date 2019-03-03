@@ -1,7 +1,7 @@
 <!--pages/login/login.wxml-->
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__hd">
-    <view class="page__title">登陆</view>
+    <view class="page__title">登录</view>
     <view class="page__desc">欢迎回来！</view>
   </view>
 

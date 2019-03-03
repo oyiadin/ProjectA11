@@ -10,7 +10,7 @@ tags:
   - name: users
   - name: classes
   - name: courses
-  - name: score
+  - name: scores
   - name: misc
 schemes:
   - http
@@ -111,7 +111,7 @@ paths:
     get:
       tags:
         - users
-      summary: to fetch the info of the specific user
+      summary: to fetch the info of a specific user
       operationId: user_fetch_specific
       parameters:
         - in: path
@@ -127,10 +127,14 @@ paths:
           description: no specific user
     delete:
       tags:
-        -users
+        - users
       summary: to delete a user
       operationId: delete_users
       parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
         - in: path
           name: staff_id
           required: true
@@ -138,6 +142,12 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: no specific session_id
+        '401':
+          description: no enough permission
+        '403':
+          description: all arguments are required
         '404':
           description: no specific user
 
@@ -176,52 +186,61 @@ paths:
           schema:
             $ref: '#/definitions/course'
         '404':
-          description: no specific courese
-  '/score/{staff_id}':
+          description: no specific course
+  '/scores/{staff_id}/course/{course_id}':
     get:
       tags:
-        - score
-      summary: to fetch the score of the specific user
+        - scores
+      summary: to fetch the scores of the specific user
       operationId: score_fetch_specific
       parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
         - in: path
-          name: score
+          name: staff_id
+          required: true
+          type: string
+        - in: path
+          name: course_id
           required: true
           type: integer
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/score'
+            $ref: '#/definitions/score-show'
         '404':
-          decription: no specific user
+          description: no specific user
     post:
       tags:
-        - score
-      summary: to update the score of the specific user
+        - scores
+      summary: to update the scores of the specific user
       operationId: update_score_with_staff_id
       parameters:
-        - in: body
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
           name: staff_id
           required: true
           type: integer
+        - in: path
+          name: course_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
           schema:
-            type: object
-            properties:
-              staff_id:
-                type: string
-                example: 12345678
-              class_id:
-                type: string
-                example: 12345678
-              score:
-                type: integer
-                example: 95
-            responses:
-              '200':
-                description: OK
-              '404':
-                decription: no specific user
+            $ref: '#/definitions/score-whole'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: no specific user
   /misc/captcha:
     get:
       tags:
@@ -294,7 +313,7 @@ definitions:
         example: 12345678
       course_id:
         type: integer
-        example: 12345678
+        example: 12345
 
   course:
     type: object
@@ -307,22 +326,35 @@ definitions:
         example: Example-Course
       start:
         type: string
-        format: data-time
-        example: 10_00
+        format: date
+        example: "2019-01-02"
       end:
         type: string
-        format: data-time
-        example: 12_25
+        format: date
+        example: "2019-03-04"
 
-  score:
+  score-show:
+    type: array
+    items:
+      type: object
+      properties:
+        course_name:
+          type: string
+          example: Deep Learning
+        score:
+          type: integer
+          format: int16
+          example: 95
+
+  score-whole:
     type: object
     properties:
-      course_score:
-        type: integer
-        format: int16
       staff_id:
+        type: string
+        example: 12345678
+      course_id:
         type: integer
-        format: int
-      class_id:
+        example: 12345
+      score:
         type: integer
-        format: int
+        example: 95

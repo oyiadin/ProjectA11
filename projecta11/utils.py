@@ -1,7 +1,8 @@
 # coding=utf-8
-
+import hashlib
 from json.decoder import JSONDecodeError
 
+from projecta11.config import conf
 from projecta11.session import Session
 from tornado.escape import json_decode
 
@@ -41,3 +42,10 @@ def keys_filter(obj, keys: tuple) -> dict:
     return dict(zip(keys, map(
         lambda x: x.decode() if isinstance(x, bytes) else x,
         obj[keys])))
+
+
+def hash_password(password):
+    hashed = hashlib.sha256(password.encode()).hexdigest()
+    salted = hashed + conf.app.password_salt
+    hashed_and_salted = hashlib.sha256(salted.encode()).hexdigest()
+    return hashed_and_salted

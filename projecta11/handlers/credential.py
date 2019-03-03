@@ -3,7 +3,9 @@
 from functools import reduce
 
 from projecta11.handlers.base import BaseHandler
-from projecta11.utils import parse_json_body, require_session, keys_filter
+from projecta11.utils import (
+    parse_json_body, require_session, keys_filter, hash_password
+)
 from projecta11.routers import handling
 from projecta11.config import conf
 from projecta11.session import Session
@@ -20,7 +22,7 @@ class AccountHandler(BaseHandler):
         if not (staff_id and password):
             return self.finish(403, 'all arguments are required')
 
-        password = self.hash_password(password)
+        password = hash_password(password)
 
         selected_user = self.db_sess.query(db.User).filter(
             db.User.staff_id == staff_id, db.User.password == password).first()
@@ -52,7 +54,7 @@ class AccountHandler(BaseHandler):
         if selected_user is not None:
             return self.finish(409, 'conflict user information')
 
-        data['password'] = self.hash_password(data['password'])
+        data['password'] = hash_password(data['password'])
 
         new_user = db.User(**data)
         self.db_sess.add(new_user)

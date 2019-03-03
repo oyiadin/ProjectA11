@@ -1,6 +1,6 @@
 # coding=utf-8
-import hashlib
 import traceback
+import json
 
 from tornado.escape import json_encode
 import tornado.web
@@ -37,7 +37,9 @@ class BaseHandler(tornado.web.RequestHandler):
     def finish(self, code=200, msg='OK', **kwargs):
         self.set_status(code)
         kwargs.update(msg=msg, code=code)
-        return super().finish(json_encode(kwargs))
+        ret = json_encode(kwargs) if not conf.app.debug \
+            else json.dumps(kwargs, indent=2, sort_keys=True)
+        return super().finish(ret)
 
     def write_error(self, status_code, **kwargs):
         self.set_header('Content-Type', 'application/json')
@@ -48,12 +50,6 @@ class BaseHandler(tornado.web.RequestHandler):
             self.finish(status_code, self._reason, traceback=lines)
         else:
             self.finish(status_code, self._reason)
-
-    def hash_password(self, password):
-        hashed = hashlib.sha256(password.encode()).hexdigest()
-        salted = hashed + conf.app.password_salt
-        hashed_and_salted = hashlib.sha256(salted.encode()).hexdigest()
-        return hashed_and_salted
 
 
 class Error404Handler(BaseHandler):

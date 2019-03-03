@@ -8,7 +8,8 @@
     "common_salt": "[IMPORTANT] RESET ME!",
     "template_path": "templates",
     "static_path": "static",
-    "use_static_handler": "true"
+    "use_static_handler": "true",
+    "swagger_ui": "false"
   },
   "db": {
     "dialect": "mysql",

@@ -8,7 +8,9 @@ parser.add_argument('--server',
 parser.add_argument('--init', default=False, action='store_const', const=True)
 parser.add_argument('--debug', default=False, action='store_const', const=True)
 parser.add_argument(
-    '--use_static_handler', default=False, action='store_const', const=True)
+    '--use-static-handler', default=False, action='store_const', const=True)
+parser.add_argument(
+    '--swagger-ui', default=False, action='store_const', const=True)
 parser.add_argument('--config', default='config.json')
 
 
@@ -22,11 +24,17 @@ if __name__ == '__main__':
     if args.use_static_handler:
         conf.app.update({'use_static_handler': True})
 
+    if args.swagger_ui:
+        conf.app.update({'swagger_ui': True})
+
     try:
         if args.server:
             import projecta11.server
             print('listening to http://{}:{}/'.format(
                 conf.app.host, conf.app.port))
+            if conf.app.swagger_ui:
+                print('documentation lies here: http://{}:{}/api/v1/doc'.format(
+                    conf.app.host, conf.app.port))
             projecta11.server.startup(conf)
 
         if args.init:

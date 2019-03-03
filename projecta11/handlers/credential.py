@@ -60,7 +60,7 @@ class AccountHandler(BaseHandler):
         data = dict(filter(lambda x: x[0] in keys, data))
 
         if not reduce(lambda a, b: a and (b is not None), data):
-            return self.finish('all arguments are required')
+            return self.finish(403, 'all arguments are required')
 
         selected_user = self.db_sess.query(db.User).filter(
             db.User.staff_id == data['staff_id']).first()

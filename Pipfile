@@ -11,6 +11,7 @@ sqlalchemy = "*"
 pymysql = "*"
 pillow = "*"
 redis = "*"
+swagger-ui-py = "*"
 
 [requires]
 python_version = "3.6"

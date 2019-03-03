@@ -46,6 +46,8 @@
 
 如果其他人修改了数据库的表结构，需要删了对应的表，然后重新运行一下 `--init` (可以直接改吗，我 mysql 不是很熟悉)
 
+`--server` 模式有一个额外的开关 `--swagger-ui`，开启之后可以在本地看到 API 文档。
+
 ## Dependent Libraries
 
 根据赛题文档，所使用的开源库必须进行标注：
@@ -58,3 +60,4 @@
 * [jQuery](https://github.com/jquery/jquery/blob/master/LICENSE.txt)(MIT)
 * [pillow](https://github.com/python-pillow/Pillow/blob/master/LICENSE) (PIL协议，类似MIT)
 * [redis](https://redis.io/topics/license/) (BSD)
+* [swagger-ui-py](https://github.com/PWZER/swagger-ui-py) (Apache License 2.0)

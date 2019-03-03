@@ -1,12 +1,10 @@
 # coding=utf-8
-
 import hashlib
 import traceback
 
 from tornado.escape import json_encode
 import tornado.web
 import projecta11.db as db
-import projecta11.session as session
 from projecta11.config import conf
 
 
@@ -15,6 +13,10 @@ class BaseHandler(tornado.web.RequestHandler):
         super().__init__(*args, **kwargs)
         self._session = None
         self._session_db = None
+
+    def prepare(self):
+        super().prepare()
+        self.set_header('Content-Type', 'application/json')
 
     def _get_session_db(self):
         if self._session_db:
@@ -38,6 +40,7 @@ class BaseHandler(tornado.web.RequestHandler):
         return super().finish(json_encode(kwargs))
 
     def write_error(self, status_code, **kwargs):
+        self.set_header('Content-Type', 'application/json')
         if self.settings.get("serve_traceback") and "exc_info" in kwargs:
             # in debug mode, try to send a traceback
             self.set_header("Content-Type", "text/plain")

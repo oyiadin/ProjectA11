@@ -2,23 +2,8 @@
 
 from json.decoder import JSONDecodeError
 
-import projecta11.db as db
 from projecta11.session import Session
 from tornado.escape import json_decode
-
-
-def role_assert(*roles):
-    def decorator(func):
-        def wrapper(self, *args, **kwargs):
-            if self.current_user is None:
-                self.redirect('/login')
-            else:
-                for role in roles:
-                    if db.string2role[role] == self.current_user.role:
-                        return func(self, *args, **kwargs)
-                    self.redirect('/login')
-        return wrapper
-    return decorator
 
 
 def parse_json_body(func):
@@ -46,3 +31,13 @@ def require_session(func):
             return
         return func(self, *args, sess=sess, **kwargs)
     return wrapper
+
+
+def keys_filter(obj, keys: tuple) -> dict:
+    if isinstance(obj, dict):
+        return dict(filter(lambda x: x[0] in keys, obj.items()))
+
+    # else: isinstance(Session)
+    return dict(zip(keys, map(
+        lambda x: x.decode() if isinstance(x, bytes) else x,
+        obj[keys])))

@@ -2,7 +2,7 @@
 
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
-from projecta11.utils import require_session
+from projecta11.utils import require_session, keys_filter
 
 
 @handling(r"/user")
@@ -10,7 +10,5 @@ class UserInformationHandler(BaseHandler):
     @require_session
     def get(self, sess=None):
         keys = ('staff_id',)
-        ret = dict(zip(keys, map(
-            lambda x: x.decode() if isinstance(x, bytes) else x,
-            sess[keys])))
+        ret = keys_filter(sess, keys)
         self.finish(**ret)

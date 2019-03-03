@@ -3,7 +3,7 @@
 from functools import reduce
 
 from projecta11.handlers.base import BaseHandler
-from projecta11.utils import parse_json_body, require_session
+from projecta11.utils import parse_json_body, require_session, keys_filter
 from projecta11.routers import handling
 from projecta11.config import conf
 from projecta11.session import Session
@@ -28,7 +28,6 @@ class AccountHandler(BaseHandler):
             return self.finish(404, 'wrong staff_id or password')
 
         sess = Session()
-        sess['is_login'] = 1
         sess['staff_id'] = staff_id
         sess.expire(conf.session.expires_after)
 
@@ -42,9 +41,8 @@ class AccountHandler(BaseHandler):
 
     @parse_json_body
     def put(self, data=None):
-        print(data)
-        keys = ['staff_id', 'password']
-        data = dict(filter(lambda x: x[0] in keys, data.items()))
+        keys = ('staff_id', 'password')
+        data = keys_filter(data, keys)
 
         if not reduce(lambda a, b: a and (b is not None), data):
             return self.finish(403, 'all arguments are required')
@@ -62,3 +60,4 @@ class AccountHandler(BaseHandler):
         self.db_sess.close()
 
         self.finish()
+

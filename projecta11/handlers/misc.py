@@ -14,7 +14,7 @@ from projecta11.utils import require_session
 
 _letter_cases = "acdefjkmprtwxy"
 _upper_cases = _letter_cases.upper()
-_numbers = '2348'
+_numbers = '2348' * 2  # 稍微提高一下出现数字的概率…
 candidates = ''.join((_letter_cases, _upper_cases, _numbers))
 
 captcha = ImageCaptcha()
@@ -32,6 +32,6 @@ class CaptchaHandler(BaseHandler):
             int(time.time() + conf.session.captcha_expires_after)
 
         stream = io.BytesIO()
-        image.save(stream, 'GIF')
-        self.set_header('Content-Type', 'image/gif')
+        image.save(stream, 'JPEG')
+        self.set_header('Content-Type', 'image/jpeg')
         self.write(stream.getvalue())

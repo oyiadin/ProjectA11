@@ -7,10 +7,11 @@ basePath: /api/v1
 tags:
   - name: credential
   - name: user
+  - name: check-in
+  - name: score
   - name: class
   - name: course
-  - name: score
-  - name: check-in
+  - name: forum
   - name: misc
 schemes:
   - http
@@ -21,7 +22,7 @@ paths:
       tags:
         - credential
       summary: to register
-      description: register a new user
+      description: app_id='0cc175b9c0f1b6a8'
       operationId: account_register
       parameters:
         - in: body
@@ -37,19 +38,13 @@ paths:
         - credential
       summary: to login
       operationId: account_login
+      description: app_id='9c15af0d3e0ea84d'
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            type: object
-            properties:
-              user_id:
-                type: string
-                example: 12345678
-              password:
-                type: string
-                example: p@ssword
+            $ref: '#/definitions/user-login'
       responses:
         '200':
           description: OK
@@ -58,13 +53,28 @@ paths:
             properties:
               session_id:
                 type: string
-                example: 7I+OyQhMCaMTpdU7W1VZ+0PFETZbaTTPU/UfW3nf0c/vDNj1oewNF3Z+tms0nwbK
+                example: 21cfcfdb1ca625bdb1341cbfb65d50272b997b02f22396d54a0058c678e91ffe4b3e1bf773a9e386fd042e0069602449
     delete:
       tags:
         - credential
       summary: to logout
       description: clear the session of the logged user, remember to clear the local `session_id`
       operationId: account_logout
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+
+  /credential/session_id:
+    post:
+      tags:
+        - credential
+      summary: to renew a session_id
+      operationId: session_renew
       parameters:
         - in: query
           name: session_id
@@ -141,7 +151,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/class'
+            $ref: '#/definitions/class-show'
 
   '/course/{course_id}':
     get:
@@ -158,15 +168,15 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/course'
+            $ref: '#/definitions/course-show'
 
-  '/user/{user_id}/score/{course_id}':
+  '/user/{user_id}/scores':
     get:
       tags:
         - user
         - score
       summary: to fetch the scores of the specific user
-      operationId: score_fetch_specific
+      operationId: user_scores_fetch
       parameters:
         - in: query
           name: session_id
@@ -176,15 +186,13 @@ paths:
           name: user_id
           required: true
           type: string
-        - in: path
-          name: course_id
-          required: true
-          type: integer
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/score'
+            type: array
+            items:
+              $ref: '#/definitions/score-show'
 
   /score/{score_id}:
     post:
@@ -205,7 +213,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/score'
+            $ref: '#/definitions/score-register'
       responses:
         '200':
           description: OK
@@ -227,7 +235,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/score-add'
+              $ref: '#/definitions/score-register'
       responses:
         '200':
           description: OK
@@ -254,7 +262,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/score-add-specific-class'
+              $ref: '#/definitions/score-register-specific-class'
       responses:
         '200':
           description: OK
@@ -281,7 +289,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/class'
+              $ref: '#/definitions/class-show'
 
   /misc/captcha:
     get:
@@ -294,6 +302,18 @@ paths:
           name: session_id
           required: true
           type: string
+        - in: body
+          name: body
+          required: true
+          description: "`app_id` can specify the situation where this captcha will use (such as when login, register, post new topics...)
+
+            the backend would store a dict which may contains something like `{'0cc175b9c0f1b6a8': 'login'}`"
+          schema:
+            type: object
+            properties:
+              app_id:
+                type: string
+                example: "0cc175b9c0f1b6a8"
       responses:
         '200':
           description: OK
@@ -306,8 +326,9 @@ paths:
       tags:
         - check-in
         - class
-      summary: to fetch a captcha image
+      summary: to fetch a check-in code
       operationId: check-in-fetch
+      description: the code won't be available until "xxx/start" is called
       parameters:
         - in: query
           name: session_id
@@ -321,7 +342,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/check-in-code'
+            $ref: '#/definitions/check-in-code-show'
 
   /check-in/code/{code_id}/start:
     post:
@@ -339,6 +360,28 @@ paths:
           name: code_id
           required: true
           type: integer
+      responses:
+        '200':
+          description: OK
+
+  /check-in/verify/{code}:
+    put:
+      tags:
+        - check-in
+        - user
+      summary: to do a check-in
+      operationId: do-check-in
+      description: app_id='a97754bc483c6de5'
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: code
+          required: true
+          type: string
+          description: 'an ***encrypted*** version of the real `code` (uses [TEA](https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%9E%8B%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95) to encrypt)'
       responses:
         '200':
           description: OK
@@ -366,21 +409,41 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user-show'
+
+  /{class|course}/{id}/forum/topics:
+    get:
+      tags:
+        - forum
+        - class
+      summary: to fetch the list of topics
+      operationId: class-forum-topics
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class|course
+          required: true
+          type: string
+          enum: [class, course]
+        - in: path
+          name: id
+          description: a specific class_id or course_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+
+
 
 
 definitions:
-  user-register:
-    type: object
-    properties:
-      # code:
-      #   type: string
-      #   example: <the code returned from wx.login>
-      user_id:
-        type: integer
-        example: 12345678
-      password:
-        type: string
-        example: p@ssword
 
   user-backend:
     type: object
@@ -392,6 +455,25 @@ definitions:
         type: string
         example: p@ssword
 
+  user-register:
+    type: object
+    properties:
+      user_id:
+        type: integer
+        example: 12345678
+      password:
+        type: string
+        example: p@ssword
+
+  user-login:
+    type: object
+    properties:
+      user_id:
+        type: integer
+        example: 12345678
+      password:
+        type: string
+        example: p@ssword
 
   user-show:
     type: object
@@ -400,7 +482,10 @@ definitions:
         type: integer
         example: 12345678
 
-  class:
+  ################################################################
+  ################################################################
+
+  class-backend:
     type: object
     properties:
       class_id:
@@ -411,11 +496,9 @@ definitions:
         example: Example-Class
       weekday:
         type: integer
-        format: int16
         example: 1
       start:
         type: integer
-        format: int16
         example: 3
       end:
         type: integer
@@ -426,9 +509,18 @@ definitions:
         example: 12345678
       course_id:
         type: integer
-        example: 12345678
+        example: 12345
 
-  course:
+  class-register:
+    $ref: '#/definitions/class-backend'
+
+  class-show:
+    $ref: '#/definitions/class-backend'
+
+  ################################################################
+  ################################################################
+
+  course-backend:
     type: object
     properties:
       course_id:
@@ -446,64 +538,87 @@ definitions:
         format: date
         example: "2019-03-04"
 
-  score:
+  course-register:
+    $ref: '#/definitions/course-backend'
+
+  course-show:
+    $ref: '#/definitions/course-backend'
+
+  ################################################################
+  ################################################################
+
+  score-backend:
     type: object
     properties:
       score_id:
         type: integer
+        example: 42
       score:
         type: integer
-        format: int16
+        example: 95
       user_id:
         type: integer
-        format: int
+        example: 12345678
       class_id:
         type: integer
-        format: int
+        example: 12345
 
-  score-add:
+  score-register:
     type: object
     properties:
       score:
         type: integer
-        format: int16
+        example: 95
       user_id:
         type: integer
-        format: int
+        example: 12345678
       class_id:
         type: integer
-        format: int
+        example: 12345
 
-  score-add-specific-class:
+  score-register-specific-class:
     type: object
     properties:
       score:
         type: integer
-        format: int16
+        example: 95
       user_id:
         type: integer
-        format: int
+        example: 12345678
 
-  check-in-code:
-    type: object
-    properties:
-      code_id:
-        type: integer
-      code:
-        type: string
+  score-show:
+    $ref: '#/definitions/score-backend'
+
+  ################################################################
+  ################################################################
 
   check-in-code-backend:
     type: object
     properties:
       code_id:
         type: integer
+        example: 42
       code:
         type: string
+        example: 6789
       class_id:
         type: integer
+        example: 12345
       started:
         type: boolean
+        example: false
       expire_at:
         type: string
         format: time
         example: "1551682932"
+
+  check-in-code-show:
+    type: object
+    properties:
+      code_id:
+        type: integer
+        example: 42
+      code:
+        type: string
+        example: 6789
+

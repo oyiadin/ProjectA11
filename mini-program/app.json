@@ -5,23 +5,21 @@
     "pages/data_analysis/data_analysis",
     "pages/login/login",
     "pages/users/users",
+    "pages/users/user_information/user_information",
     "pages/index/index",
     "pages/logs/logs",
     "pages/classes/classes",
     "pages/register/register"
   ],
-
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
-
   "tabBar": {
     "color": "#000000",
     "selectedColor": "#000000",
-
     "list": [
       {
         "pagePath": "pages/teacher_information/teacher_information",
@@ -30,7 +28,7 @@
         "selectedIconPath": "images/icons/index_active.png"
       },
       {
-        "pagePath": "pages/login/login",
+        "pagePath": "pages/users/users",
         "text": "个人中心",
         "iconPath": "images/icons/users.png",
         "selectedIconPath": "images/icons/users_active.png"

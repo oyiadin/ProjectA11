@@ -1,2 +1,48 @@
 <!--pages/users/users.wxml-->
-<text>pages/users/users.wxml</text>
+<view class='user_views'>
+  <view class='user_view_beijing_view'>
+    <image class='user_view_beijing_view_images' mode="aspectFill" src='../../images/user_background.png'></image>
+  </view>
+  <image class='huanbeijingtishi' src='../../images/icon/view.png' catchtap='huanbeijing' data-type='GHBJ'></image>
+  <view class='user_view_touxiang_view'>
+    <image mode="aspectFill" style='border-radius:100rpx;' class='user_view_touxiang_view_images' src='../../images/icons/Student.png' catchtap='huanbeijing' data-type='GHTX'></image>
+    <view>
+      <text class='user_view_touxiang_view_name'>Xyf<!--{{name}} --></text>
+      <!-- <image class='mail_views' src="{{ gender=='男'?'../../images/icon/male.png':'../../images/icon/female.png'}}"></image> -->
+    </view>
+  </view>
+  <!-- <view class='mail_view'>
+    <image src='../../images/icon/male.png'></image>
+  </view> -->
+  <view class='user_xuanxiang_list_view'>
+    <!--订单列表  -->
+    <view class='tools_list'>
+      <view catchtap='user_information'>
+        <image src='../../images/icon/userinfo.png'></image>
+        <text>个人信息</text>
+      </view>
+      <view catchtap='wofabude'>
+        <image src='../../images/icon/userinfo.png'></image>
+        <text>我发起的</text>
+      </view>
+      <view catchtap='liulanjilu'>
+        <image src='../../images/icon/userinfo.png'></image>
+        <text>浏览记录</text>
+      </view>
+    </view>
+    <view class='tools_list'>
+      <view catchtap='collection'>
+        <image src='../../images/icon/userinfo.png'></image>
+        <text>我收藏的</text>
+      </view>
+      <view catchtap='wodebaoming'>
+        <image src='../../images/icon/userinfo.png'></image>
+        <text>我加入的</text>
+      </view>
+      <view catchtap='Advicefeedback'>
+        <image src='../../images/icon/userinfo.png'></image>
+        <text>意见反馈</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,4 +1,7 @@
 // pages/users/users.js
+const app = getApp();
+//var Request = require("../../utils/request.js");
+
 Page({
 
   /**
@@ -12,13 +15,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (app.appData.userInfo == null) {
-      wx.redirectTo({ url: "../login/login" })
-    }
-    else{
-      this.setData({username:app.appData.userInfo.username})
-    }
-
+    //if (app.appData.userInfo == null) {
+    //  wx.redirectTo({ url: "../login/login" })
+    //}
+    // 获取个人信息
+    //else{
+    //  Request.
+    //  this.setData({username:app.appData.userInfo.username})
+    //}
+    pass;
   },
 
   /**
@@ -70,8 +75,40 @@ Page({
 
   },
 
-  appDate : {
-    userInfo : null,
+  // 个人信息跳转
+  user_information: function () {
+    wx.navigateTo({
+      url: './user_information/user_information',
+    })
+  },
+  // 点击我发布的跳转
+  wofabude: function () {
+    wx.navigateTo({
+      url: './UserAllActivity/UserAllActivity',
+    })
+  },
+  // 浏览记录
+  liulanjilu: function () {
+    wx.navigateTo({
+      url: './userjiaoyin/userjiaoyin',
+    })
+  },
+  // 我的收藏
+  collection: function () {
+    wx.navigateTo({
+      url: './collection/collection',
+    })
+  },
+  // 我的报名跳转
+  wodebaoming: function () {
+    wx.navigateTo({
+      url: './usersingup/usersingup',
+    })
+  },
+  // 建议反馈
+  Advicefeedback: function () {
+    wx.navigateTo({
+      url: './Advicefeedback/Advicefeedback',
+    })
   }
-
 })

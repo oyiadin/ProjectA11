@@ -2,9 +2,17 @@
 
 基于微信的移动智能学习平台
 
-## 前端
 
-前端`Bootstrap`现在版本是3.3.7
+> 由于微信限制，每个人都只能用自己的小程序测试号进行开发
+> 这会导致 `mini-program/project.config.json` 被频繁修改
+> 
+> 运行如下命令（一次即可）以忽略该文件的修改:
+> `git update-index --assume-unchanged mini-program/project.config.json`
+> 
+> 等到该配置文件需要被提交修改时，运行以下命令（一次即可）
+> `git update-index --no-assume-unchanged mini-program/project.config.json`
+> 即可恢复
+
 
 ## Usage
 

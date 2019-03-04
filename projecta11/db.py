@@ -54,7 +54,7 @@ def startup(conf):
 
     engine = create_engine(
         '{dialect}+{driver}://{user}:{password}@{host}/{dbname}'.format(
-            **conf.db))  # echo=conf.app.debug  # 这东西太烦了…
+            **conf.db), echo=conf.app.debug)
     Session = sessionmaker(bind=engine)
 
 

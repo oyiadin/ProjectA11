@@ -7,16 +7,31 @@ basePath: /api/v1
 tags:
   - name: credential
   - name: user
-  - name: users
-  - name: classes
-  - name: courses
-  - name: scores
+  - name: class
+  - name: course
+  - name: score
+  - name: check-in
   - name: misc
 schemes:
   - http
 
 paths:
   /credential/account:
+    put:
+      tags:
+        - credential
+      summary: to register
+      description: register a new user
+      operationId: account_register
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/user-register'
+      responses:
+        '200':
+          description: OK
     post:
       tags:
         - credential
@@ -29,7 +44,7 @@ paths:
           schema:
             type: object
             properties:
-              staff_id:
+              user_id:
                 type: string
                 example: 12345678
               password:
@@ -44,12 +59,6 @@ paths:
               session_id:
                 type: string
                 example: 7I+OyQhMCaMTpdU7W1VZ+0PFETZbaTTPU/UfW3nf0c/vDNj1oewNF3Z+tms0nwbK
-        '400':
-          description: bad request (maybe the body contains illegal json data)
-        '403':
-          description: all arguments are required
-        '404':
-          description: wrong staff_id or password
     delete:
       tags:
         - credential
@@ -64,34 +73,12 @@ paths:
       responses:
         '200':
           description: OK
-        '403':
-          description: all arguments are required
-        '404':
-          description: no specific session_id
-    put:
-      tags:
-        - credential
-      summary: to register
-      description: register a new user
-      operationId: account_register
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/user-whole'
-      responses:
-        '200':
-          description: OK
-        '403':
-          description: all arguments are required
-        '409':
-          description: conflict staff_id
+
   /user:
     get:
       tags:
         - user
-      summary: to fetch the info of current logged user
+      summary: to fetch the basic info of current logged user
       operationId: user_fetch
       parameters:
         - in: query
@@ -102,32 +89,28 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/user-show-self'
-        '403':
-          description: all arguments are required
-        '404':
-          description: no specific session_id
-  '/users/{staff_id}':
+            $ref: '#/definitions/user-show'
+
+  /user/{user_id}:
     get:
       tags:
-        - users
-      summary: to fetch the info of a specific user
+        - user
+      summary: to fetch the basic info of the specific user
       operationId: user_fetch_specific
       parameters:
         - in: path
-          name: staff_id
+          name: user_id
           required: true
           type: integer
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/user-show-others'
-        '404':
-          description: no specific user
+            $ref: '#/definitions/user-show'
+
     delete:
       tags:
-        - users
+        - user
       summary: to delete a user
       operationId: delete_users
       parameters:
@@ -136,25 +119,17 @@ paths:
           required: true
           type: string
         - in: path
-          name: staff_id
+          name: user_id
           required: true
           type: integer
       responses:
         '200':
           description: OK
-        '400':
-          description: no specific session_id
-        '401':
-          description: no enough permission
-        '403':
-          description: all arguments are required
-        '404':
-          description: no specific user
 
-  '/classes/{class_id}':
+  '/class/{class_id}':
     get:
       tags:
-        - classes
+        - class
       summary: to fetch the info of the specific class
       operationId: class_fetch_specific
       parameters:
@@ -167,12 +142,11 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/class'
-        '404':
-          description: no specific class
-  '/courses/{course_id}':
+
+  '/course/{course_id}':
     get:
       tags:
-        - courses
+        - course
       summary: to fetch the info of the specific course
       operationId: course_fetch_specific
       parameters:
@@ -185,12 +159,12 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/course'
-        '404':
-          description: no specific course
-  '/scores/{staff_id}/course/{course_id}':
+
+  '/user/{user_id}/score/{course_id}':
     get:
       tags:
-        - scores
+        - user
+        - score
       summary: to fetch the scores of the specific user
       operationId: score_fetch_specific
       parameters:
@@ -199,7 +173,7 @@ paths:
           required: true
           type: string
         - in: path
-          name: staff_id
+          name: user_id
           required: true
           type: string
         - in: path
@@ -210,37 +184,105 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/score-show'
-        '404':
-          description: no specific user
+            $ref: '#/definitions/score'
+
+  /score/{score_id}:
     post:
       tags:
-        - scores
-      summary: to update the scores of the specific user
-      operationId: update_score_with_staff_id
+        - score
+      summary: to update the specific score item
+      operationId: update_specific_score
       parameters:
         - in: query
           name: session_id
           required: true
           type: string
         - in: path
-          name: staff_id
-          required: true
-          type: integer
-        - in: path
-          name: course_id
+          name: score_id
           required: true
           type: integer
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/score-whole'
+            $ref: '#/definitions/score'
       responses:
         '200':
           description: OK
-        '404':
-          description: no specific user
+
+  /scores:
+    put:
+      tags:
+        - score
+      summary: to add some new scores
+      operationId: add_new_score
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/score-add'
+      responses:
+        '200':
+          description: OK
+
+  /class/{class_id}/scores:
+    put:
+      tags:
+        - score
+        - class
+      summary: to add some new scores of a specific class
+      operationId: add_new_score_specific_class
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/score-add-specific-class'
+      responses:
+        '200':
+          description: OK
+
+  /user/{user_id}/classes:
+    get:
+      tags:
+        - user
+        - class
+      summary: to fetch the classes which the current user belongs to
+      operationId: user_classes_fetch
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: user_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/class'
+
   /misc/captcha:
     get:
       tags:
@@ -258,14 +300,92 @@ paths:
           schema:
             type: file
             example: (the binary data of the captcha image)
-        '403':
-          description: all arguments are required
+
+  /check-in/class/{class_id}/code:
+    get:
+      tags:
+        - check-in
+        - class
+      summary: to fetch a captcha image
+      operationId: check-in-fetch
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/check-in-code'
+
+  /check-in/code/{code_id}/start:
+    post:
+      tags:
+        - check-in
+        - class
+      summary: to start a check-in code immediately
+      operationId: check-in-start
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: code_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+
+  /class/{class_id}/code/{code_id}/list:
+    get:
+      tags:
+        - check-in
+        - class
+      summary: to fetch the list of checked-in users
+      operationId: check-in-list
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class_id
+          required: true
+          type: integer
+        - in: path
+          name: code_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+
 
 definitions:
-  user-whole:
+  user-register:
     type: object
     properties:
-      staff_id:
+      # code:
+      #   type: string
+      #   example: <the code returned from wx.login>
+      user_id:
+        type: integer
+        example: 12345678
+      password:
+        type: string
+        example: p@ssword
+
+  user-backend:
+    type: object
+    properties:
+      user_id:
         type: integer
         example: 12345678
       password:
@@ -273,17 +393,10 @@ definitions:
         example: p@ssword
 
 
-  user-show-self:
+  user-show:
     type: object
     properties:
-      staff_id:
-        type: integer
-        example: 12345678
-
-  user-show-others:
-    type: object
-    properties:
-      staff_id:
+      user_id:
         type: integer
         example: 12345678
 
@@ -313,7 +426,7 @@ definitions:
         example: 12345678
       course_id:
         type: integer
-        example: 12345
+        example: 12345678
 
   course:
     type: object
@@ -333,28 +446,64 @@ definitions:
         format: date
         example: "2019-03-04"
 
-  score-show:
-    type: array
-    items:
-      type: object
-      properties:
-        course_name:
-          type: string
-          example: Deep Learning
-        score:
-          type: integer
-          format: int16
-          example: 95
-
-  score-whole:
+  score:
     type: object
     properties:
-      staff_id:
-        type: string
-        example: 12345678
-      course_id:
+      score_id:
         type: integer
-        example: 12345
       score:
         type: integer
-        example: 95
+        format: int16
+      user_id:
+        type: integer
+        format: int
+      class_id:
+        type: integer
+        format: int
+
+  score-add:
+    type: object
+    properties:
+      score:
+        type: integer
+        format: int16
+      user_id:
+        type: integer
+        format: int
+      class_id:
+        type: integer
+        format: int
+
+  score-add-specific-class:
+    type: object
+    properties:
+      score:
+        type: integer
+        format: int16
+      user_id:
+        type: integer
+        format: int
+
+  check-in-code:
+    type: object
+    properties:
+      code_id:
+        type: integer
+      code:
+        type: string
+
+  check-in-code-backend:
+    type: object
+    properties:
+      code_id:
+        type: integer
+      code:
+        type: string
+      class_id:
+        type: integer
+      started:
+        type: boolean
+      expire_at:
+        type: string
+        format: time
+        example: "1551682932"

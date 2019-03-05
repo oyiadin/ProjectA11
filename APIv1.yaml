@@ -11,6 +11,7 @@ tags:
   - name: score
   - name: class
   - name: course
+  - name: material
   - name: forum
   - name: misc
 schemes:
@@ -173,7 +174,6 @@ paths:
   '/user/{user_id}/scores':
     get:
       tags:
-        - user
         - score
       summary: to fetch the scores of the specific user
       operationId: user_scores_fetch
@@ -244,7 +244,6 @@ paths:
     put:
       tags:
         - score
-        - class
       summary: to add some new scores of a specific class
       operationId: add_new_score_specific_class
       parameters:
@@ -270,7 +269,6 @@ paths:
   /user/{user_id}/classes:
     get:
       tags:
-        - user
         - class
       summary: to fetch the classes which the current user belongs to
       operationId: user_classes_fetch
@@ -325,7 +323,6 @@ paths:
     get:
       tags:
         - check-in
-        - class
       summary: to fetch a check-in code
       operationId: check-in-fetch
       description: the code won't be available until "xxx/start" is called
@@ -348,7 +345,6 @@ paths:
     post:
       tags:
         - check-in
-        - class
       summary: to start a check-in code immediately
       operationId: check-in-start
       parameters:
@@ -368,7 +364,6 @@ paths:
     put:
       tags:
         - check-in
-        - user
       summary: to do a check-in
       operationId: do-check-in
       description: app_id='a97754bc483c6de5'
@@ -386,11 +381,33 @@ paths:
         '200':
           description: OK
 
+  /check-in/class/{class_id}/user/{user_id}:
+    post:
+      tags:
+        - check-in
+      summary: to check-in manually by a teacher
+      operationId: check-in-manual
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class_id
+          required: true
+          type: integer
+        - in: path
+          name: user_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+
   /class/{class_id}/code/{code_id}/list:
     get:
       tags:
         - check-in
-        - class
       summary: to fetch the list of checked-in users
       operationId: check-in-list
       parameters:
@@ -418,7 +435,6 @@ paths:
     get:
       tags:
         - forum
-        - class
       summary: to fetch the list of topics
       operationId: class-forum-topics
       parameters:
@@ -440,6 +456,34 @@ paths:
         '200':
           description: OK
 
+  /{class|course}/{id}/material/list:
+    get:
+      tags:
+        - material
+      summary: to fetch the list of current materials
+      operationId: materials-list
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class|course
+          required: true
+          type: string
+          enum: [class, course]
+        - in: path
+          name: id
+          description: a specific class_id or course_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/material-backend'
 
 
 
@@ -453,7 +497,8 @@ definitions:
         example: 12345678
       password:
         type: string
-        example: p@ssword
+        example: 90f2c9c53f66540e67349e0ab83d8cd0
+        description: a hashed password
 
   user-register:
     type: object
@@ -463,7 +508,8 @@ definitions:
         example: 12345678
       password:
         type: string
-        example: p@ssword
+        example: 90f2c9c53f66540e67349e0ab83d8cd0
+        description: a hashed password
 
   user-login:
     type: object
@@ -473,7 +519,8 @@ definitions:
         example: 12345678
       password:
         type: string
-        example: p@ssword
+        example: 90f2c9c53f66540e67349e0ab83d8cd0
+        description: a hashed password
 
   user-show:
     type: object
@@ -621,4 +668,29 @@ definitions:
       code:
         type: string
         example: 6789
+
+  ################################################################
+  ################################################################
+
+  material-backend:
+    type: object
+    properties:
+      file_id:
+        type: integer
+        example: 1234
+      filename:
+        type: string
+        example: "unit-1-slides.ppt"
+      size:
+        type: integer
+        example: 1024
+        description: (in bytes)
+      uploaded_at:
+        type: string
+        format: date
+        example: "2019-12-12"
+      uploader_id:
+        type: integer
+        example: 12345678
+
 

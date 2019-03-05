@@ -1,2 +1,52 @@
 <!--pages/user_information/user_information.wxml-->
-<text>pages/user_information/user_information.wxml</text>
+<view class='user_information'>
+
+  <view class='line-control'>
+    <text>头像</text>
+    <view class='gerenxinxi_view_touxiang_images' catchtap='huanbeijing' data-type='GHTX'>
+      <image class='touxiang_images' mode="aspectFill" src='../../../images/icons/Student.png'></image>
+    </view>
+  </view>
+
+  <view class='line-control'>
+    <text>昵称</text>
+    <view class='gerenxinxi_view_touxiang_images'>
+      <text>{{name}}</text>
+    </view>
+  </view>
+
+  <view class='line-control'>
+    <text>性别</text>
+    <view class='gerenxinxi_view_touxiang_images'>
+      <text>{{gender}}</text>
+    </view>
+  </view>
+
+  <view class='line-control'>
+    <text>学号</text>
+    <view class='gerenxinxi_view_touxiang_images'>
+      <text>{{student_number}}</text>
+    </view>
+  </view>
+
+  <view class='line-control'>
+    <text>手机号</text>
+    <view class='gerenxinxi_view_touxiang_images'>
+      <text>{{mobile==null?'没有绑定手机':mobile}}</text>
+    </view>
+  </view>
+
+
+
+  <!--昵称修改
+  <modal id="modal" hidden="{{hiddenmodalput}}" data-type='GHNAME' catchtouchmove='true' title="更改昵称" confirm-text="更改" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+    <input style='margin-top:20rpx;' type='text' adjust-position="true" bindinput='new_name' cursor-spacing='70' maxlength='7' value='{{baoming_name}}' placeholder="输入您的新昵称" />
+  </modal>
+  昵称修改  -->
+
+  <!--  手机号修改  
+  <modal id="modal" hidden="{{phonehiddeninput}}" data-type='GHPHONE' catchtouchmove='true' title="更改手机号" confirm-text="更改" cancel-text="取消" bindcancel="cancelphone" bindconfirm="confirmphone">
+    <input style='margin-top:20rpx;' type='number' adjust-position="true" bindinput='new_phones' cursor-spacing='70' maxlength='11' value='{{value_phone}}' placeholder="输入您的新更改手机号" />
+  </modal>
+   手机号修改   --> 
+</view>

@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    name: '用户名Test'
   },
 
   /**
@@ -72,6 +72,15 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  // 登出
+  log_out: function() {
+    wx.navigateTo({
+      // 这里要加一个seesion销毁功能
+
+      url: '../index/index',
+    })
   },
 
   // 个人信息跳转

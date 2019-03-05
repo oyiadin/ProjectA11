@@ -4,24 +4,28 @@
     <image class='user_view_background_images' mode="aspectFill" src='../../images/default.jpg'></image>
   </view>
   <view class='user_view_touxiang_view'>
-    <image mode="aspectFill" style='border-radius:100rpx;' class='user_view_touxiang_view_images' src='../../images/icons/Student.png' catchtap='huanbeijing' data-type='GHTX'></image>
+    <image mode="aspectFill" style='border-radius:100rpx;' class='user_view_touxiang_view_images' src='../../images/icons/Student.png' data-type='GHTX'></image>
     <view>
-      <text class='user_view_touxiang_view_name'>用户名Test<!--{{name}} --></text>
+      <text class='user_view_touxiang_view_name'>{{name}}</text>
     </view>
   </view>
   <view class='user_xuanxiang_list_view'>
     <!--列表  -->
     <view class='tools_list'>
       <view catchtap='user_information'>
-        <image src='../../images/icon/user_information.png'></image>
+        <image src='../../images/icons/user_information.png'></image>
         <text>个人信息</text>
       </view>
     </view>
     <view class='tools_list'>
       <view catchtap='collection'>
         <image src=''></image>
-        <text>我收藏的</text>
+        <text>已在班级</text>
       </view>
     </view>
+    <text> \n </text>
+    <button class="wx-button" style="background-color:#3BB8EA;color:#ffffff" bindtap='log_out'>
+    登出
+    </button>
   </view>
 </view>

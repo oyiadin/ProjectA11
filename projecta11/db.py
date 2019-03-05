@@ -5,7 +5,8 @@ import enum
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (
-    Column, Integer, String, CHAR, SmallInteger, ForeignKey, DateTime,
+    Column, Integer, String, CHAR, SmallInteger, ForeignKey, Date,
+    Boolean
 )
 from sqlalchemy.orm import sessionmaker
 
@@ -16,9 +17,17 @@ Session = None
 
 class User(Base):
     __tablename__ = "users"
-    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, primary_key=True)
     staff_id = Column(Integer)
     password = Column(CHAR(64))  # only store sha256 hashed password
+
+
+class Course(Base):
+    __tablename__ = "courses"
+    course_id = Column(Integer, primary_key=True)
+    course_name = Column(String(96))
+    start = Column(Date())
+    end = Column(Date())
 
 
 class Class(Base):
@@ -28,23 +37,31 @@ class Class(Base):
     weekday = Column(SmallInteger)  # 周几
     start = Column(SmallInteger)  # 第几节课开始
     end = Column(SmallInteger)  # 第几节课结束
-    teacher_id = Column(Integer)
-    course_id = Column(Integer)
+    teacher_id = Column(Integer, ForeignKey(User.user_id))
+    course_id = Column(Integer, ForeignKey(Course.course_id))
 
 
 class RelationUserClass(Base):  # 用户(学生)与班级的关系表
     __tablename__ = 'relation_user_class'
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey(User.id))
+    user_id = Column(Integer, ForeignKey(User.user_id))
     class_id = Column(Integer, ForeignKey(Class.class_id))
 
 
-class Course(Base):
-    __tablename__ = "courses"
-    course_id = Column(Integer, primary_key=True)
-    course_name = Column(String(96))
-    start = Column(DateTime())
-    end = Column(DateTime())
+class CheckinCodes(Base):
+    __tablename__ = "check-in-codes"
+    code_id = Column(Integer, primary_key=True)
+    code = Column(SmallInteger)
+    class_id = Column(Integer, ForeignKey(Class.class_id))
+    started = Column(Boolean)
+    expire_at = Column(Integer)
+
+
+class CheckedInLogs(Base):
+    __tablename__ = "checked-in-logs"
+    log_id = Column(Integer, primary_key=True)
+    code_id = Column(Integer, ForeignKey(CheckinCodes.code_id))
+    user_id = Column(Integer, ForeignKey(User.user_id))
 
 
 def startup(conf):

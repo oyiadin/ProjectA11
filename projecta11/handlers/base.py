@@ -2,7 +2,6 @@
 import traceback
 import json
 
-from tornado.escape import json_encode
 import tornado.web
 import projecta11.db as db
 from projecta11.config import conf
@@ -18,27 +17,34 @@ class BaseHandler(tornado.web.RequestHandler):
         super().prepare()
         self.set_header('Content-Type', 'application/json')
 
-    def _get_session_db(self):
+    def _get_db_session(self):
         if self._session_db:
             return self._session_db
         self._session_db = db.Session()
         return self._session_db
 
-    def _set_session_db(self, value):
+    def _set_db_session(self, value):
         raise PermissionError("no manual db-session replacement")
 
-    def _del_session_db(self):
+    def _del_db_session(self):
         if self._session_db:
             self._session_db.close()
         self._session_db = None
 
-    db_sess = property(_get_session_db, _set_session_db, _del_session_db)
+    db = property(_get_db_session, _set_db_session, _del_db_session)
 
-    def finish(self, code=200, msg='OK', **kwargs):
-        self.set_status(code)
-        kwargs.update(msg=msg, code=code)
-        ret = json_encode(kwargs) if not conf.app.debug \
-            else json.dumps(kwargs, indent=2, sort_keys=True)
+    def finish(self, status_code=200, msg=None, **kwargs):
+        self.set_status(status_code)
+
+        if msg is None:
+            msg = self._reason
+
+        kwargs.update(msg=msg, status_code=status_code)
+        value = kwargs
+
+        kwargs = dict(indent=2, sort_keys=True) if conf.app.debug else {}
+        ret = json.dumps(
+            value, default=str, **kwargs).replace("</", "<\\/")
         return super().finish(ret)
 
     def write_error(self, status_code, **kwargs):

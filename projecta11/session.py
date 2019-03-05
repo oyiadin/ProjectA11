@@ -1,4 +1,5 @@
 # coding=utf-8
+import time
 
 import redis
 import os
@@ -27,6 +28,18 @@ class Session(object):
         self.r.expire(key, conf.session.expires_after)
 
         return key
+
+    def get_captcha(self, app_id):
+        key = 'captcha:{}:{}'.format(app_id, self.key)
+        return self.r.get(key)
+
+    def set_captcha(self, app_id, code, expire=None):
+        expire = int(time.time() + conf.session.captcha_expires_after) \
+            if expire is None else expire
+        key = 'captcha:{}:{}'.format(app_id, self.key)
+
+        self.r.set(key, code)
+        self.r.expire(key, expire)
 
     def __getitem__(self, item):
         if not isinstance(item, tuple):

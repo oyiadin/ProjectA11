@@ -26,7 +26,8 @@
       "db": 0
     },
     "expires_after": 604800,
-    "captcha_expires_after": 300
+    "captcha_expires_after": 300,
+    "checkin_code_expires_after": 30
   },
   "page": {
     "page_title": "Welcome to project A11!"

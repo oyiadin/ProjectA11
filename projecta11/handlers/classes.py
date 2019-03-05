@@ -5,10 +5,27 @@ from projecta11.routers import handling
 from projecta11.utils import require_session, parse_json_body, keys_filter
 
 
-@handling(r"/classes/(\d+)")
+@handling(r"/class")
+class NewClassHandler(BaseHandler):
+    @require_session
+    @parse_json_body
+    def put(self, data=None, sess=None):
+        keys = (
+            'class_name', 'weekday', 'start', 'end', 'teacher_id', 'course_id'
+        )
+        data = keys_filter(data, keys)
+
+        new_class = db.Class(**data)
+        self.db.add(new_class)
+        self.db.commit()
+
+        self.finish(class_id=new_class.class_id)
+
+
+@handling(r"/class/(\d+)")
 class ClassInformationHandler(BaseHandler):
     def get(self, class_id):
-        selected = self.db_sess.query(db.Class).filter(
+        selected = self.db.query(db.Class).filter(
             db.Class.class_id == int(class_id)).first()
         if selected is None:
             self.finish(404, 'not found')
@@ -25,21 +42,3 @@ class ClassInformationHandler(BaseHandler):
         )
 
         self.finish(**ret)
-
-
-@handling(r"/classes")
-class NewClassHandler(BaseHandler):
-    @require_session
-    @parse_json_body
-    def put(self, data=None, sess=None):
-        keys = (
-            'class_name', 'weekday', 'start', 'end', 'teacher_id', 'course_id'
-        )
-        data = keys_filter(data, keys)
-
-        new_class = db.Class(**data)
-        self.db_sess.add(new_class)
-        self.db_sess.commit()
-        self.db_sess.close()
-
-        self.finish(class_id=new_class.class_id)

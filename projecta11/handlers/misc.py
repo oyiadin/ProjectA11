@@ -9,8 +9,7 @@ from captcha.image import ImageCaptcha
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
 from projecta11.config import conf
-from projecta11.utils import require_session
-
+from projecta11.utils import require_session, parse_json_body, keys_filter
 
 _letter_cases = "acdefjkmprtwxy"
 _upper_cases = _letter_cases.upper()
@@ -19,18 +18,30 @@ candidates = ''.join((_letter_cases, _upper_cases, _numbers))
 
 captcha = ImageCaptcha()
 
+available_app_id = (
+    '0cc175b9c0f1b6a8',  # register
+    '9c15af0d3e0ea84d',  # login
+    'a97754bc483c6de5',  # check-in
+)
+
 
 @handling(r"/misc/captcha")
 class CaptchaHandler(BaseHandler):
     @require_session
-    def get(self, sess=None):
+    @parse_json_body
+    def get(self, data=None, sess=None):
+        app_id = data.get('app_id')
+
+        if app_id is None:
+            return self.finish(400, 'app_id is required')
+
+        if app_id not in available_app_id:
+            return self.finish(400, 'illegal app_id')
+
         code = ''.join(random.choices(candidates, k=4))
         image = captcha.generate_image(code)
 
-        sess['captcha'] = code.lower()
-        sess['captcha_expire'] = \
-            int(time.time() + conf.session.captcha_expires_after)
-
+        sess.set_captcha(app_id=app_id, code=code.lower())
         stream = io.BytesIO()
         image.save(stream, 'JPEG')
         self.set_header('Content-Type', 'image/jpeg')

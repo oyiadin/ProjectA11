@@ -7,10 +7,10 @@ basePath: /api/v1
 tags:
   - name: credential
   - name: user
+  - name: course
+  - name: class
   - name: check-in
   - name: score
-  - name: class
-  - name: course
   - name: material
   - name: forum
   - name: misc
@@ -55,6 +55,9 @@ paths:
               session_id:
                 type: string
                 example: 21cfcfdb1ca625bdb1341cbfb65d50272b997b02f22396d54a0058c678e91ffe4b3e1bf773a9e386fd042e0069602449
+              user_id:
+                type: integer
+                example: 12345
     delete:
       tags:
         - credential
@@ -137,6 +140,32 @@ paths:
         '200':
           description: OK
 
+  /class:
+    put:
+      tags:
+        - class
+      summary: to register a new class
+      operationId: class_register
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/class-register'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              course_id:
+                type: integer
+                example: 12345
+
   '/class/{class_id}':
     get:
       tags:
@@ -153,6 +182,32 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/class-show'
+
+  '/course':
+    put:
+      tags:
+        - course
+      summary: to register a new course
+      operationId: course_register
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/course-register'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              course_id:
+                type: integer
+                example: 12345
 
   '/course/{course_id}':
     get:
@@ -375,8 +430,8 @@ paths:
         - in: path
           name: code
           required: true
-          type: string
-          description: 'an ***encrypted*** version of the real `code` (uses [TEA](https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%9E%8B%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95) to encrypt)'
+          type: integer
+          # description: 'an ***encrypted*** version of the real `code` (uses [TEA](https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%9E%8B%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95) to encrypt)'
       responses:
         '200':
           description: OK
@@ -494,7 +549,10 @@ definitions:
     properties:
       user_id:
         type: integer
-        example: 12345678
+        example: 12345
+      staff_id:
+        type: string
+        example: 17052100
       password:
         type: string
         example: 90f2c9c53f66540e67349e0ab83d8cd0
@@ -503,9 +561,9 @@ definitions:
   user-register:
     type: object
     properties:
-      user_id:
-        type: integer
-        example: 12345678
+      staff_id:
+        type: string
+        example: 17052100
       password:
         type: string
         example: 90f2c9c53f66540e67349e0ab83d8cd0
@@ -514,9 +572,9 @@ definitions:
   user-login:
     type: object
     properties:
-      user_id:
-        type: integer
-        example: 12345678
+      staff_id:
+        type: string
+        example: 17052100
       password:
         type: string
         example: 90f2c9c53f66540e67349e0ab83d8cd0
@@ -527,7 +585,10 @@ definitions:
     properties:
       user_id:
         type: integer
-        example: 12345678
+        example: 12345
+      staff_id:
+        type: string
+        example: 17052100
 
   ################################################################
   ################################################################
@@ -549,7 +610,6 @@ definitions:
         example: 3
       end:
         type: integer
-        format: int16
         example: 5
       teacher_id:
         type: integer
@@ -559,7 +619,26 @@ definitions:
         example: 12345
 
   class-register:
-    $ref: '#/definitions/class-backend'
+    type: object
+    properties:
+      class_name:
+        type: string
+        example: Example-Class
+      weekday:
+        type: integer
+        example: 1
+      start:
+        type: integer
+        example: 3
+      end:
+        type: integer
+        example: 5
+      teacher_id:
+        type: integer
+        example: 12345678
+      course_id:
+        type: integer
+        example: 12345
 
   class-show:
     $ref: '#/definitions/class-backend'
@@ -586,7 +665,19 @@ definitions:
         example: "2019-03-04"
 
   course-register:
-    $ref: '#/definitions/course-backend'
+    type: object
+    properties:
+      course_name:
+        type: string
+        example: Example-Course
+      start:
+        type: string
+        format: date
+        example: "2019-01-02"
+      end:
+        type: string
+        format: date
+        example: "2019-03-04"
 
   course-show:
     $ref: '#/definitions/course-backend'

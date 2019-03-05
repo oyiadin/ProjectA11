@@ -23,7 +23,6 @@ Page({
     //  Request.
     //  this.setData({username:app.appData.userInfo.username})
     //}
-    pass;
   },
 
   /**
@@ -80,35 +79,35 @@ Page({
     wx.navigateTo({
       url: './user_information/user_information',
     })
-  },
-  // 点击我发布的跳转
-  wofabude: function () {
-    wx.navigateTo({
-      url: './UserAllActivity/UserAllActivity',
-    })
-  },
-  // 浏览记录
-  liulanjilu: function () {
-    wx.navigateTo({
-      url: './userjiaoyin/userjiaoyin',
-    })
-  },
-  // 我的收藏
-  collection: function () {
-    wx.navigateTo({
-      url: './collection/collection',
-    })
-  },
-  // 我的报名跳转
-  wodebaoming: function () {
-    wx.navigateTo({
-      url: './usersingup/usersingup',
-    })
-  },
-  // 建议反馈
-  Advicefeedback: function () {
-    wx.navigateTo({
-      url: './Advicefeedback/Advicefeedback',
-    })
   }
+  // 点击我发布的跳转
+  //wofabude: function () {
+  //  wx.navigateTo({
+  //   url: './UserAllActivity/UserAllActivity',
+  //  })
+  //},
+  // 浏览记录
+  //liulanjilu: function () {
+  //  wx.navigateTo({
+  //    url: './userjiaoyin/userjiaoyin',
+  //  })
+  //},
+  // 我的收藏
+  //collection: function () {
+  //  wx.navigateTo({
+  //   url: './collection/collection',
+  //  })
+  //},
+  // 我的报名跳转
+  //wodebaoming: function () {
+  //  wx.navigateTo({
+  //    url: './usersingup/usersingup',
+  //  })
+  //},
+  // 建议反馈
+  //Advicefeedback: function () {
+  //  wx.navigateTo({
+  //    url: './Advicefeedback/Advicefeedback',
+  //  })
+  //}
 })

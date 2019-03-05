@@ -4,12 +4,12 @@
   flex-direction: column;
 }
 
-.user_view_beijing_view {
+.user_view_background_view {
   width: 100%;
   height: 360rpx;
 }
 
-.user_view_beijing_view_images {
+.user_view_background_images {
   width: 100%;
   height: 360rpx;
   filter: blur(6px);
@@ -26,21 +26,6 @@
   position: absolute; /* 浮动 */
   top: 20rpx; /* 顶部高度 */
   width: 100%;
-}
-
-/*换背景图标位置  */
-
-.huanbeijingtishi {
-  display: flex; /* 把view容器变成弹性的*/
-  flex-direction: column; /* 按照垂直方向排序 */
-  align-items: center; /* 居中 */
-  position: absolute; /* 浮动 */
-  right: 5%; /* 垂直居中的经典方式 */
-  margin-right: -5rpx; /* 垂直居中的经典方式 */
-  top: 20rpx; /* 顶部高度 */
-  width: 60rpx;
-  height: 60rpx;
-  z-index:2000;
 }
 
 .user_view_touxiang_view_images {

@@ -74,5 +74,22 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  submit:function(){
+    wx.request({
+      url: 'http://127.0.0.1:8888/api/v1/credential/accounts',
+      data: {
+        "user_id": 12345678,
+        "password": "p@ssword"
+      },
+      method:'PUT',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res.data)
+      }
+    })
   }
 })

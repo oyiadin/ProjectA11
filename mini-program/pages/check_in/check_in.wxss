@@ -1,0 +1,10 @@
+.weui-btn{
+  width: 70%;
+}
+.button-sp-area{
+  
+}
+.show_code{
+  text-align: center;
+  font-size: 90px;
+}

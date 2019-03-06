@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">教师签到管理</view>
+    <view class="page__desc">生成签到码</view>
+</view>
+  <view class="generate_check_in_code">
+    <view class='show_code'>
+      <text>{{msg || "待获取"}}</text>
+    </view>
+    <view class="button-sp-area">
+      <button class="weui-btn" type="primary" plain="true" bindtap="generate_check_in_code">生成签到码</button>
+    </view>
+  </view>
+</view>
+
+
+

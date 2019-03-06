@@ -1,9 +1,11 @@
 function success_callback(res) {
-  console.log('success: ' + res.statusCode + ' ' + res.data);
+  console.log('success: ' + res.statusCode);
+  console.log(res.data);
 }
 
 function fail_callback(res) {
-  console.log('failed: ' + res.statusCode + ' ' + res.data);
+  console.log('failed: ' + res.statusCode);
+  console.log(res.data);
 }
 
 function nonsense(res) {}

@@ -37,9 +37,10 @@
 .user_view_touxiang_view_name {
   margin-top: 20rpx;
   font-size: 38rpx;
-  color: #fff;
+  color: white;
   font-weight:bold;
   vertical-align: middle;
+  text-shadow: 2px 2px 2px black;
 }
 
 .user_xuanxiang_list_view {

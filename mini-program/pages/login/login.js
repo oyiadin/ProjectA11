@@ -6,21 +6,19 @@ Page({
     account_types: ["学生", "教师"],
     account_types_name: ["学号", "教职工号"],
     account_type_index: 0,
-    username: null,
-    password: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    if(app.appData.userInfo == null ){
-      wx.redirectTo("../register/register");
-    }
-    else {
-      this.setDate({username:app.appData.username})
-    }
-  },
+  // onLoad: function (options) {
+  //   if(app.appData.userInfo == null ){
+  //     wx.redirectTo("../register/register");
+  //   }
+  //   else {
+  //     this.setDate({username:app.appData.username})
+  //   }
+  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -75,7 +73,7 @@ Page({
     wx.request({
       url: 'http://127.0.0.1:8888/api/v1/credential/account',
       data: {
-        "user_id": 12345678,
+        "staff_id": 12345678,
         "password": "p@ssword"
       },
       method: 'POST',
@@ -84,12 +82,13 @@ Page({
       },
       success(res) {
         console.log(res.data)
-      }
+      },
+      dataType:"json"
     })
   },
 
   registerBtnClick:function() {
-    
+
   },
 
   bind_account_type_change: function (e) {
@@ -100,11 +99,12 @@ Page({
 
   do_login: function (e) {
     request(
-      'PUT', '/credential/account',
+      'POST', '/credential/account',
       {
-        user_id: 123456,
+        staff_id: 12345678,
         password: "p@ssword"
       },
+
     );
   }
 });

@@ -9,7 +9,7 @@ App({
       pass
     }
     else {
-      this.appData.log = log;
+      this.appData.logs = logs;
     }
   },
 

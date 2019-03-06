@@ -14,18 +14,18 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log('hi');
-    console.log(wx.request({
-      url: 'http://localhost:8887/',
-      data: {
-        hello: "world!"
-      },
-      success(res) {
-        console.log(res.data)
-      }
-    }));
-  },
+  // onLoad: function (options) {
+  //   console.log('hi');
+  //   console.log(wx.request({
+  //     url: 'http://localhost:8887/',
+  //     data: {
+  //       hello: "world!"
+  //     },
+  //     success(res) {
+  //       console.log(res.data)
+  //     }
+  //   }));
+  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -78,9 +78,9 @@ Page({
 
   submit:function(){
     wx.request({
-      url: 'http://127.0.0.1:8888/api/v1/credential/accounts',
+      url: 'http://127.0.0.1:8888/api/v1/credential/account',
       data: {
-        "user_id": 12345678,
+        "staff_id": 12345678,
         "password": "p@ssword"
       },
       method:'PUT',

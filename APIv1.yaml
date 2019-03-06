@@ -245,9 +245,12 @@ paths:
         '200':
           description: OK
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/score-show'
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/score-show'
 
   /score/{score_id}:
     post:
@@ -288,9 +291,12 @@ paths:
           name: body
           required: true
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/score-register'
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/score-register'
       responses:
         '200':
           description: OK
@@ -314,9 +320,12 @@ paths:
           name: body
           required: true
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/score-register-specific-class'
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/score-register-specific-class'
       responses:
         '200':
           description: OK
@@ -340,9 +349,12 @@ paths:
         '200':
           description: OK
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/class-show'
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/class-show'
 
   /misc/captcha:
     get:
@@ -436,7 +448,7 @@ paths:
         '200':
           description: OK
 
-  /check-in/class/{class_id}/user/{user_id}:
+  /check-in/verify/code/{code_id}/user/{user_id}:
     post:
       tags:
         - check-in
@@ -448,7 +460,7 @@ paths:
           required: true
           type: string
         - in: path
-          name: class_id
+          name: code_id
           required: true
           type: integer
         - in: path
@@ -459,7 +471,7 @@ paths:
         '200':
           description: OK
 
-  /class/{class_id}/code/{code_id}/list:
+  /check-in/code/{code_id}/list:
     get:
       tags:
         - check-in
@@ -471,10 +483,6 @@ paths:
           required: true
           type: string
         - in: path
-          name: class_id
-          required: true
-          type: integer
-        - in: path
           name: code_id
           required: true
           type: integer
@@ -482,9 +490,12 @@ paths:
         '200':
           description: OK
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/user-show'
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/user-show'
 
   /{class|course}/{id}/forum/topics:
     get:
@@ -536,9 +547,12 @@ paths:
         '200':
           description: OK
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/material-backend'
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/material-backend'
 
 
 

@@ -68,6 +68,18 @@ class AccountHandler(BaseHandler):
 
 @handling(r"/credential/session_id")
 class SessionIDRenewHandler(BaseHandler):
+    def get(self):
+        session_id = self.get_argument('session_id', None)
+        if session_id is None:
+            return self.finish(403, 'all arguments are required')
+
+        try:
+            sess = Session(session_id)
+        except FileNotFoundError as e:
+            return self.finish(is_valid=False)
+
+        self.finish(is_valid=True)
+
     @require_session
     def post(self, sess=None):
         sess.expire(conf.session.expires_after)

@@ -73,6 +73,24 @@ paths:
           description: OK
 
   /credential/session_id:
+    get:
+      tags:
+        - credential
+      summary: to check if a session_id is still valid
+      operationId: session_check
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              is_valid:
+                type: boolean
     post:
       tags:
         - credential
@@ -181,6 +199,23 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/class-show'
+    delete:
+      tags:
+        - class
+      summary: to delete the specific class
+      operationId: class_delete_specific
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
 
   '/course':
     put:
@@ -224,6 +259,49 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/course-show'
+    delete:
+      tags:
+        - course
+      summary: to delete the specific course
+      operationId: course_delete_specific
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: course_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+
+  /user/{user_id}/courses:
+    get:
+      tags:
+        - course
+      summary: to fetch the courses which the current user belongs to
+      operationId: user_courses_fetch
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: user_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/course-show'
 
   '/user/{user_id}/scores':
     get:

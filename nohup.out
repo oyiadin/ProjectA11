@@ -1,0 +1,17 @@
+listening to http://localhost:8888/
+documentation lies here: http://localhost:8888/api/v1/doc
+Traceback (most recent call last):
+  File "manage.py", line 38, in <module>
+    projecta11.server.startup(conf)
+  File "/Users/gukeyu/ProjectA11/projecta11/server.py", line 38, in startup
+    app.listen(conf.app.port)
+  File "/Users/gukeyu/.local/share/virtualenvs/ProjectA11-aAYYv6iM/lib/python3.6/site-packages/tornado/web.py", line 2112, in listen
+    server.listen(port, address)
+  File "/Users/gukeyu/.local/share/virtualenvs/ProjectA11-aAYYv6iM/lib/python3.6/site-packages/tornado/tcpserver.py", line 151, in listen
+    sockets = bind_sockets(port, address=address)
+  File "/Users/gukeyu/.local/share/virtualenvs/ProjectA11-aAYYv6iM/lib/python3.6/site-packages/tornado/netutil.py", line 174, in bind_sockets
+    sock.bind(sockaddr)
+OSError: [Errno 48] Address already in use
+listening to http://localhost:8888/
+documentation lies here: http://localhost:8888/api/v1/doc
+goodbye

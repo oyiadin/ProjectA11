@@ -64,3 +64,7 @@ class AccountHandler(BaseHandler):
         sess.r.delete(sess.key)
         del sess
         self.finish()
+
+    @require_session
+    def post(self, sess=None):
+        sess.expire(conf.session.expires_after)

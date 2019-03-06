@@ -65,6 +65,9 @@ class AccountHandler(BaseHandler):
         del sess
         self.finish()
 
+
+@handling(r"/credential/session_id")
+class SessionIDRenewHandler(BaseHandler):
     @require_session
     def post(self, sess=None):
         sess.expire(conf.session.expires_after)

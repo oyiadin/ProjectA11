@@ -3,92 +3,13 @@ const request = base.request;
 
 Page({
   data: {
+    is_show_top: false,
+    top: "",
+    staff_id: "",
+    password: "",
     account_types: ["学生", "教师"],
     account_types_name: ["学号", "教职工号"],
     account_type_index: 0,
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  // onLoad: function (options) {
-  //   if(app.appData.userInfo == null ){
-  //     wx.redirectTo("../register/register");
-  //   }
-  //   else {
-  //     this.setDate({username:app.appData.username})
-  //   }
-  // },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  loginBtnClick: function () {
-    wx.request({
-      url: 'http://127.0.0.1:8888/api/v1/credential/account',
-      data: {
-        "staff_id": 12345678,
-        "password": "p@ssword"
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        console.log(res.data)
-      },
-      dataType:"json"
-    })
-  },
-
-  registerBtnClick:function() {
-
   },
 
   bind_account_type_change: function (e) {
@@ -97,17 +18,51 @@ Page({
     });
   },
 
+  set_staff_id: function (e) {
+    this.data.staff_id = e.detail.value;
+  },
+
+  set_password: function (e) {
+    this.data.password = e.detail.value;
+  },
+
   do_login: function (e) {
-    request(
-      'POST', '/credential/account',
-      {
-        staff_id: 12345678,
-        password: "p@ssword"
+    const that = this;
+    if (!this.data.staff_id) {
+      wx.showToast({
+        title: '请输入' + this.data.account_types_name[this.data.account_type_index],
+        icon: 'none',
+        duration: 1500
+      });
+    } else if (!this.data.password) {
+      wx.showToast({
+        title: '请输入密码',
+        icon: 'none',
+        duration: 1500
+      });
+    } else {
+      request(
+        'POST', '/credential/account',
+        {
+          staff_id: this.data.staff_id,
+          password: this.data.password
+        },
+        function (res) {
+          console.log('fetched session_id=' + res.data["session_id"]);
+          wx.setStorageSync('session_id', res.data['session_id']);
+          that.setData({ is_show_top: true, top: "登录成功！" });
+        },
+      );
+    }
+  },
+
+  onLoad: function (e) {
+    const that = this;
+    wx.getStorage({
+      key: 'session_id',
+      success: function(res) {
+        that.setData({ is_show_top: true, top: "账号已登录！" });
       },
-      function (res) {
-        console.log(res.data["session_id"]);
-        wx.setStorageSync('session_id', res.data['session_id']);
-      }
-    );
+    });
   }
 });

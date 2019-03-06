@@ -3,20 +3,23 @@ const request = base.request;
 
 
 Page({
-  generate_check_in_code: function(){
+  data: {
+    code: "待获取",
+  },
+
+  gen_captcha: function(e) {
     var that = this;
     request(
-      'GET', '/check-in/class/3/code', {},
+      'GET', '/check-in/class/1/code', {},
       function (res) {
         console.log(res.data);
-        that.setData({ msg: res.data.code });
-        wx.hideToast();
+        that.setData({ code: res.data.code });
+        wx.hideLoading();
       }
     );
-    wx.showToast({
-      title: '数据加载中',
-      icon: 'loading',
-      duration: 10000
-    });
+    wx.showLoading({
+      title: '获取中',
+      mask: true
+    })
   },
 });

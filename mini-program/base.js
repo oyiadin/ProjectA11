@@ -1,21 +1,26 @@
-function success_callback(res) {
-  console.log('success: ' + res.statusCode);
+function success_callback(res) {}
+
+function fail_callback(res) {}
+
+function logger(res) {
+  console.log(res.statusCode)
   console.log(res.data);
 }
-
-function fail_callback(res) {
-  console.log('failed: ' + res.statusCode);
-  console.log(res.data);
-}
-
-function nonsense(res) {}
 
 function request(
     method, url, data,
     success = success_callback,
     fail = fail_callback,
-    complete = nonsense,
+    complete = logger,
     parse_json = true) {
+
+    var status_code_checker = function (res) {
+      if (res.statusCode == 200) {
+        success(res);
+      } else {
+        fail(res);
+      }
+    }
 
     function _req() {
       wx.request({
@@ -24,7 +29,7 @@ function request(
         header: { 'Content-Type': 'application/json' },
         method: method,
         dataType: parse_json ? "json" : "binary",
-        success: success,
+        success: status_code_checker,
         fail: fail,
         complete: complete
       });

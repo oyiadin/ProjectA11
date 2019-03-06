@@ -5,10 +5,10 @@
 </view>
   <view class="generate_check_in_code">
     <view class='show_code'>
-      <text>{{msg || "待获取"}}</text>
+      <text>{{code}}</text>
     </view>
     <view class="button-sp-area">
-      <button class="weui-btn" type="primary" plain="true" bindtap="generate_check_in_code">生成签到码</button>
+      <button class="weui-btn" type="primary" plain="true" bindtap="gen_captcha">生成签到码</button>
     </view>
   </view>
 </view>

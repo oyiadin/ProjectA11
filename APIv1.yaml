@@ -54,10 +54,9 @@ paths:
             properties:
               session_id:
                 type: string
-                example: 21cfcfdb1ca625bdb1341cbfb65d50272b997b02f22396d54a0058c678e91ffe4b3e1bf773a9e386fd042e0069602449
               user_id:
                 type: integer
-                example: 12345
+                example: 1
     delete:
       tags:
         - credential
@@ -164,7 +163,7 @@ paths:
             properties:
               course_id:
                 type: integer
-                example: 12345
+                example: 1
 
   '/class/{class_id}':
     get:
@@ -207,7 +206,7 @@ paths:
             properties:
               course_id:
                 type: integer
-                example: 12345
+                example: 1
 
   '/course/{course_id}':
     get:
@@ -563,14 +562,13 @@ definitions:
     properties:
       user_id:
         type: integer
-        example: 12345
+        example: 1
       staff_id:
         type: string
         example: 17052100
       password:
         type: string
-        example: 90f2c9c53f66540e67349e0ab83d8cd0
-        description: a hashed password
+        example: p@ssword
 
   user-register:
     type: object
@@ -580,8 +578,7 @@ definitions:
         example: 17052100
       password:
         type: string
-        example: 90f2c9c53f66540e67349e0ab83d8cd0
-        description: a hashed password
+        example: p@ssword
 
   user-login:
     type: object
@@ -591,15 +588,14 @@ definitions:
         example: 17052100
       password:
         type: string
-        example: 90f2c9c53f66540e67349e0ab83d8cd0
-        description: a hashed password
+        example: p@ssword
 
   user-show:
     type: object
     properties:
       user_id:
         type: integer
-        example: 12345
+        example: 1
       staff_id:
         type: string
         example: 17052100
@@ -612,7 +608,7 @@ definitions:
     properties:
       class_id:
         type: integer
-        example: 12345
+        example: 1
       class_name:
         type: string
         example: Example-Class
@@ -627,10 +623,10 @@ definitions:
         example: 5
       teacher_id:
         type: integer
-        example: 12345678
+        example: 1
       course_id:
         type: integer
-        example: 12345
+        example: 1
 
   class-register:
     type: object
@@ -649,10 +645,10 @@ definitions:
         example: 5
       teacher_id:
         type: integer
-        example: 12345678
+        example: 1
       course_id:
         type: integer
-        example: 12345
+        example: 1
 
   class-show:
     $ref: '#/definitions/class-backend'
@@ -665,7 +661,7 @@ definitions:
     properties:
       course_id:
         type: integer
-        example: 12345
+        example: 1
       course_name:
         type: string
         example: Example-Course
@@ -704,16 +700,16 @@ definitions:
     properties:
       score_id:
         type: integer
-        example: 42
+        example: 1
       score:
         type: integer
         example: 95
       user_id:
         type: integer
-        example: 12345678
+        example: 1
       class_id:
         type: integer
-        example: 12345
+        example: 1
 
   score-register:
     type: object
@@ -723,10 +719,10 @@ definitions:
         example: 95
       user_id:
         type: integer
-        example: 12345678
+        example: 1
       class_id:
         type: integer
-        example: 12345
+        example: 1
 
   score-register-specific-class:
     type: object
@@ -736,7 +732,7 @@ definitions:
         example: 95
       user_id:
         type: integer
-        example: 12345678
+        example: 1
 
   score-show:
     $ref: '#/definitions/score-backend'
@@ -749,13 +745,13 @@ definitions:
     properties:
       code_id:
         type: integer
-        example: 42
+        example: 1
       code:
         type: string
         example: 6789
       class_id:
         type: integer
-        example: 12345
+        example: 1
       started:
         type: boolean
         example: false
@@ -769,7 +765,7 @@ definitions:
     properties:
       code_id:
         type: integer
-        example: 42
+        example: 1
       code:
         type: string
         example: 6789
@@ -782,7 +778,7 @@ definitions:
     properties:
       file_id:
         type: integer
-        example: 1234
+        example: 1
       filename:
         type: string
         example: "unit-1-slides.ppt"
@@ -796,6 +792,5 @@ definitions:
         example: "2019-12-12"
       uploader_id:
         type: integer
-        example: 12345678
-
+        example: 1
 

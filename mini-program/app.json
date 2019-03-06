@@ -30,11 +30,7 @@
         "selectedIconPath": "images/icons/index_active.png"
       },
       {
-<<<<<<< Updated upstream
         "pagePath": "pages/users/users",
-=======
-        "pagePath": "pages/register/register",
->>>>>>> Stashed changes
         "text": "个人中心",
         "iconPath": "images/icons/users.png",
         "selectedIconPath": "images/icons/users_active.png"

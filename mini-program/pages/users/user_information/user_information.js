@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    name: '用户名Test',
+    gender: "男",
+    student_number: "17071140"
   },
 
   /**

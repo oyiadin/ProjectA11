@@ -104,7 +104,10 @@ Page({
         staff_id: 12345678,
         password: "p@ssword"
       },
-
+      function (res) {
+        console.log(res.data["session_id"]);
+        wx.setStorageSync('session_id', res.data['session_id']);
+      }
     );
   }
 });

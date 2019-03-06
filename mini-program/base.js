@@ -12,10 +12,10 @@ function nonsense(res) {}
 
 function request(
     method, url, data,
-    parse_json = true,
     success = success_callback,
     fail = fail_callback,
-    complete = nonsense) {
+    complete = nonsense,
+    parse_json = true) {
 
     function _req() {
       wx.request({

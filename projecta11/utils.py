@@ -34,9 +34,12 @@ def require_session(func):
     return wrapper
 
 
-def keys_filter(obj, keys: tuple) -> dict:
+def keys_filter(obj, keys: [tuple]) -> dict:
     if isinstance(obj, dict):
-        return dict(filter(lambda x: x[0] in keys, obj.items()))
+        temp_dict = dict(filter(lambda x: x[0] in keys, obj.items()))
+        missing_keys = keys - temp_dict.keys()
+        temp_dict.update({key: None for key in missing_keys})
+        return temp_dict
 
     # else: isinstance(Session)
     return dict(zip(keys, map(

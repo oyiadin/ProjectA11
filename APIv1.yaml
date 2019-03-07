@@ -18,62 +18,16 @@ schemes:
   - http
 
 paths:
-  /credential/account:
-    put:
-      tags:
-        - credential
-      summary: to register
-      description: app_id='0cc175b9c0f1b6a8'
-      operationId: account_register
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/user-register'
-      responses:
-        '200':
-          description: OK
-    post:
-      tags:
-        - credential
-      summary: to login
-      operationId: account_login
-      description: app_id='9c15af0d3e0ea84d'
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/user-login'
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: object
-            properties:
-              session_id:
-                type: string
-              user_id:
-                type: integer
-                example: 1
-    delete:
-      tags:
-        - credential
-      summary: to logout
-      description: clear the session of the logged user, remember to clear the local `session_id`
-      operationId: account_logout
-      parameters:
-        - in: query
-          name: session_id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-
   /credential/session_id:
     get:
+      tags:
+        - credential
+      summary: to get a new session_id
+      operationId: session_new
+      responses:
+        '200':
+          description: OK
+    options:
       tags:
         - credential
       summary: to check if a session_id is still valid
@@ -96,6 +50,68 @@ paths:
         - credential
       summary: to renew a session_id
       operationId: session_renew
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+
+  /credential/account:
+    put:
+      tags:
+        - credential
+      summary: to register
+      description: 注册是永远都需要验证码的
+      operationId: account_register
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/user-register'
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+        - credential
+      summary: to login
+      operationId: account_login
+      description: " 超过两次密码错误就需要输入验证码\n
+        下一次是否需要验证码由`need_captcha`指示\n
+        `need_captcha`字段不一定会出现，但是可以保证，如果下一次登录需要验证码，则一定会出现\n"
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/user-login'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 1
+    delete:
+      tags:
+        - credential
+      summary: to logout
+      description: clear the session of the logged user, remember to clear the local `session_id`
+      operationId: account_logout
       parameters:
         - in: query
           name: session_id
@@ -434,7 +450,7 @@ paths:
                   $ref: '#/definitions/class-show'
 
   /misc/captcha:
-    get:
+    post:
       tags:
         - misc
       summary: to fetch a captcha image
@@ -657,6 +673,9 @@ definitions:
       password:
         type: string
         example: p@ssword
+      captcha:
+        type: string
+        example: "xxxx"
 
   user-login:
     type: object
@@ -667,6 +686,9 @@ definitions:
       password:
         type: string
         example: p@ssword
+      captcha:
+        type: string
+        example: "xxxx"
 
   user-show:
     type: object

@@ -1,5 +1,5 @@
 # coding=utf-8
-
+import time
 from functools import reduce
 
 from projecta11.handlers.base import BaseHandler
@@ -12,63 +12,17 @@ from projecta11.session import Session
 import projecta11.db as db
 
 
-@handling(r"/credential/account")
-class AccountHandler(BaseHandler):
-    @parse_json_body
-    def put(self, data=None):
-        keys = ('staff_id', 'password')
-        data = keys_filter(data, keys)
-
-        if not reduce(lambda a, b: a and (b is not None), data):
-            return self.finish(403, 'all arguments are required')
-
-        selected = self.db.query(db.User).filter(
-            db.User.staff_id == data['staff_id']).first()
-        if selected is not None:
-            return self.finish(409, 'conflict user information')
-
-        data['password'] = hash_password(
-            data['password'] + conf.app.password_salt)
-
-        new_user = db.User(**data)
-        self.db.add(new_user)
-        self.db.commit()
-
-        self.finish()
-
-    @parse_json_body
-    def post(self, data=None):
-        staff_id = data.get('staff_id')
-        password = data.get('password')
-
-        if not (staff_id and password):
-            return self.finish(403, 'all arguments are required')
-
-        password = hash_password(password + conf.app.password_salt)
-
-        selected = self.db.query(db.User).filter(
-            db.User.staff_id == staff_id, db.User.password == password).first()
-        if selected is None:
-            return self.finish(404, 'wrong user_id or password')
-
-        user_id = selected.user_id
-        sess = Session()
-        sess['user_id'] = user_id
-        sess['staff_id'] = staff_id
-        sess.expire(conf.session.expires_after)
-
-        self.finish(session_id=sess.key, user_id=user_id)
-
-    @require_session
-    def delete(self, sess=None):
-        sess.r.delete(sess.key)
-        del sess
-        self.finish()
-
-
 @handling(r"/credential/session_id")
-class SessionIDRenewHandler(BaseHandler):
+class SessionIDHandler(BaseHandler):
     def get(self):
+        session_id = self.get_argument('session_id', None)
+        if session_id is not None:
+            return self.finish(session_id=session_id)
+
+        sess = Session()
+        self.finish(session_id=sess.id)
+
+    def options(self):
         session_id = self.get_argument('session_id', None)
         if session_id is None:
             return self.finish(403, 'all arguments are required')
@@ -82,4 +36,88 @@ class SessionIDRenewHandler(BaseHandler):
 
     @require_session
     def post(self, sess=None):
-        sess.expire(conf.session.expires_after)
+        expire_at = int(time.time() + conf.session.expires_after)
+        sess.r.set(sess.id, expire_at)
+        sess.r.expireat(sess.id, expire_at)
+
+        keys = sess.r.keys("{}:*".format(sess.id))
+        for key in map(lambda x: x.decode(), keys):
+            if key.split(':')[1] != 'captcha':
+                sess.r.expireat(key, expire_at)
+
+
+@handling(r"/credential/account")
+class AccountHandler(BaseHandler):
+    @parse_json_body
+    @require_session
+    def put(self, data=None, sess=None):
+        captcha_key = 'captcha:0cc175b9c0f1b6a8'
+
+        keys = ('staff_id', 'password', 'captcha')
+        data = keys_filter(data, keys)
+
+        if not reduce(lambda a, b: a and b, map(
+                lambda x: x[0] and (x[1] is not None), data.items())):
+            return self.finish(403, 'all arguments are required')
+
+        if data['captcha'].encode() != sess.get(captcha_key):
+            return self.finish(400, 'incorrect captcha')
+        sess.delete(captcha_key)
+
+        selected = self.db.query(db.User).filter(
+            db.User.staff_id == data['staff_id']).first()
+        if selected is not None:
+            return self.finish(409, 'conflict user information')
+
+        data['password'] = hash_password(data['password'])
+
+        data = keys_filter(data, ('staff_id', 'password'))
+        new_user = db.User(**data)
+        self.db.add(new_user)
+        self.db.commit()
+
+    @require_session
+    @parse_json_body
+    def post(self, data=None, sess=None):
+        captcha_key = 'captcha:9c15af0d3e0ea84d'
+        staff_id = data.get('staff_id')
+        password = data.get('password')
+        captcha = data.get('captcha')
+
+        if not (staff_id and password):
+            return self.finish(403, 'all arguments are required')
+
+        need_captcha = sess.get('need_captcha') == b'1'
+        if need_captcha and captcha is None:
+            return self.finish(400, 'need captcha',
+                               need_captcha=need_captcha)
+
+        if captcha.encode() != sess.get(captcha_key):
+            return self.finish(400, 'wrong captcha',
+                               need_captcha=need_captcha)
+        sess.delete(captcha_key)
+
+        password = hash_password(password + conf.app.password_salt)
+
+        selected = self.db.query(db.User).filter(
+            db.User.staff_id == staff_id, db.User.password == password).first()
+        if selected is None:
+            if int(sess.incr('login_tried_times')) >= 2:
+                sess.set('need_captcha', 1)
+                need_captcha = True
+            at = int(time.time() + 600)
+            sess.expireat('login_tried_times', at)
+            sess.expireat('need_captcha', at)
+            return self.finish(404, 'wrong user_id or password',
+                               need_captcha=need_captcha)
+
+        user_id = selected.user_id
+        sess['is_login'] = 1
+        sess['user_id'] = user_id
+        sess['staff_id'] = staff_id
+
+        self.finish(user_id=user_id)
+
+    @require_session
+    def delete(self, sess=None):
+        sess.delete()

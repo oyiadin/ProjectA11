@@ -56,6 +56,12 @@ Page({
     }
   },
 
+  do_register: function(e) {
+    wx.navigateTo({
+      url: '../register/register',
+    })
+  },
+
   onLoad: function (e) {
     const that = this;
     wx.getStorage({

@@ -11,7 +11,8 @@
     "pages/users/user_information/user_information",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/classes/classes"
+    "pages/classes/classes",
+    "pages/users/selected_class/selected_class"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -30,7 +31,7 @@
         "selectedIconPath": "images/icons/index_active.png"
       },
       {
-        "pagePath": "pages/login/login",
+        "pagePath": "pages/users/users",
         "text": "个人中心",
         "iconPath": "images/icons/users.png",
         "selectedIconPath": "images/icons/users_active.png"

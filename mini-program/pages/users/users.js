@@ -88,6 +88,12 @@ Page({
     wx.navigateTo({
       url: './user_information/user_information',
     })
+  },
+
+  selected_class: function(){
+    wx.navigateTo({
+      url: './selected_class/selected_class',
+    })
   }
   // 点击我发布的跳转
   //wofabude: function () {

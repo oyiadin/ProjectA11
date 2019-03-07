@@ -18,9 +18,9 @@
       </view>
     </view>
     <view class='tools_list'>
-      <view catchtap='collection'>
-        <image src=''></image>
-        <text>已在班级</text>
+      <view catchtap='selected_class'>
+        <image src='../../images/icons/class.png'></image>
+        <text>已选课程</text>
       </view>
     </view>
     <text> \n </text>

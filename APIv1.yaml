@@ -64,7 +64,9 @@ paths:
       tags:
         - credential
       summary: to register
-      description: 注册是永远都需要验证码的
+      description: "
+        app_id='0cc175b9c0f1b6a8'\n
+        注册是永远都需要验证码的"
       operationId: account_register
       parameters:
         - in: query
@@ -84,7 +86,9 @@ paths:
         - credential
       summary: to login
       operationId: account_login
-      description: " 超过两次密码错误就需要输入验证码\n
+      description: "
+        app_id='9c15af0d3e0ea84d'\n
+        超过两次密码错误就需要输入验证码\n
         下一次是否需要验证码由`need_captcha`指示\n
         `need_captcha`字段不一定会出现，但是可以保证，如果下一次登录需要验证码，则一定会出现\n"
       parameters:

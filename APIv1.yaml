@@ -484,7 +484,7 @@ paths:
                   $ref: '#/definitions/class-show'
 
   /misc/captcha:
-    post:
+    get:
       tags:
         - misc
       summary: to fetch a captcha image
@@ -494,19 +494,13 @@ paths:
           name: session_id
           required: true
           type: string
-        - in: body
-          name: body
+        - in: query
+          name: app_id
           required: true
           description: "
           `app_id` can specify the situation where this captcha will use
           (such as when login, register, post new topics...)\n
           the backend would store a dict which may contains something like `{'0cc175b9c0f1b6a8': 'login'}`"
-          schema:
-            type: object
-            properties:
-              app_id:
-                type: string
-                example: "0cc175b9c0f1b6a8"
       responses:
         '200':
           description: OK

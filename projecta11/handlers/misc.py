@@ -28,9 +28,8 @@ available_app_id = (
 @handling(r"/misc/captcha")
 class CaptchaHandler(BaseHandler):
     @require_session
-    @parse_json_body
-    def post(self, data=None, sess=None):
-        app_id = data.get('app_id')
+    def get(self, sess=None):
+        app_id = self.get_argument('app_id')
 
         if app_id is None:
             return self.finish(400, 'app_id is required')

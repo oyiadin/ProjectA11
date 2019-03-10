@@ -10,7 +10,6 @@ function request(
     method, url, data,
     success = success_callback,
     fail = fail_callback,
-    complete = logger,
     parse_json = true) {
 
     var status_code_checker = function (res) {
@@ -30,7 +29,7 @@ function request(
         dataType: parse_json ? "json" : "binary",
         success: status_code_checker,
         fail: fail,
-        complete: complete
+        complete: logger
       });
     }
   

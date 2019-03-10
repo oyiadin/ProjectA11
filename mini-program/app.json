@@ -10,7 +10,9 @@
     "pages/users/users",
     "pages/users/user_information/user_information",
     "pages/classes/classes",
-    "pages/users/selected_class/selected_class"
+    "pages/users/selected_class/selected_class",
+    "pages/stu_check_in_list/stu_check_in_list",
+    "pages/stu_check_in/stu_check_in"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -39,6 +41,18 @@
         "text": "个人中心",
         "iconPath": "images/icons/users.png",
         "selectedIconPath": "images/icons/users_active.png"
+      },
+      {
+        "pagePath": "pages/stu_check_in/stu_check_in",
+        "text": "签到",
+        "iconPath": "images/icons/register.png",
+        "selectedIconPath": "images/icons/register_active.png"
+      },
+      {
+        "pagePath": "pages/stu_check_in_list/stu_check_in_list",
+        "text": "签到列表",
+        "iconPath": "images/icons/index.png",
+        "selectedIconPath": "images/icons/index_active.png"
       }
     ]
   }

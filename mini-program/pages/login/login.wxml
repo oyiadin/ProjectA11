@@ -27,6 +27,14 @@
           <input class="weui-input" placeholder="请输入密码" bindinput='set_password'/>
         </view>
       </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">验证码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入验证码" />
+        </view>
+      </view>
     </view>
   </view>
 

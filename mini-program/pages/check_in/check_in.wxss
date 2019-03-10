@@ -8,3 +8,6 @@
   text-align: center;
   font-size: 90px;
 }
+.start_button, .check_in_status{
+  padding-top: 20px;
+}

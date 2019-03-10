@@ -56,5 +56,7 @@ page{
 }
 .return{
   margin: 20rpx;
-
+}
+.weui-cell{
+  padding: 0rpx;
 }

@@ -7,8 +7,14 @@
     <view class='show_code'>
       <text>{{code}}</text>
     </view>
-    <view class="button-sp-area">
+    <view class="generate_code">
       <button class="weui-btn" type="primary" plain="true" bindtap="gen_captcha">生成签到码</button>
+    </view>
+    <view class="start_button">
+      <button class="weui-btn" type="primary" plain="true" bindtap="start_check_in">开始签到</button>
+    </view>
+    <view class="check_in_status">
+      <button class="weui-btn" type="default" plain="true" bindtap="check_status">查看签到情况</button>
     </view>
   </view>
 </view>

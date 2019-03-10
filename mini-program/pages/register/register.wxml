@@ -2,45 +2,57 @@
 
 <!-- <view wx:if="{{!success}}"> -->
 
-<!-- 用户名 -->
+<!-- 用户名
 <view class='row'>
     <view class='info'>
     <input  class='info-input' bindinput="handleInputUsername" placeholder="用户名" />
     </view>
+</view> -->
+
+<!-- 角色 -->
+<view class='row'>
+  <view class='info'>
+    <input class= 'info-input' bindinput="setStaffID" placeholder="请输入学号" />
+  </view>
 </view>
 
 <!-- 密码 -->
 <view class='row'>
   <view class='info'>
-    <input  type='password' class='info-input' bindinput="handleNewChangesAgain" placeholder="请重新输入密码" />
+    <input  type='password' class='info-input' bindinput="setPassword" placeholder="请输入密码" />
   </view>
 </view>
 
-<!-- 重复密码 -->
+<!-- 重复密码
 <view class='row'>
   <view class='info'>
-    <input  type='password' class= 'info-input' bindinput="handleNewChangesAgain" placeholder="请重新输入你的密码" />
+    <input  type='password' class= 'info-input' bindinput="setPasswordAgain" placeholder="请重新输入你的密码" />
   </view>
-</view>
+</view> -->
 
-<!-- 姓名 -->
+<!-- 姓名
 <view class='row'>
   <view class='info'>
     <input class= 'info-input' bindinput="handleNewName" placeholder="请输入姓名" />
   </view>
-</view>
+</view> -->
 
-<!-- 角色 -->
+<!-- 学号
 <view class='row'>
   <view class='info'>
     <input class= 'info-input' bindinput="handleNewStudentID" placeholder="请输入学号" />
   </view>
-</view>
+</view> -->
 
-<!-- 学号 -->
+<!-- 验证码 -->
 <view class='row'>
-  <view class='info'>
-    <input class= 'info-input' bindinput="handleNewStudentID" placeholder="请输入学号" />
+  <view class="weui-cell weui-cell_input weui-cell_vcode">
+    <view class='info'>
+      <input class='info-input' bindinput='set_captcha' placeholder="请输入验证码" />
+    </view>
+    <view class="weui-cell__ft">
+      <image class="weui-vcode-img" src="{{ src }}" style="width: 150px"></image>
+    </view>
   </view>
 </view>
 

@@ -1,0 +1,15 @@
+.weui-btn{
+  width: 70%;
+}
+.show_list{
+  text-align: center;
+}
+.show_staff_id{
+  padding-right: 40px;
+}
+.head_list{
+  font-weight: bold;
+}
+.information_list{
+  padding-top: 10px;
+}

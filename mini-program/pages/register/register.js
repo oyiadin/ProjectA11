@@ -1,5 +1,7 @@
 // pages/login/login.js
 var app = getApp();
+var base = require('../../base.js');
+const request = base.request;
 
 Page({
 
@@ -7,9 +9,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username: '用户名',
+    staff_id: "",
+    password: "",
+    src: 'http://localhost:8888/api/v1/misc/captcha?session_id=' + wx.getStorageSync('session_id') + '&app_id=0cc175b9c0f1b6a8',
+    captcha : '',
   },
 
+  setStaffID: function (e) {
+    this.data.staff_id = e.detail.value;
+  },
+
+  setPassword: function (e) {
+    this.data.password = e.detail.value;
+  },
+
+  set_captcha: function(e) {
+    this.data.captcha = e.detail.value;
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -30,8 +46,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
+  onLoad: function () {
   },
 
   /**
@@ -76,20 +91,27 @@ Page({
 
   },
 
-  submit:function(){
-    wx.request({
-      url: 'http://127.0.0.1:8888/api/v1/credential/account',
-      data: {
-        "staff_id": 12345678,
-        "password": "p@ssword"
-      },
-      method:'PUT',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        console.log(res.data)
+  submit: function (e) {
+    const that = this;
+    request(
+      'PUT', '/credential/account', 
+      {
+        staff_id: this.data.staff_id,
+        password: this.data.password,
+        app_id: '0cc175b9c0f1b6a8',
+        captcha: this.data.captcha
+        },
+      function (res) {
+        console.log(res.data);
+        wx.showToast({
+          title: '已完成',
+          icon: 'success',
+          duration: 3000
+        });
+        wx.redirectTo({
+          url: '../login/login',
+        });
       }
-    })
+    )
   }
 })

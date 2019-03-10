@@ -88,13 +88,14 @@ class AccountHandler(BaseHandler):
             return self.finish(403, 'all arguments are required')
 
         need_captcha = sess.get('need_captcha') == b'1'
-        if need_captcha and captcha is None:
-            return self.finish(400, 'need captcha',
-                               need_captcha=need_captcha)
+        if need_captcha:
+            if captcha is None:
+                return self.finish(400, 'need captcha',
+                                   need_captcha=need_captcha)
 
-        if captcha.encode() != sess.get(captcha_key):
-            return self.finish(400, 'wrong captcha',
-                               need_captcha=need_captcha)
+            if captcha.encode() != sess.get(captcha_key):
+                return self.finish(400, 'wrong captcha',
+                                   need_captcha=need_captcha)
         sess.delete(captcha_key)
 
         password = hash_password(password + conf.app.password_salt)

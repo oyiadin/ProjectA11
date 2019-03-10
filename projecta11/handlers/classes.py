@@ -42,3 +42,45 @@ class ClassInformationHandler(BaseHandler):
         )
 
         self.finish(**ret)
+
+    @require_session
+    def delete(self, class_id, sess=None):
+        self.db.query(db.Class).filter(
+            db.Class.class_id == class_id).delete()
+        self.db.commit()
+
+        self.finish()
+
+
+@handling(r"/user/(\d+)/classes")
+class SpecificUserClassesInformationHandler(BaseHandler):
+    @require_session
+    def get(self, user_id, sess=None):
+        selected = self.db.query(db.Class).filter(
+            db.Class.teacher_id == user_id).all()
+        if not selected:
+            self.finish(404, 'not found')
+            return
+
+        list = []
+        for i in selected:
+            dict = {
+                'class_id': i.class_id,
+                'class_name': self.db.query(db.Class.class_name).filter(
+                    db.Class.class_name == i.class_name).first()[0],
+                'weeekday': self.db.query(db.Class.weekday).filter(
+                    db.Class.weekday == i.weekday).first()[0],
+                'start': self.db.query(db.Class.start).filter(
+                    db.Class.start == i.start).first()[0],
+                'end': self.db.query(db.Class.end).filter(
+                    db.Class.end == i.end).first()[0],
+                'teacher_id': self.db.query(db.Class.teacher_id).filter(
+                    db.Class.teacher_id == i.teacher_id).first()[0],
+                'course_id': self.db.query(db.Class.course_id).filter(
+                    db.Class.course_id == i.course_id).first()[0]
+            }
+            list.append(dict)
+        self.finish(list=list)
+
+
+

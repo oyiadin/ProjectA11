@@ -37,3 +37,36 @@ class CourseInformationHandler(BaseHandler):
         )
 
         self.finish(**ret)
+
+    def delete(self, course_id, sess=None):
+        self.db.query(db.Course).filter(
+            db.Course.course_id == course_id).delete()
+        self.db.commit()
+
+        self.finish()
+
+'''
+@handling(r"/user/(\d+)/courses")
+class SpecificUserCoursesInformationHandler(BaseHandler):
+    @require_session
+    def get(self, user_id, sess=None):
+        selected = self.db.query(db.Class).filter(
+            db.Class.teacher_id == user_id).all()
+        if not selected:
+            self.finish(404, 'not found')
+            return
+
+        list = []
+        for i in selected:
+            dict = {
+                'course_id': i.course_id,
+                'course_name': self.db.query(db.Course.course_name).filter(
+                    db.Course.course_name == i.course_name).first()[0],
+                'start': self.db.query(db.Course.start).filter(
+                    db.Course.start == i.start).first()[0],
+                'end': self.db.query(db.Course.end).filter(
+                    db.Course.end == i.end).first()[0]
+            }
+            list.append(dict)
+        self.finish(list=list)
+'''

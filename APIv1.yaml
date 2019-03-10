@@ -629,7 +629,7 @@ paths:
                 items:
                   $ref: '#/definitions/user-show'
 
-  /{class|course}/{id}/forum/topics:
+  /{class|course}/{id}/forum/topics/list:
     get:
       tags:
         - forum
@@ -653,6 +653,171 @@ paths:
       responses:
         '200':
           description: OK
+
+  /{class|course}/{id}/forum/topic:
+    put:
+      tags:
+        - forum
+      summary: to create a new topic
+      operationId: create-topic
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class|course
+          required: true
+          type: string
+          enum: [class, course]
+        - in: path
+          name: id
+          description: a specific class_id or course_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/topic-register'
+      responses:
+        '200':
+          description: OK
+
+  /{class|course}/{id}/forum/topic/{topic_id}:
+    get:
+      tags:
+        - forum
+      summary: to fetch the info of a specific topic
+      operationId: fetch-topic-info
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class|course
+          required: true
+          type: string
+          enum: [class, course]
+        - in: path
+          name: id
+          description: a specific class_id or course_id
+          required: true
+          type: integer
+        - in: path
+          name: topic_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/topic-show'
+
+  /{class|course}/{id}/forum/topic/{topic_id}/reply:
+    put:
+      tags:
+        - forum
+      summary: to create a new reply
+      operationId: create-reply
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class|course
+          required: true
+          type: string
+          enum: [class, course]
+        - in: path
+          name: id
+          description: a specific class_id or course_id
+          required: true
+          type: integer
+        - in: path
+          name: topic_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/reply-register'
+      responses:
+        '200':
+          description: OK
+
+  /{class|course}/{id}/forum/topic/{topic_id}/replies:
+    get:
+      tags:
+        - forum
+      summary: to fetch the replies
+      operationId: replies-fetch
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class|course
+          required: true
+          type: string
+          enum: [class, course]
+        - in: path
+          name: id
+          description: a specific class_id or course_id
+          required: true
+          type: integer
+        - in: path
+          name: topic_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/reply-show'
+
+  /{class|course}/{id}/material:
+    post:
+      tags:
+        - material
+      summary: to upload a new teaching material file
+      operationId: materials-upload
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class|course
+          required: true
+          type: string
+          enum: [class, course]
+        - in: path
+          name: id
+          description: a specific class_id or course_id
+          required: true
+          type: integer
+        - in: formData
+          name: file
+          description: the binary data of the file
+          required: true
+          type: file
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/material-backend'
 
   /{class|course}/{id}/material/list:
     get:
@@ -684,8 +849,48 @@ paths:
               list:
                 type: array
                 items:
-                  $ref: '#/definitions/material-backend'
+                  $ref: '#/definitions/material-show'
 
+  /material/{file_id}:
+    get:
+      tags:
+        - material
+      summary: to download a new teaching material file
+      operationId: materials-download
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: file_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+            example: (the binary data of the file)
+    delete:
+      tags:
+        - material
+      summary: to delete a teaching material file
+      operationId: materials-delete
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: file_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
 
 
 definitions:
@@ -921,6 +1126,9 @@ definitions:
       filename:
         type: string
         example: "unit-1-slides.ppt"
+      internal_filename:
+        type: string
+        example: 'e4032bac-354b-4473-93c1-70c632d90bec'
       size:
         type: integer
         example: 1024
@@ -932,3 +1140,141 @@ definitions:
       uploader_id:
         type: integer
         example: 1
+      belong_type:
+        type: string
+        enum: [course, class]
+      belong_id:
+        type: integer
+        example: 1
+
+  material-show:
+    type: object
+    properties:
+      file_id:
+        type: integer
+        example: 1
+      filename:
+        type: string
+        example: "unit-1-slides.ppt"
+      size:
+        type: integer
+        example: 1024
+        description: (in bytes)
+      uploaded_at:
+        type: string
+        format: date
+        example: "2019-12-12"
+      uploader_id:
+        type: integer
+        example: 1
+      belong_type:
+        type: string
+        enum: [course, class]
+      belong_id:
+        type: integer
+        example: 1
+
+  topic-backend:
+    type: object
+    properties:
+      topic_id:
+        type: integer
+        example: 1
+      title:
+        type: string
+        example: "Example-Topic"
+      content:
+        type: string
+        example: "This is the content of the topic!"
+      user_id:
+        type: integer
+        example: 1
+      created_at:
+        type: string
+        format: datetime
+        example: "2018-02-03 15:00"
+      last_replied_at:
+        type: string
+        format: datetime
+        example: "2018-02-03 17:00"
+      replies:
+        type: integer
+        example: 1
+
+  topic-register:
+    type: object
+    properties:
+      title:
+        type: string
+        example: "Example-Topic"
+      content:
+        type: string
+        example: "This is the content of the topic!"
+
+  topic-show:
+    type: object
+    properties:
+      topic_id:
+        type: integer
+        example: 1
+      title:
+        type: string
+        example: "Example-Topic"
+      content:
+        type: string
+        example: "This is the content of the topic!"
+      user_id:
+        type: integer
+        example: 1
+      created_at:
+        type: string
+        format: datetime
+        example: "2018-02-03 15:00"
+      last_replied_at:
+        type: string
+        format: datetime
+        example: "2018-02-03 17:00"
+      replies:
+        type: integer
+        example: 1
+
+  reply-backend:
+    type: object
+    properties:
+      reply_id:
+        type: integer
+        example: 1
+      content:
+        type: string
+        example: "This is a reply!"
+      user_id:
+        type: integer
+        example: 1
+      created_at:
+        type: string
+        format: datetime
+        example: "2018-02-03 17:00"
+
+  reply-register:
+    type: object
+    properties:
+      content:
+        type: string
+        example: "This is a reply!"
+
+  reply-show:
+    type: object
+    properties:
+      reply_id:
+        type: integer
+        example: 1
+      content:
+        type: string
+        example: "This is a reply!"
+      user_id:
+        type: integer
+        example: 1
+      created_at:
+        type: string
+        format: datetime
+        example: "2018-02-03 17:00"

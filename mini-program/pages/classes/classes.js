@@ -1,12 +1,35 @@
 // pages/classes/classes.js
+var app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    // courses
+    courseInfos: null,
+    // userInfo
+    userInfo: null,
+    // swiper
+    activities: ['../../images/Classes/activity-1.jpg',   
+                '../resources/activities/activity-2.jpg', 
+                '../resources/activities/activity-3.jpg',        
+                '../resources/activities/activity-4.jpg'],
+    indicatorDots: true,
+    vertical: false,
+    autoplay: true,
+    interval: 2000,
+    duration: 500,
 
-  },
+    // 模态
+    collegeIndex: 0,
+    majorIndex: 0,
+    noInput: "未设置",
+    inputShowed: false,
+    inputVal: "",
+    selectClick: false,
+  }, 
 
   /**
    * 生命周期函数--监听页面加载
@@ -62,5 +85,31 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  /**
+   * 搜索框
+   */
+  showInput: function () {
+    this.setData({
+      inputShowed: true
+    });
+  },
+  hideInput: function () {
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+  },
+  clearInput: function () {
+    this.setData({
+      inputVal: ""
+    });
+  },
+  inputTyping: function (e) {
+    this.setData({
+      inputVal: e.detail.value
+    });
+  },
+
 })

@@ -3,12 +3,10 @@ info:
   version: '1.0'
   title: Project A11 RESTful API
   description: "
-    一些所有api通用的错误码，下面就不重复列出这些通用的了:\n
-    - 400: 解析json时发生错误\n
-    - 401: 缺少session_id\n
-    - 402: 无效的session_id\n
-
-    "
+    Some common status_code of the responses:\n
+    - 400: something went wrong when parsing json\n
+    - 401: session_id is required\n
+    - 402: invalid session_id"
 host: localhost:8888
 basePath: /api/v1
 tags:
@@ -59,7 +57,7 @@ paths:
         - credential
       summary: to renew a session_id
       operationId: session_renew
-      description: 本api仅供开发期间测试使用，生产环境下本api无效
+      description: "**This API is only available when --debug is on**"
       parameters:
         - in: query
           name: session_id
@@ -78,7 +76,7 @@ paths:
       summary: to register
       description: "
         app_id='0cc175b9c0f1b6a8'\n
-        注册是永远都需要验证码的"
+        CAPTCHA is always required for registering"
       operationId: account_register
       parameters:
         - in: query
@@ -100,9 +98,10 @@ paths:
       operationId: account_login
       description: "
         app_id='9c15af0d3e0ea84d'\n
-        超过两次密码错误就需要输入验证码\n
-        下一次是否需要验证码由`need_captcha`指示\n
-        `need_captcha`字段不一定会出现，但是可以保证，如果下一次登录需要验证码，则一定会出现\n"
+        CAPTCHA is needed after two failed login attempts\n
+        Whether the next time of login needs CAPTCHA or not is indicated by `need_captcha`\n
+        `need_captcha` won't always be returned, but you can assure that,
+        if the next time needs CAPTCHA, it will always be there"
       parameters:
         - in: query
           name: session_id
@@ -498,9 +497,10 @@ paths:
         - in: body
           name: body
           required: true
-          description: "`app_id` can specify the situation where this captcha will use (such as when login, register, post new topics...)
-
-            the backend would store a dict which may contains something like `{'0cc175b9c0f1b6a8': 'login'}`"
+          description: "
+          `app_id` can specify the situation where this captcha will use
+          (such as when login, register, post new topics...)\n
+          the backend would store a dict which may contains something like `{'0cc175b9c0f1b6a8': 'login'}`"
           schema:
             type: object
             properties:

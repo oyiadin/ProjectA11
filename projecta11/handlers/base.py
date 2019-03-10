@@ -15,7 +15,6 @@ class BaseHandler(tornado.web.RequestHandler):
 
     def prepare(self):
         super().prepare()
-        self.set_header('Content-Type', 'application/json')
 
     def _get_db_session(self):
         if self._session_db:
@@ -33,8 +32,13 @@ class BaseHandler(tornado.web.RequestHandler):
 
     db = property(_get_db_session, _set_db_session, _del_db_session)
 
-    def finish(self, status_code=200, msg=None, **kwargs):
+    def finish(self, status_code=200, msg=None, no_json=False, **kwargs):
         self.set_status(status_code)
+
+        if no_json:
+            return super().finish()
+
+        self.set_header('Content-Type', 'application/json')
 
         if msg is None:
             msg = self._reason
@@ -51,7 +55,6 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header('Content-Type', 'application/json')
         if self.settings.get("serve_traceback") and "exc_info" in kwargs:
             # in debug mode, try to send a traceback
-            self.set_header("Content-Type", "text/plain")
             lines = list(traceback.format_exception(*kwargs["exc_info"]))
             self.finish(status_code, self._reason, traceback=lines)
         else:

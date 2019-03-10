@@ -811,9 +811,9 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/material-backend'
+            $ref: '#/definitions/material-show'
 
-  /{class|course}/{id}/material/list:
+  /{class|course}/{id}/materials/list:
     get:
       tags:
         - material
@@ -1159,12 +1159,6 @@ definitions:
         format: date
         example: "2019-12-12"
       uploader_id:
-        type: integer
-        example: 1
-      belong_type:
-        type: string
-        enum: [course, class]
-      belong_id:
         type: integer
         example: 1
 

@@ -13,16 +13,6 @@ App({
     }
   },
 
-  // 登录
-  login: function (e) {
-    pass;
-  },
-
-  // 注册代码
-  register: function (e) {
-    pass;;
-  },
-
   appData: {
     userInfo: null,
     log: null,

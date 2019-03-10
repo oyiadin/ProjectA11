@@ -1,6 +1,16 @@
 var base = require('../../base.js');
 const request = base.request;
 
+
+function fetch_new_session_id() {
+  request(
+    'GET', '/credential/session_id', {},
+    function (res) {
+      wx.setStorageSync('session_id', res.data.session_id);
+    });
+}
+
+
 Page({
   data: {
     is_show_top: false,
@@ -48,10 +58,14 @@ Page({
           password: this.data.password
         },
         function (res) {
-          console.log('fetched session_id=' + res.data["session_id"]);
-          wx.setStorageSync('session_id', res.data['session_id']);
-          that.setData({ is_show_top: true, top: "登录成功！" });
+          wx.switchTab({url: '/pages/users/users'});
         },
+        function (res) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+          })
+        }
       );
     }
   },
@@ -67,8 +81,25 @@ Page({
     wx.getStorage({
       key: 'session_id',
       success: function(res) {
-        that.setData({ is_show_top: true, top: "账号已登录！" });
+        request(
+          'OPTIONS', '/credential/session_id', {},
+          function (_res) {
+            if (_res.data.is_valid) {
+              wx.switchTab({
+                url: '/pages/users/users',
+              });
+            } else {
+              fetch_new_session_id();
+            }
+          },
+          function () {
+            fetch_new_session_id();
+          }
+        )
       },
+      fail: function() {
+        fetch_new_session_id();
+      }
     });
   }
 });

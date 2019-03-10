@@ -3,7 +3,6 @@ function success_callback(res) {}
 function fail_callback(res) {}
 
 function logger(res) {
-  console.log(res.statusCode)
   console.log(res.data);
 }
 

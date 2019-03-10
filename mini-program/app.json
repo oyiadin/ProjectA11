@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/check_in/check_in",
     "pages/login/login",
+    "pages/check_in/check_in",
     "pages/register/register",
     "pages/questionaire/questionaire",
     "pages/teacher_information/teacher_information",
@@ -9,8 +9,6 @@
     "pages/data_analysis/data_analysis",
     "pages/users/users",
     "pages/users/user_information/user_information",
-    "pages/index/index",
-    "pages/logs/logs",
     "pages/classes/classes",
     "pages/users/selected_class/selected_class"
   ],

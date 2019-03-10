@@ -45,28 +45,26 @@ class CourseInformationHandler(BaseHandler):
 
         self.finish()
 
-'''
+
 @handling(r"/user/(\d+)/courses")
-class SpecificUserCoursesInformationHandler(BaseHandler):
+class UserEnrolledInCoursesHandler(BaseHandler):
     @require_session
     def get(self, user_id, sess=None):
-        selected = self.db.query(db.Class).filter(
-            db.Class.teacher_id == user_id).all()
+        selected = self.db.query(db.RelationUserClass).filter(
+            db.RelationUserClass.user_id == user_id).all()
         if not selected:
             self.finish(404, 'not found')
             return
 
         list = []
-        for i in selected:
-            dict = {
-                'course_id': i.course_id,
-                'course_name': self.db.query(db.Course.course_name).filter(
-                    db.Course.course_name == i.course_name).first()[0],
-                'start': self.db.query(db.Course.start).filter(
-                    db.Course.start == i.start).first()[0],
-                'end': self.db.query(db.Course.end).filter(
-                    db.Course.end == i.end).first()[0]
-            }
-            list.append(dict)
+        for rel in selected:
+            _class = self.db.query(db.Class).filter(
+                db.Class.class_id == rel.class_id).first()
+            _course = self.db.query(db.Course).filter(
+                db.Course.course_id == _class.course_id).first()
+            list.append(dict(
+                course_id=_course.course_id,
+                course_name=_course.course_name,
+                start=_course.start,
+                end=_course.end))
         self.finish(list=list)
-'''

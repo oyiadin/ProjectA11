@@ -52,35 +52,43 @@ class ClassInformationHandler(BaseHandler):
         self.finish()
 
 
+@handling(r"/class/(\d+)/enroll_in")
+class ClassEnrollInHandler(BaseHandler):
+    @require_session
+    def post(self, class_id, sess=None):
+        selected = self.db.query(db.RelationUserClass).filter(
+            db.RelationUserClass.class_id == class_id,
+            db.RelationUserClass.user_id == sess['user_id']).first()
+        if selected is not None:
+            return self.finish(400, "you've already enrolled in before")
+
+        new_item = db.RelationUserClass(
+            user_id=sess['user_id'],
+            class_id=class_id)
+        self.db.add(new_item)
+        self.db.commit()
+
+
 @handling(r"/user/(\d+)/classes")
-class SpecificUserClassesInformationHandler(BaseHandler):
+class UserEnrolledInClassesHandler(BaseHandler):
     @require_session
     def get(self, user_id, sess=None):
-        selected = self.db.query(db.Class).filter(
-            db.Class.teacher_id == user_id).all()
+        selected = self.db.query(db.RelationUserClass).filter(
+            db.RelationUserClass.user_id == user_id).all()
         if not selected:
             self.finish(404, 'not found')
             return
 
         list = []
-        for i in selected:
-            dict = {
-                'class_id': i.class_id,
-                'class_name': self.db.query(db.Class.class_name).filter(
-                    db.Class.class_name == i.class_name).first()[0],
-                'weeekday': self.db.query(db.Class.weekday).filter(
-                    db.Class.weekday == i.weekday).first()[0],
-                'start': self.db.query(db.Class.start).filter(
-                    db.Class.start == i.start).first()[0],
-                'end': self.db.query(db.Class.end).filter(
-                    db.Class.end == i.end).first()[0],
-                'teacher_id': self.db.query(db.Class.teacher_id).filter(
-                    db.Class.teacher_id == i.teacher_id).first()[0],
-                'course_id': self.db.query(db.Class.course_id).filter(
-                    db.Class.course_id == i.course_id).first()[0]
-            }
-            list.append(dict)
+        for rel in selected:
+            _class = self.db.query(db.Class).filter(
+                db.Class.class_id == rel.class_id).first()
+            list.append(dict(
+                class_id=_class.class_id,
+                class_name=_class.class_name,
+                weekday=_class.weekday,
+                start=_class.start,
+                end=_class.end,
+                teacher_id=_class.teacher_id,
+                course_id=_class.course_id))
         self.finish(list=list)
-
-
-

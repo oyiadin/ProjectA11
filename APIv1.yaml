@@ -2,6 +2,13 @@ swagger: '2.0'
 info:
   version: '1.0'
   title: Project A11 RESTful API
+  description: "
+    一些所有api通用的错误码，下面就不重复列出这些通用的了:\n
+    - 400: 解析json时发生错误\n
+    - 401: 缺少session_id\n
+    - 402: 无效的session_id\n
+
+    "
 host: localhost:8888
 basePath: /api/v1
 tags:
@@ -45,11 +52,14 @@ paths:
             properties:
               is_valid:
                 type: boolean
+        '400':
+          description: session_id is required
     post:
       tags:
         - credential
       summary: to renew a session_id
       operationId: session_renew
+      description: 本api仅供开发期间测试使用，生产环境下本api无效
       parameters:
         - in: query
           name: session_id
@@ -58,6 +68,8 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: not in debug mode
 
   /credential/account:
     put:
@@ -224,6 +236,25 @@ paths:
         - class
       summary: to delete the specific class
       operationId: class_delete_specific
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: class_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+
+  '/class/{class_id}/enroll_in':
+    post:
+      tags:
+        - class
+      summary: to enroll in a specific class
+      operationId: class_enroll
       parameters:
         - in: query
           name: session_id
@@ -482,6 +513,10 @@ paths:
           schema:
             type: file
             example: (the binary data of the captcha image)
+        '410':
+          description: app_id is required
+        '411':
+          description: illegal app_id
 
   /check-in/class/{class_id}/code:
     get:
@@ -897,4 +932,3 @@ definitions:
       uploader_id:
         type: integer
         example: 1
-

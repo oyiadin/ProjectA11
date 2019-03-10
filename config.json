@@ -8,6 +8,7 @@
     "common_salt": "[IMPORTANT] RESET ME!",
     "template_path": "templates",
     "static_path": "static",
+    "upload_dir": "upload",
     "use_static_handler": true,
     "swagger_ui": true
   },

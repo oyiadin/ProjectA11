@@ -2,7 +2,7 @@
 
 import enum
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, DateTime, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (
     Column, Integer, String, CHAR, SmallInteger, ForeignKey, Date,
@@ -62,6 +62,23 @@ class CheckedInLogs(Base):
     log_id = Column(Integer, primary_key=True)
     code_id = Column(Integer, ForeignKey(CheckinCodes.code_id))
     user_id = Column(Integer, ForeignKey(User.user_id))
+
+
+class BelongType(enum.Enum):
+    CLASS = 0
+    COURSE = 1
+
+
+class Material(Base):
+    __tablename__ = "material"
+    file_id = Column(Integer, primary_key=True)
+    filename = Column(String(64))
+    internal_filename = Column(String(64))
+    size = Column(Integer)
+    uploaded_at = Column(Integer)
+    uploader_id = Column(Integer, ForeignKey(User.user_id))
+    belong_type = Column(Enum(BelongType))
+    belong_id = Column(Integer)
 
 
 def startup(conf):

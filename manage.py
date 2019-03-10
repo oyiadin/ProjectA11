@@ -1,4 +1,6 @@
 import argparse
+import os
+
 import projecta11.config as config
 
 parser = argparse.ArgumentParser(description='project_a11')
@@ -26,6 +28,12 @@ if __name__ == '__main__':
 
     if args.swagger_ui:
         conf.app.update({'swagger_ui': True})
+
+    upload_dir = os.path.join(os.path.dirname(__file__), conf.app.upload_dir)
+    try:
+        os.mkdir(upload_dir)
+    except FileExistsError:
+        pass
 
     try:
         if args.server:

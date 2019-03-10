@@ -5,3 +5,4 @@ import projecta11.handlers.classes
 import projecta11.handlers.courses
 import projecta11.handlers.misc
 import projecta11.handlers.checkin
+import projecta11.handlers.material

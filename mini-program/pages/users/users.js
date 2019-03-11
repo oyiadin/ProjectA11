@@ -5,11 +5,19 @@ const request = base.request;
 
 Page({
   data: {
-    name: '用户名Test'
+    name: 'Welcome'
   },
    // 个人信息
-  request_information: function(){
-    pass
+  onload: function(){
+    var session = wx.getStorageSync('session_id');
+    var is_login = wx.getStorageSync('is_login');
+    if(is_login){
+      pass;
+    } else {
+      wx.navigateTo({
+        url: '../../login/login',
+      })
+    }
   },
 
   // 登出

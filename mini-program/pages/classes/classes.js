@@ -11,11 +11,7 @@ Page({
     courseInfos: null,
     // userInfo
     userInfo: null,
-    // swiper
-    activities: ['../../images/Classes/activity-1.jpg',   
-                '../resources/activities/activity-2.jpg', 
-                '../resources/activities/activity-3.jpg',        
-                '../resources/activities/activity-4.jpg'],
+
     indicatorDots: true,
     vertical: false,
     autoplay: true,

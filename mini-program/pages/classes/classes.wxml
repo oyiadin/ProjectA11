@@ -27,18 +27,4 @@
     </view>
   </view>
 
- <!-- 课程选择 -->
-<view class="index-bd">
-  <view class="kind-list">
-    <block wx:for-items="{{courseInfos}}" wx:key="{{item.courseNo}}">
-      <view class="kind-list-item">
-        <view id="{{item.courseNo}}" class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}" bindtap="noteGraph" data-evaluation="{{item.evaluation}}">
-          <view class="kind-list-text">
-            <text class="class-list-item-title">{{item.courseName}}</text>
-            <text class="class-list-item-content">\n{{item.courseDesc}}</text>
-           </view>
-         </view>
-      </view>
-    </block>
-  </view>
 </view>

@@ -7,6 +7,10 @@ Page({
   data: {
     name: '用户名Test'
   },
+   // 个人信息
+  request_information: function(){
+    pass
+  },
 
   // 登出
   log_out: function() {

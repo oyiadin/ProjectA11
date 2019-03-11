@@ -70,7 +70,7 @@ class BelongType(enum.Enum):
 
 
 class Material(Base):
-    __tablename__ = "material"
+    __tablename__ = "materials"
     file_id = Column(Integer, primary_key=True)
     filename = Column(String(64))
     internal_filename = Column(String(64))
@@ -79,6 +79,28 @@ class Material(Base):
     uploader_id = Column(Integer, ForeignKey(User.user_id))
     belong_type = Column(Enum(BelongType))
     belong_id = Column(Integer)
+
+
+class Topic(Base):
+    __tablename__ = "topics"
+    topic_id = Column(Integer, primary_key=True)
+    title = Column(String(64))
+    content = Column(String(4096))
+    user_id = Column(Integer, ForeignKey(User.user_id))
+    created_at = Column(Integer)
+    updated_at = Column(Integer)
+    replies = Column(Integer)
+    belong_type = Column(Enum(BelongType))
+    belong_id = Column(Integer)
+
+
+class Reply(Base):
+    __tablename__ = "replies"
+    reply_id = Column(Integer, primary_key=True)
+    topic_id = Column(Integer, ForeignKey(Topic.topic_id))
+    content = Column(String(4096))
+    user_id = Column(Integer, ForeignKey(User.user_id))
+    created_at = Column(Integer)
 
 
 def startup(conf):

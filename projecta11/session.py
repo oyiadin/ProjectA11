@@ -36,7 +36,9 @@ class Session(object):
             return self.r.mget(real_keys)
 
     def __getitem__(self, item):
-        return self.r.get('{}:{}'.format(self.id, item))
+        if isinstance(item, (tuple, list)):
+            return self.get(*item)
+        return self.get(item)
 
     def set(self, key, value, expire_at=None):
         key = '{}:{}'.format(self.id, key)

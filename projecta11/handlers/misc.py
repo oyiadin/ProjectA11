@@ -47,3 +47,4 @@ class CaptchaHandler(BaseHandler):
         image.save(stream, 'JPEG')
         self.set_header('Content-Type', 'image/jpeg')
         self.write(stream.getvalue())
+        self.finish(no_json=True)

@@ -647,6 +647,11 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            type: object
+            properties:
+              list:
+                $ref: '#/definitions/topic-show'
 
   /{class|course}/{id}/forum/topic:
     put:
@@ -1178,13 +1183,11 @@ definitions:
         type: integer
         example: 1
       created_at:
-        type: string
-        format: datetime
-        example: "2018-02-03 15:00"
-      last_replied_at:
-        type: string
-        format: datetime
-        example: "2018-02-03 17:00"
+        type: integer
+        example: "1552282678"
+      updated_at:
+        type: integer
+        example: "1552282678"
       replies:
         type: integer
         example: 1
@@ -1215,13 +1218,11 @@ definitions:
         type: integer
         example: 1
       created_at:
-        type: string
-        format: datetime
-        example: "2018-02-03 15:00"
-      last_replied_at:
-        type: string
-        format: datetime
-        example: "2018-02-03 17:00"
+        type: integer
+        example: "1552282678"
+      updated_at:
+        type: integer
+        example: "1552282678"
       replies:
         type: integer
         example: 1
@@ -1239,9 +1240,8 @@ definitions:
         type: integer
         example: 1
       created_at:
-        type: string
-        format: datetime
-        example: "2018-02-03 17:00"
+        type: integer
+        example: "1552282678"
 
   reply-register:
     type: object
@@ -1263,6 +1263,7 @@ definitions:
         type: integer
         example: 1
       created_at:
-        type: string
-        format: datetime
-        example: "2018-02-03 17:00"
+        type: integer
+        example: "1552282678"
+
+

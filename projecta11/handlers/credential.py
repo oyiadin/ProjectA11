@@ -61,6 +61,9 @@ class AccountHandler(BaseHandler):
             return self.finish(403, 'all arguments are required')
 
         if data['captcha'].encode() != sess.get(captcha_key):
+            if conf.app.debug:
+                return self.finish(400, 'incorrect captcha',
+                                   correct_captcha=sess.get(captcha_key))
             return self.finish(400, 'incorrect captcha')
         sess.delete(captcha_key)
 
@@ -94,11 +97,14 @@ class AccountHandler(BaseHandler):
                                    need_captcha=need_captcha)
 
             if captcha.encode() != sess.get(captcha_key):
+                if conf.app.debug:
+                    return self.finish(400, 'incorrect captcha',
+                                       correct_captcha=sess.get(captcha_key))
                 return self.finish(400, 'wrong captcha',
                                    need_captcha=need_captcha)
         sess.delete(captcha_key)
 
-        password = hash_password(password + conf.app.password_salt)
+        password = hash_password(password)
 
         selected = self.db.query(db.User).filter(
             db.User.staff_id == staff_id, db.User.password == password).first()

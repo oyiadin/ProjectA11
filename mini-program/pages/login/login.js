@@ -3,6 +3,7 @@ const request = base.request;
 
 
 function fetch_new_session_id() {
+  wx.setStorageSync('is_login', 0);
   request(
     'GET', '/credential/session_id', {},
     function (res) {
@@ -58,6 +59,7 @@ Page({
           password: this.data.password
         },
         function (res) {
+          wx.setStorageSync('is_login', 1);
           wx.switchTab({url: '/pages/users/users'});
         },
         function (res) {
@@ -79,8 +81,11 @@ Page({
   onLoad: function (e) {
     const that = this;
     wx.getStorage({
-      key: 'session_id',
+      key: 'is_login',
       success: function(res) {
+        if (res.data == 0)
+          return fetch_new_session_id();
+
         request(
           'OPTIONS', '/credential/session_id', {},
           function (_res) {

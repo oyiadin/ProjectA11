@@ -14,6 +14,7 @@ Page({
       'DELETE', '/credential/account', {},
       function() {
         wx.removeStorageSync('session_id');
+        wx.removeStorageSync('is_login');
         wx.navigateTo({
           url: '/pages/login/login',
         });

@@ -407,7 +407,7 @@ paths:
     put:
       tags:
         - score
-      summary: to add some new scores
+      summary: to add a new score
       operationId: add_new_score
       parameters:
         - in: query
@@ -418,12 +418,7 @@ paths:
           name: body
           required: true
           schema:
-            type: object
-            properties:
-              list:
-                type: array
-                items:
-                  $ref: '#/definitions/score-register'
+            $ref: '#/definitions/score-register'
       responses:
         '200':
           description: OK
@@ -432,7 +427,7 @@ paths:
     put:
       tags:
         - score
-      summary: to add some new scores of a specific class
+      summary: to add a new scores of a specific class
       operationId: add_new_score_specific_class
       parameters:
         - in: query
@@ -447,12 +442,7 @@ paths:
           name: body
           required: true
           schema:
-            type: object
-            properties:
-              list:
-                type: array
-                items:
-                  $ref: '#/definitions/score-register-specific-class'
+            $ref: '#/definitions/score-register-specific-class'
       responses:
         '200':
           description: OK
@@ -1044,6 +1034,9 @@ definitions:
       score_id:
         type: integer
         example: 1
+      course_name:
+        type: string
+        example: "Example-Course"
       score:
         type: integer
         example: 95
@@ -1057,6 +1050,9 @@ definitions:
   score-register:
     type: object
     properties:
+      score_id:
+        tpye: integer
+        example: 1
       score:
         type: integer
         example: 95
@@ -1066,6 +1062,9 @@ definitions:
       class_id:
         type: integer
         example: 1
+      course_name:
+        type: string
+        example: "Example-Course"
 
   score-register-specific-class:
     type: object

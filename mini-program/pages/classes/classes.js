@@ -1,5 +1,8 @@
 // pages/classes/classes.js
-var app = getApp();
+var base = require('../../base.js');
+const request = base.request;
+
+
 
 Page({
 
@@ -7,31 +10,43 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // courses
-    courseInfos: null,
-    // userInfo
-    userInfo: null,
-
-    indicatorDots: true,
-    vertical: false,
-    autoplay: true,
-    interval: 2000,
-    duration: 500,
-
-    // 模态
-    collegeIndex: 0,
-    majorIndex: 0,
-    noInput: "未设置",
-    inputShowed: false,
-    inputVal: "",
-    selectClick: false,
+    staff_id: "",
+    classes: [
+      {
+        "name":"示例1",
+        "teacher":"王老师"
+      },
+      {
+        "name": "示例2",
+        "teacher": "李老师"
+      }
+    ]
   }, 
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const that = this;
+    wx.getStorage({
+      key: 'is_login',
+      success: function(res) {
+        request(
+          'GET', '/class/',{
+            staff_id: this.data.staff_id
+          },
+          function(res) {
+            this.setData({ classes: res.classes })
+          },
+          function(res) {}
+        )
+      },
+      fail: function(){
+        wx.navigateTo({
+          url: '/pages/login/login',
+        });
+      }
+    })
   },
 
   /**
@@ -107,5 +122,7 @@ Page({
       inputVal: e.detail.value
     });
   },
+
+
 
 })

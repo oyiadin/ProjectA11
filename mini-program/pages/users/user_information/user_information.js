@@ -10,11 +10,22 @@ Page({
     name: '用户名Test',
     gender: "男",
     student_number: 17071140,
-    mobile: 18267275886
+    mobile: ""
   },
 
   get_information: function (session){
-    pass;
+    const that = this;
+    request(
+        'POST', '/user/' + this.session,
+        {
+          staff_id: this.session,
+        },
+        function (res) {
+          return res.data.information
+        },
+        function (res) {
+            pass;
+        })
   },
 
   onLoad: function (options) {

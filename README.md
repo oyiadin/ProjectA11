@@ -38,6 +38,16 @@
 
 10. 安装 `redis`，自行百度，装完把 `redis-server` 打开 (默认配置即可，反正只是本地测试环境)
 
+11. `redis`设置了密码,密码为`4d46745a30d006b9cbbd90005f50075764ccc67c53fade810b4f43d644acab4d`。
+如果要在本地跑的话，需要设置下密码：
+```bash
+> config set requirepass 4d46745a30d006b9cbbd90005f50075764ccc67c53fade810b4f43d644acab4d
+```
+想登录`redis`可以使用：
+```bash
+$ redis-cil -h 127.0.0.1 -p 6379 -a 4d46745a30d006b9cbbd90005f50075764ccc67c53fade810b4f43d644acab4d
+```
+
 
 ### Run
 

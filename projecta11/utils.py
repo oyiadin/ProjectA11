@@ -21,7 +21,7 @@ def parse_json_body(func):
 def require_session(func):
     def wrapper(self, *args, **kwargs):
         session_id = self.get_argument('session_id', None)
-        if session_id is None:
+        if session_id is None or session_id == '':
             self.finish(403, 'all arguments are required')
             return
 

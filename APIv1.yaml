@@ -6,7 +6,11 @@ info:
     Some common status_code of the responses:\n
     - 400: something went wrong when parsing json\n
     - 401: session_id is required\n
-    - 402: invalid session_id"
+    - 402: invalid session_id\n
+    - 403: missing arguments\n
+    - 404: no matched data\n
+    - 410: no enough permission\n\n
+    _**They won't appear in the APIs listed above**_"
 host: localhost:8888
 basePath: /api/v1
 tags:
@@ -50,8 +54,8 @@ paths:
             properties:
               is_valid:
                 type: boolean
-        '400':
-          description: session_id is required
+        '403':
+          description: missing arguments
     post:
       tags:
         - credential
@@ -66,8 +70,8 @@ paths:
       responses:
         '200':
           description: OK
-        '400':
-          description: not in debug mode
+        '405':
+          description: not currently in debug mode
 
   /credential/account:
     put:
@@ -91,6 +95,12 @@ paths:
       responses:
         '200':
           description: OK
+        '405':
+          description: incorrect captcha
+        '409':
+          description:
+            conflict user information
+
     post:
       tags:
         - credential
@@ -121,6 +131,12 @@ paths:
               user_id:
                 type: integer
                 example: 1
+        '405':
+          description:
+            incorrect captcha
+        '406':
+          description:
+            need capctha
     delete:
       tags:
         - credential
@@ -187,6 +203,8 @@ paths:
       responses:
         '200':
           description: OK
+        '410':
+          description: no enough permission
 
   /class:
     put:
@@ -266,6 +284,8 @@ paths:
       responses:
         '200':
           description: OK
+        '405':
+          description: you've already enrolled in before
 
   '/course':
     put:
@@ -407,7 +427,7 @@ paths:
     put:
       tags:
         - score
-      summary: to add a new score
+      summary: to add some new scores
       operationId: add_new_score
       parameters:
         - in: query
@@ -418,7 +438,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/score-register'
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/score-register'
       responses:
         '200':
           description: OK
@@ -427,7 +452,7 @@ paths:
     put:
       tags:
         - score
-      summary: to add a new scores of a specific class
+      summary: to add some new scores of a specific class
       operationId: add_new_score_specific_class
       parameters:
         - in: query
@@ -442,7 +467,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/score-register-specific-class'
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/score-register-specific-class'
       responses:
         '200':
           description: OK
@@ -487,10 +517,12 @@ paths:
         - in: query
           name: app_id
           required: true
+          type: string
           description: "
           `app_id` can specify the situation where this captcha will use
           (such as when login, register, post new topics...)\n
-          the backend would store a dict which may contains something like `{'0cc175b9c0f1b6a8': 'login'}`"
+          the backend would store a dict which may contains something like
+          `{'0cc175b9c0f1b6a8': 'register'}`"
       responses:
         '200':
           description: OK
@@ -563,6 +595,8 @@ paths:
       responses:
         '200':
           description: OK
+        '404':
+          description: invalid check-in code
 
   /check-in/verify/code/{code_id}/user/{user_id}:
     post:
@@ -1034,9 +1068,6 @@ definitions:
       score_id:
         type: integer
         example: 1
-      course_name:
-        type: string
-        example: "Example-Course"
       score:
         type: integer
         example: 95
@@ -1050,9 +1081,6 @@ definitions:
   score-register:
     type: object
     properties:
-      score_id:
-        tpye: integer
-        example: 1
       score:
         type: integer
         example: 95
@@ -1062,9 +1090,6 @@ definitions:
       class_id:
         type: integer
         example: 1
-      course_name:
-        type: string
-        example: "Example-Course"
 
   score-register-specific-class:
     type: object
@@ -1230,6 +1255,9 @@ definitions:
     type: object
     properties:
       reply_id:
+        type: integer
+        example: 1
+      topic_id:
         type: integer
         example: 1
       content:

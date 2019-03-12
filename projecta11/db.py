@@ -46,7 +46,6 @@ class Score(Base):
     score = Column(Integer)
     user_id = Column(Integer, ForeignKey(User.user_id))
     class_id = Column(Integer, ForeignKey(Class.class_id))
-    course_name = Column(String(96))
 
 
 class RelationUserClass(Base):  # 用户(学生)与班级的关系表

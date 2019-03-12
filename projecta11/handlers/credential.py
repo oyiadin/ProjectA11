@@ -25,7 +25,7 @@ class SessionIDHandler(BaseHandler):
     def options(self):
         session_id = self.get_argument('session_id', None)
         if session_id is None:
-            return self.finish(403, 'all arguments are required')
+            return self.finish(403, 'missing arguments')
 
         try:
             sess = Session(session_id)
@@ -36,6 +36,9 @@ class SessionIDHandler(BaseHandler):
 
     @require_session
     def post(self, sess=None):
+        if not conf.app.debug:
+            return self.finish(405, 'not currently in debug mode')
+
         expire_at = int(time.time() + conf.session.expires_after)
         sess.r.set(sess.id, expire_at)
         sess.r.expireat(sess.id, expire_at)
@@ -58,13 +61,13 @@ class AccountHandler(BaseHandler):
 
         if not reduce(lambda a, b: a and b, map(
                 lambda x: x[0] and (x[1] is not None), data.items())):
-            return self.finish(403, 'all arguments are required')
+            return self.finish(403, 'missing arguments')
 
         if data['captcha'].encode() != sess.get(captcha_key):
             if conf.app.debug:
-                return self.finish(400, 'incorrect captcha',
+                return self.finish(405, 'incorrect captcha',
                                    correct_captcha=sess.get(captcha_key))
-            return self.finish(400, 'incorrect captcha')
+            return self.finish(405, 'incorrect captcha')
         sess.delete(captcha_key)
 
         selected = self.db.query(db.User).filter(
@@ -88,19 +91,19 @@ class AccountHandler(BaseHandler):
         captcha = data.get('captcha')
 
         if not (staff_id and password):
-            return self.finish(403, 'all arguments are required')
+            return self.finish(403, 'missing arguments')
 
         need_captcha = sess.get('need_captcha') == b'1'
         if need_captcha:
             if captcha is None:
-                return self.finish(400, 'need captcha',
+                return self.finish(406, 'need captcha',
                                    need_captcha=need_captcha)
 
             if captcha.encode() != sess.get(captcha_key):
                 if conf.app.debug:
-                    return self.finish(400, 'incorrect captcha',
+                    return self.finish(405, 'incorrect captcha',
                                        correct_captcha=sess.get(captcha_key))
-                return self.finish(400, 'wrong captcha',
+                return self.finish(405, 'incorrect captcha',
                                    need_captcha=need_captcha)
         sess.delete(captcha_key)
 
@@ -115,7 +118,7 @@ class AccountHandler(BaseHandler):
             at = int(time.time() + 600)
             sess.expireat('login_tried_times', at)
             sess.expireat('need_captcha', at)
-            return self.finish(404, 'wrong user_id or password',
+            return self.finish(404, 'no matched data',
                                need_captcha=need_captcha)
 
         user_id = selected.user_id

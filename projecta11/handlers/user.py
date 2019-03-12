@@ -20,21 +20,23 @@ class SpecificUserInformationHandler(BaseHandler):
         selected = self.db.query(db.User).filter(
             db.User.user_id == user_id).first()
         if selected is None:
-            self.finish(404, 'wrong user_id')
+            self.finish(404, 'no matched data')
             return
 
         ret = dict(
             user_id=selected.user_id,
-            staff_id=selected.staff_id
-        )
+            staff_id=selected.staff_id)
         self.finish(**ret)
 
     @require_session
     def delete(self, user_id, sess=None):
-        # TODO: permission check
+        selected = self.db.query(db.User).filter(
+            db.User.user_id == user_id).first()
+        if selected is None:
+            self.finish(404, 'no matched data')
+            return
 
-        self.db.query(db.User).filter(
-            db.User.user_id == user_id).delete()
+        self.db.delete(selected)
         self.db.commit()
 
         self.finish()

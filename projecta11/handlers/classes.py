@@ -10,9 +10,8 @@ class NewClassHandler(BaseHandler):
     @require_session
     @parse_json_body
     def put(self, data=None, sess=None):
-        keys = (
-            'class_name', 'weekday', 'start', 'end', 'teacher_id', 'course_id'
-        )
+        keys = ('class_name', 'weekday', 'start', 'end', 'teacher_id',
+                'course_id')
         data = keys_filter(data, keys)
 
         new_class = db.Class(**data)
@@ -23,13 +22,12 @@ class NewClassHandler(BaseHandler):
 
 
 @handling(r"/class/(\d+)")
-class ClassInformationHandler(BaseHandler):
+class ClassInfoHandler(BaseHandler):
     def get(self, class_id):
         selected = self.db.query(db.Class).filter(
-            db.Class.class_id == int(class_id)).first()
+            db.Class.class_id == class_id).first()
         if selected is None:
-            self.finish(404, 'not found')
-            return
+            return self.finish(404, 'not found')
 
         ret = dict(
             class_id=selected.class_id,
@@ -38,18 +36,19 @@ class ClassInformationHandler(BaseHandler):
             start=selected.start,
             end=selected.end,
             teacher_id=selected.teacher_id,
-            course_id=selected.course_id,
-        )
+            course_id=selected.course_id)
 
         self.finish(**ret)
 
     @require_session
     def delete(self, class_id, sess=None):
-        self.db.query(db.Class).filter(
-            db.Class.class_id == class_id).delete()
-        self.db.commit()
+        selected = self.db.query(db.Class).filter(
+            db.Class.class_id == class_id).first()
+        if selected is None:
+            return self.finish(404, 'no matched data')
 
-        self.finish()
+        self.db.delete(selected)
+        self.db.commit()
 
 
 @handling(r"/class/(\d+)/enroll_in")
@@ -60,7 +59,7 @@ class ClassEnrollInHandler(BaseHandler):
             db.RelationUserClass.class_id == class_id,
             db.RelationUserClass.user_id == sess['user_id']).first()
         if selected is not None:
-            return self.finish(400, "you've already enrolled in before")
+            return self.finish(405, "you've already enrolled in before")
 
         new_item = db.RelationUserClass(
             user_id=sess['user_id'],
@@ -76,7 +75,7 @@ class UserEnrolledInClassesHandler(BaseHandler):
         selected = self.db.query(db.RelationUserClass).filter(
             db.RelationUserClass.user_id == user_id).all()
         if not selected:
-            self.finish(404, 'not found')
+            self.finish(404, 'no matched data')
             return
 
         list = []
@@ -91,4 +90,5 @@ class UserEnrolledInClassesHandler(BaseHandler):
                 end=_class.end,
                 teacher_id=_class.teacher_id,
                 course_id=_class.course_id))
+
         self.finish(list=list)

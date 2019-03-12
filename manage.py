@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser(description='project_a11')
 parser.add_argument('--server',
                     default=False, action='store_const', const=True)
 parser.add_argument('--init', default=False, action='store_const', const=True)
+parser.add_argument('--reinit', default=False, action='store_const', const=True)
 parser.add_argument('--debug', default=False, action='store_const', const=True)
 parser.add_argument(
     '--use-static-handler', default=False, action='store_const', const=True)
@@ -44,6 +45,28 @@ if __name__ == '__main__':
                 print('documentation lies here: http://{}:{}/api/v1/doc'.format(
                     conf.app.host, conf.app.port))
             projecta11.server.startup(conf)
+
+        if args.reinit:
+            import pymysql.cursors
+            connection = pymysql.connect(host=conf.db.host,
+                                         user=conf.db.user,
+                                         password=conf.db.password)
+            try:
+                with connection.cursor() as cursor:
+                    sql1 = "DROP DATABASE `%s`;" % conf.db.dbname
+                    sql2 = "CREATE DATABASE `%s`;" % conf.db.dbname
+                    try:
+                        cursor.execute(sql1)
+                    except pymysql.err.InternalError:
+                        pass
+                    cursor.execute(sql2)
+                connection.commit()
+                print('database droped!')
+            finally:
+                connection.close()
+
+            import projecta11.db
+            projecta11.db.init_db(conf)
 
         if args.init:
             import projecta11.db

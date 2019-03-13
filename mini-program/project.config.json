@@ -41,8 +41,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "login",
-					"pathName": "pages/register/register",
+					"name": "specific_page",
+					"pathName": "pages/check-in/student/do-check-in",
 					"query": "",
 					"scene": null
 				}

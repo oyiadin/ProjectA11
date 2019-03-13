@@ -1,1 +1,11 @@
 /* pages/classes/classes.wxss */
+.weui-form-preview{
+    margin-bottom: 25px;
+}
+
+.block{
+  width: 100px;
+  height:100px;
+  margin:auto;
+  padding:5px 0px 0px 0px;
+}

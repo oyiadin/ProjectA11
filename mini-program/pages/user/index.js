@@ -4,22 +4,13 @@ var u = require('../../utils/utils.js');
 
 Page({
   data: {
-    name: 'Welcome'
-  },
-   // 个人信息
-  onload: function(){
-    var session = wx.getStorageSync('session_id');
-    var is_login = wx.getStorageSync('is_login');
-    if(is_login){
-      pass;
-    } else {
-      wx.navigateTo({
-        url: '/pages/credential/login/login',
-      })
-    }
+    name: "",
   },
 
-  // 登出
+  onLoad: function() {
+    this.setData({ name: wx.getStorageSync('name') });
+  },
+
   log_out: function() {
     u.request(
       'DELETE', '/credential/account', {},
@@ -33,7 +24,6 @@ Page({
     );
   },
 
-  // 个人信息跳转
   user_information: function () {
     wx.navigateTo({
       url: './user-information/user-information',

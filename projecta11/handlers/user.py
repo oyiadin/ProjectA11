@@ -9,8 +9,15 @@ from projecta11.utils import require_session, keys_filter
 class UserInformationHandler(BaseHandler):
     @require_session
     def get(self, sess=None):
-        keys = ('user_id', 'staff_id')
-        ret = keys_filter(sess, keys)
+        keys = ('user_id', 'staff_id', 'role', 'name', 'is_male')
+        selected = self.db.query(db.User).filter(
+            db.User.user_id == sess['user_id']).first()
+        ret = dict(
+            user_id=selected.user_id,
+            staff_id=selected.staff_id,
+            role=selected.role.value,
+            name=selected.name,
+            is_male=selected.is_male)
         self.finish(**ret)
 
 

@@ -1,8 +1,5 @@
-// pages/user_information/user_information.js
+var u = require('../../../utils/utils.js');
 
-// pages/user_information/user_information.js
-var base = require('../../../base.js');
-const request = base.request;
 
 Page({
   data: {
@@ -15,7 +12,7 @@ Page({
 
   get_information: function (session){
     const that = this;
-    request(
+    u.request(
         'POST', '/user/' + this.session,
         {
           staff_id: this.session,

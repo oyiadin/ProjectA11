@@ -23,6 +23,7 @@
         <text>已选课程</text>
       </view>
     </view>
+    <text>这个页面暂时别改，直接在首页添加grid，方便</text>
     <text> \n </text>
     <button class="weui-btn button-hover" type="primary" plain="true" bindtap='log_out'>
     登出

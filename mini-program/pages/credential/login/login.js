@@ -19,29 +19,26 @@ Page({
     staff_id: "",
     password: "",
     account_type: "",
-    account_types: ["学生", "教师"],
+    role: "0",
+    account_types: ["学生", "教师", "管理员"],
     id_name: "",
-    id_names: ["学号", "教职工号"],
+    id_names: ["学号", "教职工号", "账号ID"],
   },
 
   bind_account_type_change: function (e) {
     this.setData({
       account_type: this.data.account_types[e.detail.value],
       id_name: this.data.id_names[e.detail.value],
+      role: e.detail.value,
     });
   },
 
   set_staff_id: function (e) {
-    this.data.staff_id = e.detail.value;
-  },
-
+    this.data.staff_id = e.detail.value; },
   set_password: function (e) {
-    this.data.password = e.detail.value;
-  },
-
+    this.data.password = e.detail.value; },
   set_captcha: function (e) {
-    this.data.captcha = e.detail.value;
-  },
+    this.data.captcha = e.detail.value; },
 
   refetch_captcha: function (e) {
     var src = 'http://localhost:8888/api/v1/misc/captcha?session_id=' + this.data.session_id + '&app_id=9c15af0d3e0ea84d' + '&t=' + Date.parse(new Date());
@@ -66,11 +63,22 @@ Page({
           staff_id: this.data.staff_id,
           password: this.data.password,
           captcha: this.data.captcha,
+          role: parseInt(this.data.role),
         },
         function (res) {
-          wx.setStorageSync('is_login', 1);
-          wx.setStorageSync('user_id', res.data.user_id);
-          wx.switchTab({url: '/pages/misc/index'});
+          wx.setStorage({
+            key: 'is_login',
+            data: 1 });
+          wx.setStorage({
+            key: 'user_id',
+            data: res.data.user_id });
+          wx.setStorage({
+            key: 'role',
+            data: that.data.role });
+          wx.setStorage({
+            key: 'name',
+            data: res.data.name });
+          wx.switchTab({ url: '/pages/misc/index' });
         },
         function (res) {
           that.refetch_captcha();
@@ -78,10 +86,10 @@ Page({
           if (res.statusCode == 405) {
             title = '验证码错误，请重试';
           } else if (res.statusCode == 404) {
-            title = '与密码错误'
+            title = '请检查账号类型、'+that.data.id_name+'、密码';
           }
           wx.showToast({
-            title: res.data.msg,
+            title: title,
             icon: 'none',
           })
         }
@@ -99,6 +107,7 @@ Page({
     const that = this;
 
     this.setData({
+      role: 0,
       account_type: this.data.account_types[0],
       id_name: this.data.id_names[0],
     });

@@ -72,6 +72,14 @@ class AccountHandler(BaseHandler):
                     405, 'incorrect captcha', correct_captcha=correct_captcha)
             return self.finish(405, 'incorrect captcha')
 
+        if not isinstance(data['role'], int):
+            return self.finish(400, 'role must be a digit')
+        data['role'] = db.int2UserRole[data['role']]
+
+        if isinstance(data['is_male'], str) and not data['is_male'].isdigit():
+            return self.finish(400, 'is_male must be a digit')
+        data['is_male'] = bool(int(data['is_male']))
+
         selected = self.db.query(db.User).filter(
             db.User.staff_id == data['staff_id']).first()
         if selected is not None:
@@ -91,9 +99,10 @@ class AccountHandler(BaseHandler):
         captcha_key = 'captcha:9c15af0d3e0ea84d'
         staff_id = data.get('staff_id')
         password = data.get('password')
+        role = data.get('role')
         captcha = data.get('captcha')
 
-        if not (staff_id and password and captcha):
+        if not (staff_id and password and captcha and role is not None):
             return self.finish(403, 'missing arguments')
 
         captcha = captcha.lower()
@@ -105,20 +114,24 @@ class AccountHandler(BaseHandler):
                     405, 'incorrect captcha', correct_captcha=correct_captcha)
             return self.finish(405, 'incorrect captcha')
 
+        if not isinstance(role, int):
+            return self.finish(400, 'role must be a digit')
+        role = db.int2UserRole[role]
 
         password = hash_password(password)
 
         selected = self.db.query(db.User).filter(
-            db.User.staff_id == staff_id, db.User.password == password).first()
+            db.User.staff_id == staff_id,
+            db.User.password == password,
+            db.User.role == role).first()
         if selected is None:
             return self.finish(404, 'no matched data')
 
-        user_id = selected.user_id
         sess['is_login'] = 1
-        sess['user_id'] = user_id
+        sess['user_id'] = selected.user_id
         sess['staff_id'] = staff_id
 
-        self.finish(user_id=user_id)
+        self.finish(user_id=selected.user_id, name=selected.name)
 
     @require_session
     def delete(self, sess=None):

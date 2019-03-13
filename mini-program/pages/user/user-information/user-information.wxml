@@ -11,21 +11,30 @@
           <image src="../../../images/icons/Student.png" style="width: 50px; height: 50px; display: block"/>
         </view>
         <view class="weui-cell__bd">
-          <view>用户名</view>
-          <view style="font-size: 13px;color: #888888;">摘要信息</view>
+          <view>{{data.name}}</view>
+          <view style="font-size: 13px;color: #888888;">{{ ['学生', '教师', '管理员'][data.role] }}</view>
         </view>
       </view>
+
       <view class="weui-cell weui-cell_access">
         <view class="weui-cell__bd">
           <view style="display: inline-block; vertical-align: middle">用户ID</view>
         </view>
         <view class="weui-cell__ft" style="display: inline-block;vertical-align:middle; font-size: 17px;">{{data.user_id}}</view>
       </view>
+
       <view class="weui-cell weui-cell_access">
         <view class="weui-cell__bd">
           <view style="display: inline-block; vertical-align: middle">学号</view>
         </view>
         <view class="weui-cell__ft" style="display: inline-block;vertical-align:middle; font-size: 17px;">{{data.staff_id}}</view>
+      </view>
+
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">性别</view>
+        </view>
+        <view class="weui-cell__ft" style="display: inline-block;vertical-align:middle; font-size: 17px;">{{ data.is_male ? "男" : "女" }}</view>
       </view>
     </view>
   </view>

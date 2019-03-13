@@ -16,9 +16,12 @@ Session = None
 
 
 class UserRole(enum.Enum):
-    admin = 1
-    teacher = 2
-    student = 3
+    student = 0
+    teacher = 1
+    admin = 2
+
+int2UserRole = [UserRole.student, UserRole.teacher, UserRole.admin]
+
 
 class User(Base):
     __tablename__ = "users"

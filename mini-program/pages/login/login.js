@@ -1,21 +1,22 @@
 var base = require('../../base.js');
 const request = base.request;
 
-
-function fetch_new_session_id() {
+function fetch_new_session_id(that, callback) {
   wx.setStorageSync('is_login', 0);
   request(
     'GET', '/credential/session_id', {},
     function (res) {
+      that.setData({ session_id: res.data.session_id });
       wx.setStorageSync('session_id', res.data.session_id);
-    });
+      callback();
+    }
+  );
 }
 
 
 Page({
   data: {
-    is_show_top: false,
-    top: "",
+    session_id: "",
     staff_id: "",
     password: "",
     account_types: ["学生", "教师"],
@@ -37,6 +38,18 @@ Page({
     this.data.password = e.detail.value;
   },
 
+  set_captcha: function (e) {
+    this.data.captcha = e.detail.value;
+  },
+
+  refetch_captcha: function (e) {
+    var src = 'http://localhost:8888/api/v1/misc/captcha?session_id=' + this.data.session_id + '&app_id=9c15af0d3e0ea84d' + '&t=' + Date.parse(new Date());
+    console.log('src=', src);
+    this.setData({
+      src: src,
+    });
+  },
+
   do_login: function (e) {
     const that = this;
     if (!this.data.staff_id) {
@@ -56,7 +69,8 @@ Page({
         'POST', '/credential/account',
         {
           staff_id: this.data.staff_id,
-          password: this.data.password
+          password: this.data.password,
+          captcha: this.data.captcha,
         },
         function (res) {
           wx.setStorageSync('is_login', 1);
@@ -78,32 +92,38 @@ Page({
     })
   },
 
-  onLoad: function (e) {
+  onLoad: function(e) {
     const that = this;
     wx.getStorage({
-      key: 'is_login',
+      key: 'session_id',
       success: function(res) {
-        if (res.data == 0)
-          return fetch_new_session_id();
-
-        request(
-          'OPTIONS', '/credential/session_id', {},
-          function (_res) {
-            if (_res.data.is_valid) {
-              wx.switchTab({
-                url: '/pages/users/users',
-              });
-            } else {
-              fetch_new_session_id();
+        if (res.data == undefined) {
+          fetch_new_session_id(that);
+          that.refetch_captcha();
+        } else {
+          request(
+            'OPTIONS', '/credential/session_id', {},
+            function (_res) {
+              if (_res.data.is_valid) {
+                if (wx.getStorageSync('is_login')) {
+                  wx.switchTab({
+                    url: '/pages/users/users',
+                  });
+                }
+                that.setData({ session_id: res.data });
+                that.refetch_captcha();
+              } else {
+                fetch_new_session_id(that, that.refetch_captcha);
+              }
+            },
+            function () {
+              fetch_new_session_id(that, that.refetch_captcha);
             }
-          },
-          function () {
-            fetch_new_session_id();
-          }
-        )
+          );
+        }
       },
       fail: function() {
-        fetch_new_session_id();
+        fetch_new_session_id(that, that.refetch_captcha);
       }
     });
   }

@@ -65,8 +65,9 @@ class AccountHandler(BaseHandler):
 
         if data['captcha'].encode() != sess.get(captcha_key):
             if conf.app.debug:
-                return self.finish(405, 'incorrect captcha',
-                                   correct_captcha=sess.get(captcha_key))
+                return self.finish(
+                    405, 'incorrect captcha',
+                    correct_captcha=(sess.get(captcha_key) or b'').decode())
             return self.finish(405, 'incorrect captcha')
         sess.delete(captcha_key)
 
@@ -95,8 +96,9 @@ class AccountHandler(BaseHandler):
 
         if captcha.encode() != sess.get(captcha_key):
             if conf.app.debug:
-                return self.finish(405, 'incorrect captcha',
-                                   correct_captcha=sess.get(captcha_key))
+                return self.finish(
+                    405, 'incorrect captcha',
+                    correct_captcha=(sess.get(captcha_key) or b'').decode())
             return self.finish(405, 'incorrect captcha')
         sess.delete(captcha_key)
 

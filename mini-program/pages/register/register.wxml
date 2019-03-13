@@ -1,67 +1,47 @@
-<!--pages/register/register.wxml-->
+<!--pages/login/login.wxml-->
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title">注册</view>
+    <view class="page__desc">欢迎光临！</view>
+  </view>
 
-<!-- <view wx:if="{{!success}}"> -->
-
-<!-- 用户名
-<view class='row'>
-    <view class='info'>
-    <input  class='info-input' bindinput="handleInputUsername" placeholder="用户名" />
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd" style="width: 105px">
+            <picker bindchange="bind_account_type_change" value="{{account_type_index}}" range="{{account_types}}">
+                <view class="weui-select">{{account_types[account_type_index]}}</view>
+            </picker>
+        </view>
+        <view class="weui-cell__bd weui-cell__bd_in-select-before">
+            <input class="weui-input" placeholder="请输入{{account_types_name[account_type_index]}}" bindinput='set_staff_id'/>
+        </view>
     </view>
-</view> -->
-
-<!-- 角色 -->
-<view class='row'>
-  <view class='info'>
-    <input class= 'info-input' bindinput="setStaffID" placeholder="请输入学号" />
-  </view>
-</view>
-
-<!-- 密码 -->
-<view class='row'>
-  <view class='info'>
-    <input  type='password' class='info-input' bindinput="setPassword" placeholder="请输入密码" />
-  </view>
-</view>
-
-<!-- 重复密码
-<view class='row'>
-  <view class='info'>
-    <input  type='password' class= 'info-input' bindinput="setPasswordAgain" placeholder="请重新输入你的密码" />
-  </view>
-</view> -->
-
-<!-- 姓名
-<view class='row'>
-  <view class='info'>
-    <input class= 'info-input' bindinput="handleNewName" placeholder="请输入姓名" />
-  </view>
-</view> -->
-
-<!-- 学号
-<view class='row'>
-  <view class='info'>
-    <input class= 'info-input' bindinput="handleNewStudentID" placeholder="请输入学号" />
-  </view>
-</view> -->
-
-<!-- 验证码 -->
-<view class='row'>
-  <view class="weui-cell weui-cell_input weui-cell_vcode">
-    <view class='info'>
-      <input class='info-input' bindinput='set_captcha' placeholder="请输入验证码" />
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">密码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入密码" bindinput='set_password'/>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">验证码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入验证码"  bindinput='set_captcha'/>
+        </view>
+        <view class="weui-cell__ft">
+          <image class="weui-vcode-img" src="{{src}}" style="width: 108px" bindtap="refetch_captcha"></image>
+        </view>
+      </view>
     </view>
-    <view class="weui-cell__ft">
-      <image class="weui-vcode-img" src="{{ src }}" style="width: 150px"></image>
+  </view>
+
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="do_register">注册</button>
     </view>
   </view>
 </view>
-
-<!-- 提交 -->
-<view>
- <button class='submit' bindtap='submit'>提交</button>
-</view>
-<!-- 
-<view class='success' wx:if="{{success}}">
-<view class='cheer'><icon type="success" size="24"/>恭喜您注册成功!</view>
-<button type="default" class = 'return' bindtap='return_home'>返回首页</button>
-</view> -->

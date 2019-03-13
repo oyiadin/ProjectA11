@@ -63,13 +63,14 @@ class AccountHandler(BaseHandler):
                 lambda x: x[0] and (x[1] is not None), data.items())):
             return self.finish(403, 'missing arguments')
 
-        if data['captcha'].encode() != sess.get(captcha_key):
+        captcha = data['captcha'].lower()
+        correct_captcha = (sess.get(captcha_key) or b'').decode()
+        sess.delete(captcha_key)
+        if captcha != correct_captcha:
             if conf.app.debug:
                 return self.finish(
-                    405, 'incorrect captcha',
-                    correct_captcha=(sess.get(captcha_key) or b'').decode())
+                    405, 'incorrect captcha', correct_captcha=correct_captcha)
             return self.finish(405, 'incorrect captcha')
-        sess.delete(captcha_key)
 
         selected = self.db.query(db.User).filter(
             db.User.staff_id == data['staff_id']).first()
@@ -94,13 +95,15 @@ class AccountHandler(BaseHandler):
         if not (staff_id and password and captcha):
             return self.finish(403, 'missing arguments')
 
-        if captcha.encode() != sess.get(captcha_key):
+        captcha = captcha.lower()
+        correct_captcha = (sess.get(captcha_key) or b'').decode()
+        sess.delete(captcha_key)
+        if captcha != correct_captcha:
             if conf.app.debug:
                 return self.finish(
-                    405, 'incorrect captcha',
-                    correct_captcha=(sess.get(captcha_key) or b'').decode())
+                    405, 'incorrect captcha', correct_captcha=correct_captcha)
             return self.finish(405, 'incorrect captcha')
-        sess.delete(captcha_key)
+
 
         password = hash_password(password)
 

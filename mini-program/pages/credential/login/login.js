@@ -18,14 +18,16 @@ Page({
     session_id: "",
     staff_id: "",
     password: "",
+    account_type: "",
     account_types: ["学生", "教师"],
-    account_types_name: ["学号", "教职工号"],
-    account_type_index: 0,
+    id_name: "",
+    id_names: ["学号", "教职工号"],
   },
 
   bind_account_type_change: function (e) {
     this.setData({
-      account_type_index: e.detail.value
+      account_type: this.data.account_types[e.detail.value],
+      id_name: this.data.id_names[e.detail.value],
     });
   },
 
@@ -51,17 +53,11 @@ Page({
 
   do_login: function (e) {
     const that = this;
-    if (!this.data.staff_id) {
+    if (!this.data.staff_id || !this.data.password || !this.data.captcha) {
       wx.showToast({
-        title: '请输入' + this.data.account_types_name[this.data.account_type_index],
+        title: '请补全所有必填项',
         icon: 'none',
-        duration: 1500
-      });
-    } else if (!this.data.password) {
-      wx.showToast({
-        title: '请输入密码',
-        icon: 'none',
-        duration: 1500
+        duration: 2000
       });
     } else {
       u.request(
@@ -77,6 +73,13 @@ Page({
           wx.switchTab({url: '/pages/misc/index'});
         },
         function (res) {
+          that.refetch_captcha();
+          var title = '发生错误，请重试';
+          if (res.statusCode == 405) {
+            title = '验证码错误，请重试';
+          } else if (res.statusCode == 404) {
+            title = '与密码错误'
+          }
           wx.showToast({
             title: res.data.msg,
             icon: 'none',
@@ -94,6 +97,12 @@ Page({
 
   onLoad: function(e) {
     const that = this;
+
+    this.setData({
+      account_type: this.data.account_types[0],
+      id_name: this.data.id_names[0],
+    });
+
     wx.getStorage({
       key: 'session_id',
       success: function(res) {

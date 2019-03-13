@@ -15,10 +15,18 @@ engine = None
 Session = None
 
 
+class UserRole(enum.Enum):
+    admin = 1
+    teacher = 2
+    student = 3
+
 class User(Base):
     __tablename__ = "users"
     user_id = Column(Integer, primary_key=True)
     staff_id = Column(Integer)
+    role = Column(Enum(UserRole))
+    name = Column(String(32))
+    is_male = Column(Boolean)
     password = Column(CHAR(64))  # only store sha256 hashed password
 
 

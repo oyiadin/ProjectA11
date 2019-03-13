@@ -56,7 +56,7 @@ class AccountHandler(BaseHandler):
     def put(self, data=None, sess=None):
         captcha_key = 'captcha:0cc175b9c0f1b6a8'
 
-        keys = ('staff_id', 'password', 'captcha')
+        keys = {'staff_id', 'password', 'role', 'name', 'is_male', 'captcha'}
         data = keys_filter(data, keys)
 
         if not reduce(lambda a, b: a and b, map(
@@ -79,7 +79,8 @@ class AccountHandler(BaseHandler):
 
         data['password'] = hash_password(data['password'])
 
-        data = keys_filter(data, ('staff_id', 'password'))
+        keys = keys - {'captcha'}
+        data = keys_filter(data, keys)
         new_user = db.User(**data)
         self.db.add(new_user)
         self.db.commit()

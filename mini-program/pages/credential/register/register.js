@@ -13,6 +13,11 @@ Page({
     account_types: ["学生", "教师"],
     id_name: "",
     id_names: ["学号", "教职工号"],
+
+    radioItems: [
+      { name: '男', value: '1' },
+      { name: '女', value: '0' }
+    ],
   },
 
   bind_account_type_change: function (e) {

@@ -1,7 +1,7 @@
 <!--pages/users/users.wxml-->
 <view class='user_views'>
   <view class='user_view_background_view'>
-    <image class='user_view_background_images' mode="aspectFill" src='../../images/default.jpg'></image>
+    <image class='user_view_background_images' mode="aspectFill" src='/images/default.jpg'></image>
   </view>
   <view class='user_view_touxiang_view'>
     <image mode="aspectFill" style='border-radius:100rpx;' class='user_view_touxiang_view_images' src='../../images/icons/Student.png' data-type='GHTX'></image>
@@ -24,7 +24,7 @@
       </view>
     </view>
     <text> \n </text>
-    <button class="wx-button" style="background-color:#3BB8EA;color:#ffffff" bindtap='log_out'>
+    <button class="weui-btn button-hover" type="primary" plain="true" bindtap='log_out'>
     登出
     </button>
   </view>

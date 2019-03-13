@@ -1,6 +1,5 @@
 // pages/users/users.js
-var base = require('../../base.js');
-const request = base.request;
+var u = require('../../utils/utils.js');
 
 
 Page({
@@ -15,20 +14,20 @@ Page({
       pass;
     } else {
       wx.navigateTo({
-        url: '../../login/login',
+        url: '/pages/credential/login/login',
       })
     }
   },
 
   // 登出
   log_out: function() {
-    request(
+    u.request(
       'DELETE', '/credential/account', {},
       function() {
         wx.removeStorageSync('session_id');
         wx.removeStorageSync('is_login');
         wx.navigateTo({
-          url: '/pages/login/login',
+          url: '/pages/credential/login/login',
         });
       }
     );
@@ -37,13 +36,13 @@ Page({
   // 个人信息跳转
   user_information: function () {
     wx.navigateTo({
-      url: './user_information/user_information',
+      url: './user-information/user-information',
     })
   },
 
   selected_class: function(){
     wx.navigateTo({
-      url: './selected_class/selected_class',
+      url: './enrolled-in-classes/enrolled-in-classes',
     })
   }
 })

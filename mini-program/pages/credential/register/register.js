@@ -1,7 +1,7 @@
 // pages/login/login.js
 var app = getApp();
-var base = require('../../base.js');
-const request = base.request;
+var u = require('../../../utils/utils.js');
+
 
 Page({
   data: {
@@ -44,7 +44,7 @@ Page({
 
   do_register: function (e) {
     const that = this;
-    request(
+    u.request(
       'PUT', '/credential/account', 
       {
         staff_id: this.data.staff_id,

@@ -1,7 +1,4 @@
-// pages/classes/classes.js
-var base = require('../../base.js');
-const request = base.request;
-
+var u = require('../../../utils/utils.js');
 
 
 Page({
@@ -31,7 +28,7 @@ Page({
     wx.getStorage({
       key: 'is_login',
       success: function(res) {
-        request(
+        u.request(
           'GET', '/class/',{
             staff_id: this.data.staff_id
           },

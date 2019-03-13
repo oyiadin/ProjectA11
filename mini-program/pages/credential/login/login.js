@@ -1,9 +1,8 @@
-var base = require('../../base.js');
-const request = base.request;
+var u = require('../../../utils/utils.js');
 
 function fetch_new_session_id(that, callback) {
   wx.setStorageSync('is_login', 0);
-  request(
+  u.request(
     'GET', '/credential/session_id', {},
     function (res) {
       that.setData({ session_id: res.data.session_id });
@@ -65,7 +64,7 @@ Page({
         duration: 1500
       });
     } else {
-      request(
+      u.request(
         'POST', '/credential/account',
         {
           staff_id: this.data.staff_id,
@@ -74,7 +73,7 @@ Page({
         },
         function (res) {
           wx.setStorageSync('is_login', 1);
-          wx.switchTab({url: '/pages/users/users'});
+          wx.switchTab({url: '/pages/user/index'});
         },
         function (res) {
           wx.showToast({
@@ -101,13 +100,13 @@ Page({
           fetch_new_session_id(that);
           that.refetch_captcha();
         } else {
-          request(
+          u.request(
             'OPTIONS', '/credential/session_id', {},
             function (_res) {
               if (_res.data.is_valid) {
                 if (wx.getStorageSync('is_login')) {
                   wx.switchTab({
-                    url: '/pages/users/users',
+                    url: '/pages/user/index',
                   });
                 }
                 that.setData({ session_id: res.data });

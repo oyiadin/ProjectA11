@@ -1,9 +1,6 @@
-var base = require('../../base.js');
-const request = base.request;
+var u = require('../../../utils/utils.js');
 
 Page({
-
-
   data: {
     Length: 4,        //输入框个数
     isFocus: true,    //聚焦
@@ -29,7 +26,7 @@ Page({
   // },
   submit_code: function(e){
     var that = this;
-    request(
+    u.request(
       'PUT', '/check-in/verify/' + this.data.Value, {},
       function () {
         wx.showToast({

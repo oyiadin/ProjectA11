@@ -1,6 +1,4 @@
-var base = require('../../base.js');
-const request = base.request;
-
+var u = require('../../../../utils/utils.js');
 
 Page({
   data: {
@@ -9,7 +7,7 @@ Page({
 
   gen_captcha: function(e) {
     var that = this;
-    request(
+    u.request(
       'GET', '/check-in/class/1/code', {},
       function (res) {
         console.log(res.data);
@@ -27,7 +25,7 @@ Page({
 
   start_check_in: function(e) {
     var that = this;
-    request(
+    u.request(
       'POST', '/check-in/code/' + this.data.code_id +  '/start', {},
       function () {
         wx.showToast({
@@ -50,8 +48,8 @@ Page({
     );
   },
   check_status: function() {
-    wx.switchTab({
-      url: '../stu_check_in_list/stu_check_in_list',
+    wx.redirectTo({
+      url: '../checked-in-list/checked-in-list',
     });
   }
 });

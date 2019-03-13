@@ -73,7 +73,8 @@ Page({
         },
         function (res) {
           wx.setStorageSync('is_login', 1);
-          wx.switchTab({url: '/pages/user/index'});
+          wx.setStorageSync('user_id', res.data.user_id);
+          wx.switchTab({url: '/pages/misc/index'});
         },
         function (res) {
           wx.showToast({
@@ -106,7 +107,7 @@ Page({
               if (_res.data.is_valid) {
                 if (wx.getStorageSync('is_login')) {
                   wx.switchTab({
-                    url: '/pages/user/index',
+                    url: '/pages/misc/index',
                   });
                 }
                 that.setData({ session_id: res.data });

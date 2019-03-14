@@ -37,12 +37,33 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 3,
 			"list": [
 				{
 					"id": 0,
+					"name": "specific_page",
+					"pathName": "pages/check-in/student/do-check-in",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
 					"name": "login",
-					"pathName": "pages/register/register",
+					"pathName": "pages/credential/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "set_score",
+					"pathName": "pages/uncatalogued/set_score/set_score",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "show_score",
+					"pathName": "pages/uncatalogued/show_score/show_score",
 					"query": "",
 					"scene": null
 				}

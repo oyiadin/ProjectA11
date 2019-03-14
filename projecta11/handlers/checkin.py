@@ -87,8 +87,8 @@ class VerifyCheckInCodeHandler(BaseHandler):
             if teacher_length <= 2*conf.app.wifi_min_same:
                 pass
             else:
-                num_same = len(teacher_wifi_list.union(wifi_list))
-                if num_same > conf.app.wifi_min_same:
+                num_same = len(teacher_wifi_list.intersection(wifi_list))
+                if num_same < conf.app.wifi_min_same:
                     if conf.app.debug:
                         return self.finish(
                             400,

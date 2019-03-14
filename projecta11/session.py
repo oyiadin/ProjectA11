@@ -9,7 +9,6 @@ from projecta11.config import conf
 class Session(object):
     def __init__(self, session_id=None, *args, **kwargs):
         self.r = redis.Redis(*args, **kwargs, **conf.session.connection)
-        self.r.passwd="4d46745a30d006b9cbbd90005f50075764ccc67c53fade810b4f43d644acab4d"
         self.id = self.expire_at = None
 
         if session_id:

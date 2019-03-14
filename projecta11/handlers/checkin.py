@@ -1,7 +1,11 @@
 # coding=utf-8
+from json import JSONDecodeError
+
 import sqlalchemy
 import time
 import random
+
+from tornado.escape import json_decode
 
 import projecta11.db as db
 from projecta11.config import conf
@@ -38,11 +42,19 @@ class NewCheckInCodeHandler(BaseHandler):
 @handling(r"/check-in/code/(\d+)/start")
 class StartCheckInHandler(BaseHandler):
     @require_session
-    def post(self, code_id, sess=None):
+    @parse_json_body
+    def post(self, code_id, data=None, sess=None):
         selected = self.db.query(db.CheckinCodes).filter(
             db.CheckinCodes.code_id == code_id).first()
         if selected is None:
             return self.finish(404, 'no matched code_id')
+
+        try:
+            wifi_list = json_decode(data['wifi_list'])
+        except JSONDecodeError:
+            return self.finish(400, 'bad request')
+
+        print(wifi_list)
 
         key = 'checkin:{}'.format(selected.code)
 

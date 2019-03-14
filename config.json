@@ -30,7 +30,7 @@
     },
     "expires_after": 604800,
     "captcha_expires_after": 300,
-    "checkin_code_expires_after": 6000,
+    "checkin_code_expires_after": 6000
   },
   "page": {
     "page_title": "Welcome to project A11!"

@@ -11,7 +11,9 @@
     "pages/class/classes-list/classes-list",
     "pages/misc/index",
     "pages/uncatalogued/set_score/set_score",
-    "pages/uncatalogued/show_score/show_score"
+    "pages/uncatalogued/show_score/show_score",
+    "pages/uncatalogued/show_video/show_video",
+    "pages/uncatalogued/video_test/video_test"
   ],
   "window": {
     "backgroundTextStyle": "light",

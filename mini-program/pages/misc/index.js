@@ -28,6 +28,10 @@ Page({
       {
         title: '增加分数(教师)',
         url: '../uncatalogued/set_score/set_score',
+      },
+      {
+        title: '教学视频',
+        url: '../uncatalogued/show_video/show_video',
       }
     ]
   }

@@ -1,0 +1,40 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+  <view class="page__title">教学视频</view>
+  <view class="page__desc">show_video</view>
+  </view>
+  <view class="weui-cells__title">数字电路，FPGA与HDL</view>
+  <view class="weui-panel__bd">
+    <view class="weui-media-box weui-media-box_small-appmsg">
+      <view class="weui-cells weui-cells_in-small-appmsg">
+        <navigator url="../video_test/video_test" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__hd">
+            <icon class="weui-icon-checkbox_success" type="success" size="23"></icon>
+          </view>
+          <view class="weui-cell__bd weui-cell_primary">
+            <view class='course_title'>数字电路</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="../video_test/video_test" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__hd">
+            <icon class="weui-icon-checkbox_success" type="success" size="23"></icon>
+          </view>
+          <view class="weui-cell__bd weui-cell_primary">
+            <view class='course_title'>FPGA</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="../video_test/video_test" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__hd">
+            <icon class="weui-icon-checkbox_success" type="success" size="23"></icon>
+          </view>
+          <view class="weui-cell__bd weui-cell_primary">
+            <view class='course_title'>硬件描述语言HDL</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+      </view>
+    </view>
+  </view>     
+</view>

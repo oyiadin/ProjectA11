@@ -6,12 +6,16 @@ Page({
     staff_id: "",
     classes: [
       {
-        "name":"示例1",
-        "teacher":"王老师"
+        "name":"高等代数",
+        "teacher":"王老师",
+        "time": "周五3-5",
+        "place": "六教中223"
       },
       {
-        "name": "示例2",
-        "teacher": "李老师"
+        "name": "数学分析",
+        "teacher": "李老师",
+        "time": "周四3-5",
+        "place": "七教中223"
       }
     ]
   }, 
@@ -37,6 +41,38 @@ Page({
         });
       }
     })
+  },
+
+  openAlert: function(event){
+    const that = this;
+    console.log(event);
+    u.request(
+      'POST', '/class/' ,{
+        staff_id: this.data.staff_id
+      },
+      function(res){
+        wx.showModal({
+          content: '选择成功',
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            }
+          }
+        });
+      },
+      function(res){
+        wx.showModal({
+          content: '选择失败',
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击失败')
+            }
+          }
+        });
+      }
+    )
   },
 
   /**

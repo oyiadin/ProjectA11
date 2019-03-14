@@ -1,3 +1,4 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "课程选择",
+  "enablePullDownRefresh": true
 }

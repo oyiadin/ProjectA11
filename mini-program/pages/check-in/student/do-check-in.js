@@ -7,6 +7,18 @@ Page({
     Value: "",        //输入的内容
     ispassword: false, //是否密文显示 true为密文， false为明文。
   },
+
+  onLoad: function () {
+    console.log('loaded');
+    wx.startWifi({
+      success: function(){console.log('startWifi success')}
+    });
+    wx.onGetWifiList(function (res) {
+      console.log(res.wifiList);
+    });
+  },
+
+
   Focus(e) {
     var that = this;
     console.log(e.detail.value);
@@ -26,6 +38,12 @@ Page({
   // },
   submit_code: function(e){
     var that = this;
+
+    wx.getWifiList({
+      success: function () { console.log('getWifiList success') }
+    });
+    return;
+
     u.request(
       'PUT', '/check-in/verify/' + this.data.Value, {},
       function () {

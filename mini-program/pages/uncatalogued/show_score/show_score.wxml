@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">已获取分数</view>
+    <view class="page__desc">点击按钮刷新成绩</view>
+  </view>
+  <view class="show_list">
+    <view class="weui-flex head_list">
+      <view class="weui-flex__item"><view class="placeholder">科目</view></view>
+      <view class="weui-flex__item"><view class="placeholder">成绩</view></view>
+    </view>
+    <view class="weui-flex information_list">
+      <view class="weui-flex__item"><view class="placeholder">{{ subject }}</view></view>
+      <view class="weui-flex__item"><view class="placeholder">{{ score }}</view></view>
+    </view>
+  </view>
+
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-btn-area">
+      <button class="weui-btn-area" type="primary" plain="true" bindtap='get_score_list'>刷新</button>
+    </view>
+  </view>
+</view>

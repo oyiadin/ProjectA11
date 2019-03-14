@@ -20,6 +20,14 @@ Page({
       {
         title: '已选课程',
         url: '../user/enrolled-in-classes/enrolled-in-classes',
+      },
+      {
+        title: '查看分数(学生)',
+        url: '../uncatalogued/show_score/show_score',
+      },
+      {
+        title: '增加分数(教师)',
+        url: '../uncatalogued/set_score/set_score',
       }
     ]
   }

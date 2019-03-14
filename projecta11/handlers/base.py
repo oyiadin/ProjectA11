@@ -13,9 +13,6 @@ class BaseHandler(tornado.web.RequestHandler):
         self._session = None
         self._session_db = None
 
-    def prepare(self):
-        super().prepare()
-
     def _get_db_session(self):
         if self._session_db:
             return self._session_db

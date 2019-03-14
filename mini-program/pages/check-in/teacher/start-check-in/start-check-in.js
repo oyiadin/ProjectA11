@@ -32,70 +32,73 @@ Page({
       },
       fail: fail_handler,
     });
-    wx.onGetWifiList(function (res) {
-      var list = [];
-      res.wifiList.forEach(function (x) {
-        list = list.concat(x.BSSID);
-      });
-      that.data.wifi_list = JSON.stringify(list);
-      console.log('wifi_list=', JSON.stringify(list));
-    });
   },
 
   gen_captcha: function(e) {
     var that = this;
-    wx.getWifiList({
-      success: function (res) {
-        console.log('getWifiList success');
-        wx.showLoading({ title: '获取中' });
-        u.request(
-          'GET', '/check-in/class/1/code', {},
-          function (res) {
-            console.log(res.data);
-            that.setData({ code: res.data.code });
-            wx.hideLoading();
-            that.setData({ code_id: res.data.code_id });
-            wx.setStorageSync('code_id', res.data.code_id);
-          },
-          function (res) {
-            wx.hideLoading();
-            wx.showToast({
-              title: '发生错误，请重试',
-              icon: 'none',
-              duration: 2000,
-            });
-          }
-        );
+    u.request(
+      'GET', '/check-in/class/1/code', {},
+      function (res) {
+        console.log(res.data);
+        that.setData({ code: res.data.code });
+        wx.hideLoading();
+        that.setData({ code_id: res.data.code_id });
+        wx.setStorageSync('code_id', res.data.code_id);
       },
-      fail: fail_handler,
-    });
+      function (res) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '发生错误，请重试',
+          icon: 'none',
+          duration: 2000,
+        });
+      }
+    );
   },
 
   start_check_in: function(e) {
     var that = this;
-    u.request(
-      'POST',
-      '/check-in/code/' + that.data.code_id +  '/start',
-      { wifi_list: that.data.wifi_list },
-      function () {
-        wx.showToast({
-          title: '已完成',
-          icon: 'success',
-          duration: 3000
-        });
-      },
-      function () {
-        wx.showModal({
-          content: '网络访问失败！请重试！',
-          showCancel: false,
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
+    wx.onGetWifiList(function (res) {
+      wx.hideLoading();
+
+      var wifi_list = [];
+      res.wifiList.forEach(function (x) {
+        wifi_list = wifi_list.concat(x.BSSID);
+      });
+      console.log('wifi_list=', wifi_list);
+
+      u.request(
+        'POST',
+        '/check-in/code/' + that.data.code_id +  '/start',
+        { wifi_list: wifi_list },
+        function () {
+          wx.showToast({
+            title: '已完成',
+            icon: 'success',
+            duration: 3000
+          });
+        },
+        function () {
+          wx.showModal({
+            content: '网络访问失败！请重试！',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              }
             }
-          }
-        });
-      }
-    );
+          });
+        }
+      );
+    });
+
+    wx.getWifiList({
+      success: function (res) {
+        console.log('getWifiList success');
+        wx.showLoading({ title: '获取中' });
+      },
+      fail: fail_handler,
+    });
   },
 
   check_status: function() {

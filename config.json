@@ -28,7 +28,8 @@
     },
     "expires_after": 604800,
     "captcha_expires_after": 300,
-    "checkin_code_expires_after": 30
+    "checkin_code_expires_after": 6000,
+    "wifi_min_diff_ratio": 0.2
   },
   "page": {
     "page_title": "Welcome to project A11!"

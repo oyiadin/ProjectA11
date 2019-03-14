@@ -49,7 +49,7 @@ function request(
   }
 
   console.log(method + ' ' + url);
-  url = 'http://localhost:8888/api/v1' + url;
+  url = 'http://118.24.58.137:8888/api/v1' + url;
 
   wx.getStorage({
     key: 'session_id',

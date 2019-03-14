@@ -49,28 +49,55 @@ class StartCheckInHandler(BaseHandler):
         if selected is None:
             return self.finish(404, 'no matched code_id')
 
-        try:
-            wifi_list = json_decode(data['wifi_list'])
-        except JSONDecodeError:
-            return self.finish(400, 'bad request')
+        wifi_list = data.get('wifi_list')
+        if wifi_list is None:
+            return self.finish(403, 'missing arguments')
 
-        print(wifi_list)
+        key1 = 'checkin:{}'.format(selected.code)
+        key2 = 'checkin:{}:wifi_list'.format(selected.code)
 
-        key = 'checkin:{}'.format(selected.code)
+        sess.r.lpush(key2, *wifi_list)
+        sess.r.hmset(key1, {'started': 1})
 
-        sess.r.hmset(key, {'started': 1})
-        sess.r.expire(key, conf.session.checkin_code_expires_after)
+        sess.r.expire(key1, conf.session.checkin_code_expires_after)
+        sess.r.expire(key2, conf.session.checkin_code_expires_after)
 
 
 @handling(r"/check-in/verify/(\d+)")
 class VerifyCheckInCodeHandler(BaseHandler):
     @require_session
-    def put(self, code, sess=None):
-        key = 'checkin:{}'.format(code)
+    @parse_json_body
+    def put(self, code, data=None, sess=None):
+        key1 = 'checkin:{}'.format(code)
+        key2 = 'checkin:{}:wifi_list'.format(code)
 
-        if sess.r.exists(key) and int(sess.r.hget(key, 'started')) == 1:
+        teacher_wifi_list = set(map(
+            lambda x: x.decode(), sess.r.lrange(key2, 0, -1)))
+
+        try:
+            wifi_list = set(data['wifi_list'])
+        except JSONDecodeError:
+            return self.finish(400, 'error occurred when parsing wifi_list')
+        except KeyError:
+            return self.finish(403, 'missing arguments')
+
+        if sess.r.exists(key1) and int(sess.r.hget(key1, 'started')) == 1:
+            teacher_length = len(teacher_wifi_list)
+            if teacher_length <= 5:
+                pass
+            else:
+                diff_ratio = len(teacher_wifi_list - wifi_list) / teacher_length
+                if diff_ratio  > conf.session.wifi_min_diff_ratio:
+                    if conf.app.debug:
+                        return self.finish(
+                            400,
+                            "your wifi_list differ from teacher's too much",
+                            diff_ratio=diff_ratio)
+                    return self.finish(
+                        400, "your wifi_list differ from teacher's too much")
+
             new_log = db.CheckedInLogs(
-                code_id=sess.r.hget(key, 'code_id'), user_id=sess['user_id'])
+                code_id=sess.r.hget(key1, 'code_id'), user_id=sess['user_id'])
             self.db.add(new_log)
             self.db.commit()
         else:

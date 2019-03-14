@@ -37,19 +37,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "specific_page",
-					"pathName": "pages/check-in/student/do-check-in",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "login",
-					"pathName": "pages/credential/login/login",
+					"pathName": "pages/misc/index",
 					"query": "",
 					"scene": null
 				},
@@ -71,6 +64,7 @@
 					"id": -1,
 					"name": "show_video",
 					"pathName": "pages/uncatalogued/show_video/show_video",
+					"query": "",
 					"scene": null
 				}
 			]

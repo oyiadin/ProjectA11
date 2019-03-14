@@ -67,7 +67,7 @@ Page({
         { wifi_list: wifi_list },
         function (_res) {
           wx.showToast({
-            title: '已签到:' + _res.data.diff_ratio,
+            title: '已签到:' + _res.data.num_same,
             icon: 'success',
             duration: 3000
           });

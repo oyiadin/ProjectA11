@@ -83,23 +83,25 @@ class VerifyCheckInCodeHandler(BaseHandler):
 
         if sess.r.exists(key1) and int(sess.r.hget(key1, 'started')) == 1:
             teacher_length = len(teacher_wifi_list)
-            if teacher_length <= 5:
+            num_same = -1
+            if teacher_length <= 2*conf.app.wifi_min_same:
                 pass
             else:
-                diff_ratio = len(teacher_wifi_list - wifi_list) / teacher_length
-                if diff_ratio  > conf.session.wifi_min_diff_ratio:
+                num_same = len(teacher_wifi_list.union(wifi_list))
+                if num_same > conf.app.wifi_min_same:
                     if conf.app.debug:
                         return self.finish(
                             400,
-                            "your wifi_list differ from teacher's too much",
-                            diff_ratio=diff_ratio)
+                            "your wifi_list differs from teacher's too much",
+                            num_same=num_same)
                     return self.finish(
-                        400, "your wifi_list differ from teacher's too much")
+                        400, "your wifi_list differs from teacher's too much")
 
             new_log = db.CheckedInLogs(
                 code_id=sess.r.hget(key1, 'code_id'), user_id=sess['user_id'])
             self.db.add(new_log)
             self.db.commit()
+            self.finish(num_same=num_same)
         else:
             self.finish(404, 'invalid check-in code')
 

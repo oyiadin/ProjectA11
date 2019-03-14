@@ -15,10 +15,6 @@ import projecta11.db as db
 @handling(r"/credential/session_id")
 class SessionIDHandler(BaseHandler):
     def get(self):
-        session_id = self.get_argument('session_id', None)
-        if session_id is not None:
-            return self.finish(session_id=session_id)
-
         sess = Session()
         self.finish(session_id=sess.id)
 

@@ -10,7 +10,8 @@
     "static_path": "static",
     "upload_dir": "upload",
     "use_static_handler": true,
-    "swagger_ui": true
+    "swagger_ui": true,
+    "wifi_min_same": 10
   },
   "db": {
     "dialect": "mysql",
@@ -30,7 +31,6 @@
     "expires_after": 604800,
     "captcha_expires_after": 300,
     "checkin_code_expires_after": 6000,
-    "wifi_max_diff_ratio": 0.8
   },
   "page": {
     "page_title": "Welcome to project A11!"

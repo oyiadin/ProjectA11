@@ -4,52 +4,25 @@ var u = getApp().utils;
 Page({
   data: {
     staff_id: "",
-    classes: [
-      {
-        "name":"高等代数",
-        "teacher":"王老师",
-        "time": "周五3-5",
-        "place": "六教中223"
-      },
-      {
-        "name": "数学分析",
-        "teacher": "李老师",
-        "time": "周四3-5",
-        "place": "七教中223"
-      }
-    ]
-  }, 
-
-  onLoad: function (options) {
-    const that = this;
-    wx.getStorage({
-      key: 'is_login',
-      success: function(res) {
-        u.request(
-          'GET', '/class/',{
-            staff_id: this.data.staff_id
-          },
-          function(res) {
-            this.setData({ classes: res.classes })
-          },
-          function(res) {}
-        )
-      },
-      fail: function(){
-        wx.navigateTo({
-          url: '/pages/login/login',
-        });
-      }
-    })
+    classes: [{
+      "class_id": 1,
+      "class_name": "高等数学",
+      "course_id": 1,
+      "end": 7,
+      "msg": "OK",
+      "start": 6,
+      "status_code": 200,
+      "teacher_id": 1,
+      "teacher_name": "你猜",
+      "weekday": 2
+    }],
   },
 
-  openAlert: function(event){
+  openAlert: function (event) {
     const that = this;
     console.log(event);
     u.request(
-      'POST', '/class/' ,{
-        staff_id: this.data.staff_id
-      },
+      'POST', '/class/' + event.currentTarget.dataset.class_id + '/enroll_in', {},
       function(res){
         wx.showModal({
           content: '选择成功',

@@ -82,7 +82,7 @@ Page({
           wx.setStorage({
             key: 'name',
             data: res.data.name });
-          wx.switchTab({ url: '/pages/misc/index' });
+          wx.switchTab({ url: '/pages/apps/index' });
         },
         function (res) {
           that.refetch_captcha();
@@ -129,7 +129,7 @@ Page({
               if (_res.data.is_valid) {
                 if (wx.getStorageSync('is_login')) {
                   wx.switchTab({
-                    url: '/pages/misc/index',
+                    url: '/pages/apps/index',
                   });
                 }
                 that.setData({ session_id: res.data });

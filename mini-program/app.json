@@ -2,6 +2,7 @@
   "pages": [
     "pages/credential/login/login",
     "pages/credential/register/register",
+    "pages/apps/index",
     "pages/user/index",
     "pages/user/user-information/user-information",
     "pages/user/enrolled-in-classes/enrolled-in-classes",
@@ -9,7 +10,8 @@
     "pages/check-in/teacher/start-check-in/start-check-in",
     "pages/check-in/teacher/checked-in-list/checked-in-list",
     "pages/class/classes-list/classes-list",
-    "pages/misc/index"
+    "pages/material/material-list/material-list",
+    "pages/material/video-playing/video-playing"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,7 +24,7 @@
     "selectedColor": "#000000",
     "list": [
       {
-        "pagePath": "pages/misc/index",
+        "pagePath": "pages/apps/index",
         "text": "首页",
         "iconPath": "images/icons/index.png",
         "selectedIconPath": "images/icons/index_active.png"

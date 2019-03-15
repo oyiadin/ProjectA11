@@ -34,7 +34,7 @@ Page({
       },
       {
         title: '教学视频',
-        url: '../uncatalogued/show_video/show_video',
+        url: '../material/material-list/material-list',
       }
     ]
   },

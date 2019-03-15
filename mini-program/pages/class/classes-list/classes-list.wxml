@@ -1,6 +1,7 @@
 <!--pages/classes/classes.wxml-->
 <view class="page">
 <!-- 搜索框 -->
+  <!--还没实现
   <view class="page__bd">
     <view class="weui-search-bar">
       <view class="weui-search-bar__form">
@@ -26,38 +27,34 @@
       </navigator>
     </view>
   </view>
-
+  -->
   <view class="page">
     <view class="page__hd block">
       <view class="page__title">课程目录</view>
     </view>
     <view class="page__bd">
     <!-- 课程展示 -->
-        <view class="weui-form-preview" wx:for="{{classes}}">
-            <view class="weui-form-preview__hd">
-                <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">课程名称</view>
-                    <view class="weui-form-preview__value_in-hd">{{item.name}}</view>
-                </view>
-            </view>
-            <view class="weui-form-preview__bd">
-                <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">教师姓名</view>
-                    <view class="weui-form-preview__value">{{item.teacher}}</view>
-                </view>
-                <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">上课时间</view>
-                    <view class="weui-form-preview__value">{{item.time}}</view>
-                </view>
-                <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">上课地点</view>
-                    <view class="weui-form-preview__value">{{item.place}}</view>
-                </view>
-                <view class="weui-form-preview__ft">
-                <button class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='openAlert'>选择</button>
-            </view>
-            </view>
-        </view>    
+      <view class="weui-form-preview" wx:for="{{classes}}">
+        <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">课程名称</view>
+            <view class="weui-form-preview__value_in-hd">{{item.class_name}}</view>
+          </view>
+        </view>
+        <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">教师姓名</view>
+            <view class="weui-form-preview__value">{{item.teacher_name}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">上课时间</view>
+            <view class="weui-form-preview__value">周{{['','一','二','三','四','五','六','日'][item.weekday]}} {{item.start}}-{{item.end}}</view>
+          </view>
+          <view class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='openAlert' data-class_id="{{item.class_id}}">选择</button>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 

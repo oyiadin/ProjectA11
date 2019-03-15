@@ -74,14 +74,13 @@ class UserEnrolledInClassesHandler(BaseHandler):
     def get(self, user_id, sess=None):
         selected = self.db.query(db.RelationUserClass).filter(
             db.RelationUserClass.user_id == user_id).all()
-        if not selected:
-            self.finish(404, 'no matched data')
-            return
 
         list = []
         for rel in selected:
             _class = self.db.query(db.Class).filter(
                 db.Class.class_id == rel.class_id).first()
+            teacher_name = self.db.query(db.User.name).filter(
+                db.User.user_id == _class.teacher_id).first()
             list.append(dict(
                 class_id=_class.class_id,
                 class_name=_class.class_name,
@@ -89,6 +88,7 @@ class UserEnrolledInClassesHandler(BaseHandler):
                 start=_class.start,
                 end=_class.end,
                 teacher_id=_class.teacher_id,
+                teacher_name=teacher_name,
                 course_id=_class.course_id))
 
         self.finish(list=list)

@@ -1,4 +1,5 @@
-var u = require('../../../utils/utils.js');
+var u = getApp().utils;
+
 
 function fetch_new_session_id(that, callback) {
   wx.setStorageSync('is_login', 0);
@@ -41,7 +42,10 @@ Page({
     this.data.captcha = e.detail.value; },
 
   refetch_captcha: function (e) {
-    var src = 'http://118.24.58.137:8888/api/v1/misc/captcha?session_id=' + this.data.session_id + '&app_id=9c15af0d3e0ea84d' + '&t=' + Date.parse(new Date());
+    var src = u.gen_url('/misc/captcha')
+      + '?session_id=' + this.data.session_id
+      + '&app_id=9c15af0d3e0ea84d'
+      + '&t=' + Date.parse(new Date());
     console.log('src=', src);
     this.setData({
       src: src,

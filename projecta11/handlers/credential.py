@@ -20,7 +20,7 @@ class SessionIDHandler(BaseHandler):
 
     def options(self):
         session_id = self.get_argument('session_id', None)
-        if session_id is None:
+        if session_id is None or session_id == '':
             return self.finish(403, 'missing arguments')
 
         try:
@@ -41,8 +41,7 @@ class SessionIDHandler(BaseHandler):
 
         keys = sess.r.keys("{}:*".format(sess.id))
         for key in map(lambda x: x.decode(), keys):
-            if key.split(':')[1] != 'captcha':
-                sess.r.expireat(key, expire_at)
+            sess.r.expireat(key, expire_at)
 
 
 @handling(r"/credential/account")

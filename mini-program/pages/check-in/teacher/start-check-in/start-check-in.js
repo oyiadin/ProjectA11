@@ -1,4 +1,5 @@
-var u = require('../../../../utils/utils.js');
+var u = getApp().utils;
+
 
 function fail_handler (res) {
   var code = res.errCode;

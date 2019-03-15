@@ -9,11 +9,7 @@
     "pages/check-in/teacher/start-check-in/start-check-in",
     "pages/check-in/teacher/checked-in-list/checked-in-list",
     "pages/class/classes-list/classes-list",
-    "pages/misc/index",
-    "pages/uncatalogued/set_score/set_score",
-    "pages/uncatalogued/show_score/show_score",
-    "pages/uncatalogued/show_video/show_video",
-    "pages/uncatalogued/video_test/video_test"
+    "pages/misc/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

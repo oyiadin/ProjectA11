@@ -41,9 +41,9 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "specific_page",
-					"pathName": "pages/misc/index",
-					"query": "",
+					"name": "localhost",
+					"pathName": "pages/credential/login/login",
+					"query": "host=127.0.0.1&port=8888",
 					"scene": null
 				},
 				{

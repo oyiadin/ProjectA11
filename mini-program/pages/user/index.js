@@ -1,5 +1,4 @@
-// pages/users/users.js
-var u = require('../../utils/utils.js');
+var u = getApp().utils;
 
 
 Page({

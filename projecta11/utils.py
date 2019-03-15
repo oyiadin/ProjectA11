@@ -28,7 +28,7 @@ def require_session(func):
         try:
             sess = Session(session_id)
         except FileNotFoundError as e:
-            self.finish(404, str(e))
+            self.finish(402, 'invalid session_id')
             return
         return func(self, *args, sess=sess, **kwargs)
     return wrapper

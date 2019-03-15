@@ -1,6 +1,4 @@
-// pages/login/login.js
-var app = getApp();
-var u = require('../../../utils/utils.js');
+var u = getApp().utils;
 
 
 Page({
@@ -50,7 +48,10 @@ Page({
 
   refetch_captcha: function (e) {
     this.setData({
-      src: 'http://118.24.58.137:8888/api/v1/misc/captcha?session_id=' + wx.getStorageSync('session_id') + '&app_id=0cc175b9c0f1b6a8' + '&t=' + Date.parse(new Date()),
+      src: u.gen_url('/misc/captcha')
+        + '?session_id=' + wx.getStorageSync('session_id')
+        + '&app_id=0cc175b9c0f1b6a8'
+        + '&t=' + Date.parse(new Date()),
     });
   },
 

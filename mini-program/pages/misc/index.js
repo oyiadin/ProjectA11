@@ -1,3 +1,6 @@
+var u = getApp().utils;
+
+
 Page({
   data: {
     apps: [
@@ -34,5 +37,5 @@ Page({
         url: '../uncatalogued/show_video/show_video',
       }
     ]
-  }
+  },
 });

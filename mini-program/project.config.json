@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 6,
 			"list": [
 				{
 					"id": 0,
@@ -64,6 +64,27 @@
 					"id": -1,
 					"name": "show_video",
 					"pathName": "pages/uncatalogued/show_video/show_video",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "show_forum",
+					"pathName": "pages/uncatalogued/show_forum/show_forum",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "detail_page",
+					"pathName": "pages/uncatalogued/show_forum/detail_page/detail_page",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "user_page",
+					"pathName": "pages/user/user-information/user-information",
 					"query": "",
 					"scene": null
 				}

@@ -11,7 +11,9 @@
     "pages/check-in/teacher/checked-in-list/checked-in-list",
     "pages/class/classes-list/classes-list",
     "pages/material/material-list/material-list",
-    "pages/material/video-playing/video-playing"
+    "pages/material/video-playing/video-playing",
+    "pages/uncatalogued/show_forum/show_forum",
+    "pages/uncatalogued/show_forum/create_page/create_page"
   ],
   "window": {
     "backgroundTextStyle": "light",

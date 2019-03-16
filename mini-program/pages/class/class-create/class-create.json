@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarTitleText": "创建班级",
+  "navigationBarBackgroundColor": "#00000",
+  "navigationBarTextStyle": "black"
 }

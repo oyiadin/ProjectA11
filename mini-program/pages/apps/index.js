@@ -35,6 +35,10 @@ Page({
       {
         title: '教学视频',
         url: '../material/material-list/material-list',
+      },
+      {
+        title: '课程管理中心',
+        url: '../class/classes-control/classes-control',
       }
     ]
   },

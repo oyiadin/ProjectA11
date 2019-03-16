@@ -13,7 +13,9 @@
     "pages/material/material-list/material-list",
     "pages/material/video-playing/video-playing",
     "pages/uncatalogued/show_forum/show_forum",
-    "pages/uncatalogued/show_forum/create_page/create_page"
+    "pages/uncatalogued/show_forum/create_page/create_page",
+    "pages/class/classes-create/classes-create",
+    "pages/class/classes-control/classes-control"
   ],
   "window": {
     "backgroundTextStyle": "light",

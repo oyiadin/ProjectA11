@@ -1,0 +1,90 @@
+<view class='page'>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <image src="../../../../images/icons/user0.jpg" style="width: 35px; height: 35px; display: block"/>
+      </view>
+      <view class="weui-cell__bd">oyiadin</view>
+      <view class="weui-cell__ft">楼主</view>
+    </view>
+  </view>
+  <view class="weui-panel">
+    <view class="weui-article">
+      <view class="weui-article__h1">PHP天下第一！</view>
+      <view class="weui-media-box__info">
+        <view class="weui-media-box__info__meta">2019-3-15</view>
+        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">回复：2333</view>
+      </view>      
+    </view>
+  </view>
+  <view class="weui-panel">
+    <view class="weui-article"> 
+      PHP（外文名:PHP: Hypertext Preprocessor，中文名：“超文本预处理器”）是一种通用开源脚本语言。语法吸收了C语言、Java和Perl的特点，利于学习，使用广泛，主要适用于Web开发领域。        PHP 独特的语法混合了C、Java、Perl以及PHP自创的语法。它可以比CGI或者Perl更快速地执行动态网页。用PHP做出的动态页面与其他的编程语言相比，PHP是将程序嵌入到HTML（标准通用标记         语言下的一个应用）文档中去执行，执行效率比完全生成HTML标记的CGI要高许多；PHP还可以执行编译后代码，编译可以达到加密和优化代码运行，使代码运行更快。
+    </view>
+  </view>
+  <view class="weui-panel">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <image src="../../../../images/icons/user1.jpg" style="width: 35px; height: 35px; display: block"/>
+      </view>
+      <view class="weui-cell__bd">_napstablook</view>
+      <view class="weui-cell__ft">1楼</view>
+      <view class="weui-article__p">
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-article__p">
+       o爷爷牛逼！
+      </view>
+    </view>
+  </view>
+  <view class="weui-panel">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <image src="../../../../images/icons/user1.jpg" style="width: 35px; height: 35px; display: block"/>   
+      </view>
+      <view class="weui-cell__bd">_napstablook</view>
+      <view class="weui-cell__ft">1楼</view>
+      <view class="weui-article__p">
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-article__p">
+       o爷爷牛逼！
+      </view>
+    </view>
+  </view>
+  <view class="weui-panel">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <image src="../../../../images/icons/user1.jpg" style="width: 35px; height: 35px; display: block"/>
+      </view>
+      <view class="weui-cell__bd">_napstablook</view>
+      <view class="weui-cell__ft">1楼</view>
+      <view class="weui-article__p">
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-article__p">
+       o爷爷牛逼！
+      </view>
+    </view>
+  </view>
+  <view class='weui-panel'>
+    <view class="weui-cells__title">评论</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入评论" style="height: 3.3em" />
+          <view class="weui-textarea-counter">0/200</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="submit">提交</button>
+    </view>
+  </view>
+</view>
+

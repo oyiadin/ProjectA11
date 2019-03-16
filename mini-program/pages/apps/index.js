@@ -17,10 +17,6 @@ Page({
         url: '../check-in/teacher/start-check-in/start-check-in',
       },
       {
-        title: '课程列表',
-        url: '../class/classes-list/classes-list',
-      },
-      {
         title: '已选课程',
         url: '../user/enrolled-in-classes/enrolled-in-classes',
       },
@@ -38,7 +34,7 @@ Page({
       },
       {
         title: '课程管理中心',
-        url: '../class/classes-control/classes-control',
+        url: '../course/course-manage/course-manage',
       }
     ]
   },

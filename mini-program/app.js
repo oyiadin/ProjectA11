@@ -13,6 +13,21 @@ App({
   },
 
   utils: {
+    get_timestamp: function (date) {
+      date = date + ' 00:00:00';
+      date = date.substring(0, 19);
+      date = date.replace(/-/g, '/');
+      var timestamp = new Date(date).getTime();
+      return timestamp / 1000;
+    },
+    timestamp2date: function (timestamp) {
+      var date = new Date();
+      date.setTime(timestamp * 1000);
+      var Y = date.getFullYear() + '-';
+      var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+      var D = date.getDate();
+      return Y + M + D;
+    },
     gen_url: function(url) {
       var app = getApp();
       return app.protocol + '://' + app.host + ':' + app.port + '/api/v1' + url;

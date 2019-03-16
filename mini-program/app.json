@@ -9,13 +9,13 @@
     "pages/check-in/student/do-check-in",
     "pages/check-in/teacher/start-check-in/start-check-in",
     "pages/check-in/teacher/checked-in-list/checked-in-list",
-    "pages/class/classes-list/classes-list",
     "pages/material/material-list/material-list",
     "pages/material/video-playing/video-playing",
     "pages/uncatalogued/show_forum/show_forum",
     "pages/uncatalogued/show_forum/create_page/create_page",
-    "pages/class/classes-create/classes-create",
-    "pages/class/classes-control/classes-control"
+    "pages/course/course-manage/course-manage",
+    "pages/course/course-create/course-create",
+    "pages/course/courses-list/courses-list"
   ],
   "window": {
     "backgroundTextStyle": "light",

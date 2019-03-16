@@ -162,11 +162,11 @@ def init_db(conf):
         course1 = Course(
             course_name="高等数学",
             start=1552706506,
-            end=1552806506)
+            end=1553806506)
         course2 = Course(
             course_name="离散数学",
             start=1552704506,
-            end=1552816506)
+            end=1553816506)
         sess.add_all([course1, course2])
         sess.commit()
 

@@ -2,13 +2,15 @@
 from projecta11 import db
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
-from projecta11.utils import require_session, parse_json_body, keys_filter
+from projecta11.utils import require_session, parse_json_body, keys_filter, \
+    role_in
 
 
 @handling(r"/class")
 class NewClassHandler(BaseHandler):
     @require_session
     @parse_json_body
+    @role_in(db.UserRole.teacher)
     def put(self, data=None, sess=None):
         keys = ('class_name', 'weekday', 'start', 'end', 'teacher_id',
                 'course_id')

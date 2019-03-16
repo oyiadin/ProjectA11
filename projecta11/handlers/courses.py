@@ -50,6 +50,20 @@ class NewCourseHandler(BaseHandler):
         self.finish(total=len(list), list=list)
 
 
+@handling(r"/courses")
+class CoursesListHandler(BaseHandler):
+    def get(self):
+        selected = self.db.query(db.Course).all()
+        list = []
+        for course in selected:
+            list.append(dict(
+                course_id=course.course_id,
+                course_name=course.course_name,
+                start=course.start,
+                end=course.end))
+        self.finish(list=list)
+
+
 @handling(r"/course/(\d+)")
 class SpecificCourseHandler(BaseHandler):
     def get(self, course_id):

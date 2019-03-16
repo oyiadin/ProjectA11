@@ -1,0 +1,42 @@
+<!--pages/class/classes-create/classes-create.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">创建课程</view>
+  </view>
+
+  <view class="weui-cells__title">课程</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">课程名</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="请输入课程名" bindinput='set_course_name'/>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">开始日期</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker mode="date" value="{{date1}}" start="2019-01-01" end="2100-01-01" bindchange="bindDate1Change">
+                    <view class="weui-input">{{date1}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">结束日期</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker mode="date" value="{{date2}}" start="2019-01-01" end="2100-01-01" bindchange="bindDate2Change">
+                    <view class="weui-input">{{date2}}</view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="do_create">确定</button>
+    </view>
+
+</view>

@@ -2,6 +2,7 @@
 import hashlib
 from json.decoder import JSONDecodeError
 
+import db
 from projecta11.config import conf
 from projecta11.session import Session
 from tornado.escape import json_decode
@@ -39,9 +40,10 @@ def role_in(*valid_roles):
     def decorator(func):
         def wrapper(self, *args, **kwargs):
             sess = kwargs['sess']
-            if sess['role'] not in map(lambda x: x.value, valid_roles):
+            role = int(sess['role'])
+            if role not in map(lambda x: x.value, valid_roles):
                 return self.finish(410, 'no enough permission')
-            return func(*args, **kwargs)
+            return func(self, *args, **kwargs)
         return wrapper
     return decorator
 

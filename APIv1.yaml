@@ -321,6 +321,20 @@ paths:
         '405':
           description: you've already enrolled in before
 
+  /courses:
+    get:
+      tags:
+        - course
+      summary: to get a list a courses
+      operationId: courses_list_fetch
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/course-show'
+
   '/course':
     put:
       tags:
@@ -368,9 +382,6 @@ paths:
           schema:
             type: object
             properties:
-              type:
-                type: string
-                enum: [course_name, teacher_name]
               pattern:
                 type: string
                 example: Example
@@ -380,6 +391,9 @@ paths:
           schema:
             type: object
             properties:
+              total:
+                type: integer
+                example: 1
               list:
                 type: array
                 items:

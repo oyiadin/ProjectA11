@@ -5,21 +5,20 @@ import sqlalchemy
 import time
 import random
 
-from tornado.escape import json_decode
-
 import projecta11.db as db
 from projecta11.config import conf
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
-from projecta11.utils import require_session, parse_json_body, keys_filter
+from projecta11.utils import require_session, parse_json_body, role_in
 
 
 @handling(r"/check-in/class/(\d+)/code")
 class NewCheckInCodeHandler(BaseHandler):
     @require_session
+    @role_in(db.UserRole.teacher)
     def get(self, class_id, sess=None):
         code = random.randint(1000, 9999)
-        new_code = db.CheckinCodes(
+        new_code = db.CheckInCodes(
             code=code,
             class_id=class_id,
             started=False,
@@ -43,9 +42,10 @@ class NewCheckInCodeHandler(BaseHandler):
 class StartCheckInHandler(BaseHandler):
     @require_session
     @parse_json_body
+    @role_in(db.UserRole.teacher)
     def post(self, code_id, data=None, sess=None):
-        selected = self.db.query(db.CheckinCodes).filter(
-            db.CheckinCodes.code_id == code_id).first()
+        selected = self.db.query(db.CheckInCodes).filter(
+            db.CheckInCodes.code_id == code_id).first()
         if selected is None:
             return self.finish(404, 'no matched code_id')
 
@@ -67,6 +67,7 @@ class StartCheckInHandler(BaseHandler):
 class VerifyCheckInCodeHandler(BaseHandler):
     @require_session
     @parse_json_body
+    @role_in(db.UserRole.student)
     def put(self, code, data=None, sess=None):
         key1 = 'checkin:{}'.format(code)
         key2 = 'checkin:{}:wifi_list'.format(code)
@@ -109,6 +110,7 @@ class VerifyCheckInCodeHandler(BaseHandler):
 @handling(r"/check-in/verify/code/(\d+)/user/(\d+)")
 class CheckInManuallyHandler(BaseHandler):
     @require_session
+    @role_in(db.UserRole.teacher)
     def post(self, code_id, user_id, sess=None):
         if self.db.query(db.User).filter(
             db.User.user_id == user_id).first() == None:

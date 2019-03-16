@@ -11,16 +11,16 @@ Page({
   },
 
   log_out: function() {
+    var complete = function() {
+      wx.removeStorageSync('session_id');
+      wx.removeStorageSync('is_login');
+      wx.navigateTo({
+        url: '/pages/credential/login/login',
+      });
+    }
     u.request(
       'DELETE', '/credential/account', {},
-      function() {
-        wx.removeStorageSync('session_id');
-        wx.removeStorageSync('is_login');
-        wx.navigateTo({
-          url: '/pages/credential/login/login',
-        });
-      }
-    );
+      complete, complete);
   },
 
   user_information: function () {

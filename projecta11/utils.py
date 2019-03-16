@@ -34,6 +34,16 @@ def require_session(func):
     return wrapper
 
 
+def role_in(*valid_roles):
+    def decorator(func):
+        def wrapper(self, sess=None, *args, **kwargs):
+            if sess['role'] not in map(lambda x: x.value, valid_roles):
+                return self.finish(410, 'no enough permission')
+            return func(*args, **kwargs, sess=sess)
+        return wrapper
+    return decorator
+
+
 def keys_filter(obj, keys: [tuple, set]) -> dict:
     if isinstance(obj, dict):
         temp_dict = dict(filter(lambda x: x[0] in keys, obj.items()))

@@ -48,23 +48,9 @@
 				},
 				{
 					"id": -1,
-					"name": "set_score",
-					"pathName": "pages/uncatalogued/set_score/set_score",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "show_score",
-					"pathName": "pages/uncatalogued/show_score/show_score",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "show_video",
-					"pathName": "pages/uncatalogued/show_video/show_video",
-					"query": "",
+					"name": "remote",
+					"pathName": "pages/credential/login/login",
+					"query": "host=118.24.58.137&port=8888",
 					"scene": null
 				},
 				{

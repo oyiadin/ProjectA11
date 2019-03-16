@@ -95,6 +95,14 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: something went wrong when parsing json
+        '401':
+          description: session_id is required
+        '402':
+          description: invalid session_id
+        '403':
+          description: missing arguments
         '405':
           description: incorrect captcha
         '409':
@@ -131,6 +139,16 @@ paths:
               user_id:
                 type: integer
                 example: 1
+        '400':
+          description: something went wrong when parsing json
+        '401':
+          description: session_id is required
+        '402':
+          description: invalid session_id
+        '403':
+          description: missing arguments
+        '404':
+          description: no matched data
         '405':
           description:
             incorrect captcha
@@ -168,6 +186,12 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/user-show'
+        '400':
+          description: something went wrong when parsing json
+        '401':
+          description: session_id is required
+        '402':
+          description: invalid session_id
 
   /user/{user_id}:
     get:
@@ -185,6 +209,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/user-show'
+        '404':
+          description: no matched data
 
     delete:
       tags:
@@ -203,6 +229,14 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: something went wrong when parsing json
+        '401':
+          description: session_id is required
+        '402':
+          description: invalid session_id
+        '404':
+          description: no matched data
         '410':
           description: no enough permission
 
@@ -312,6 +346,44 @@ paths:
               course_id:
                 type: integer
                 example: 1
+        '400':
+          description: something went wrong when parsing json
+        '401':
+          description: session_id is required
+        '402':
+          description: invalid session_id
+        '403':
+          description: missing arguments
+        '410':
+          description: no enough permission
+    post:
+      tags:
+        - course
+      summary: to search for courses
+      operationId: course_search
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                enum: [course_name, teacher_name]
+              pattern:
+                type: string
+                example: Example
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/course-show'
 
   '/course/{course_id}':
     get:
@@ -917,20 +989,6 @@ paths:
 
 
 definitions:
-
-  user-backend:
-    type: object
-    properties:
-      user_id:
-        type: integer
-        example: 1
-      staff_id:
-        type: string
-        example: 17052100
-      password:
-        type: string
-        example: p@ssword
-
   user-register:
     type: object
     properties:
@@ -940,6 +998,15 @@ definitions:
       password:
         type: string
         example: p@ssword
+      role:
+        type: integer
+        example: 0
+      name:
+        type: string
+        example: User-Name
+      is_male:
+        type: boolean
+        example: true
       captcha:
         type: string
         example: "xxxx"
@@ -953,6 +1020,9 @@ definitions:
       password:
         type: string
         example: p@ssword
+      role:
+        type: integer
+        example: 0
       captcha:
         type: string
         example: "xxxx"
@@ -966,6 +1036,15 @@ definitions:
       staff_id:
         type: string
         example: 17052100
+      role:
+        type: integer
+        example: 0
+      name:
+        type: string
+        example: User-Name
+      is_male:
+        type: boolean
+        example: true
 
   ################################################################
   ################################################################
@@ -1023,7 +1102,22 @@ definitions:
   ################################################################
   ################################################################
 
-  course-backend:
+  course-register:
+    type: object
+    properties:
+      course_name:
+        type: string
+        example: Example-Course
+      start:
+        type: string
+        format: date
+        example: 1552656892
+      end:
+        type: string
+        format: date
+        example: 1552666892
+
+  course-show:
     type: object
     properties:
       course_id:
@@ -1035,29 +1129,11 @@ definitions:
       start:
         type: string
         format: date
-        example: "2019-01-02"
+        example: 1552656892
       end:
         type: string
         format: date
-        example: "2019-03-04"
-
-  course-register:
-    type: object
-    properties:
-      course_name:
-        type: string
-        example: Example-Course
-      start:
-        type: string
-        format: date
-        example: "2019-01-02"
-      end:
-        type: string
-        format: date
-        example: "2019-03-04"
-
-  course-show:
-    $ref: '#/definitions/course-backend'
+        example: 1552666892
 
   ################################################################
   ################################################################

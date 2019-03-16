@@ -32,7 +32,10 @@ class SpecificUserInformationHandler(BaseHandler):
 
         ret = dict(
             user_id=selected.user_id,
-            staff_id=selected.staff_id)
+            staff_id=selected.staff_id,
+            role=selected.role.value,
+            name=selected.name,
+            is_male=selected.is_male)
         self.finish(**ret)
 
     @require_session
@@ -40,8 +43,7 @@ class SpecificUserInformationHandler(BaseHandler):
         selected = self.db.query(db.User).filter(
             db.User.user_id == user_id).first()
         if selected is None:
-            self.finish(404, 'no matched data')
-            return
+            return self.finish(404, 'no matched data')
 
         self.db.delete(selected)
         self.db.commit()

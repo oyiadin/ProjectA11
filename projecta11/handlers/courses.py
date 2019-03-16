@@ -1,23 +1,53 @@
 # coding=utf-8
+from functools import reduce
+
 from projecta11 import db
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
-from projecta11.utils import require_session, parse_json_body, keys_filter
+from projecta11.utils import require_session, parse_json_body, keys_filter, \
+    role_in
 
 
 @handling(r"/course")
 class NewCourseHandler(BaseHandler):
     @require_session
+    @role_in(db.UserRole.teacher, db.UserRole.admin)
     @parse_json_body
     def put(self, data=None, sess=None):
         keys = ('course_name', 'start', 'end')
         data = keys_filter(data, keys)
+
+        if not reduce(lambda a, b: a and b, map(
+                lambda x: x[0] and (x[1] is not None), data.items())):
+            return self.finish(403, 'missing arguments')
 
         new_course = db.Course(**data)
         self.db.add(new_course)
         self.db.commit()
 
         self.finish(course_id=new_course.course_id)
+
+    @parse_json_body
+    def post(self, data=None):
+        keys = ('pattern',)
+        data = keys_filter(data, keys)
+
+        if not data['pattern']:
+            return self.finish(403, 'missing arguments')
+        pattern = '%{}%'.format(data['pattern'])
+
+        selected = self.db.query(db.Course).filter(
+            db.Course.course_name.like(pattern)).all()
+
+        list = []
+        for course in selected:
+            list.append(dict(
+                course_id=course.course_id,
+                course_name=course.course_name,
+                start=course.start,
+                end=course.end))
+
+        self.finish(total=len(list), list=list)
 
 
 @handling(r"/course/(\d+)")

@@ -15,7 +15,9 @@
     "pages/uncatalogued/show_forum/create_page/create_page",
     "pages/course/course-manage/course-manage",
     "pages/course/course-create/course-create",
-    "pages/course/courses-list/courses-list"
+    "pages/course/courses-list/courses-list",
+    "pages/class/class-create/class-create",
+    "pages/class/classes-list/classes-list"
   ],
   "window": {
     "backgroundTextStyle": "light",

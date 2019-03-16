@@ -3,7 +3,7 @@ var u = getApp().utils;
 
 Page({
   data: {
-    classes: [],
+    courses: [],
   },
 
   onLoad: function() {
@@ -11,12 +11,12 @@ Page({
     u.request(
       'GET', '/courses', {},
       function (res) {
-        var classes = res.data.list;
-        for (var i = 0; i < classes.length; i++) {
-          classes[i].date1 = u.timestamp2date(classes[i].start);
-          classes[i].date2 = u.timestamp2date(classes[i].end);
+        var courses = res.data.list;
+        for (var i = 0; i < courses.length; i++) {
+          courses[i].date1 = u.timestamp2date(courses[i].start);
+          courses[i].date2 = u.timestamp2date(courses[i].end);
         }
-        that.setData({ classes: res.data.list });
+        that.setData({ courses: res.data.list });
       }
     );
   },
@@ -24,31 +24,9 @@ Page({
   openAlert: function (event) {
     const that = this;
     console.log(event);
-    u.request(
-      'POST', '/class/' + event.currentTarget.dataset.course_id + '/enroll_in', {},
-      function(res){
-        wx.showModal({
-          content: '选择成功',
-          showCancel: false,
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-            }
-          }
-        });
-      },
-      function(res) {
-        wx.showModal({
-          content: '选择失败'+res.data.msg,
-          showCancel: false,
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击失败')
-            }
-          }
-        });
-      }
-    )
+    wx.redirectTo({
+      url: '../../class/courses-list/courses-list?course_id=' + event.currentTarget.dataset.course_id,
+    });
   },
 
   // 搜索框

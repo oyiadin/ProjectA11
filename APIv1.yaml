@@ -240,6 +240,31 @@ paths:
         '410':
           description: no enough permission
 
+  /course/{course_id}/classes:
+    get:
+      tags:
+        - class
+      summary: to get a list a classes
+      operationId: classes_list_fetch
+      parameters:
+        - in: path
+          name: course_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              total:
+                type: integer
+                example: 1
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/class-show'
+
   /class:
     put:
       tags:
@@ -331,9 +356,15 @@ paths:
         '200':
           description: OK
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/course-show'
+            type: object
+            properties:
+              total:
+                type: integer
+                example: 1
+              list:
+                type: array
+                items:
+                  $ref: '#/definitions/course-show'
 
   '/course':
     put:

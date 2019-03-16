@@ -6,6 +6,27 @@ from projecta11.utils import require_session, parse_json_body, keys_filter, \
     role_in
 
 
+@handling(r"/course/(\d+)/classes")
+class ClassesListHandler(BaseHandler):
+    def get(self, course_id):
+        selected = self.db.query(db.Class, db.User.name).join(db.User).filter(
+            db.Class.course_id == course_id).all()
+
+        list = []
+        for i, teacher_name in selected:
+            list.append(dict(
+                class_id=i.class_id,
+                class_name=i.class_name,
+                weekday=i.weekday,
+                start=i.start,
+                end=i.end,
+                teacher_id=i.teacher_id,
+                teacher_name=teacher_name,
+                course_id=i.course_id))
+
+        self.finish(total=len(list), list=list)
+
+
 @handling(r"/class")
 class NewClassHandler(BaseHandler):
     @require_session

@@ -12,8 +12,8 @@
           </view>
         </view>
         <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-            <icon class="weui-icon-search" type="search" size="14"></icon>
-            <view class="weui-search-bar__text">搜索课程</view>
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索课程</view>
         </label>
       </view>
       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
@@ -27,30 +27,27 @@
     </view>
   </view>
 
-  <view class="page">
-    <view class="page__hd block">
-      <view class="page__title">课程目录</view>
-    </view>
-    <view class="page__bd">
-    <!-- 课程展示 -->
-      <view class="weui-form-preview" wx:for="{{classes}}" wx:key="*this">
-        <view class="weui-form-preview__hd">
-          <view class="weui-form-preview__item">
-            <view class="weui-form-preview__label">课程名称</view>
-            <view class="weui-form-preview__value_in-hd">{{item.course_name}}</view>
-          </view>
+  <view class="page__hd block">
+    <view class="page__title">课程目录</view>
+  </view>
+  <view class="page__bd">
+  <!-- 课程展示 -->
+    <view class="weui-form-preview" wx:for="{{courses}}" wx:key="item.course_id">
+      <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">课程名称</view>
+          <view class="weui-form-preview__value_in-hd">{{item.course_name}}</view>
         </view>
-        <view class="weui-form-preview__bd">
-          <view class="weui-form-preview__item">
-            <view class="weui-form-preview__label">开课时间</view>
-            <view class="weui-form-preview__value">{{item.date1}} ~ {{item.date2}}</view>
-          </view>
-          <view class="weui-form-preview__ft">
-            <button class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='openAlert' data-course_id="{{item.course_id}}">选择</button>
-          </view>
+      </view>
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">开课时间</view>
+          <view class="weui-form-preview__value">{{item.date1}} ~ {{item.date2}}</view>
+        </view>
+        <view class="weui-form-preview__ft">
+          <button class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='openAlert' data-course_id="{{item.course_id}}">选择</button>
         </view>
       </view>
     </view>
   </view>
-
 </view>

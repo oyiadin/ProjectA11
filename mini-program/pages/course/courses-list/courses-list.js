@@ -22,10 +22,12 @@ Page({
   },
 
   openAlert: function (event) {
-    const that = this;
     console.log(event);
+    var data = event.currentTarget.dataset;
     wx.redirectTo({
-      url: '../../class/courses-list/courses-list?course_id=' + event.currentTarget.dataset.course_id,
+      url: '../../class/classes-list/classes-list'
+           + '?course_id=' + data.course_id
+           + '&course_name=' + data.course_name
     });
   },
 
@@ -51,4 +53,14 @@ Page({
       inputVal: e.detail.value
     });
   },
+
+  do_search: function (e) {
+    u.request(
+      'POST', '/course', { pattern: this.data.inputVal },
+      (res) => {
+        this.setData({ courses: res.data.list });
+      }
+    );
+    this.setData({ inputShowed: false });
+  }
 })

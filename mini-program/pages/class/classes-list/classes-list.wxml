@@ -1,0 +1,33 @@
+<!--pages/classes/classes.wxml-->
+<view class="page">
+  <view class="page__hd block">
+    <view class="page__title">{{course_name}}</view>
+    <view class="page__desc">开课班级</view>
+  </view>
+  <view class="page__bd">
+  <!-- 课程展示 -->
+    <button bindtap="create_class">创建新班级</button>
+
+    <view class="weui-form-preview" wx:for="{{classes}}" wx:key="{{item.class_id}}">
+      <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">班级名称</view>
+          <view class="weui-form-preview__value_in-hd">{{item.class_name}}</view>
+        </view>
+      </view>
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">开课教师</view>
+          <view class="weui-form-preview__value">{{item.teacher_name}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">开课时间</view>
+          <view class="weui-form-preview__value">周{{['','一','二','三','四','五','六','日'][item.weekday]}}第{{item.start}}~{{item.end}}节</view>
+        </view>
+        <view class="weui-form-preview__ft">
+          <button class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='openAlert' data-class_id="{{item.class_id}}">选择</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

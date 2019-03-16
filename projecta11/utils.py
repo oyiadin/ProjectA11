@@ -30,16 +30,18 @@ def require_session(func):
         except FileNotFoundError as e:
             self.finish(402, 'invalid session_id')
             return
-        return func(self, *args, sess=sess, **kwargs)
+        kwargs.update(sess=sess)
+        return func(self, *args, **kwargs)
     return wrapper
 
 
 def role_in(*valid_roles):
     def decorator(func):
-        def wrapper(self, sess=None, *args, **kwargs):
+        def wrapper(self, *args, **kwargs):
+            sess = kwargs['sess']
             if sess['role'] not in map(lambda x: x.value, valid_roles):
                 return self.finish(410, 'no enough permission')
-            return func(*args, **kwargs, sess=sess)
+            return func(*args, **kwargs)
         return wrapper
     return decorator
 

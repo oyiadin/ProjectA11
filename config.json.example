@@ -13,6 +13,10 @@
     "swagger_ui": true,
     "wifi_min_same": 10
   },
+  "ssl": {
+    "certfile": null,
+    "keyfile": null
+  },
   "db": {
     "dialect": "mysql",
     "driver": "pymysql",

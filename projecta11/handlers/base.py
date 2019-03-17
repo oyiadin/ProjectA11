@@ -30,6 +30,7 @@ class BaseHandler(tornado.web.RequestHandler):
     db = property(_get_db_session, _set_db_session, _del_db_session)
 
     def finish(self, status_code=200, msg=None, no_json=False, **kwargs):
+        self.db.close()
         self.set_status(status_code)
 
         if no_json:

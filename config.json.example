@@ -24,6 +24,7 @@
     "password": "password",
     "host": "localhost",
     "dbname": "project_a11_test",
+    "pool_size": 25,
     "options": {
       "charset": "utf8mb4"
     }

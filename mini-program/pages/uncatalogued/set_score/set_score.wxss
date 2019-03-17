@@ -1,3 +1,0 @@
-.choose_class, .choose_staffId, .choose_subject, .set_score{
-  padding-bottom: 5px;
-} 

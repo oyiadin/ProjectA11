@@ -7,7 +7,8 @@ Page({
   },
 
   onLoad: function (options) {
-    this.setData({ role: wx.getStorageSync('role') });
+    var role = wx.getStorageSync('role');
+    this.setData({ role: role });
 
     var course_id = options.course_id,
         user_id = options.user_id;
@@ -26,9 +27,22 @@ Page({
         }
       );
 
-    } else if (user_id) {  // 从教师的个人中心点进来的
+    } else if (user_id && role == 1) {  // 从教师的个人中心点进来的
       this.setData({
         teacher_mode: true,
+        user_id: user_id,
+      });
+
+      u.request(
+        'GET', '/user/' + user_id + '/classes', {},
+        (res) => {
+          this.setData({ classes: res.data.list });
+        }
+      );
+    
+    } else if (user_id && role == 0) {  // 从学生的个人中心点进来的
+      this.setData({
+        student_mode: true,
         user_id: user_id,
       });
 

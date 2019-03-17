@@ -6,8 +6,7 @@ Page({
     courses: [],
   },
 
-  onLoad: function() {
-    const that = this;
+  onLoad: function(options) {
     u.request(
       'GET', '/courses', {},
       function (res) {

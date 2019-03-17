@@ -18,7 +18,9 @@
     "pages/class/classes-list/classes-list",
     "pages/forum/index",
     "pages/forum/create/index",
-    "pages/forum/topic/index"
+    "pages/forum/topic/index",
+    "pages/score/score-entering/score-entering",
+    "pages/score/score-list/score-list"
   ],
   "window": {
     "backgroundTextStyle": "light",

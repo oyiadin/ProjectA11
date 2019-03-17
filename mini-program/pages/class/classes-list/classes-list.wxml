@@ -2,7 +2,9 @@
 <view class="page">
   <view class="page__hd block">
     <view class="page__title">
-      {{course_mode ? course_name : "已开班级列表"}}
+      <text wx:if="{{course_mode}}">course_name</text>
+      <text wx:if="{{teacher_mode}}">已开班级列表</text>
+      <text wx:if="{{student_mode}}">已选课程列表</text>
     </view>
     <view class="page__desc" wx:if="{{course_mode}}">
       已开班级列表
@@ -31,13 +33,21 @@
         </view>
         <view class="weui-form-preview__ft">
           <button
-            wx:if="{{ role == 0 }}"
+            wx:if="{{ course_mode }}"
             class="weui-form-preview__btn weui-form-preview__btn_primary"
             hover-class="weui-form-preview__btn_active"
             bindtap='openAlert'
             data-class_id="{{item.class_id}}"
           >选择</button>
-          <block wx:if="{{ role == 1}}">
+          <block wx:if="{{ user_id && role == 0}}">
+            <navigator url="404">
+              <button class="weui-btn mini-btn" type="default" size="mini">课程资料</button>
+            </navigator>
+            <navigator url="404">
+              <button class="weui-btn mini-btn" type="default" size="mini">课程论坛</button>
+            </navigator>
+          </block>
+          <block wx:if="{{ user_id && role == 1}}">
             <navigator url="404">
               <button class="weui-btn mini-btn" type="default" size="mini">考勤情况</button>
             </navigator>

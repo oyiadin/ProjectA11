@@ -44,14 +44,13 @@ class UserScoresHandler(BaseHandler):
         list = []
         for score in selected:
             course_id = self.db.query(db.Class.course_id).filter(
-                db.Class.class_id == selected.class_id).first()[0]
+                db.Class.class_id == score.class_id).first()[0]
             course = self.db.query(db.Course).filter(
                 db.Course.course_id == course_id).first()
 
             list.append(dict(
                 score_id=score.score_id,
                 course_name=course.course_name,
-                course_id=course.course_id,
                 score=score.score,
                 user_id=score.user_id,
                 class_id=score.class_id))

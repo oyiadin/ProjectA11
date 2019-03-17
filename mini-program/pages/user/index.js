@@ -23,11 +23,11 @@ Page({
       postfix = '同学';
       apps = apps.concat({
         title: '已选课程',
-        url: '../course/course-list?user_id=' + user_id,
+        url: '../class/classes-list/classes-list?user_id=' + user_id,
       });
       apps = apps.concat({
         title: '我的成绩',
-        url: '404'
+        url: '../score/score-list/score-list?user_id=' + user_id,
       });
     } else if (role == 1) {
       postfix = '老师';
@@ -50,7 +50,7 @@ Page({
     var complete = function() {
       wx.removeStorageSync('session_id');
       wx.removeStorageSync('is_login');
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/credential/login/login',
       });
     }

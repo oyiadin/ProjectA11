@@ -2,7 +2,6 @@
 import hashlib
 from json.decoder import JSONDecodeError
 
-import db
 from projecta11.config import conf
 from projecta11.session import Session
 from tornado.escape import json_decode

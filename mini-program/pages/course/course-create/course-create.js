@@ -40,6 +40,7 @@ Page({
           title: '创建成功',
           duration: 2000,
         });
+        wx.navigateBack();
       },
       function (res) {
         var title = "发生未知错误:" + res.data.msg;

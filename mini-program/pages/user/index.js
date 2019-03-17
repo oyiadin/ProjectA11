@@ -39,7 +39,7 @@ Page({
       postfix = '管理员';
       apps = apps.concat({
         title: '课程管理',
-        url: '../course/course-list/course-list'
+        url: '../course/courses-list/courses-list'
       });
     }
 

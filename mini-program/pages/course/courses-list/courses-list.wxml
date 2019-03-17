@@ -21,7 +21,10 @@
     <view class="page__title">课程目录</view>
   </view>
   <view class="page__bd">
-  <!-- 课程展示 -->
+    <!-- 课程展示 -->
+    <navigator url="../course-create/course-create" wx:if="{{role == 2}}">
+      <button bindtap="create_class">创建新课程</button>
+    </navigator>
     <view class="weui-form-preview" hover-class="hover" wx:for="{{courses}}" wx:key="item.course_id" bindtap='openAlert' data-course_id="{{item.course_id}}" data-course_name="{{item.course_name}}">
       <view class="weui-form-preview__hd">
         <view class="weui-form-preview__item">

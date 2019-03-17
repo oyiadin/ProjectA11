@@ -19,7 +19,10 @@
     "user": "test",
     "password": "password",
     "host": "localhost",
-    "dbname": "project_a11_test"
+    "dbname": "project_a11_test",
+    "options": {
+      "charset": "utf8mb4"
+    }
   },
   "session": {
     "connection": {

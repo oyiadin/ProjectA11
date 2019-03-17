@@ -125,9 +125,15 @@ def startup(conf):
     if engine and Session:
         return
 
-    engine = create_engine(
-        '{dialect}+{driver}://{user}:{password}@{host}/{dbname}'.format(
-            **conf.db), echo=conf.app.debug)
+    uri = '{dialect}+{driver}://{user}:{password}@{host}/{dbname}'.format(
+        **conf.db)
+
+    if conf.db.options:
+        uri = uri + '?'
+        for key in conf.db.options:
+            uri += '{}={}'.format(key, conf.db.options[key])
+
+    engine = create_engine(uri, echo=conf.app.debug)
     Session = sessionmaker(bind=engine)
 
 

@@ -1,32 +1,22 @@
-<!--pages/users/users.wxml-->
-<view class='user_views'>
-  <view class='user_view_background_view'>
-    <image class='user_view_background_images' mode="aspectFill" src='/images/default.jpg'></image>
+<!--pages/misc/index.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">我的个人中心</view>
+    <view class="page__desc">欢迎回来，{{name}}{{postfix}}！</view>
   </view>
-  <view class='user_view_touxiang_view'>
-    <image mode="aspectFill" style='border-radius:100rpx;' class='user_view_touxiang_view_images' src='../../images/icons/Student.png' data-type='GHTX'></image>
-    <view>
-      <text class='user_view_touxiang_view_name'>{{name}}</text>
+  <view class="page__bd">
+    <view class="weui-grids">
+      <block wx:for="{{apps}}" wx:key="{{item.title}}">
+        <navigator url="{{item.url}}" class="weui-grid" hover-class="weui-grid_active">
+          <image class="weui-grid__icon" src="../../images/icons/index.png" />
+          <view class="weui-grid__label">{{item.title}}</view>
+        </navigator>
+      </block>
     </view>
   </view>
-  <view class='user_xuanxiang_list_view'>
-    <!--列表  -->
-    <view class='tools_list'>
-      <view catchtap='user_information'>
-        <image src='../../images/icons/user_information.png'></image>
-        <text>个人信息</text>
-      </view>
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-btn-area">
+      <button class="weui-btn button-hover" type="primary" plain="true" bindtap='log_out'>登出</button>
     </view>
-    <view class='tools_list'>
-      <view catchtap='selected_class'>
-        <image src='../../images/icons/class.png'></image>
-        <text>已选课程</text>
-      </view>
-    </view>
-    <text>这个页面暂时别改，直接在首页添加grid，方便</text>
-    <text> \n </text>
-    <button class="weui-btn button-hover" type="primary" plain="true" bindtap='log_out'>
-    登出
-    </button>
   </view>
 </view>

@@ -92,26 +92,47 @@ class ClassEnrollInHandler(BaseHandler):
 
 
 @handling(r"/user/(\d+)/classes")
-class UserEnrolledInClassesHandler(BaseHandler):
+class UserClassesHandler(BaseHandler):
     @require_session
     def get(self, user_id, sess=None):
-        selected = self.db.query(db.RelationUserClass).filter(
-            db.RelationUserClass.user_id == user_id).all()
+        role = int(sess['role'])
+        if role == db.UserRole.student.value:
+            selected = self.db.query(db.RelationUserClass).filter(
+                db.RelationUserClass.user_id == user_id).all()
 
-        list = []
-        for rel in selected:
-            _class = self.db.query(db.Class).filter(
-                db.Class.class_id == rel.class_id).first()
-            teacher_name = self.db.query(db.User.name).filter(
-                db.User.user_id == _class.teacher_id).first()
-            list.append(dict(
-                class_id=_class.class_id,
-                class_name=_class.class_name,
-                weekday=_class.weekday,
-                start=_class.start,
-                end=_class.end,
-                teacher_id=_class.teacher_id,
-                teacher_name=teacher_name,
-                course_id=_class.course_id))
+            list = []
+            for rel in selected:
+                _class = self.db.query(db.Class).filter(
+                    db.Class.class_id == rel.class_id).first()
+                teacher_name = self.db.query(db.User.name).filter(
+                    db.User.user_id == _class.teacher_id).first()
+                list.append(dict(
+                    class_id=_class.class_id,
+                    class_name=_class.class_name,
+                    weekday=_class.weekday,
+                    start=_class.start,
+                    end=_class.end,
+                    teacher_id=_class.teacher_id,
+                    teacher_name=teacher_name,
+                    course_id=_class.course_id))
+            self.finish(list=list)
 
-        self.finish(list=list)
+        elif role == db.UserRole.teacher.value:
+            selected = self.db.query(db.Class).filter(
+                db.Class.teacher_id == user_id).all()
+
+            list = []
+            for _class in selected:
+                list.append(dict(
+                    class_id=_class.class_id,
+                    class_name=_class.class_name,
+                    weekday=_class.weekday,
+                    start=_class.start,
+                    end=_class.end,
+                    teacher_id=_class.teacher_id,
+                    teacher_name=sess['name'].decode(),
+                    course_id=_class.course_id))
+            self.finish(list=list)
+
+        else:
+            self.finish(400)

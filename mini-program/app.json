@@ -11,13 +11,14 @@
     "pages/check-in/teacher/checked-in-list/checked-in-list",
     "pages/material/material-list/material-list",
     "pages/material/video-playing/video-playing",
-    "pages/uncatalogued/show_forum/show_forum",
-    "pages/uncatalogued/show_forum/create_page/create_page",
     "pages/course/course-manage/course-manage",
     "pages/course/course-create/course-create",
     "pages/course/courses-list/courses-list",
     "pages/class/class-create/class-create",
-    "pages/class/classes-list/classes-list"
+    "pages/class/classes-list/classes-list",
+    "pages/forum/index",
+    "pages/forum/create/index",
+    "pages/forum/topic/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

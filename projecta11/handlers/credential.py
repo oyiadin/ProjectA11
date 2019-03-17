@@ -126,6 +126,7 @@ class AccountHandler(BaseHandler):
         sess['user_id'] = selected.user_id
         sess['staff_id'] = staff_id
         sess['role'] = selected.role.value
+        sess['name'] = selected.name
 
         self.finish(user_id=selected.user_id, name=selected.name)
 

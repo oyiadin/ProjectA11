@@ -1,12 +1,17 @@
 <!--pages/classes/classes.wxml-->
 <view class="page">
   <view class="page__hd block">
-    <view class="page__title">{{course_name}}</view>
-    <view class="page__desc">开课班级</view>
+    <view class="page__title">
+      {{course_mode ? course_name : "已开班级列表"}}
+    </view>
+    <view class="page__desc" wx:if="{{course_mode}}">
+      已开班级列表
+    </view>
   </view>
   <view class="page__bd">
   <!-- 课程展示 -->
-    <button bindtap="create_class">创建新班级</button>
+    <button bindtap="create_class" wx:if="{{role == 1}}">创建新班级</button>
+    <button bindtap="redirect2forum">前往本课程论坛</button>
 
     <view class="weui-form-preview" wx:for="{{classes}}" wx:key="{{item.class_id}}">
       <view class="weui-form-preview__hd">
@@ -25,7 +30,27 @@
           <view class="weui-form-preview__value">周{{['','一','二','三','四','五','六','日'][item.weekday]}}第{{item.start}}~{{item.end}}节</view>
         </view>
         <view class="weui-form-preview__ft">
-          <button class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='openAlert' data-class_id="{{item.class_id}}">选择</button>
+          <button
+            wx:if="{{ role == 0 }}"
+            class="weui-form-preview__btn weui-form-preview__btn_primary"
+            hover-class="weui-form-preview__btn_active"
+            bindtap='openAlert'
+            data-class_id="{{item.class_id}}"
+          >选择</button>
+          <block wx:if="{{ role == 1}}">
+            <navigator url="404">
+              <button class="weui-btn mini-btn" type="default" size="mini">考勤情况</button>
+            </navigator>
+            <navigator url="404">
+              <button class="weui-btn mini-btn" type="default" size="mini">班级论坛</button>
+            </navigator>
+            <navigator url="404">
+              <button class="weui-btn mini-btn" type="default" size="mini">成绩管理</button>
+            </navigator>
+            <navigator url="404">
+              <button class="weui-btn mini-btn" type="default" size="mini">教学资料管理</button>
+            </navigator>
+          </block>
         </view>
       </view>
     </view>

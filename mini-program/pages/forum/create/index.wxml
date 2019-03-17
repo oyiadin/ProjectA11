@@ -1,0 +1,28 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title">新建帖子</view>
+    <view class="page__desc">create_page</view>
+  </view>
+  <view class="weui-cells__title">标题</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请输入标题" />
+      </view>
+    </view>
+  </view>
+  <view class="weui-cells__title">内容</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <textarea class="weui-textarea" placeholder="请输入内容" style="height: 6em" />
+        <view class="weui-textarea-counter">0/200</view>
+          </view>
+      </view>
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="submit">提交</button>
+    </view>
+  </view>
+</view>

@@ -37,13 +37,12 @@ class TopicCreateHandler(BaseHandler):
 
 @handling(r"/(class|course)/(\d+)/forum/topic/(\d+)")
 class TopicInfoHandler(BaseHandler):
-    @require_session
-    def get(self, class_or_course, id, topic_id, sess=None):
+    def get(self, class_or_course, id, topic_id):
         belong_type = db.BelongType.CLASS if class_or_course == 'class' \
             else db.BelongType.COURSE
 
-        selected = self.db.query(db.Topic).filter(
-            db.Topic.topic_id == topic_id).first()
+        selected, user_name = self.db.query(db.Topic, db.User.name) \
+            .join(db.User).filter(db.Topic.topic_id == topic_id).first()
         if selected is None:
             return self.finish(404, 'no such topic')
 
@@ -52,6 +51,7 @@ class TopicInfoHandler(BaseHandler):
             title=selected.title,
             content=selected.content,
             user_id=selected.user_id,
+            user_name=user_name,
             created_at=selected.created_at,
             updated_at=selected.updated_at,
             replies=selected.replies)
@@ -60,24 +60,22 @@ class TopicInfoHandler(BaseHandler):
 
 @handling(r"/(class|course)/(\d+)/forum/topics/list")
 class TopicListHandler(BaseHandler):
-    @require_session
-    def get(self, class_or_course, id, sess=None):
+    def get(self, class_or_course, id):
         belong_type = db.BelongType.CLASS if class_or_course == 'class' \
             else db.BelongType.COURSE
 
-        selected = self.db.query(db.Topic).filter(
+        selected = self.db.query(db.Topic, db.User.name).join(db.User).filter(
             db.Topic.belong_type == belong_type,
             db.Topic.belong_id == id).all()
-        if len(selected) == 0:
-            return self.finish(404, 'no such topic')
 
         list = []
-        for topic in selected:
+        for topic, user_name in selected:
             list.append(dict(
                 topic_id=topic.topic_id,
                 title=topic.title,
-                content=topic.content,
+                brief=topic.content[:20],
                 user_id=topic.user_id,
+                user_name=user_name,
                 created_at=topic.created_at,
                 updated_at=topic.updated_at,
                 replies=topic.replies))
@@ -106,17 +104,18 @@ class NewReplyHandler(BaseHandler):
 class RepliesListHandler(BaseHandler):
     @require_session
     def get(self, class_or_course, id, topic_id, sess=None):
-        selected = self.db.query(db.Reply).filter(
+        selected = self.db.query(db.Reply, db.User.name).join(db.User).filter(
             db.Reply.topic_id == topic_id).all()
         if len(selected) == 0:
             return self.finish(404, 'no such replies')
 
         list = []
-        for reply in selected:
+        for reply, user_name in selected:
             list.append(dict(
-            reply_id = reply.reply_id,
-            content = reply.content,
-            user_id = reply.user_id,
-            created_at = reply.created_at))
+            reply_id=reply.reply_id,
+            content=reply.content,
+            user_id=reply.user_id,
+            user_name=user_name,
+            created_at=reply.created_at))
 
         self.finish(list=list)

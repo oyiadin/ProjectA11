@@ -1,0 +1,52 @@
+<view class='page'>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <image src="../../../images/icons/user0.jpg" style="width: 35px; height: 35px; display: block"/>
+      </view>
+      <view class="weui-cell__bd">{{topic.user_name}}</view>
+      <view class="weui-cell__ft">楼主</view>
+    </view>
+  </view>
+  <view class="weui-panel">
+    <view class="weui-article">
+      <view class="weui-article__h1">{{topic.title}}</view>
+      <view class="weui-article">{{topic.content}}</view>
+      <view class="weui-media-box__info">
+        <view class="weui-media-box__info__meta">2019-3-15</view>
+      </view>      
+    </view>
+  </view>
+  <view class="weui-panel" wx:for="{{replies}}" wx:key="{{item.reply_id}}">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <image src="../../../images/icons/user1.jpg" style="width: 35px; height: 35px; display: block"/>
+      </view>
+      <view class="weui-cell__bd">{{item.user_name}}</view>
+      <view class="weui-cell__ft">{{index+1}}楼</view>
+      <view class="weui-article__p">
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-article__p">
+       {{item.content}}
+      </view>
+    </view>
+  </view>
+  <view class='weui-panel'>
+    <view class="weui-cells__title">评论</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入评论" style="height: 3.3em" />
+          <view class="weui-textarea-counter">0/200</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="submit">提交</button>
+    </view>
+  </view>
+</view>

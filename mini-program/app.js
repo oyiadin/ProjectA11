@@ -6,8 +6,8 @@ function logger(res) { console.log(res.data); }
 App({
   onLaunch: function (options) {
     var query = options.query;
-    this.protocol = query.protocol || 'http';
-    this.host = query.host || '127.0.0.1';
+    this.protocol = query.protocol || 'https';
+    this.host = query.host || 'project-a11.lwh.red';
     this.port = query.port || '8888';
     console.log('启动了');
   },

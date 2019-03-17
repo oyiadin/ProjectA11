@@ -91,6 +91,11 @@ class NewReplyHandler(BaseHandler):
         keys = ('content',)
         data = keys_filter(data, keys)
 
+        topic = self.db.query(db.Topic).filter(
+            db.Topic.topic_id == topic_id).first()
+        topic.replies = db.Topic.replies + 1
+        topic.updated_at = int(time.time())
+
         new_item = db.Reply(
             topic_id=topic_id,
             content=data['content'],
@@ -102,12 +107,9 @@ class NewReplyHandler(BaseHandler):
 
 @handling(r"/(class|course)/(\d+)/forum/topic/(\d+)/replies")
 class RepliesListHandler(BaseHandler):
-    @require_session
-    def get(self, class_or_course, id, topic_id, sess=None):
+    def get(self, class_or_course, id, topic_id):
         selected = self.db.query(db.Reply, db.User.name).join(db.User).filter(
             db.Reply.topic_id == topic_id).all()
-        if len(selected) == 0:
-            return self.finish(404, 'no such replies')
 
         list = []
         for reply, user_name in selected:
@@ -118,4 +120,4 @@ class RepliesListHandler(BaseHandler):
             user_name=user_name,
             created_at=reply.created_at))
 
-        self.finish(list=list)
+        self.finish(total=len(list), list=list)

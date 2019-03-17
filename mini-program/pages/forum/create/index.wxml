@@ -1,13 +1,13 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__hd">
     <view class="page__title">新建帖子</view>
-    <view class="page__desc">create_page</view>
+    <view class="page__desc"></view>
   </view>
   <view class="weui-cells__title">标题</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入标题" />
+        <input class="weui-input" placeholder="请输入标题" bindinput='change_title' />
       </view>
     </view>
   </view>
@@ -15,8 +15,9 @@
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
       <view class="weui-cell__bd">
-        <textarea class="weui-textarea" placeholder="请输入内容" style="height: 6em" />
-        <view class="weui-textarea-counter">0/200</view>
+        <textarea class="weui-textarea" placeholder="请输入内容" style="height: 6em"
+                  bindinput='change_content' />
+        <view class="weui-textarea-counter">{{len}}/200</view>
           </view>
       </view>
   </view>

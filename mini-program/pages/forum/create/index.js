@@ -1,65 +1,53 @@
+var u = getApp().utils;
+
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    
+    len: 0,
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    
+    this.setData({
+      class_id: options.class_id,
+      course_id: options.course_id
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    
+  change_title: function (e) {
+    this.setData({ title: e.detail.value });
+  },
+  change_content: function (e) {
+    this.setData({ content: e.detail.value, len: e.detail.value.length });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    
-  },
+  submit: function() {
+    var url;
+    if (this.data.class_id) {
+      url = '/class/' + this.data.class_id + '/forum/topic';
+    } else if (this.data.course_id) {
+      url = '/course/' + this.data.course_id + '/forum/topic';
+    }
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
+    u.request(
+      'PUT', url,
+      {
+        title: this.data.title,
+        content: this.data.content,
+      },
+      (res) => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '发布成功！',
+          duration: 1500,
+        });
+        setTimeout(() => {
+          wx.redirectTo({
+            url: '../topic/index?topic_id=' + res.data.topic_id
+                 + '&class_id=' + this.data.class_id
+                 + '&course_id=' + this.data.course_id,
+          });
+        }, 1500);
+      }
+    )
   }
 })

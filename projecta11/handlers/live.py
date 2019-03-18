@@ -1,6 +1,6 @@
 # coding=utf-8
-import sqlalchemy
 
+import sqlalchemy
 import projecta11.db as db
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling

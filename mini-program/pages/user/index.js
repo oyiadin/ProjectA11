@@ -40,6 +40,10 @@ Page({
       apps = apps.concat({
         title: '课程管理',
         url: '../course/courses-list/courses-list'
+      },
+      {
+        title: '直播管理',
+        url: '../live/manager/manager'
       });
     }
 

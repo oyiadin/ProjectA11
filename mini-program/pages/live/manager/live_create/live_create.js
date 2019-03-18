@@ -4,7 +4,7 @@ var u = getApp().utils;
 Page({
   data: {
     is_checked: false,
-    to_class_name: "",
+    to_class_name: "", // 对应的课程名
     live_name: "",
     description: "",
     start_date: "2018-2-2",

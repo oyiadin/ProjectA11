@@ -10,7 +10,7 @@ Page({
       },
       {
         title: '已创建直播',
-        url: './live_exists/live_exists',
+        url: './live_list/live_list',
       }
     ]
   },

@@ -97,15 +97,15 @@ class UserClassesHandler(BaseHandler):
     def get(self, user_id, sess=None):
         role = int(sess['role'])
         if role == db.UserRole.student.value:
-            selected = self.db.query(db.RelationUserClass).filter(
-                db.RelationUserClass.user_id == user_id).all()
+            selected = self.db \
+                .query(db.Class, db.User.name, db.Course.course_name) \
+                .join(db.User, db.User.user_id == db.Class.teacher_id) \
+                .join(db.Course, db.Course.course_id == db.Class.course_id) \
+                .join(db.RelationUserClass,
+                      db.RelationUserClass.user_id == user_id).all()
 
             list = []
-            for rel in selected:
-                _class = self.db.query(db.Class).filter(
-                    db.Class.class_id == rel.class_id).first()
-                teacher_name = self.db.query(db.User.name).filter(
-                    db.User.user_id == _class.teacher_id).first()
+            for _class, user_name, course_name in selected:
                 list.append(dict(
                     class_id=_class.class_id,
                     class_name=_class.class_name,
@@ -113,16 +113,17 @@ class UserClassesHandler(BaseHandler):
                     start=_class.start,
                     end=_class.end,
                     teacher_id=_class.teacher_id,
-                    teacher_name=teacher_name,
-                    course_id=_class.course_id))
+                    teacher_name=user_name,
+                    course_id=_class.course_id,
+                    course_name=course_name))
             self.finish(list=list)
 
         elif role == db.UserRole.teacher.value:
-            selected = self.db.query(db.Class).filter(
-                db.Class.teacher_id == user_id).all()
+            selected = self.db.query(db.Class, db.Course.course_name) \
+                .join(db.Course).filter(db.Class.teacher_id == user_id).all()
 
             list = []
-            for _class in selected:
+            for _class, course_name in selected:
                 list.append(dict(
                     class_id=_class.class_id,
                     class_name=_class.class_name,
@@ -131,7 +132,8 @@ class UserClassesHandler(BaseHandler):
                     end=_class.end,
                     teacher_id=_class.teacher_id,
                     teacher_name=sess['name'].decode(),
-                    course_id=_class.course_id))
+                    course_id=_class.course_id,
+                    course_name=course_name))
             self.finish(list=list)
 
         else:

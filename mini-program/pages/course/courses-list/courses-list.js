@@ -12,16 +12,6 @@ Page({
     this.refresh();
   },
 
-  openAlert: function (event) {
-    console.log(event);
-    var data = event.currentTarget.dataset;
-    wx.redirectTo({
-      url: '../../class/classes-list/classes-list'
-           + '?course_id=' + data.course_id
-           + '&course_name=' + data.course_name
-    });
-  },
-
   // 搜索框
   showInput: function () {
     this.setData({

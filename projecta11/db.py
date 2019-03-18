@@ -1,5 +1,4 @@
 # coding=utf-8
-
 import enum
 
 from sqlalchemy import create_engine
@@ -50,6 +49,7 @@ class Class(Base):
     teacher_id = Column(Integer, ForeignKey(User.user_id))
     course_id = Column(Integer, ForeignKey(Course.course_id))
 
+
 class Score(Base):
     __tablename__ = 'scores'
     score_id = Column(Integer, primary_key=True)
@@ -59,7 +59,7 @@ class Score(Base):
 
 
 class RelationUserClass(Base):  # 用户(学生)与班级的关系表
-    __tablename__ = 'relation_user_class'
+    __tablename__ = 'rel-user-class'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey(User.user_id))
     class_id = Column(Integer, ForeignKey(Class.class_id))
@@ -118,6 +118,23 @@ class Reply(Base):
     content = Column(String(4096))
     user_id = Column(Integer, ForeignKey(User.user_id))
     created_at = Column(Integer)
+
+
+class Live(Base):
+    __tablename__ = "lives"
+    live_id = Column(Integer, primary_key=True)
+    title = Column(String(64))
+    introduction = Column(String(1024))
+    start = Column(Integer)
+    duration = Column(SmallInteger)  # in mins
+    is_streaming = Column(Boolean)
+
+
+class RelationLiveClass(Base):
+    __tablename__ = "rel-live-class"
+    id = Column(Integer, primary_key=True)
+    live_id = Column(Integer, ForeignKey(Live.live_id))
+    class_id = Column(Integer, ForeignKey(Class.class_id))
 
 
 def startup(conf):

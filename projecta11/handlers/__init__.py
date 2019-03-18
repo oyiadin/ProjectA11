@@ -7,4 +7,5 @@ import projecta11.handlers.misc
 import projecta11.handlers.checkin
 import projecta11.handlers.material
 import projecta11.handlers.forum
-import  projecta11.handlers.score
+import projecta11.handlers.score
+import projecta11.handlers.live

@@ -22,6 +22,7 @@ tags:
   - name: score
   - name: material
   - name: forum
+  - name: live
   - name: misc
 schemes:
   - http
@@ -620,6 +621,115 @@ paths:
                 items:
                   $ref: '#/definitions/class-show'
 
+  /live/new:
+    put:
+      tags:
+       - live
+      summary: to create a new live
+      operationId: live_register
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/live-register'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              live_id:
+                type: integer
+                example: 1
+
+  /live/{live_id}:
+    get:
+      tags:
+        - live
+      summary: to fetch the info of a live
+      operationId: live_fetch
+      parameters:
+        - in: path
+          name: live_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/live-register'
+    post:
+      tags:
+        - live
+      summary: to update the info of a live
+      operationId: live_update
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: live_id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/live-register'
+      responses:
+        '200':
+          description: OK
+
+  /live/{live_id}/start:
+    post:
+      tags:
+       - live
+      summary: to start a live
+      operationId: live_start
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: live_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              url:
+                type: string
+                example: rmtp://example.com/xxx?xxx=xxx
+
+  /live/{live_id}/end:
+    post:
+      tags:
+       - live
+      summary: to end a live
+      operationId: live_end
+      parameters:
+        - in: query
+          name: session_id
+          required: true
+          type: string
+        - in: path
+          name: live_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+
   /misc/captcha:
     get:
       tags:
@@ -1094,31 +1204,6 @@ definitions:
   ################################################################
   ################################################################
 
-  class-backend:
-    type: object
-    properties:
-      class_id:
-        type: integer
-        example: 1
-      class_name:
-        type: string
-        example: Example-Class
-      weekday:
-        type: integer
-        example: 1
-      start:
-        type: integer
-        example: 3
-      end:
-        type: integer
-        example: 5
-      teacher_id:
-        type: integer
-        example: 1
-      course_id:
-        type: integer
-        example: 1
-
   class-register:
     type: object
     properties:
@@ -1142,7 +1227,29 @@ definitions:
         example: 1
 
   class-show:
-    $ref: '#/definitions/class-backend'
+    type: object
+    properties:
+      class_id:
+        type: integer
+        example: 1
+      class_name:
+        type: string
+        example: Example-Class
+      weekday:
+        type: integer
+        example: 1
+      start:
+        type: integer
+        example: 3
+      end:
+        type: integer
+        example: 5
+      teacher_id:
+        type: integer
+        example: 1
+      course_id:
+        type: integer
+        example: 1
 
   ################################################################
   ################################################################
@@ -1183,22 +1290,6 @@ definitions:
   ################################################################
   ################################################################
 
-  score-backend:
-    type: object
-    properties:
-      score_id:
-        type: integer
-        example: 1
-      score:
-        type: integer
-        example: 95
-      user_id:
-        type: integer
-        example: 1
-      class_id:
-        type: integer
-        example: 1
-
   score-register:
     type: object
     properties:
@@ -1223,30 +1314,23 @@ definitions:
         example: 1
 
   score-show:
-    $ref: '#/definitions/score-backend'
-
-  ################################################################
-  ################################################################
-
-  check-in-code-backend:
     type: object
     properties:
-      code_id:
+      score_id:
         type: integer
         example: 1
-      code:
-        type: string
-        example: 6789
+      score:
+        type: integer
+        example: 95
+      user_id:
+        type: integer
+        example: 1
       class_id:
         type: integer
         example: 1
-      started:
-        type: boolean
-        example: false
-      expire_at:
-        type: string
-        format: time
-        example: "1551682932"
+
+  ################################################################
+  ################################################################
 
   check-in-code-show:
     type: object
@@ -1260,36 +1344,6 @@ definitions:
 
   ################################################################
   ################################################################
-
-  material-backend:
-    type: object
-    properties:
-      file_id:
-        type: integer
-        example: 1
-      filename:
-        type: string
-        example: "unit-1-slides.ppt"
-      internal_filename:
-        type: string
-        example: 'e4032bac-354b-4473-93c1-70c632d90bec'
-      size:
-        type: integer
-        example: 1024
-        description: (in bytes)
-      uploaded_at:
-        type: string
-        format: date
-        example: "2019-12-12"
-      uploader_id:
-        type: integer
-        example: 1
-      belong_type:
-        type: string
-        enum: [course, class]
-      belong_id:
-        type: integer
-        example: 1
 
   material-show:
     type: object
@@ -1309,31 +1363,6 @@ definitions:
         format: date
         example: "2019-12-12"
       uploader_id:
-        type: integer
-        example: 1
-
-  topic-backend:
-    type: object
-    properties:
-      topic_id:
-        type: integer
-        example: 1
-      title:
-        type: string
-        example: "Example-Topic"
-      content:
-        type: string
-        example: "This is the content of the topic!"
-      user_id:
-        type: integer
-        example: 1
-      created_at:
-        type: integer
-        example: "1552282678"
-      updated_at:
-        type: integer
-        example: "1552282678"
-      replies:
         type: integer
         example: 1
 
@@ -1372,25 +1401,6 @@ definitions:
         type: integer
         example: 1
 
-  reply-backend:
-    type: object
-    properties:
-      reply_id:
-        type: integer
-        example: 1
-      topic_id:
-        type: integer
-        example: 1
-      content:
-        type: string
-        example: "This is a reply!"
-      user_id:
-        type: integer
-        example: 1
-      created_at:
-        type: integer
-        example: "1552282678"
-
   reply-register:
     type: object
     properties:
@@ -1413,5 +1423,29 @@ definitions:
       created_at:
         type: integer
         example: "1552282678"
+
+  live-register:
+    type: object
+    properties:
+      title:
+        type: string
+        example: Online Q&A
+      introduction:
+        type: string
+        example: Welcome to our first live
+      start:
+        type: integer
+        example: 1552895329
+      duration:
+        type: integer
+        example: 120
+      classes:
+        type: array
+        items:
+          type: object
+          properties:
+            class_id:
+              type: integer
+              example: 1
 
 

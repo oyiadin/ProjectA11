@@ -54,9 +54,9 @@ class BaseHandler(tornado.web.RequestHandler):
         if self.settings.get("serve_traceback") and "exc_info" in kwargs:
             # in debug mode, try to send a traceback
             lines = list(traceback.format_exception(*kwargs["exc_info"]))
-            self.finish(status_code, self._reason, traceback=lines)
+            self.finish(status_code, traceback=lines)
         else:
-            self.finish(status_code, self._reason)
+            self.finish(status_code)
 
 
 class Error404Handler(BaseHandler):

@@ -21,7 +21,9 @@
     "pages/forum/create/index",
     "pages/forum/topic/index",
     "pages/score/score-entering/score-entering",
-    "pages/score/score-list/score-list"
+    "pages/score/score-list/score-list",
+    "pages/live/manager/manager",
+    "pages/live/manager/live_create/live_create"
   ],
   "window": {
     "backgroundTextStyle": "light",

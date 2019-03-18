@@ -1,0 +1,89 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">创建直播</view>
+  </view>
+
+  <view class="weui-cells__title">直播课程</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">是否面向班级</view>
+          <view class="weui-cell__ft">
+            <switch checked="{{is_checked}}" bindchange="changeSwitch"/>
+          </view>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input" wx:if="{{is_checked}}">
+        <view class="weui-cell__hd">
+            <view class="weui-label">面向班级名称</view>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入班级名称" bindinput='to_class_name'/>
+        </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">直播标题</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label">标题</view>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入标题" bindinput='set_live_name'/>
+        </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">简介</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="请输入简介" style="height: 3.3em" bindinput='set_live_description'/>
+          <view class="weui-textarea-counter">0/200</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">时间设置</view>
+  <view class="weui-cells weui-cells_after-title">
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">开始日期</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker mode="date" value="{{date}}" start="2019-03-03" end="2100-01-01" bindchange="bindDateStartDateActiveChange">
+          <view class="weui-input">{{start_date}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">开始时间</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindDateStartTimeActiveChange">
+          <view class="weui-input">{{start_time}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">持续时长</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker value="{{index}}" bindchange="bindDateTimeActiveChange" range="{{time_list}}">
+          <view class="weui-input">{{time_active}}小时</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-btn-area">
+    <button class="weui-btn" type="primary" bindtap="do_create">确定</button>
+  </view>
+
+</view>

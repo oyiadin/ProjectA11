@@ -1,10 +1,12 @@
 # coding=utf-8
+import subprocess
 import traceback
 import json
 
 import tornado.web
 import projecta11.db as db
 from projecta11.config import conf
+from projecta11.routers import handling
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -62,3 +64,12 @@ class BaseHandler(tornado.web.RequestHandler):
 class Error404Handler(BaseHandler):
     def prepare(self):
         self.write_error(404)
+
+
+if conf.app.debug:
+    @handling(r"/webhook/git/push")
+    class WebHookHandler(BaseHandler):
+        def post(self, *args, **kwargs):
+            if self.request.headers.get('X-GitHub-Event') == 'push':
+                print("Execute git pull github master")
+                subprocess.call("git pull", shell=True)

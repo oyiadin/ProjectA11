@@ -1,7 +1,7 @@
 # coding=utf-8
 import sqlalchemy
 
-import db
+import projecta11.db as db
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
 from projecta11.utils import require_session, role_in, parse_json_body, \

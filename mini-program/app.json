@@ -9,6 +9,8 @@
     "pages/check-in/student/do-check-in",
     "pages/check-in/teacher/start-check-in/start-check-in",
     "pages/check-in/teacher/checked-in-list/checked-in-list",
+    "pages/check-in/teacher/check-in-menu/check-in-menu",
+    "pages/check-in/teacher/check-in-manually/check-in-manually",
     "pages/material/material-list/material-list",
     "pages/material/video-playing/video-playing",
     "pages/course/course-create/course-create",

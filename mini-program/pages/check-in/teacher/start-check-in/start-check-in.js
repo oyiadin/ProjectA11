@@ -103,8 +103,8 @@ Page({
   },
 
   check_status: function() {
-    wx.redirectTo({
-      url: '../checked-in-list/checked-in-list',
+    wx.navigateTo({
+      url: '../check-in-menu/check-in-menu',
     });
   }
 });

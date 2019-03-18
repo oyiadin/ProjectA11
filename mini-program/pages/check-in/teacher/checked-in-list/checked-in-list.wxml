@@ -1,12 +1,15 @@
 <view class="page">
   <view class="page__hd">
-    <view class="page__title">已签到人员</view>
+    <view class="page__title">签到情况</view>
     <view class="page__desc">点击按钮刷新名单</view>
   </view>
+
   <view class="show_list">
     <view class="weui-flex head_list">
       <view class="weui-flex__item"><view class="placeholder">学号</view></view>
-      <view class="weui-flex__item"><view class="placeholder">用户名</view></view>
+      <view class="weui-flex__item"><view class="placeholder">姓名</view></view>
+      <view class="weui-flex__item"><view class="placeholder">状态</view></view>
+      <view class="weui-flex__item"><view class="placeholder">操作</view></view>
     </view>
     <view class="weui-flex information_list">
       <view class="weui-flex__item"><view class="placeholder">{{ staff_id }}</view></view>
@@ -16,7 +19,8 @@
 
   <view class="weui-footer weui-footer_fixed-bottom">
     <view class="weui-btn-area">
-      <button class="weui-btn-area" type="primary" plain="true" bindtap='get_student_list'>刷新</button>
+      <button class="weui-btn-area" type="default" plain="true" bindtap='check_in_manualy'>刷新</button>
+      <button class="weui-btn-area" type="primary" plain="true" bindtap='get_student_list'>手动签到</button>
     </view>
   </view>
 </view>

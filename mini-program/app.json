@@ -23,7 +23,8 @@
     "pages/score/score-entering/score-entering",
     "pages/score/score-list/score-list",
     "pages/live/manager/manager",
-    "pages/live/manager/live_create/live_create"
+    "pages/live/manager/live_create/live_create",
+    "pages/live/watch/watch"
   ],
   "window": {
     "backgroundTextStyle": "light",

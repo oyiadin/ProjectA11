@@ -5,6 +5,7 @@ Page({
   data: {
     staff_id: "",
     password: "",
+    confirm_password: "",
     is_male: "",
     name: "",
     src: "",
@@ -33,6 +34,8 @@ Page({
     this.data.staff_id = e.detail.value; },
   set_password: function (e) {
     this.data.password = e.detail.value; },
+  confirm_password: function (e) {
+    this.data.confirm_password = e.detail.value;},
   set_name: function (e) {
     this.data.name = e.detail.value; },
   set_captcha: function(e) {
@@ -72,7 +75,14 @@ Page({
         icon: 'none',
         duration: 2000
       });
-    } else {
+    } else if(this.data.password != this.data.confirm_password){
+      wx.showToast({
+        title: '两次输入的密码不一致！请重试',
+        icon: 'none',
+        duration: 2000
+      });
+    }
+    else {
       u.request(
         'PUT', '/credential/account', 
         {

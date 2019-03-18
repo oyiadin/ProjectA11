@@ -5,9 +5,12 @@
   text-align: center;
   padding-bottom: 30px;
 }
-/* .staff_id{
-  padding-right: 100px;
-} */
+.status{
+  padding-left: 30px;
+}
+.user_id{
+  padding-right: 30px;  
+}
 .head_list{
   font-weight: bold;
 }
@@ -16,4 +19,7 @@
 }
 .checked, .unchecked{
   padding-bottom: 20px;
+}
+.weui-check__label{
+  width: 1%;
 }

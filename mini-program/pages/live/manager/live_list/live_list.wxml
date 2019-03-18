@@ -12,13 +12,13 @@
       <navigator url="../../class/classes-list/classes-list?course_id={{item.course_id}}&course_name={{item.course_name}}">
         <view class="weui-form-preview__hd">
           <view class="weui-form-preview__item">
-            <view class="weui-form-preview__label">课程名称</view>
+            <view class="weui-form-preview__label">直播课程名称</view>
             <view class="weui-form-preview__value_in-hd">{{item.course_name}}</view>
           </view>
         </view>
         <view class="weui-form-preview__bd">
           <view class="weui-form-preview__item">
-            <view class="weui-form-preview__label">开课时间</view>
+            <view class="weui-form-preview__label">开始时间</view>
             <view class="weui-form-preview__value">{{item.date1}} ~ {{item.date2}}</view>
           </view>
         </view>

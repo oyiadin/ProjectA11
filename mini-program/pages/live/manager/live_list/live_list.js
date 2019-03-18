@@ -1,4 +1,7 @@
 // pages/live/manager/live_list/live_list.js
+var u = getApp().utils;
+
+
 Page({
 
   /**
@@ -12,7 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var role = wx.getStorageSync('role');
+    this.setData({ role: role });
+    this.refresh();
   },
 
   /**

@@ -6,10 +6,10 @@
   <form bindsubmit="formSubmit">
     <view class='content'>
       <block wx:for="{{Length}}" wx:key="item">
-        <input class='iptbox' value="{{Value.length>=index+1?Value[index]:''}}" disabled password='{{ispassword}}' catchtap='Tap'></input>
+        <input class='iptbox' type='number' value="{{Value.length>=index+1?Value[index]:''}}" disabled password='{{ispassword}}' catchtap='Tap'></input>
       </block>
     </view>
-    <input name="password" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
+    <input name="password" type='number' password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
     <view class="weui-footer weui-footer_fixed-bottom">
       <button class="weui-btn" type="primary" plain="true" formType="submit" bindtap='submit_code'>提交</button>
     </view>

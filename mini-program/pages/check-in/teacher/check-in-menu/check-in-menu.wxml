@@ -1,0 +1,11 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">签到管理菜单</view>
+    <view class="page__desc">check-in-menu</view>
+  </view>
+  <button class="weui-btn" type="primary" bindtap='start_check_in'>开始签到</button>
+  <button class="weui-btn" type="default" bindtap='check_in_list'>查看3.18的签到情况</button>
+  <button class="weui-btn" type="default" bindtap='check_in_list'>查看3.17的签到情况</button>
+  <button class="weui-btn" type="default" bindtap='check_in_list'>查看3.16的签到情况</button>
+  <button class="weui-btn" type="default" bindtap='check_in_list'>查看3.15的签到情况</button>
+</view>

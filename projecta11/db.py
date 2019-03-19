@@ -151,7 +151,8 @@ def startup(conf):
             uri += '{}={}'.format(key, conf.db.options[key])
 
     engine = create_engine(uri, echo=conf.app.debug,
-                           pool_size=conf.db.pool_size, max_overflow=5)
+                           pool_size=conf.db.pool_size, max_overflow=5,
+                           pool_recycle=3600)
     Session = sessionmaker(bind=engine)
 
 

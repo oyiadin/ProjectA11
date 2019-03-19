@@ -26,6 +26,7 @@ tags:
   - name: misc
 schemes:
   - http
+  - https
 
 paths:
   /credential/session_id:

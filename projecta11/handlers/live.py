@@ -1,7 +1,10 @@
 # coding=utf-8
-
+import time
+import hashlib
 import sqlalchemy
+
 import projecta11.db as db
+from projecta11.config import conf
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
 from projecta11.utils import require_session, role_in, parse_json_body, \
@@ -66,10 +69,10 @@ class LiveInfoHandler(BaseHandler):
         if selected is None:
             return self.finish(404, 'no matched live')
 
-        selected.title=data['title'],
-        selected.introduction=data['introduction'],
-        selected.start=data['start'],
-        selected.duration=data['duration'],
+        selected.title = data['title'],
+        selected.introduction = data['introduction'],
+        selected.start = data['start'],
+        selected.duration = data['duration'],
 
         try:
             rels = []
@@ -87,12 +90,41 @@ class LiveInfoHandler(BaseHandler):
 @handling(r"/live/(\d+)/start")
 class LiveStartHandler(BaseHandler):
     @require_session
-    def post(self, live_id):
-        pass
+    @role_in(db.UserRole.teacher)
+    def get(self, live_id, sess=None):
+        selected = self.db.query(db.Live).filter(
+            db.Live.live_id == live_id).first()
+        if selected is None:
+            return self.finish(404, 'no matched live')
+
+        if selected.is_streaming:
+            return self.finish(405, 'the live is currently streaming')
+
+        selected.is_streaming = True
+        self.db.commit()
+
+        stream_name = 'u{}s{}'.format(sess['user_id'].decode(), live_id)
+        tx_time = hex(int(time.time()) + 86400)[2:].upper()  # 24h
+        tx_secret = hashlib.md5(
+            (conf.app.livepush_secret + stream_name + tx_time).encode()
+        ).hexdigest()
+
+        self.finish(url='rmtp://{}/live/{}?txSecret={}&txTime={}'.format(
+            conf.app.livepush_domain, stream_name, tx_secret, tx_time))
 
 
 @handling(r"/live/(\d+)/end")
 class LiveEndHandler(BaseHandler):
     @require_session
-    def post(self, live_id):
-        pass
+    @role_in(db.UserRole.teacher)
+    def post(self, live_id, sess=None):
+        selected = self.db.query(db.Live).filter(
+            db.Live.live_id == live_id).first()
+        if selected is None:
+            return self.finish(404, 'no matched live')
+
+        if not selected.is_streaming:
+            return self.finish(405, "the live isn't currently streaming")
+
+        selected.is_streaming = False
+        self.db.commit()

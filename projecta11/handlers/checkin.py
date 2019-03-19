@@ -144,15 +144,17 @@ class CheckInManuallyHandler(BaseHandler):
 class CheckedInListHandler(BaseHandler):
     @require_session
     def get(self, code_id, sess=None):
-        selected = self.db.query(db.CheckedInLogs).filter(
-            db.CheckedInLogs.code_id == code_id).all()
+        selected = self.db.query(db.CheckedInLogs, db.User.name).join(db.User) \
+            .filter(db.CheckedInLogs.code_id == code_id).all()
 
         list = []
-        for i in selected:
+        for i, user_name in selected:
             user = self.db.query(db.User).filter(
                 db.User.user_id == i.user_id).first()
             list.append(dict(
+                log_id=i.log_id,
                 user_id=user.user_id,
-                staff_id=user.staff_id))
+                staff_id=user.staff_id,
+                user_name=user_name))
 
         self.finish(list=list)

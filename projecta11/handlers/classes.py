@@ -9,7 +9,7 @@ from projecta11.utils import require_session, parse_json_body, keys_filter, \
 @handling(r"/course/(\d+)/classes")
 class ClassesListHandler(BaseHandler):
     def get(self, class_id):
-        selected = self.db.query(db.Class).filter(
+        selected = self.db.query(db.Class, db.User.name).filter(
             db.Class.class_id == class_id).all()
 
         list = []

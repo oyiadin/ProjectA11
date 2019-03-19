@@ -7,6 +7,8 @@ Page({
     checkboxItems: [
       { value: '0', checked: false }
     ],
+    operationCodes: ["已到", "迟到", "早退", "旷课"],
+    operationCodeIndex: 0
   },
 
   onLoad: function (options) {
@@ -18,6 +20,14 @@ Page({
         this.setData({ logs: res.data.list });
       }
     )
+  },
+
+  bindoperationCodeChange: function (e) {
+    console.log('picker operation code 发生选择改变，携带值为', e.detail.value);
+
+    this.setData({
+      operationCodeIndex: e.detail.value
+    })
   },
 
   checkboxChange: function (e) {

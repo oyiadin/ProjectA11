@@ -25,7 +25,7 @@ App({
       date.setTime(timestamp * 1000);
       var Y = date.getFullYear() + '-';
       var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-      var D = (date.getDate() + 1 < 10 ? '0' + (date.getDate() + 1) : date.getDate() + 1);
+      var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
       return Y + M + D;
     },
     gen_url: function(url) {

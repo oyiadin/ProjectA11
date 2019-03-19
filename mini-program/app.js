@@ -14,8 +14,6 @@ App({
 
   utils: {
     get_timestamp: function (date) {
-      date = date + ' 00:00:00';
-      date = date.substring(0, 19);
       date = date.replace(/-/g, '/');
       var timestamp = new Date(date).getTime();
       return timestamp / 1000;

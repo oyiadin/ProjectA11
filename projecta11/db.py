@@ -123,10 +123,12 @@ class Reply(Base):
 class Live(Base):
     __tablename__ = "lives"
     live_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey(User.user_id))
     title = Column(String(64))
     introduction = Column(String(1024))
     start = Column(Integer)
     duration = Column(SmallInteger)  # in mins
+    is_public = Column(Boolean)
     is_streaming = Column(Boolean)
 
 

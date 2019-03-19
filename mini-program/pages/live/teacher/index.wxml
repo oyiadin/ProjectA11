@@ -1,0 +1,39 @@
+<view class="page">
+  <view class="page__hd block">
+    <view class="page__title">直播活动列表</view>
+    <view class="page__desc">点击对应活动即可进入直播页面</view>
+  </view>
+  <view class="page__bd">
+    <navigator url="./create/create?user_id={{user_id}}" wx:if="{{role == 1}}">
+      <button bindtap="create_class">创建新直播活动</button>
+    </navigator>
+    <view class="weui-form-preview" hover-class="hover" wx:for="{{lives}}" wx:key="item.course_id">
+      <navigator url="streaming?live_id={{item.live_id}}">
+        <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">活动标题</view>
+            <view class="weui-form-preview__value_in-hd">{{item.title}}</view>
+          </view>
+        </view>
+        <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">活动简介</view>
+            <view class="weui-form-preview__value">{{item.brief}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">预定时间</view>
+            <view class="weui-form-preview__value">{{item.date}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">预定时长</view>
+            <view class="weui-form-preview__value">{{item.duration / 60}}小时</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">正在直播</view>
+            <view class="weui-form-preview__value">{{item.is_streaming ? "是" : "否"}}</view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>

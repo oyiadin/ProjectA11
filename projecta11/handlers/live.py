@@ -17,14 +17,19 @@ class LiveCreateHandler(BaseHandler):
     @role_in(db.UserRole.teacher)
     @parse_json_body
     def put(self, data=None, sess=None):
-        keys = ('title', 'introduction', 'start', 'duration', 'classes')
+        keys = (
+            'title', 'introduction', 'start', 'duration', 'classes',
+            'is_public'
+        )
         data = keys_filter(data, keys)
 
         new_item = db.Live(
             title=data['title'],
+            user_id=sess['user_id'],
             introduction=data['introduction'],
             start=data['start'],
             duration=data['duration'],
+            is_public=data['is_public'],
             is_streaming=False)
         self.db.add(new_item)
         self.db.commit()
@@ -52,6 +57,7 @@ class LiveInfoHandler(BaseHandler):
 
         return self.finish(dict(
             title=selected.title,
+            user_id=selected.user_id,
             introduction=selected.introduction,
             start=selected.start,
             duration=selected.duration,
@@ -85,6 +91,25 @@ class LiveInfoHandler(BaseHandler):
         except sqlalchemy.exc.IntegrityError:
             # sqlalchemy would rollback automatically for us
             return self.finish(404, 'no matched class_id')
+
+
+@handling(r"/user/(\d+)/live/list")
+class UserLiveListHandler(BaseHandler):
+    @require_session
+    @role_in(db.UserRole.teacher)
+    def get(self, user_id, sess=None):
+        selected = self.db.query(db.Live).filter(
+            db.Live.user_id == user_id).all()
+
+        list = []
+        for live in selected:
+            list.append(dict(
+                title=live.title,
+                brief=live.introduction[:20],
+                start=live.start,
+                duration=live.duration,
+                is_streaming=live.is_streaming))
+        self.finish(total=len(list), list=list)
 
 
 @handling(r"/live/(\d+)/start")

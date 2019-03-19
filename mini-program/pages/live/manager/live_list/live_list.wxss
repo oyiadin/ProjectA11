@@ -1,8 +1,0 @@
-/* pages/live/manager/live_list/live_list.wxss */
-.weui-form-preview {
-    margin-bottom: 25px;
-}
-
-.hover {
-  background-color: #eee;
-}

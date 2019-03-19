@@ -21,17 +21,10 @@
     "pages/forum/topic/index",
     "pages/score/score-entering/score-entering",
     "pages/score/score-list/score-list",
-<<<<<<< HEAD
-    "pages/live/manager/live_create/live_create",
-    "pages/live/watch/watch",
-    "pages/live/manager/live_list/live_list",
-    "pages/live/watch/pick_room_id/pick_room_id"
-=======
     "pages/live/teacher/index",
     "pages/live/teacher/create/create",
     "pages/live/teacher/streaming",
     "pages/live/student/watch"
->>>>>>> d1136b707cc8084d8e759ec2fe4e0e5abb7e5ae4
   ],
   "window": {
     "backgroundTextStyle": "light",

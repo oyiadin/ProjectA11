@@ -8,9 +8,9 @@ from projecta11.utils import require_session, parse_json_body, keys_filter, \
 
 @handling(r"/course/(\d+)/classes")
 class ClassesListHandler(BaseHandler):
-    def get(self, course_id):
-        selected = self.db.query(db.Class, db.User.name).join(db.User).filter(
-            db.Class.course_id == course_id).all()
+    def get(self, class_id):
+        selected = self.db.query(db.CheckInCodes).filter(
+            db.CheckInCodes.class_id == class_id).all()
 
         list = []
         for i, teacher_name in selected:

@@ -52,7 +52,7 @@
             </navigator>
           </block>
           <block wx:if="{{ user_id && role == 1}}">
-            <navigator url="404">
+            <navigator url="../../check-in/teacher/check-in-menu/check-in-menu?class_id={{item.class_id}}">
               <button class="weui-btn mini-btn" type="default" size="mini">考勤情况</button>
             </navigator>
             <navigator url="../../forum/index?class_id={{item.class_id}}">

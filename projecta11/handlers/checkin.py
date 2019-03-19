@@ -38,6 +38,25 @@ class NewCheckInCodeHandler(BaseHandler):
         self.finish(**ret)
 
 
+@handling(r"/check-in/class/(\d+)/activities/list")
+class CheckInActivitiesHandler(BaseHandler):
+    @require_session
+    @role_in(db.UserRole.teacher)
+    def get(self, class_id, sess=None):
+        selected = self.db.query(db.CheckInCodes) \
+            .filter(db.CheckInCodes.class_id == class_id) \
+            .order_by(db.CheckInCodes.expire_at).all()
+
+        list = []
+        for i in selected:
+            list.append(dict(
+                code_id=i.code_id,
+                started=i.started,
+                expire_at=i.expire_at))
+
+        self.finish(total=len(list), list=list)
+
+
 @handling(r"/check-in/code/(\d+)/start")
 class StartCheckInHandler(BaseHandler):
     @require_session

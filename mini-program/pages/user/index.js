@@ -54,7 +54,7 @@ Page({
     var complete = function() {
       wx.removeStorageSync('session_id');
       wx.removeStorageSync('is_login');
-      wx.redirectTo({
+      wx.reLaunch({
         url: '/pages/credential/login/login',
       });
     }

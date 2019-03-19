@@ -1,12 +1,22 @@
+var u = getApp().utils;
+
+
 Page({
-  start_check_in: function() {
-    wx.navigateTo({
-      url: '../start-check-in/start-check-in',
-    })
+  data: {
+    activities: {},
   },
-  check_in_list: function () {
-    wx.navigateTo({
-      url: '../checked-in-list/checked-in-list',
-    })
-  }
+
+  onLoad: function (options) {
+    var class_id = options.class_id;
+    u.request(
+      'GET', '/check-in/class/' + class_id + '/activities/list', {},
+      (res) => {
+        var activities = res.data.list;
+        for (var i = 0; i < activities.length; i++) {
+          activities[i].date = u.timestamp2date(activities[i].expire_at);
+        }
+        this.setData({ activities: res.data.list });
+      }
+    )
+  },
 })

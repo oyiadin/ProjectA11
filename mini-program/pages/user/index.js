@@ -43,7 +43,7 @@ Page({
       },
       {
         title: '直播管理',
-        url: '../live/manager/manager'
+        url: '../live/manager/live_list/live_list'
       });
     }
 

@@ -8,18 +8,18 @@
     <navigator url="../live_create/live_create" wx:if="{{role == 2}}">
       <button bindtap="create_class">创建新直播课程</button>
     </navigator>
-    <view class="weui-form-preview" hover-class="hover" wx:for="{{courses}}" wx:key="item.course_id">
+    <view class="weui-form-preview" hover-class="hover" wx:for="{{live_class}}" wx:key="item.course_id">
       <navigator url="../../class/classes-list/classes-list?course_id={{item.course_id}}&course_name={{item.course_name}}">
         <view class="weui-form-preview__hd">
           <view class="weui-form-preview__item">
             <view class="weui-form-preview__label">直播课程名称</view>
-            <view class="weui-form-preview__value_in-hd">{{item.course_name}}</view>
+            <view class="weui-form-preview__value_in-hd">{{item.name}}</view>
           </view>
         </view>
         <view class="weui-form-preview__bd">
           <view class="weui-form-preview__item">
             <view class="weui-form-preview__label">开始时间</view>
-            <view class="weui-form-preview__value">{{item.date1}} ~ {{item.date2}}</view>
+            <view class="weui-form-preview__value">{{item.start}} ~ {{item.end}}</view>
           </view>
         </view>
       </navigator>

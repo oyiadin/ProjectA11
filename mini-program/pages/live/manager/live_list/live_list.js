@@ -8,9 +8,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    live_class: [],
+    live_class: {
+      name: '小圆课堂',
+      start: "2019-01-01",
+      end: "2019-10-10"
+    },
   },
 
+  create_class: function() {
+    wx.navigateTo({
+      url: '../live_create/live_create',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

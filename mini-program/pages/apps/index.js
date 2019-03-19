@@ -10,7 +10,7 @@ Page({
       },  
       {
         title: '观看直播',
-        url: '../live/watch/pick_room_id/pick_room_id',
+        url: '../live/student/pick',
       }, 
     ]
   },

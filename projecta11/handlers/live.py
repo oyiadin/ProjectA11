@@ -55,13 +55,15 @@ class LiveInfoHandler(BaseHandler):
         if selected is None:
             return self.finish(404, 'no matched live')
 
-        return self.finish(dict(
+        return self.finish(
             title=selected.title,
             user_id=selected.user_id,
             introduction=selected.introduction,
             start=selected.start,
             duration=selected.duration,
-            is_streaming=selected.is_streaming))
+            is_streaming=selected.is_streaming,
+            play_url='{}/u{}:s{}'.format(
+                conf.app.liveplay_prefix, selected.user_id, live_id))
 
     @require_session
     @role_in(db.UserRole.teacher)
@@ -104,6 +106,7 @@ class UserLiveListHandler(BaseHandler):
         list = []
         for live in selected:
             list.append(dict(
+                live_id=live.live_id,
                 title=live.title,
                 brief=live.introduction[:20],
                 start=live.start,
@@ -116,7 +119,7 @@ class UserLiveListHandler(BaseHandler):
 class LiveStartHandler(BaseHandler):
     @require_session
     @role_in(db.UserRole.teacher)
-    def get(self, live_id, sess=None):
+    def post(self, live_id, sess=None):
         selected = self.db.query(db.Live).filter(
             db.Live.live_id == live_id).first()
         if selected is None:
@@ -138,7 +141,7 @@ class LiveStartHandler(BaseHandler):
             conf.app.livepush_domain, stream_name, tx_secret, tx_time))
 
 
-@handling(r"/live/(\d+)/end")
+@handling(r"/live/(\d+)/stop")
 class LiveEndHandler(BaseHandler):
     @require_session
     @role_in(db.UserRole.teacher)

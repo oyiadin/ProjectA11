@@ -24,6 +24,7 @@
     "pages/live/teacher/index",
     "pages/live/teacher/create/create",
     "pages/live/teacher/streaming",
+    "pages/live/student/pick",
     "pages/live/student/watch"
   ],
   "window": {

@@ -1,0 +1,19 @@
+<!--pages/live/watch/pick/pick.wxml-->
+<view class="page">
+  <view class="weui-msg">
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">房间号输入</view>
+      <view class="weui-msg__desc">输入给定的直播房间号码</view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请输入房间号" bindinput='change_live_id' />
+      </view>
+    </view>
+    <view class="weui-msg__opr-area">
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap='submit'>前往房间</button>
+      </view>
+    </view>
+  </view>
+</view>

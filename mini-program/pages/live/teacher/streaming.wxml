@@ -1,6 +1,17 @@
 <view class="page-body">
   <view class="page-section tc">
-    <video id="myVideo" src="{{src}}" binderror="videoErrorCallback" danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video>
+    <live-pusher
+      id="pusher"
+      autopush="true"
+      url="{{streaming_url}}"
+      mode="SD"
+      beauty="1"
+      whiteness="1"
+      min-cache="0.2"
+      max-cache="0.8"
+      bindstatechange="statechange"
+      style="height:400rpx"
+    />
 
     <view class="weui-cells">
       <view class="weui-cell weui-cell_input">
@@ -14,8 +25,9 @@
     </view>
     <view class="btn-area">
       <button bindtap="bindSendDanmu" class="page-body-button" type="primary" formType="submit">发送弹幕</button>
-      <button bindtap="bindPlay" class="page-body-button" type="primary">播放</button>
-      <button bindtap="bindPause" class="page-body-button" type="primary">暂停</button>
+      <button bindtap="bindStartStreaming" class="page-body-button" type="start_streaming" wx:if="{{!is_streaming}}">开始直播</button>
+      <button bindtap="bindStopStreaming" class="page-body-button" type="start_streaming" wx:if="{{is_streaming}}">结束直播</button>
+      <button bindtap="bindStopStreaming" class="page-body-button" type="start_streaming" wx:if="{{!is_streaming}}">结束直播</button>
     </view>
   </view>
 </view>

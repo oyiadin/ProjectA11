@@ -1,0 +1,98 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">创建直播活动</view>
+  </view>
+
+  <view class="weui-cells__title">活动信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">标题</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请输入标题" bindinput='change_title'/>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">简介</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入简介" style="height: 3.3em" bindinput='change_introduction'/>
+        <view class="weui-textarea-counter">0/200</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">预定时间</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">开始日期</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker mode="date" value="{{date}}" start="2019-01-01" end="2020-01-01" bindchange="change_date">
+          <view class="weui-input">{{date}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">开始时间</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="change_time">
+          <view class="weui-input">{{time}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">持续时长</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker value="{{index}}" bindchange="change_duration" range="{{duration_options}}">
+          <view class="weui-input">{{duration}}小时</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">面向班级</view>
+  <view class="weui-cells weui-cells_after-title">
+    <checkbox-group bindchange="checkboxChange">
+      <label class="weui-cell weui-check__label" wx:for="{{classes}}" wx:key="value">
+        <checkbox class="weui-check" value="{{item.class_id}}" checked="{{item.checked}}"/>
+        <view class="weui-cell__hd weui-check__hd_in-checkbox">
+          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+        </view>
+        <view class="weui-cell__bd">
+          {{item.course_name}}-{{item.class_name}}
+        </view>
+      </label>
+    </checkbox-group>
+    <view class="weui-cell">
+      <text>以上班级的学生将在直播开始前统一收到开播提醒</text>
+    </view>
+  </view>
+
+  <view class="weui-cells">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">是否公开</view>
+      <view class="weui-cell__ft">
+        <switch checked="{{is_public}}" bindchange="change_public"/>
+      </view>
+    </view>
+
+    <view class="weui-cell" wx:if="{{is_public}}">
+      <text>此次活动将可以由任何已登录的账号通过活动 ID 进入</text>
+    </view>
+  </view>
+
+  <view class="weui-btn-area">
+    <button class="weui-btn" type="primary" bindtap="submit">确定</button>
+  </view>
+</view>

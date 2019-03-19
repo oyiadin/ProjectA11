@@ -1,0 +1,7 @@
+.weui-form-preview {
+    margin-bottom: 25px;
+}
+
+.hover {
+  background-color: #eee;
+}

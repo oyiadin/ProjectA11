@@ -5,11 +5,15 @@
   text-align: center;
   padding-bottom: 30px;
 }
-.status{
+/* .status{
   padding-left: 30px;
 }
 .user_id{
   padding-right: 30px;  
+} */
+.weui-select{
+  width: 70%;
+  background-color:#f8f8f8;
 }
 .head_list{
   font-weight: bold;

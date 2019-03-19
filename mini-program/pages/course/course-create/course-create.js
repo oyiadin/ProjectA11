@@ -26,8 +26,8 @@ Page({
   
   // 创建课程
   do_create: function () {
-    var start = u.get_timestamp(this.data.date1),
-          end = u.get_timestamp(this.data.date2);
+    var start = u.get_timestamp(this.data.date1 + ' 00:00:00'),
+          end = u.get_timestamp(this.data.date2 + ' 00:00:00');
     u.request(
       'PUT', '/course',
       {

@@ -64,6 +64,9 @@
             <navigator url="404">
               <button class="weui-btn mini-btn" type="default" size="mini">教学资料管理</button>
             </navigator>
+            <navigator url="../live/">
+              <button class="weui-btn mini-btn" type="default" size="mini">教学资料管理</button>
+            </navigator>
           </block>
         </view>
       </view>

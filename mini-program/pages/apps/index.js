@@ -7,7 +7,11 @@ Page({
       {
         title: '课程列表',
         url: '../course/courses-list/courses-list',
-      },
+      },  
+      {
+        title: '观看直播',
+        url: '../live/watch/pick_room_id/pick_room_id',
+      }, 
     ]
   },
 

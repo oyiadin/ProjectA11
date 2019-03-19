@@ -23,7 +23,8 @@
     "pages/score/score-list/score-list",
     "pages/live/manager/live_create/live_create",
     "pages/live/watch/watch",
-    "pages/live/manager/live_list/live_list"
+    "pages/live/manager/live_list/live_list",
+    "pages/live/watch/pick_room_id/pick_room_id"
   ],
   "window": {
     "backgroundTextStyle": "light",

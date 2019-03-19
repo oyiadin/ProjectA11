@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
@@ -51,34 +51,6 @@
 					"name": "remote",
 					"pathName": "pages/credential/login/login",
 					"query": "host=project-a11.lwh.red&port=8888&protocol=https",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "stu-check-in",
-					"pathName": "pages/check-in/student/do-check-in",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 3,
-					"name": "start-check-in",
-					"pathName": "pages/check-in/teacher/start-check-in/start-check-in",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "checked-in-list",
-					"pathName": "pages/check-in/teacher/checked-in-list/checked-in-list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "check-in-manually",
-					"pathName": "pages/check-in/teacher/check-in-manually/check-in-manually",
-					"query": "",
 					"scene": null
 				}
 			]

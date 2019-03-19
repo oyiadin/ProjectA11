@@ -22,7 +22,7 @@
                   </view>
                   <view class="weui-media-box__info__meta weui-media-box__info__meta_extra"
                         wx:if="{{item.created_at != item.updated_at}}">
-                    更新于{{item.create_date}}
+                    更新于{{item.update_date}}
                   </view>
                   <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{item.replies}}条回复</view>
                 </view>

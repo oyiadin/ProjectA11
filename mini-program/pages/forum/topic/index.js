@@ -67,7 +67,9 @@ Page({
     u.request(
       'GET', url, {},
       (res) => {
-        this.setData({ topic: res.data });
+        var topic = res.data;
+        topic.date = u.timestamp2date(topic.created_at);
+        this.setData({ topic: topic });
         u.request(
           'GET', url + '/replies', {},
           (res) => {

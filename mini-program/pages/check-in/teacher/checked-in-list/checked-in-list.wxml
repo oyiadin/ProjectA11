@@ -6,33 +6,27 @@
 
   <view class="show_list">
     <view class="weui-flex head_list">
-      <view class="weui-flex__item status"><view class="placeholder">状态</view></view>
-      <view class="weui-flex__item staff_id"><view class="placeholder">姓名</view></view>
-      <view class="weui-flex__item user_id"><view class="placeholder">学号</view></view>
+      <view class="weui-flex__item status">状态</view>
+      <view class="weui-flex__item staff_id">姓名</view>
+      <view class="weui-flex__item user_id">学号</view>
     </view>
-    <view class="weui-flex information_list">
-    <view class="weui-flex__item"><view class="placeholder">      
-      <checkbox-group bindchange="checkboxChange">
-        <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
-          <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
-
-          <view class="weui-cell__hd weui-check__hd_in-checkbox">
-            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
-              <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
-          </view>
-          <view class="weui-cell__bd">{{item.name}}</view>
-        </label>
-      </checkbox-group></view></view>
-      <view class="weui-flex__item"><view class="placeholder"></view></view>
-      <view class="weui-flex__item"><view class="placeholder">{{ user_id }}</view></view>
-      <view class="weui-flex__item"><view class="placeholder">{{ staff_id }}</view></view>
-    </view>
-  </view>
-
-  <view class="weui-footer weui-footer_fixed-bottom">
-    <view class="weui-btn-area">
-      <button class="weui-btn-area" type="default" plain="true" bindtap='get_student_list'>刷新</button>
-      <button class="weui-btn-area" type="primary" plain="true" bindtap=''>手动签到</button>
+    <view class="weui-flex information_list"
+          wx:for="{{logs}}" wx:key="{{item.log_id}}">
+      <view class="weui-flex__item">
+        <checkbox-group bindchange="checkboxChange">
+          <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
+            <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+            <view class="weui-cell__hd weui-check__hd_in-checkbox">
+              <icon class="weui-icon-checkbox_circle" type="circle" size="22" wx:if="{{!item.checked}}"></icon>
+              <icon class="weui-icon-checkbox_success" type="success" size="22" wx:if="{{item.checked}}"></icon>
+            </view>
+            <view class="weui-cell__bd">{{item.name}}</view>
+          </label>
+        </checkbox-group>
+      </view>
+      <view class="weui-flex__item"></view>
+      <view class="weui-flex__item">{{user_id}}</view>
+      <view class="weui-flex__item">{{staff_id}}</view>
     </view>
   </view>
 </view>

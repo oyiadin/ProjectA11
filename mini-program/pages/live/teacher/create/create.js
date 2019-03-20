@@ -44,8 +44,29 @@ Page({
     this.setData({ title: e.detail.value })
   },
 
+  // 计算字数
+  strlen: function(str){
+    var len = 0;
+    for(var i = 0; i<str.length; i++) {
+      var c = str.charCodeAt(i);
+      //单字节加1   
+      if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+        len++;
+      }
+      else {
+        len += 2;
+      }
+    }
+      return len;  
+    },
+
+
   change_introduction: function (e) {
-    this.setData({ introduction: e.detail.value })
+    var word_len = this.strlen(e.detail.value);
+    this.setData({ 
+      introduction: e.detail.value,
+      word_length: word_len
+    })
   },
 
   change_date: function (e) {

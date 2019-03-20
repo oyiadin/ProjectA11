@@ -20,7 +20,7 @@
       <view class="weui-cell">
         <view class="weui-cell__bd">
           <textarea class="weui-textarea" placeholder="请输入简介" style="height: 3.3em" bindinput='change_introduction'/>
-        <view class="weui-textarea-counter">0/200</view>
+        <view class="weui-textarea-counter">{{word_length}}/200</view>
       </view>
     </view>
   </view>

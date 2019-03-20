@@ -98,9 +98,9 @@ Page({
           wx.showToast({
             title: '注册成功！',
             icon: 'success',
-            duration: 2000
+            duration: 1200
           });
-          setInterval(wx.navigateBack, 1000);
+          setTimeout(wx.navigateBack, 1200);
         },
         function (res) {
           that.refetch_captcha();

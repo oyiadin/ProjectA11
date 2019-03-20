@@ -2,13 +2,32 @@ var u = getApp().utils;
 
 
 function fetch_new_session_id(that, callback) {
+  console.log('fetching new session_id');
   wx.setStorageSync('is_login', 0);
   u.request(
     'GET', '/credential/session_id', {},
-    function (res) {
+    (res) => {
       that.setData({ session_id: res.data.session_id });
       wx.setStorageSync('session_id', res.data.session_id);
       callback();
+    },
+    (res) => {
+      wx.hideLoading();
+      wx.showModal({
+        title: '网络错误',
+        content: '服务器好像开小差了QAQ',
+        confirmText: '重试',
+        success: (res) => {
+          if (res.confirm)
+            fetch_new_session_id(that, callback);
+          else
+            wx.showToast({
+              title: '小程序在下次重启前将无法正常运行，请在重启后重试',
+              icon: 'none',
+              duration: 5000,
+            });
+        }
+      })
     }
   );
 }
@@ -27,6 +46,7 @@ Page({
   },
 
   bind_account_type_change: function (e) {
+    console.log("account type changed");
     this.setData({
       account_type: this.data.account_types[e.detail.value],
       id_name: this.data.id_names[e.detail.value],
@@ -51,25 +71,27 @@ Page({
   },
 
   refetch_captcha: function (e) {
+    console.log('refetch captcha');
     var src = u.gen_url('/misc/captcha')
       + '?session_id=' + this.data.session_id
       + '&app_id=9c15af0d3e0ea84d'
       + '&t=' + Date.parse(new Date());
-    console.log('src=', src);
-    this.setData({
-      src: src,
-    });
+    console.log('src =', src);
+    this.setData({ src: src });
+    wx.hideLoading();
   },
 
-  do_login: function (e) {
-    const that = this;
+  submit: function (e) {
     if (!this.data.staff_id || !this.data.password || !this.data.captcha) {
-      wx.showToast({
+      wx.showModal({
         title: '请补全所有必填项',
-        icon: 'none',
         duration: 2000
       });
     } else {
+      wx.showLoading({
+        title: '登录中',
+      })
+      console.log('[login] submitting...');
       u.request(
         'POST', '/credential/account',
         {
@@ -78,7 +100,8 @@ Page({
           captcha: this.data.captcha,
           role: parseInt(this.data.role),
         },
-        function (res) {
+        (res) => {
+          wx.hideLoading();
           wx.setStorage({
             key: 'is_login',
             data: 1 });
@@ -87,38 +110,34 @@ Page({
             data: res.data.user_id });
           wx.setStorage({
             key: 'role',
-            data: that.data.role });
+            data: this.data.role });
           wx.setStorage({
             key: 'name',
             data: res.data.name });
           wx.switchTab({ url: '/pages/apps/index' });
         },
-        function (res) {
-          that.refetch_captcha();
+        (res) => {
+          wx.hideLoading();
+          this.refetch_captcha();
           var title = '发生错误，请重试';
           if (res.statusCode == 405) {
             title = '验证码错误，请重试';
           } else if (res.statusCode == 404) {
-            title = '请检查账号类型、'+that.data.id_name+'、密码';
+            title = '请检查账号类型、'+this.data.id_name+'、密码后重试';
           }
-          wx.showToast({
+          wx.showModal({
             title: title,
-            icon: 'none',
-          })
+            duration: 2000,
+          });
         }
       );
     }
   },
 
-  do_register: function(e) {
-    wx.navigateTo({
-      url: '../register/register',
-    })
-  },
-
-  onLoad: function(e) {
-    const that = this;
-
+  onLoad: function (e) {
+    wx.showLoading({
+      title: '正在载入',
+    });
     this.setData({
       role: 0,
       account_type: this.data.account_types[0],
@@ -127,35 +146,43 @@ Page({
 
     wx.getStorage({
       key: 'session_id',
-      success: function(res) {
+      success: (res) => {
         if (res.data == undefined) {
-          fetch_new_session_id(that);
-          that.refetch_captcha();
+          fetch_new_session_id(this, wx.hideLoading);
+          this.refetch_captcha();
         } else {
           u.request(
             'OPTIONS', '/credential/session_id', {},
-            function (_res) {
+            (_res) => {
               if (_res.data.is_valid) {
                 if (wx.getStorageSync('is_login')) {
+                  wx.hideLoading();
                   wx.switchTab({
                     url: '/pages/apps/index',
                   });
+                } else {
+                  this.setData({ session_id: res.data });
+                  this.refetch_captcha();
                 }
-                that.setData({ session_id: res.data });
-                that.refetch_captcha();
               } else {
-                fetch_new_session_id(that, that.refetch_captcha);
+                fetch_new_session_id(this, this.refetch_captcha);
               }
             },
-            function () {
-              fetch_new_session_id(that, that.refetch_captcha);
+            (res) => {
+              fetch_new_session_id(this, this.refetch_captcha);
             }
           );
         }
       },
-      fail: function() {
-        fetch_new_session_id(that, that.refetch_captcha);
+      fail: (res) => {
+        fetch_new_session_id(this, this.refetch_captcha);
       }
+    });
+  },
+
+  jumpRegister: () => {
+    wx.navigateTo({
+      url: '../register/register',
     });
   },
 

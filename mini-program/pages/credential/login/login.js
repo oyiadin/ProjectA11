@@ -35,11 +35,20 @@ Page({
   },
 
   set_staff_id: function (e) {
-    this.data.staff_id = e.detail.value; },
+    this.setData({
+      staff_id:e.detail.value
+    })
+  },
   set_password: function (e) {
-    this.data.password = e.detail.value; },
+    this.setData({
+      password: e.detail.value
+    })
+  },
   set_captcha: function (e) {
-    this.data.captcha = e.detail.value; },
+    this.setData({
+      captcha: e.detail.value
+    })
+  },
 
   refetch_captcha: function (e) {
     var src = u.gen_url('/misc/captcha')
@@ -148,5 +157,23 @@ Page({
         fetch_new_session_id(that, that.refetch_captcha);
       }
     });
+  },
+
+  clear_information: function() {
+    this.setData({
+      staff_id: null,
+      password: null
+    })
+  },
+
+  // 下拉更新
+  onPullDownRefresh: function() {
+    console.log('onPullDownRefresh')
+    wx.showNavigationBarLoading();
+    this.clear_information();
+    
+    console.log(this.data.staff_id);
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh();
   }
 });

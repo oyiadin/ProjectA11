@@ -34,7 +34,12 @@ Page({
       apps = apps.concat({
         title: '班级管理',
         url: '../class/classes-list/classes-list?user_id=' + user_id,
-      });
+        },
+        {
+          title: '直播管理',
+          url: '../live/teacher/index'
+        }
+      );
     } else if (role == 2) {
       postfix = '管理员';
       apps = apps.concat({
@@ -43,7 +48,7 @@ Page({
       },
       {
         title: '直播管理',
-        url: '../live/manager/live_list/live_list'
+        url: '../live/teacher/index'
       });
     }
 

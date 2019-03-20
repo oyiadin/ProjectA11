@@ -6,6 +6,7 @@ import time
 import random
 
 import projecta11.db as db
+from projecta11.celery_tasks import change_checkin_status
 from projecta11.config import conf
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
@@ -75,11 +76,29 @@ class StartCheckInHandler(BaseHandler):
         key1 = 'checkin:{}'.format(selected.code)
         key2 = 'checkin:{}:wifi_list'.format(selected.code)
 
+        if int(sess.r.hget(key1, 'started') or '0'):
+            return self.finish(405, 'already started')
+
+        user_ids = self.db.query(db.User.user_id).join(db.RelationUserClass) \
+            .filter(db.RelationUserClass.class_id == selected.class_id)
+        list = []
+        for user_id in user_ids:
+            list.append(db.CheckedInLogs(
+                code_id=code_id,
+                user_id=user_id[0],
+                status=db.CheckedInStatus.awaiting))
+
+        self.db.add_all(list)
+        self.db.commit()
+
         sess.r.lpush(key2, *wifi_list)
         sess.r.hmset(key1, {'started': 1})
 
         sess.r.expire(key1, conf.session.checkin_code_expires_after)
         sess.r.expire(key2, conf.session.checkin_code_expires_after)
+
+        change_checkin_status.apply_async(
+            (code_id,), countdown=conf.session.checkin_code_expires_after)
 
 
 @handling(r"/check-in/verify/(\d+)")
@@ -155,6 +174,7 @@ class CheckedInListHandler(BaseHandler):
                 log_id=i.log_id,
                 user_id=user.user_id,
                 staff_id=user.staff_id,
-                user_name=user_name))
+                user_name=user_name,
+                status=i.status.value))
 
         self.finish(list=list)

@@ -74,11 +74,25 @@ class CheckInCodes(Base):
     expire_at = Column(Integer)
 
 
+class CheckedInStatus(enum.Enum):
+    awaiting = 0
+    normal = 1
+    late = 2
+    leave_early = 3
+    absent = 4
+
+int2status = [
+    CheckedInStatus.awaiting,
+    CheckedInStatus.normal, CheckedInStatus.late,
+    CheckedInStatus.leave_early, CheckedInStatus.absent]
+
+
 class CheckedInLogs(Base):
     __tablename__ = "checked-in-logs"
     log_id = Column(Integer, primary_key=True)
     code_id = Column(Integer, ForeignKey(CheckInCodes.code_id))
     user_id = Column(Integer, ForeignKey(User.user_id))
+    status = Column(Enum(CheckedInStatus))
 
 
 class BelongType(enum.Enum):
@@ -222,7 +236,7 @@ def init_db(conf):
         sess.add_all([code1])
         sess.commit()
 
-        log1 = CheckedInLogs(code_id=1, user_id=2)
+        log1 = CheckedInLogs(code_id=1, user_id=2, status=CheckedInStatus.late)
         sess.add_all([log1])
         sess.commit()
 

@@ -40,7 +40,6 @@ Page({
     u.request(
       'GET', '/check-in/class/1/code', {},
       function (res) {
-        console.log(res.data);
         that.setData({ code: res.data.code });
         wx.hideLoading();
         that.setData({ code_id: res.data.code_id });

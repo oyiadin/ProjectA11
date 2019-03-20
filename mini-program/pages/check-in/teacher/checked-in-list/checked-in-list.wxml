@@ -11,11 +11,12 @@
       <view class="weui-flex__item staff_id">姓名</view>
       <view class="weui-flex__item operation">操作</view>
     </view>
-    <view class="weui-flex information_list">
-      <view class="weui-flex__item">{{ status }}</view>
-      <view class="weui-flex__item">{{ user_id }}</view>
-      <view class="weui-flex__item">{{ staff_id }}</view>
-      <view class="weui-flex__item">    
+    <view class="weui-flex information_list"
+          wx:for="{{logs}}" wx:key="{{item.log_id}}">
+      <view class="weui-flex__item">{{ item.status }}</view>
+      <view class="weui-flex__item">{{ item.staff_id }}</view>
+      <view class="weui-flex__item">{{ item.user_name }}</view>
+      <view class="weui-flex__item">
       <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_select">
         <view class="weui-cell__hd" style="width: 80px">

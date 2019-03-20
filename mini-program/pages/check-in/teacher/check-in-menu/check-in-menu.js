@@ -8,6 +8,7 @@ Page({
 
   onLoad: function (options) {
     var class_id = options.class_id;
+    console.log('class_id=', class_id);
     u.request(
       'GET', '/check-in/class/' + class_id + '/activities/list', {},
       (res) => {

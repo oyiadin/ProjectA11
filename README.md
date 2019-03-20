@@ -2,18 +2,6 @@
 
 基于微信的移动智能学习平台
 
-
-> 由于微信限制，每个人都只能用自己的小程序测试号进行开发
-> 这会导致 `mini-program/project.config.json` 被频繁修改
-> 
-> 运行如下命令（一次即可）以忽略该文件的修改:
-> `git update-index --assume-unchanged mini-program/project.config.json`
-> 
-> 等到该配置文件需要被提交修改时，运行以下命令（一次即可）
-> `git update-index --no-assume-unchanged mini-program/project.config.json`
-> 即可恢复
-
-
 ## Usage
 
 ### Preparation
@@ -58,6 +46,8 @@ $ redis-cil -h 127.0.0.1 -p 6379 -a 4d46745a30d006b9cbbd90005f50075764ccc67c53fa
 
 注意每次运行前都要激活运行所需的环境 `pipenv shell`
 
+注意要把 `celery` 开起来：`celery worker -b redis://@localhost:6379/0 --loglevel=debug -A projecta11.celery_tasks`
+
 `--server` 是运行服务器用的；`--init` 是建表用的，只需要第一次运行时跑一下。
 
 服务器跑起来之后，去 [http://localhost:8888](http://localhost:8888) 就可以看到了。
@@ -80,3 +70,4 @@ $ redis-cil -h 127.0.0.1 -p 6379 -a 4d46745a30d006b9cbbd90005f50075764ccc67c53fa
 * [redis](https://redis.io/topics/license/) (BSD)
 * [swagger-ui-py](https://github.com/PWZER/swagger-ui-py) (Apache License 2.0)
 * [captcha](https://github.com/lepture/captcha) (BSD)
+* [celery](https://github.com/celery/celery/blob/master/LICENSE) (BSD-3-Clause)

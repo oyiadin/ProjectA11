@@ -19,7 +19,7 @@ Page({
         course_id: course_id,
         course_name: options.course_name 
       });
-      
+
       u.request(
         'GET', '/course/' + course_id + '/classes', {},
         (res) => {

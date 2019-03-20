@@ -74,7 +74,7 @@ class MaterialsListHandler(BaseHandler):
         self.finish(list=list)
 
 
-@handling(r"/material/(\d+)")
+@handling(r"/material/(\d+)/bin")
 class MaterialDownloadHandler(BaseHandler):
     @require_session
     def get(self, file_id, sess=None):
@@ -102,3 +102,21 @@ class MaterialDownloadHandler(BaseHandler):
         self.db.commit()
 
         os.remove(os.path.join(upload_dir, selected.internal_filename))
+
+
+@handling(r"/material/(\d+)/info")
+class MaterialInfoHandler(BaseHandler):
+    @require_session
+    def get(self, file_id, sess=None):
+        selected, user_name = self.db.query(db.Material, db.User.name) \
+            .join(db.User).filter(db.Material.file_id == file_id).first()
+        if selected is None:
+            return self.finish(404, 'no such a file_id')
+
+        self.finish(**dict(
+            file_id=selected.file_id,
+            filename=selected.filename,
+            size=selected.size,
+            uploaded_at=selected.uploaded_at,
+            uploader_id=selected.uploader_id,
+            uploader_name=user_name))

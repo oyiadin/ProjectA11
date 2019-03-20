@@ -1,0 +1,49 @@
+<view class="section tc page">
+
+  <block wx:if="{{in_(['mp4', 'avi'])}}">
+    <video
+      class="myVideo"
+      src="{{src}}"
+      danmu-list="{{danmuList}}"
+      enable-danmu
+      danmu-btn
+      controls
+    ></video>
+    <view class="button-sp-area">
+      <button class="weui-btn" type="default" plain="true" bindtap='bindSendDanmu'>发送弹幕</button>
+    </view>
+  </block>
+
+  <view wx:else class="page__bd">
+  </view>
+
+  <block>
+    <view class="weui-cells__title">文件详细信息</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">文件名</view>
+        <view class="weui-cell__ft">{{file.filename}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">文件大小</view>
+        <view class="weui-cell__ft">{{file.size}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">上传于</view>
+        <view class="weui-cell__ft">{{file.date}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">上传者</view>
+        <view class="weui-cell__ft">{{file.uploader_name}}</view>
+      </view>
+    </view>
+
+    <view class="weui-footer weui-footer_fixed-bottom">
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap="bindDownload">
+          下载到本地
+        </button>
+      </view>
+    </view>
+  </block>
+</view>

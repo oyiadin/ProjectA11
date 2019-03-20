@@ -51,16 +51,29 @@ Page({
   },
 
   log_out: function() {
-    var complete = function() {
-      wx.removeStorageSync('session_id');
-      wx.removeStorageSync('is_login');
-      wx.reLaunch({
-        url: '/pages/credential/login/login',
-      });
-    }
-    u.request(
-      'DELETE', '/credential/account', {},
-      complete, complete);
+    wx.showModal({
+      title: '登出',
+      content: '点击确定登出',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          var complete = function() {
+          wx.removeStorageSync('session_id');
+          wx.removeStorageSync('is_login');
+          wx.reLaunch({
+            url: '/pages/credential/login/login',
+          });
+        }
+        u.request(
+          'DELETE', '/credential/account', {},
+          complete, complete);
+        } else {
+          console.log('用户点击辅助操作')
+        }
+      }
+    });
   },
 
   user_information: function () {

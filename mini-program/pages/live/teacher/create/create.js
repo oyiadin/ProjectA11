@@ -5,6 +5,7 @@ Page({
   data: {
     title: '',
     introduction: '',
+    word_length: 0,
     date: '2019-01-01',
     time: "18:00",
     duration: 1,
@@ -98,25 +99,50 @@ Page({
       }
     }
 
-    u.request(
-      'PUT', '/live/new',
-      {
-        title: this.data.title,
-        introduction: this.data.introduction,
-        start: start,
-        duration: duration,
-        classes: classes,
-      },
-      (res) => {
-        wx.showToast({
-          title: '创建成功！',
-          duration: 1500,
-        });
-        setTimeout(() => {
-          wx.navigateBack();
-        }, 1500);
-      }
-    )
+    if (!this.data.title || !this.data.time || !this.data.duration) {
+      wx.showToast({
+        title: '请补全所有必填项',
+        icon: 'none',
+        duration: 2000
+    });
+    } else{
+      u.request(
+        'PUT', '/live/new',
+        {
+          title: this.data.title,
+          introduction: this.data.introduction,
+          start: start,
+          duration: duration,
+          classes: classes,
+        },
+        (res) => {
+          wx.showToast({
+            title: '创建成功！',
+            duration: 1500,
+          });
+          setTimeout(() => {
+            wx.navigateBack();
+          }, 1500);
+        }
+      )
+    }
   },
 
+  clear_information: function () {
+    this.setData({
+      title: "",
+      introduction: ""
+    })
+  },
+
+  // 下拉更新
+  onPullDownRefresh: function () {
+    console.log('onPullDownRefresh')
+    wx.showNavigationBarLoading();
+    this.clear_information();
+
+    console.log(this.data.staff_id);
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh();
+  }
 })

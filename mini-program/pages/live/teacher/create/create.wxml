@@ -10,7 +10,7 @@
         <view class="weui-label">标题</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入标题" bindinput='change_title'/>
+        <input value="{{title}}" class="weui-input" placeholder="请输入标题" bindinput='change_title'/>
       </view>
     </view>
   </view>
@@ -19,7 +19,7 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="请输入简介" style="height: 3.3em" bindinput='change_introduction'/>
+          <textarea value="{{introduction}}" class="weui-textarea" placeholder="请输入简介" style="height: 3.3em" bindinput='change_introduction'/>
         <view class="weui-textarea-counter">{{word_length}}/200</view>
       </view>
     </view>

@@ -10,7 +10,7 @@
                 <view class="weui-label">课程名</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input" placeholder="请输入课程名" bindinput='set_course_name'/>
+                <input value="{{course_name}}" class="weui-input" placeholder="请输入课程名" bindinput='set_course_name'/>
             </view>
         </view>
         <view class="weui-cell weui-cell_input">

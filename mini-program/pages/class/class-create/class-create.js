@@ -126,5 +126,22 @@ Page({
   onLoad: function (options) {
     var course_id = options.course_id;
     this.setData({ course_id: course_id });
+  },
+
+  clear_information: function () {
+    this.setData({
+      class_name: ""
+    })
+  },
+
+  // 下拉更新
+  onPullDownRefresh: function () {
+    console.log('onPullDownRefresh')
+    wx.showNavigationBarLoading();
+    this.clear_information();
+
+    console.log(this.data.staff_id);
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh();
   }
 })

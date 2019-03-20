@@ -118,5 +118,26 @@ Page({
         }
       )
     }
+  },
+
+  clear_information: function () {
+    this.setData({
+      staff_id: "",
+      password: "",
+      confirm_password: "",
+      name: "",
+      captcha: ""
+    })
+  },
+
+  // 下拉更新
+  onPullDownRefresh: function () {
+    console.log('onPullDownRefresh')
+    wx.showNavigationBarLoading();
+    this.clear_information();
+
+    console.log(this.data.staff_id);
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh();
   }
 })

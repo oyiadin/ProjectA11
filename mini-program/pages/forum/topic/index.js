@@ -6,6 +6,7 @@ Page({
     icon: "../../../images/icons/user0.png",
     len: 0,
     content: "",
+    showModal: false,
   },
 
   change_content: function (e) {
@@ -84,5 +85,26 @@ Page({
 
   onPullDownRefresh: function() {
     this.refresh(wx.stopPullDownRefresh);
-  }
+  },
+
+
+  reply: function () {
+    this.setData({
+      showModal: true
+    })
+  },
+
+  preventTouchMove: function () {
+    this.setData({
+      showModal: false
+    })
+  },
+
+
+  // go: function () {
+  //   this.setData({
+  //     showModal: false
+  //   })
+  // }
+
 })

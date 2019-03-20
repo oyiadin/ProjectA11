@@ -1,1 +1,16 @@
 /* pages/class/classes-list/classes-list.wxss */
+.weui-btn{
+  width: 95%;
+}
+.weui-form-preview{
+  margin-top: 10px;
+}
+.course_name{
+  font-size: 20px;
+}
+.weui-form-preview__label, .weui-form-preview__value{
+  color: black;
+}
+.weui-form-preview__ft{
+  padding-top: 10px;
+}

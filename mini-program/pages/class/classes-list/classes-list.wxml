@@ -12,13 +12,13 @@
   </view>
   <view class="page__bd">
     <!-- 课程展示 -->
-    <button bindtap="create_class" wx:if="{{role == 1}}">创建新班级</button>
-    <button bindtap="redirect2forum" wx:if="{{course_mode}}">前往本课程论坛</button>
+    <button class="weui-btn" type="default" plain="true" bindtap="create_class" wx:if="{{role == 1}}">创建新班级</button>
+    <button class="weui-btn" type="default" plain="true" bindtap="redirect2forum" wx:if="{{course_mode}}">前往本课程论坛</button>
 
     <view class="weui-form-preview" wx:for="{{classes}}" wx:key="{{item.class_id}}">
       <view class="weui-form-preview__hd">
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">课程名称</view>
+          <view class="weui-form-preview__label course_name">课程名称</view>
           <view class="weui-form-preview__value_in-hd">{{item.course_name}}</view>
         </view>
       </view>
@@ -38,7 +38,8 @@
         <view class="weui-form-preview__ft">
           <button
             wx:if="{{ course_mode && role == 0 }}"
-            class="weui-form-preview__btn weui-form-preview__btn_primary"
+            class="weui-btn choose"
+            type="primary"
             hover-class="weui-form-preview__btn_active"
             bindtap='openAlert'
             data-class_id="{{item.class_id}}"

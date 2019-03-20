@@ -2,7 +2,7 @@
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
       <view class="weui-cell__hd">
-        <image src="../../../images/icons/user0.jpg" style="width: 35px; height: 35px; display: block"/>
+        <image src="../../../images/icons/user0.jpg" style="width: 35px; height: 35px;"/>
       </view>
       <view class="weui-cell__bd">{{topic.user_name}}</view>
       <view class="weui-cell__ft">楼主</view>
@@ -17,13 +17,14 @@
       </view>      
     </view>
   </view>
-  <view class="weui-panel" wx:for="{{replies}}" wx:key="{{item.reply_id}}">
+  <view class="weui-panel" bindtap='reply' wx:for="{{replies}}" wx:key="{{item.reply_id}}">
     <view class="weui-cell">
       <view class="weui-cell__hd">
-        <image src="../../../images/icons/user1.jpg" style="width: 35px; height: 35px; display: block"/>
+        <image src="../../../images/icons/user1.jpg" style="width: 35px; height: 35px;"/>
       </view>
       <view class="weui-cell__bd">{{item.user_name}}</view>
       <view class="weui-cell__ft">{{index+1}}楼</view>
+      
       <view class="weui-article__p">
       </view>
     </view>
@@ -49,4 +50,22 @@
       <button class="weui-btn" type="primary" bindtap="submit">提交</button>
     </view>
   </view>
+  
+  <view class="mask" bindtap="preventTouchMove" wx:if="{{showModal}}"></view>
+ 
+  <view class="modalDlg" wx:if="{{showModal}}">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">回复{{item.user_name}}：</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
+          <view class="weui-textarea-counter">0/200</view>
+        </view>
+      </view>
+    </view>
+    <button class="weui-btn commit" type="primary">评论</button>
+  </view>
+ 
 </view>

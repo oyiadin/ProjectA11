@@ -4,6 +4,7 @@ function fail_callback(res) {
   wx.showToast({
     title: '网络错误，错误码:' + res.statusCode + ',请重试QAQ',
     duration: 2000,
+    icon: 'none',
   });
 }
 function logger(res) { console.log(res.data); }

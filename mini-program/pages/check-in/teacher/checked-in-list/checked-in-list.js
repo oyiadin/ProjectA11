@@ -7,7 +7,7 @@ Page({
     checkboxItems: [
       { value: '0', checked: false }
     ],
-    operationCodes: ["已到", "迟到", "早退", "旷课"],
+    operationCodes: ["等待中", "已到", "迟到", "早退", "旷课"],
     operationCodeIndex: 0
   },
 
@@ -20,6 +20,10 @@ Page({
     u.request(
       'GET', '/check-in/code/' + code_id + '/list', {},
       (res) => {
+        var logs = res.data.list;
+        for (var i = 0; i < logs.length; ++i) {
+          logs[i].status_descirption = this.data.operationCodes[logs[i].status];
+        }
         this.setData({ logs: res.data.list });
         wx.hideLoading();
       }

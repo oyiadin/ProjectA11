@@ -75,8 +75,13 @@ Page({
           wx.showToast({
             title: '已完成',
             icon: 'success',
-            duration: 3000
+            duration: 2000
           });
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../checked-in-list/checked-in-list?code_id=' + this.data.code_id,
+            })
+          }, 2000);
         },
         function () {
           wx.showModal({
@@ -100,10 +105,4 @@ Page({
       fail: fail_handler,
     });
   },
-
-  check_status: function() {
-    wx.navigateTo({
-      url: '../check-in-menu/check-in-menu',
-    });
-  }
 });

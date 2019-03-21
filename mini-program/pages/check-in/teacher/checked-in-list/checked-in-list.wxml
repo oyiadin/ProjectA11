@@ -1,7 +1,7 @@
 <view class="page">
   <view class="page__hd">
     <view class="page__title">签到情况</view>
-    <view class="page__desc">点击按钮刷新名单</view>
+    <view class="page__desc">下滑刷新名单</view>
   </view>
 
   <view class="show_list">
@@ -13,15 +13,15 @@
     </view>
     <view class="weui-flex information_list"
           wx:for="{{logs}}" wx:key="{{item.log_id}}">
-      <view class="weui-flex__item">{{ item.status }}</view>
+      <view class="weui-flex__item">{{ item.status_descirption }}</view>
       <view class="weui-flex__item">{{ item.staff_id }}</view>
       <view class="weui-flex__item">{{ item.user_name }}</view>
       <view class="weui-flex__item">
       <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_select">
         <view class="weui-cell__hd" style="width: 80px">
-          <picker bindchange="bindoperationCodeChange" value="{{operationCodeIndex}}" range="{{operationCodes}}">
-            <view class="weui-select">{{operationCodes[operationCodeIndex]}}</view>
+          <picker bindchange="bindoperationCodeChange" value="{{item.status}}" range="{{operationCodes}}" data-user_id="{{item.user_id}}">
+            <view class="weui-select">{{operationCodes[item.status]}}</view>
           </picker>
         </view>
       </view>

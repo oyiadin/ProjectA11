@@ -1,8 +1,5 @@
 # coding=utf-8
 from json import JSONDecodeError
-
-import sqlalchemy
-import time
 import random
 
 import projecta11.db as db
@@ -18,18 +15,20 @@ class NewCheckInCodeHandler(BaseHandler):
     @require_session
     @role_in(db.UserRole.teacher)
     def get(self, class_id, sess=None):
+        if self.db.query(db.Class).filter(
+                db.Class.teacher_id == sess['user_id'],
+                db.Class.class_id == class_id).first() is None:
+            return self.finish(405, "you haven't such a class")
+
         code = random.randint(1000, 9999)
         new_code = db.CheckInCodes(
             code=code,
             class_id=class_id,
             started=False,
-            expire_at=int(time.time()))
+            expire_at=0)
 
         self.db.add(new_code)
-        try:
-            self.db.commit()
-        except sqlalchemy.exc.IntegrityError:
-            return self.finish(404, 'no matched class_id')
+        self.db.commit()
 
         key = 'checkin:{}'.format(code)
         sess.r.hmset(key, dict(
@@ -42,11 +41,10 @@ class NewCheckInCodeHandler(BaseHandler):
 @handling(r"/check-in/class/(\d+)/activities/list")
 class CheckInActivitiesHandler(BaseHandler):
     @require_session
-    @role_in(db.UserRole.teacher)
     def get(self, class_id, sess=None):
         selected = self.db.query(db.CheckInCodes) \
             .filter(db.CheckInCodes.class_id == class_id) \
-            .order_by(db.CheckInCodes.expire_at).all()
+            .order_by(db.CheckInCodes.expire_at.desc()).all()
 
         list = []
         for i in selected:
@@ -64,10 +62,11 @@ class StartCheckInHandler(BaseHandler):
     @parse_json_body
     @role_in(db.UserRole.teacher)
     def post(self, code_id, data=None, sess=None):
-        selected = self.db.query(db.CheckInCodes).filter(
-            db.CheckInCodes.code_id == code_id).first()
+        selected = self.db.query(db.CheckInCodes).join(db.Class) \
+            .filter(db.CheckInCodes.code_id == code_id,
+                    db.Class.teacher_id == sess['user_id']).first()
         if selected is None:
-            return self.finish(404, 'no matched code_id')
+            return self.finish(406, "you haven't such a check-in code")
 
         wifi_list = data.get('wifi_list')
         if wifi_list is None:
@@ -164,7 +163,8 @@ class CheckedInListHandler(BaseHandler):
     @require_session
     def get(self, code_id, sess=None):
         selected = self.db.query(db.CheckedInLogs, db.User.name).join(db.User) \
-            .filter(db.CheckedInLogs.code_id == code_id).all()
+            .filter(db.CheckedInLogs.code_id == code_id) \
+            .order_by(db.CheckedInLogs.status.desc()).all()
 
         list = []
         for i, user_name in selected:

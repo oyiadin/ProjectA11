@@ -1,7 +1,6 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__hd">
     <view class="page__title">导入分数</view>
-    <view class="page__desc">set_score</view>
   </view>
   <view class='set_staffId'>
     <view class="weui-cells weui-cells_after-title">

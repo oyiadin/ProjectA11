@@ -5,6 +5,10 @@ Page({
   data: {
     apps: [
       {
+        title: '通知中心',
+        url: '../notification/notification/notification',
+      }, 
+      {
         title: '课程列表',
         url: '../course/courses-list/courses-list',
       },  

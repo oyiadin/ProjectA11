@@ -42,7 +42,7 @@ def role_in(*valid_roles):
             sess = kwargs['sess']
             role = int(sess['role'])
             if role not in map(lambda x: x.value, valid_roles):
-                return self.finish(410, 'no enough permission')
+                return self.finish(410, 'you have no permission')
             return func(self, *args, **kwargs)
         return wrapper
     return decorator

@@ -1,0 +1,117 @@
+<view class="page__hd">
+    <view class="page__title">教学调查问卷</view>
+</view>
+
+<view class="single-selection">
+    <view class="weui-cells__title">老师使用教案上课吗？</view>
+    <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+                <view class="weui-cell__bd">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+            </label>
+        </radio-group>
+    </view>
+    <view class="weui-cells__title">老师上课准时吗？</view>
+    <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+                <view class="weui-cell__bd">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+            </label>
+        </radio-group>
+    </view>
+    <view class="weui-cells__title">老师有无迟到早退？</view>
+    <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+                <view class="weui-cell__bd">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+            </label>
+        </radio-group>
+    </view>
+    <view class="weui-cells__title">你认为老师授课的重难点把握是否准确？</view>
+    <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+                <view class="weui-cell__bd">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+            </label>
+        </radio-group>
+    </view>
+    <view class="weui-cells__title">你认为老师授课容量是否适中？</view>
+    <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+                <view class="weui-cell__bd">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+            </label>
+        </radio-group>
+    </view>
+    <view class="weui-cells__title">你认为老师专业术语表述是否准确？</view>
+    <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+                <view class="weui-cell__bd">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+            </label>
+        </radio-group>
+    </view>
+    <view class="weui-cells__title">你认为老师安排教学进度是否合理？</view>
+    <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+                <view class="weui-cell__bd">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+            </label>
+        </radio-group>
+    </view>
+    <view class="weui-cells__title">你认为老师是否注重启发式教学？</view>
+    <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+                <view class="weui-cell__bd">{{item.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                    <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+                </view>
+            </label>
+        </radio-group>
+    </view>
+</view>
+
+<view class="text-area">
+    <view class="weui-cells__title">其他意见</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="weui-btn-area">
+    <button class="weui-btn" type="primary" bindtap="showTopTips">提交</button>
+</view>

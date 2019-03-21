@@ -1,14 +1,14 @@
 Page({
     data:{
         radioItems:[
-            { name: '很满意', value: '0', checked: 'ture' },
+            { name: '很满意', value: '0'},
             { name: '满意', value: '1'},
             { name: '不满意', value: '2'}
         ],
         checkboxItems:[
-            { name: 'A', value: '0'},
-            { name: 'B', value: '1'},
-            {name: 'C', value: '2'}
+            { name: '使用粉笔黑板的传统授课方式', value: '0'},
+            { name: '使用电脑ppt的授课方式', value: '1'},
+            {name: '在多媒体教室进行小组讨论的授课方式', value: '2'}
         ]
     },
     radioChange: function (e) {

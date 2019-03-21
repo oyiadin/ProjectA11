@@ -33,6 +33,14 @@ Page({
         title: '我的成绩',
         url: '../score/score-list/score-list?user_id=' + user_id,
       });
+      apps = apps.concat({
+        title: '课程满意度调查',
+        url: '../questionaire/course/course?user_id=' + user_id,
+      });
+      apps = apps.concat({
+        title: '教学问卷',
+        url: '../questionaire/teaching/teaching?user_id=' + user_id,
+      });
     } else if (role == 1) {
       postfix = '老师';
       apps = apps.concat({

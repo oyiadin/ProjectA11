@@ -25,7 +25,9 @@
     "pages/live/teacher/create/create",
     "pages/live/teacher/streaming",
     "pages/live/student/pick",
-    "pages/live/student/watch"
+    "pages/live/student/watch",
+    "pages/questionaire/course/course",
+    "pages/questionaire/teaching/teaching"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -27,7 +27,9 @@
     "pages/live/student/pick",
     "pages/live/student/watch",
     "pages/questionaire/course/course",
-    "pages/questionaire/teaching/teaching"
+    "pages/questionaire/teaching/teaching",
+    "pages/notification/notification_detail/notification_detail",
+    "pages/notification/notification/notification"
   ],
   "window": {
     "backgroundTextStyle": "dark",

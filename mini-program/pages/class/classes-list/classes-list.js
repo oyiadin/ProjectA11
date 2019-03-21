@@ -94,5 +94,18 @@ Page({
         });
       }
     );
-  }
+  },
+
+  forum: function(e){
+    // console.log(e.currentTarget.dataset.class_id);
+    wx.navigateTo({
+      url: '../../forum/index?class_id=' + e.currentTarget.dataset.class_id,
+    })
+  },
+
+  // course-information: function(e){
+  //   wx.navigateTo({
+  //     url: '',
+  //   })
+  // }
 });

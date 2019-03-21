@@ -45,12 +45,8 @@
             data-class_id="{{item.class_id}}"
           >选择</button>
           <block wx:if="{{ user_id && role == 0}}">
-            <navigator url="../../material/material-list/material-list?class_id={{item.class_id}}">
-              <button class="weui-btn mini-btn" type="default" size="mini">课程资料</button>
-            </navigator>
-            <navigator url="../../forum/index?class_id={{item.class_id}}">
-              <button class="weui-btn mini-btn" type="default" size="mini">班级论坛</button>
-            </navigator>
+            <button class="weui-btn data" type="primary" bindtap='data'>课程资料</button>
+            <button class="weui-btn forum" type="primary" bindtap='forum' data-class_id="{{item.class_id}}">班级论坛</button>
           </block>
           <block wx:if="{{ user_id && role == 1}}">
             <navigator url="../../check-in/teacher/check-in-menu/check-in-menu?class_id={{item.class_id}}">

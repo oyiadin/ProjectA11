@@ -3,8 +3,9 @@
 from projecta11 import db
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
-from projecta11.utils import require_session, parse_json_body, keys_filter, \
-    role_in
+from projecta11.utils import (
+    require_session, parse_json_body, keys_filter, role_in
+)
 
 
 @handling(r"/score")

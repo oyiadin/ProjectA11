@@ -8,11 +8,15 @@ Page({
   },
 
   onLoad: function(options) {
+    wx.showLoading({
+      title: '载入中',
+    });
     var user_id = options.user_id;
     u.request(
       'GET', '/user/' + user_id + '/classes', {},
       (res) => {
         this.setData({ classes: res.data.list });
+        wx.hideLoading();
       }
     )
   }

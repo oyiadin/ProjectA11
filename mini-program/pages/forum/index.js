@@ -20,6 +20,10 @@ Page({
       }
     });
 
+    wx.showLoading({
+      title: '载入中',
+    });
+
     var class_id = options.class_id,
         course_id = options.course_id;
     
@@ -41,9 +45,11 @@ Page({
           topics[i].update_date = u.timestamp2date(topics[i].updated_at);
         }
         this.setData({ topics: res.data.list });
+        wx.hideLoading();
       }
     );
   },
+
   tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,

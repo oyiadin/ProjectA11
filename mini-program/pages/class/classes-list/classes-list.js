@@ -7,6 +7,9 @@ Page({
   },
 
   onLoad: function (options) {
+    wx.showLoading({
+      title: '载入中',
+    });
     var role = wx.getStorageSync('role');
     this.setData({ role: role });
 
@@ -24,6 +27,7 @@ Page({
         'GET', '/course/' + course_id + '/classes', {},
         (res) => {
           this.setData({ classes: res.data.list });
+          wx.hideLoading();
         }
       );
 
@@ -37,6 +41,7 @@ Page({
         'GET', '/user/' + user_id + '/classes', {},
         (res) => {
           this.setData({ classes: res.data.list });
+          wx.hideLoading();
         }
       );
     
@@ -50,6 +55,7 @@ Page({
         'GET', '/user/' + user_id + '/classes', {},
         (res) => {
           this.setData({ classes: res.data.list });
+          wx.hideLoading();
         }
       );
     }

@@ -100,14 +100,6 @@ Page({
     this.setData({
       showModal: false
     })
-
   },
-
-
-  // go: function () {
-  //   this.setData({
-  //     showModal: false
-  //   })
-  // }
 
 })

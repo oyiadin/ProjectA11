@@ -3,7 +3,8 @@
 from projecta11 import db
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
-from projecta11.utils import require_session, parse_json_body, keys_filter
+from projecta11.utils import require_session, parse_json_body, keys_filter, \
+    role_in
 
 
 @handling(r"/score")
@@ -54,5 +55,28 @@ class UserScoresHandler(BaseHandler):
                 score=score.score,
                 user_id=score.user_id,
                 class_id=score.class_id))
+
+        self.finish(list=list)
+
+
+@handling(r"/class/(\d+)/scores")
+class ClassScoresHandler(BaseHandler):
+    @require_session
+    @role_in(db.UserRole.teacher)
+    def get(self, class_id, sess=None):
+        selected = self.db.query(db.Score, db.User.staff_id,
+                                 db.User.name, db.Course.course_name) \
+            .join(db.User, db.User.user_id == db.Score.user_id) \
+            .join(db.Class, db.Class.class_id == db.Score.class_id) \
+            .join(db.Course, db.Course.course_id == db.Class.course_id) \
+            .filter(db.Score.class_id == class_id).all()
+
+        list = []
+        for score, staff_id, user_name, course_name in selected:
+            keys = ('score_id', 'score', 'user_id', 'class_id')
+            dict = keys_filter(score, keys)
+            dict.update(course_name=course_name, staff_id=staff_id,
+                        user_name=user_name)
+            list.append(dict)
 
         self.finish(list=list)

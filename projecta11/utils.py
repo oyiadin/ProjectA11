@@ -2,6 +2,7 @@
 import hashlib
 from json.decoder import JSONDecodeError
 
+import projecta11.db as db
 from projecta11.config import conf
 from projecta11.session import Session
 from tornado.escape import json_decode
@@ -54,10 +55,16 @@ def keys_filter(obj, keys: [tuple, set]) -> dict:
         temp_dict.update({key: None for key in missing_keys})
         return temp_dict
 
-    # else: isinstance(Session)
-    return dict(zip(keys, map(
-        lambda x: x.decode() if isinstance(x, bytes) else x,
-        obj[keys])))
+    elif isinstance(obj, Session):
+        return dict(zip(keys, map(
+            lambda x: x.decode() if isinstance(x, bytes) else x,
+            obj[keys])))
+
+    elif isinstance(obj, db.Base):
+        return {key: obj.__dict__.get(key, None) for key in keys}
+
+    else:
+        raise ValueError
 
 
 def hash_password(password):

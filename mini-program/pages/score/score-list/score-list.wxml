@@ -21,9 +21,18 @@
         <view class="weui-flex__item">成绩</view>
       </block>
     </view>
-    <view class="weui-flex information_list" wx:for="{{scores}}" wx:key="{{item.score_id}}">
-      <view class="weui-flex__item">{{item.course_name}}</view>
-      <view class="weui-flex__item">{{item.score}}</view>
-    </view>
+    <block wx:if="{{student_mode}}">
+      <view class="weui-flex information_list" wx:for="{{scores}}" wx:key="{{item.score_id}}">
+        <view class="weui-flex__item">{{item.course_name}}</view>
+        <view class="weui-flex__item">{{item.score}}</view>
+      </view>
+    </block>
+    <block wx:if="{{class_mode}}">
+      <view class="weui-flex information_list" wx:for="{{scores}}" wx:key="{{item.score_id}}">
+        <view class="weui-flex__item">{{item.staff_id}}</view>
+        <view class="weui-flex__item">{{item.user_name}}</view>
+        <view class="weui-flex__item">{{item.score}}</view>
+      </view>
+    </block>
   </view>
 </view>

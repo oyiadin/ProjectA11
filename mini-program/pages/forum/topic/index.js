@@ -1,4 +1,5 @@
 var u = getApp().utils;
+var mydate = new Date()
 
 
 Page({
@@ -92,12 +93,14 @@ Page({
     this.setData({
       showModal: true
     })
+    var user_name = this.user_name;
   },
 
   preventTouchMove: function () {
     this.setData({
       showModal: false
     })
+
   },
 
 

@@ -14,3 +14,8 @@
 .weui-form-preview__ft{
   padding-top: 10px;
 }
+button[size=mini]{
+  font-size: 15px;
+  background-color: #eee;
+  color: black;
+}

@@ -54,16 +54,16 @@
           </block>
           <block wx:if="{{ user_id && role == 1}}">
             <navigator url="../../check-in/teacher/check-in-menu/check-in-menu?class_id={{item.class_id}}">
-              <button class="weui-btn mini-btn" type="default" size="mini">考勤情况</button>
+              <button class="weui-btn mini-btn" type="primary" size="mini">考勤情况</button>
             </navigator>
             <navigator url="../../forum/index?class_id={{item.class_id}}">
-              <button class="weui-btn mini-btn" type="default" size="mini">班级论坛</button>
+              <button class="weui-btn mini-btn" type="primary" size="mini">班级论坛</button>
             </navigator>
             <navigator url="../../score/score-list/score-list?class_id={{item.class_id}}">
-              <button class="weui-btn mini-btn" type="default" size="mini">成绩管理</button>
+              <button class="weui-btn mini-btn" type="primary" size="mini">成绩管理</button>
             </navigator>
             <navigator url="404">
-              <button class="weui-btn mini-btn" type="default" size="mini">教学资料管理</button>
+              <button class="weui-btn mini-btn" type="primary" size="mini">教学资料</button>
             </navigator>
           </block>
         </view>

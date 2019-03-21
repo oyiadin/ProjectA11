@@ -1,0 +1,18 @@
+<!--pages/notification/notificatin_detail/notification_detail.wxml-->
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">注意！注意！</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-article">
+            <view class="weui-article__h1">第一个标题</view>
+            <view class="weui-article__section">
+                <view class="weui-article__section">
+                    <view class="weui-article__p">
+                        请各位同学即使查看自己的可擦啊！！！！！！！！！！！！！
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

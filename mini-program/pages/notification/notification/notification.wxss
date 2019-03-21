@@ -1,0 +1,4 @@
+/* pages/notification/notification/notification.wxss */
+.weui-form-preview {
+    margin-bottom: 25px;
+}

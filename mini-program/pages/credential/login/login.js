@@ -22,9 +22,9 @@ function fetch_new_session_id(that, callback) {
             fetch_new_session_id(that, callback);
           else
             wx.showToast({
-              title: '小程序在下次重启前将无法正常运行，请在重启后重试',
+              title: '小程序在下次重启前将无法正常运行，请重启后重试',
               icon: 'none',
-              duration: 5000,
+              duration: 10000,
             });
         }
       })

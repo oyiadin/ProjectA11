@@ -37,13 +37,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "localhost",
 					"pathName": "pages/credential/login/login",
-					"query": "host=127.0.0.1&port=8888&protocol=http",
+					"query": "host=m.b1n.top&port=8888&protocol=http",
 					"scene": null
 				},
 				{

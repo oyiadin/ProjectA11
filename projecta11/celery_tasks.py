@@ -10,12 +10,13 @@ conf = config.conf
 
 db.startup(conf)
 
-celery_app = Celery('celery_tasks',
-                    broker='redis://{}@{}:{}/{}'.format(
-                        conf.session.connection.password,
-                        conf.session.connection.host,
-                        conf.session.connection.port,
-                        conf.session.connection.db))
+
+broker='redis://{}@{}:{}/{}'.format(
+    conf.session.connection.password,
+    conf.session.connection.host,
+    conf.session.connection.port,
+    conf.session.connection.db)
+celery_app = Celery('celery_tasks', broker=broker)
 
 
 @celery_app.task

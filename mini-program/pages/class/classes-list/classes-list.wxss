@@ -14,8 +14,14 @@
 .weui-form-preview__ft{
   padding-top: 10px;
 }
-button[size=mini]{
+button[size=mini], .weui-btn mini-btn{
   font-size: 15px;
   background-color: #eee;
   color: black;
+  text-align: left;
 }
+.data, .forum{
+  position: relative;
+  margin-left: 10px;
+}
+

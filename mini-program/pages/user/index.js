@@ -3,12 +3,7 @@ var u = getApp().utils;
 
 Page({
   data: {
-    apps: [
-      {
-        title: '个人资料',
-        url: 'user-information/user-information'
-      },
-    ]
+    apps: []
   },
 
   onLoad: function() {
@@ -19,11 +14,20 @@ Page({
         apps = this.data.apps,
         postfix = '';
 
+    apps = apps.concat({
+      title: '个人资料',
+      url: 'user-information/user-information?user_id=' + user_id,
+    });
+
     if (role == 0) {
       postfix = '同学';
       apps = apps.concat({
         title: '已选课程',
         url: '../class/classes-list/classes-list?user_id=' + user_id,
+      });
+      apps = apps.concat({
+        title: '我的课表',
+        url: 'enrolled-in-classes/enrolled-in-classes?user_id=' + user_id,
       });
       apps = apps.concat({
         title: '我的成绩',
@@ -65,15 +69,16 @@ Page({
         console.log(res);
         if (res.confirm) {
           var complete = function() {
-          wx.removeStorageSync('session_id');
-          wx.removeStorageSync('is_login');
-          wx.reLaunch({
-            url: '/pages/credential/login/login',
-          });
-        }
-        u.request(
-          'DELETE', '/credential/account', {},
-          complete, complete);
+            wx.removeStorageSync('session_id');
+            wx.removeStorageSync('is_login');
+            wx.reLaunch({
+              url: '/pages/credential/login/login',
+            });
+          }
+          u.request(
+            'DELETE', '/credential/account', {},
+            complete, complete
+          );
         } else {
           console.log('用户点击辅助操作')
         }

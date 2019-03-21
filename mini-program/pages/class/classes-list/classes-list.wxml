@@ -28,8 +28,10 @@
           <view class="weui-form-preview__value">{{item.class_name}}</view>
         </view>
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">开课教师</view>
-          <view class="weui-form-preview__value">{{item.teacher_name}}</view>
+          <navigator url="../../user/user-information/user-information?user_id={{item.teacher_id}}">
+            <view class="weui-form-preview__label">开课教师</view>
+            <view class="weui-form-preview__value">{{item.teacher_name}}</view>
+          </navigator>
         </view>
         <view class="weui-form-preview__item">
           <view class="weui-form-preview__label">开课时间</view>

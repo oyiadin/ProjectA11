@@ -7,11 +7,11 @@ Page({
   },
 
   onLoad: function (options) {
-    const that = this;
+    var user_id = options.user_id;
     u.request(
-      'GET', '/user', {},
-      function (res) {
-        that.setData({ data: res.data });
+      'GET', '/user/' + user_id, {},
+      (res) => {
+        this.setData({ data: res.data });
       }
     );
   },

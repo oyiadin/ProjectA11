@@ -83,14 +83,13 @@ Page({
         });
       },
       function (res) {
+        var msg = "选课失败：" + res.data.msg;
+        if (res.statusCode == 405) {
+          msg = "你已经选过这门课程！";
+        }
         wx.showModal({
-          content: '选课失败:' + res.data.msg,
+          content: msg,
           showCancel: false,
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击失败')
-            }
-          }
         });
       }
     );

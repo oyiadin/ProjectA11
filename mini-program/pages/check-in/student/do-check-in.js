@@ -37,16 +37,14 @@ Page({
   },
 
   Focus(e) {
-    var that = this;
     console.log(e.detail.value);
     var inputValue = e.detail.value;
-    that.setData({
+    this.setData({
       Value: inputValue,
     })
   },
 
   Tap() {
-    var that = this;
     that.setData({
       isFocus: true,
     })

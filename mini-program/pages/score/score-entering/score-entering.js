@@ -1,12 +1,53 @@
+var u = getApp().utils;
+
+
 Page({
   data: {
-    classes: ["1", "2", "3"],
-    classIndex: 0
+    class_id: '',
+    staff_id: '',
+    score: '',
   },
-  bindClass: function (e) {
-    console.log('picker country 发生选择改变，携带值为', e.detail.value);
-    this.setData({
-      classIndex: e.detail.value
-    })
+
+  onLoad: function (options) {
+    this.data.class_id = options.class_id;
+  },
+
+  bindStaffID: function (e) {
+    this.setData({ staff_id: e.detail.value });
+  },
+  bindScore: function (e) {
+    this.setData({ score: e.detail.value });
+  },
+
+  submit: function () {
+    u.request(
+      'PUT', '/score',
+      {
+        score: this.data.score,
+        staff_id: this.data.staff_id,
+        class_id: this.data.class_id,
+      },
+      (res) => {
+        wx.showToast({
+          title: '添加成功',
+          duration: 800,
+        });
+        this.setData({
+          staff_id: '',
+          score: '',
+        });
+      },
+      (res) => {
+        var msg = '导入失败:' + res.statusCode;
+        if (res.statusCode == 404) {
+          msg = '没有学号为' + this.data.staff_id + '的学生';
+        }
+        wx.showToast({
+          title: msg,
+          duration: 2000,
+          icon: 'none',
+        });
+      }
+    );
   }
 });

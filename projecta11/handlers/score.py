@@ -12,8 +12,17 @@ class NewScoreHandler(BaseHandler):
     @require_session
     @parse_json_body
     def put(self, data=None, sess=None):
-        keys = ('score', 'user_id', 'class_id')
+        keys = ('score', 'staff_id', 'class_id')
         data = keys_filter(data, keys)
+
+        user_id = self.db.query(db.User.user_id).filter(
+            db.User.staff_id == data['staff_id']).first()
+        if user_id is None:
+            return self.finish(404, 'no matched user')
+
+        keys = ('score', 'class_id')
+        data = keys_filter(data, keys)
+        data['user_id'] = user_id[0]
 
         new_score = db.Score(**data)
         self.db.add(new_score)

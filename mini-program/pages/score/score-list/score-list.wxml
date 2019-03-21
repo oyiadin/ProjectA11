@@ -10,6 +10,12 @@
     </view>
   </view>
   <view class="show_list">
+    <navigator url="../score-entering/score-entering?class_id={{class_id}}"
+               wx:if="{{class_mode}}">
+      <button class="weui-btn" type="default" plain="true">
+        录入成绩
+      </button>
+    </navigator>
     <view class="weui-flex head_list">
       <block wx:if="{{student_mode}}">
         <view class="weui-flex__item">科目</view>

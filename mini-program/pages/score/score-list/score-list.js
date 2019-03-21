@@ -19,7 +19,9 @@ Page({
         name: name,
       })
     }
+  },
 
+  onShow: function () {
     this.refresh();
   },
 

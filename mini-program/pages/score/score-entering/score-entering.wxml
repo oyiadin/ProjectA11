@@ -3,34 +3,19 @@
     <view class="page__title">导入分数</view>
     <view class="page__desc">set_score</view>
   </view>
-  <view class="choose_class">
+  <view class='set_staffId'>
     <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_select">
-        <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">选择班级</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">学生学号</view>
         </view>
         <view class="weui-cell__bd">
-          <picker bindchange="bindClass" value="{{classIndex}}" range="{{classes}}">
-            <view class="weui-select weui-select_in-select-after">{{classes[classIndex]}}</view>
-          </picker>
+          <input class="weui-input" placeholder="请输入学生学号"
+                 bindinput="bindStaffID" value="{{staff_id}}" />
         </view>
       </view>
-    </view>
+    </view> 
   </view>
-  <view class="choose_staffId">
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_select">
-        <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">选择学号</view>
-        </view>
-        <view class="weui-cell__bd">
-          <picker bindchange="bindstaffId" value="{{staffIdIndex}}" range="{{staffIds}}">
-            <view class="weui-select weui-select_in-select-after">{{staffIds[staffIdIndex]}}</view>
-          </picker>
-        </view>
-      </view>
-    </view>
-  </view> 
   <view class='set_score'>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
@@ -38,14 +23,15 @@
           <view class="weui-label">输入成绩</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入成绩"/>
+          <input class="weui-input" placeholder="请输入成绩"
+                 bindinput="bindScore" value="{{score}}" />
         </view>
       </view>
     </view> 
   </view>
   <view class="weui-footer weui-footer_fixed-bottom">
     <view class="weui-btn-area">
-      <button class="weui-btn" type="primary" bindtap="do_login">导入</button>
+      <button class="weui-btn" type="primary" bindtap="submit">导入</button>
     </view>
   </view>
 </view>

@@ -1,4 +1,5 @@
 # coding=utf-8
+import time
 from json import JSONDecodeError
 import random
 
@@ -87,6 +88,8 @@ class StartCheckInHandler(BaseHandler):
                 user_id=user_id[0],
                 status=db.CheckedInStatus.awaiting))
 
+        selected.expire_at = int(time.time()) \
+                             + conf.session.checkin_code_expires_after
         self.db.add_all(list)
         self.db.commit()
 

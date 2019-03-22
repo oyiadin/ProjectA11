@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
     print('''remember to run celery worker server by running:
     celery -A projecta11.celery_tasks worker -b {} --loglevel=info''' \
-        .format('redis://{}@{}:{}/{}'.format(
+        .format('redis://:{}@{}:{}/{}'.format(
             conf.session.connection.password or '',
             conf.session.connection.host,
             conf.session.connection.port,

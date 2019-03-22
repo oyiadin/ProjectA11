@@ -11,7 +11,7 @@ conf = config.conf
 db.startup(conf)
 
 
-broker='redis://{}@{}:{}/{}'.format(
+broker='redis://:{}@{}:{}/{}'.format(
     conf.session.connection.password,
     conf.session.connection.host,
     conf.session.connection.port,

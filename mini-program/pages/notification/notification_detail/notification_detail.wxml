@@ -1,15 +1,16 @@
 <!--pages/notification/notificatin_detail/notification_detail.wxml-->
-<view class="page">
-    <view class="page__hd">
-        <view class="page__title">注意！注意！</view>
+<view class="page article">
+        <view class="title">注意！注意！</view>
+    <view class="prop">
+    <view clasd="author details">教务处</view>
+    <view clasd="date details">2019-03-03下发</view>
     </view>
     <view class="page__bd">
         <view class="weui-article">
-            <view class="weui-article__h1">第一个标题</view>
             <view class="weui-article__section">
                 <view class="weui-article__section">
-                    <view class="weui-article__p">
-                        请各位同学即使查看自己的可擦啊！！！！！！！！！！！！！
+                    <view class="weui-article__p page">
+                        请各位同学即使查看自己的课程啊啊！！！！！！！！！！！！！
                     </view>
                 </view>
             </view>

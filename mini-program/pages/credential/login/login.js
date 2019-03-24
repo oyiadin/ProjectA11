@@ -138,6 +138,7 @@ Page({
     wx.showLoading({
       title: '正在载入',
     });
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     this.setData({
       role: 0,
       account_type: this.data.account_types[0],
@@ -202,5 +203,17 @@ Page({
     console.log(this.data.staff_id);
     wx.hideNavigationBarLoading();
     wx.stopPullDownRefresh();
-  }
+  },
+
+  switchLang: function() {
+    console.log('language switched!');
+    var prevLangIndex = wx.getStorageSync('langIndex') || 0;
+    if (prevLangIndex == 1) {
+      wx.setStorageSync('langIndex', 0);
+      this.setData({ langIndex: 0 });
+    } else {
+      wx.setStorageSync('langIndex', 1);
+      this.setData({ langIndex: 1 });
+    }
+  },
 });

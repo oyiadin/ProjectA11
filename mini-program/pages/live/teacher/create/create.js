@@ -15,6 +15,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     var user_id = options.user_id;
     var date = new Date();
     this.setData({ date: u.timestamp2date(date.getTime() / 1000) });

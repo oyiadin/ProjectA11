@@ -8,6 +8,10 @@ Page({
     course_name: "",
   },
 
+  onLoad: function () {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
+  },
+
   // 获取课程名
   set_course_name: function (e) {
     this.data.course_name = e.detail.value;

@@ -7,6 +7,7 @@ Page({
   },
 
   onLoad: function(options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     var role = wx.getStorageSync('role');
     this.setData({ role: role });
     this.refresh();

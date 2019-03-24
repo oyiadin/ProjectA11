@@ -27,6 +27,7 @@ Page({
   },
 
   onLoad: function () {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     console.log('loaded');
     wx.startWifi({
       success: function() {

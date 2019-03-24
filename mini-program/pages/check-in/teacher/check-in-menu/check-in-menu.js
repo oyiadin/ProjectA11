@@ -7,6 +7,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     var class_id = options.class_id;
     console.log('class_id=', class_id);
     u.request(

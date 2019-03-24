@@ -12,6 +12,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     wx.showLoading({
       title: '载入中',
     });

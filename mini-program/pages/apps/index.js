@@ -20,6 +20,7 @@ Page({
   },
 
   onLoad: function () {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     var role = wx.getStorageSync('role');
     var user_id = wx.getStorageSync('user_id')
     if (role == 0) {  // 学生

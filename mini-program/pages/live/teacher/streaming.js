@@ -20,6 +20,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     this.live_id = options.live_id;
     this.pusher = wx.createLivePusherContext('pusher');
   },

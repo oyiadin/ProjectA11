@@ -17,6 +17,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     var file_id = options.file_id;
     u.request(
       'GET', '/material/' + file_id + '/info', {},

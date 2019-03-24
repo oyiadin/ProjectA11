@@ -59,6 +59,7 @@ Page({
   },
 
   onLoad: function () {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     this.refetch_captcha();
     this.setData({
       role: 0,

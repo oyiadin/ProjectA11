@@ -35,6 +35,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     var topic_id = options.topic_id,
         class_id = options.class_id,
         course_id = options.course_id;

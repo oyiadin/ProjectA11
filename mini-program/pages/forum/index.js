@@ -11,6 +11,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     wx.getSystemInfo({
       success: (res) => {
         this.setData({

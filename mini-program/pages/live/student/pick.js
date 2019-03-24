@@ -6,6 +6,10 @@ Page({
     live_id: '',
   },
 
+  onLoad: function () {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
+  },
+
   change_live_id: function (e) {
     this.data.live_id = e.detail.value;
   },

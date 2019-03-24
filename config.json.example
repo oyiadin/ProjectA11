@@ -36,7 +36,7 @@
     "connection": {
       "host": "localhost",
       "port": 6379,
-      "password": "4d46745a30d006b9cbbd90005f50075764ccc67c53fade810b4f43d644acab4d",
+      "password": "",
       "db": 0
     },
     "expires_after": 604800,

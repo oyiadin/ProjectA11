@@ -9,6 +9,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     this.data.class_id = options.class_id;
   },
 

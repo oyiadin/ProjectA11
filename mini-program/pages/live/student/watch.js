@@ -7,6 +7,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     var live_id = options.live_id;
     u.request(
       'GET', '/live/' + live_id, {},

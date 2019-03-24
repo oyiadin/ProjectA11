@@ -10,6 +10,7 @@ Page({
     wx.showLoading({
       title: '载入中',
     });
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     var role = wx.getStorageSync('role');
     this.setData({ role: role });
 

@@ -2,6 +2,7 @@ var u = getApp().utils;
 
 Page({
   onLoad: function (options) {
+    this.setData({ langIndex: wx.getStorageSync('langIndex') });
     var user_id = options.user_id,
         class_id = options.class_id,
         name = wx.getStorageSync('name');

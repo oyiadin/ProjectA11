@@ -19,7 +19,7 @@
   </view>
   <view class="weui-footer weui-footer_fixed-bottom">
     <view class="weui-btn-area">
-      <button class="weui-btn button-hover" type="primary" plain="true" bindtap='log_out'>登出</button>
+      <button class="weui-btn button-hover" type="primary" plain="true" bindtap='log_out'>{{_.T('logout')}}</button>
     </view>
   </view>
 </view>

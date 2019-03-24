@@ -14,15 +14,15 @@ Page({
     captcha: "",
     account_type: "",
     role: "",
-    account_types: ["学生", "教师", "管理员"],
+    account_types: [_('role1'), _('role2'), _('role3')],
     id_name: "",
     id_names: ["学号", "教职工号", "账号ID"],
     is_checked: false,
     invite_code: "",
 
     sex_types: [
-      { name: '男', value: '1' },
-      { name: '女', value: '0' }
+      { name: _('male'), value: '1' },
+      { name: _('female'), value: '0' }
     ],
   },
 

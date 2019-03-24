@@ -19,7 +19,16 @@ var locales = [
     class_management: '班级管理',
     live_management: '直播活动管理',
     admin_postfix: '管理员',
-    course_management: '课程管理'
+    course_management: '课程管理',
+    logout: '登出',
+    confirm_logout: '点击确定登出',
+    ok: '确定',
+    cancel: '取消',
+    role1: '学生',
+    role2: '教师',
+    role3: '管理员',
+    male: '男',
+    female: '女'
   },
 
   {
@@ -32,17 +41,26 @@ var locales = [
     waiting2fetch: 'Pending',
     completed: 'Completed!',
     user_info: 'User Information',
-    student_postfix: '同学',
+    student_postfix: 'Student',
     enrolled_in_classes: 'My Classes',
     my_curriculum: 'My Curriculum',
     my_scores: 'My Scores',
     questionaire: 'Questionaires of Statisfaction',
     teaching_quiz: 'Questionaires of Teaching Method',
-    teacher_postfix: '老师',
+    teacher_postfix: 'Teacher',
     class_management: 'Classes Management',
     live_management: 'Live Management',
     admin_postfix: 'Admin',
-    course_management: 'Course Management'
+    course_management: 'Course Management',
+    logout: 'Logout',
+    confirm_logout: 'Are you sure to logout?',
+    ok: 'OK',
+    cancel: 'Cancel',
+    role1: 'Student',
+    role2: 'Teacher',
+    role3: 'Admin',
+    male: 'Male',
+    female: 'Female'
   }
 ];
 

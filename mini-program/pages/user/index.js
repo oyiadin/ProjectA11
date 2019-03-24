@@ -72,10 +72,10 @@ Page({
 
   log_out: function() {
     wx.showModal({
-      title: '登出',
-      content: '点击确定登出',
-      confirmText: "确定",
-      cancelText: "取消",
+      title: _('logout'),
+      content: _('confirm_logout'),
+      confirmText: _("ok"),
+      cancelText: _("cancel"),
       success: function (res) {
         console.log(res);
         if (res.confirm) {

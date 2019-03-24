@@ -42,7 +42,7 @@ Page({
     password: "",
     account_type: "",
     role: "0",
-    account_types: ["学生", "教师", "管理员"],
+    account_types: [_('role1'), _('role2'), _('role3')],
     id_name: "",
     id_names: ["学号", "教职工号", "账号ID"],
   },
@@ -217,5 +217,7 @@ Page({
       wx.setStorageSync('langIndex', 1);
       this.setData({ langIndex: 1 });
     }
+
+    this.setData({ account_types: [_('role1'), _('role2'), _('role3')]});
   },
 });

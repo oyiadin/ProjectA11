@@ -15,6 +15,8 @@ Page({
     account_types: ["学生", "教师", "管理员"],
     id_name: "",
     id_names: ["学号", "教职工号", "账号ID"],
+    is_checked: false,
+    invite_code: "",
 
     sex_types: [
       { name: '男', value: '1' },
@@ -28,6 +30,12 @@ Page({
       id_name: this.data.id_names[e.detail.value],
       role: e.detail.value,
     });
+    //console.log(this.data.account_type);
+    if (this.data.account_type == "教师" || this.data.account_type == "管理员"){
+      this.setData({
+        is_checked: true
+      })
+    }
   },
 
   set_staff_id: function (e) {
@@ -40,6 +48,11 @@ Page({
     this.data.name = e.detail.value; },
   set_captcha: function(e) {
     this.data.captcha = e.detail.value; },
+  set_invite_code: function(e){
+    this.setData({
+      invite_code: e.detail.value
+    })
+  },
 
   sex_change: function (e) {
     var sex_types = this.data.sex_types;
@@ -127,7 +140,8 @@ Page({
       password: "",
       confirm_password: "",
       name: "",
-      captcha: ""
+      captcha: "",
+      invite_code: null
     })
   },
 

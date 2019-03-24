@@ -18,51 +18,51 @@ Page({
         postfix = '';
 
     apps = apps.concat({
-      title: '个人资料',
+      title: _('user_info'),
       url: 'user-information/user-information?user_id=' + user_id,
     });
 
     if (role == 0) {
-      postfix = '同学';
+      postfix = _('student_postfix');
       apps = apps.concat({
-        title: '已选课程',
+        title: _('enrolled_in_classes'),
         url: '../class/classes-list/classes-list?user_id=' + user_id,
       });
       apps = apps.concat({
-        title: '我的课表',
+        title: _('my_curriculum'),
         url: 'enrolled-in-classes/enrolled-in-classes?user_id=' + user_id,
       });
       apps = apps.concat({
-        title: '我的成绩',
+        title: _('my_scores'),
         url: '../score/score-list/score-list?user_id=' + user_id,
       });
       apps = apps.concat({
-        title: '课程满意度调查',
+        title: _('questionaire'),
         url: '../questionaire/course/course?user_id=' + user_id,
       });
       apps = apps.concat({
-        title: '教学问卷',
+        title: _('teaching_quiz'),
         url: '../questionaire/teaching/teaching?user_id=' + user_id,
       });
     } else if (role == 1) {
-      postfix = '老师';
+      postfix = _('teacher_postfix');
       apps = apps.concat({
-        title: '班级管理',
+        title: _('class_management'),
         url: '../class/classes-list/classes-list?user_id=' + user_id,
         },
         {
-          title: '直播管理',
+          title: _('live_management'),
           url: '../live/teacher/index'
         }
       );
     } else if (role == 2) {
-      postfix = '管理员';
+      postfix = _('admin_postfix');
       apps = apps.concat({
-        title: '课程管理',
+        title: _('course_management'),
         url: '../course/courses-list/courses-list'
       },
       {
-        title: '直播管理',
+        title: _('live_management'),
         url: '../live/teacher/index'
       });
     }

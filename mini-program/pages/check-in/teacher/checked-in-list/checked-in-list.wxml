@@ -4,16 +4,16 @@
 
 <view class="page">
   <view class="page__hd">
-    <view class="page__title">签到情况</view>
-    <view class="page__desc">下滑刷新名单</view>
+    <view class="page__title">{{_.T('checkin_status')}}</view>
+    <view class="page__desc">{{_.T('pulldown2refresh')}}</view>
   </view>
 
   <view class="show_list">
     <view class="weui-flex head_list">
-      <view class="weui-flex__item status">状态</view>
-      <view class="weui-flex__item user_id">学号</view>
-      <view class="weui-flex__item staff_id">姓名</view>
-      <view class="weui-flex__item operation">操作</view>
+      <view class="weui-flex__item status">{{_.T('status')}}</view>
+      <view class="weui-flex__item user_id">{{_.T('staff_id')}}</view>
+      <view class="weui-flex__item staff_id">{{_.T('name')}}</view>
+      <view class="weui-flex__item operation">{{_.T('operation')}}</view>
     </view>
     <view class="weui-flex information_list"
           wx:for="{{logs}}" wx:key="{{item.log_id}}">

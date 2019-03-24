@@ -16,7 +16,7 @@ Page({
   onLoad: function (options) {
     this.setData({ langIndex: wx.getStorageSync('langIndex') });
     wx.showLoading({
-      title: '载入中',
+      title: _('loading'),
     });
     var code_id = options.code_id;
 

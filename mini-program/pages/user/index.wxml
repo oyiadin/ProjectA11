@@ -4,8 +4,8 @@
 
 <view class="page">
   <view class="page__hd">
-    <view class="page__title">我的个人中心</view>
-    <view class="page__desc">欢迎回来，{{name}}{{postfix}}！</view>
+    <view class="page__title">{{_.T('my_center')}}</view>
+    <view class="page__desc">{{_.T('welcome')}} {{name}}{{postfix}}！</view>
   </view>
   <view class="page__bd">
     <view class="weui-grids">

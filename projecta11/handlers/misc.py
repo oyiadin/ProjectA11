@@ -9,7 +9,7 @@ from captcha.image import ImageCaptcha
 from projecta11.config import conf
 from projecta11.handlers.base import BaseHandler
 from projecta11.routers import handling
-from projecta11.utils import require_session, parse_json_body, keys_filter
+from projecta11.utils import require_session
 
 _letter_cases = "acdefjkmprtwxy"
 _upper_cases = _letter_cases.upper()

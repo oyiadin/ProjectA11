@@ -19,6 +19,13 @@ var locales = [
     checkin_manage: '考勤管理',
     create_check: '创建一次新的签到活动',
     date_s_checkin: '的签到情况',
+    checkin_status: '签到情况',
+    pulldown2refresh: '下拉页面以刷新',
+    status: '状态',
+    staff_id: '学号',
+    operation: '操作',
+    my_center: '我的个人中心',
+
   },
 
   {
@@ -40,7 +47,12 @@ var locales = [
     checkin_manage: 'Checkin Activities Management',
     create_check: 'Create a new checkin code',
     date_s_checkin: "'s checkin status",
-
+    checkin_status: 'Checkin Status',
+    pulldown2refresh: 'Pull down the page to refresh',
+    status: 'Status',
+    staff_id: 'Staff ID',
+    operation: 'Operation'
+    my_center: 'My User-Center',
   }
 ];
 

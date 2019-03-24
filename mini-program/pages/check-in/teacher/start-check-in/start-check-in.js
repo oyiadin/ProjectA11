@@ -23,7 +23,7 @@ function fail_handler (res) {
 
 Page({
   data: {
-    code: "待获取",
+    code: _("waiting2fetch"),
     wifi_list: undefined,
   },
 
@@ -75,7 +75,7 @@ Page({
         { wifi_list: wifi_list },
         function () {
           wx.showToast({
-            title: '已完成',
+            title: _('completed'),
             icon: 'success',
             duration: 2000
           });
@@ -102,7 +102,7 @@ Page({
     wx.getWifiList({
       success: function (res) {
         console.log('getWifiList success');
-        wx.showLoading({ title: '获取中' });
+        wx.showLoading({ title: _('loading') });
       },
       fail: fail_handler,
     });

@@ -17,7 +17,7 @@ var locales = [
     verify_code: '输入签到码',
     submit: '提交',
     checkin_manage: '考勤管理',
-    create_check: '创建一次新的签到活动',
+    create_checkin: '创建一次新的签到活动',
     date_s_checkin: '的签到情况',
     checkin_status: '签到情况',
     pulldown2refresh: '下拉页面以刷新',
@@ -45,13 +45,13 @@ var locales = [
     verify_code: 'Please fill in the verification code',
     submit: 'Submit',
     checkin_manage: 'Checkin Activities Management',
-    create_check: 'Create a new checkin code',
+    create_checkin: 'Create a new checkin code',
     date_s_checkin: "'s checkin status",
     checkin_status: 'Checkin Status',
     pulldown2refresh: 'Pull down the page to refresh',
     status: 'Status',
     staff_id: 'Staff ID',
-    operation: 'Operation'
+    operation: 'Operation',
     my_center: 'My User-Center',
     logout: 'Logout'
   }

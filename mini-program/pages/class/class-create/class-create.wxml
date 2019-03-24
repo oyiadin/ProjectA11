@@ -24,7 +24,7 @@
         <view class="weui-cell__bd">
           <picker bindchange="bind_Weekday_Picker_Change" value="{{index}}" range="{{weekdays}}">
             <view class="weui-input" >
-              {{weekday}}
+              {{weekdays[weekday-1]}}
             </view>
           </picker>
         </view>

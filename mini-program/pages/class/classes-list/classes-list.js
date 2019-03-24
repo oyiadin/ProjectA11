@@ -13,17 +13,29 @@ Page({
       title: '载入中',
     });
     this.setData({ langIndex: wx.getStorageSync('langIndex') });
+    this.setData({ options: options });
+
+    this.refresh();
+  },
+
+  onShow: function () {
+    this.refresh();
+  },
+
+  refresh: function () {
+    var options = this.data.options;
+  
     var role = wx.getStorageSync('role');
     this.setData({ role: role });
 
     var course_id = options.course_id,
-        user_id = options.user_id;
+      user_id = options.user_id;
 
     if (course_id) {  // 从特定课程点进来的
       this.setData({
         course_mode: true,
         course_id: course_id,
-        course_name: options.course_name 
+        course_name: options.course_name
       });
 
       u.request(
@@ -47,7 +59,7 @@ Page({
           wx.hideLoading();
         }
       );
-    
+
     } else if (user_id && role == 0) {  // 从学生的个人中心点进来的
       this.setData({
         student_mode: true,

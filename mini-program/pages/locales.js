@@ -28,7 +28,8 @@ var locales = [
     role2: '教师',
     role3: '管理员',
     male: '男',
-    female: '女'
+    female: '女',
+    success: '成功',
   },
 
   {
@@ -60,7 +61,8 @@ var locales = [
     role2: 'Teacher',
     role3: 'Admin',
     male: 'Male',
-    female: 'Female'
+    female: 'Female',
+    success: 'Success!',
   }
 ];
 

@@ -24,41 +24,40 @@ Page({
   // 星期
   bind_Weekday_Picker_Change: function(e) {
     var date = e.detail.value;
-    date = date;
     switch (date) {
       case "0":
         this.setData({
-          weekday: "周一"
+          weekday: 1
         });
         break;
       case "1":
         this.setData({
-          weekday: "周二"
+          weekday: 2
         });
         break;
       case "2":
         this.setData({
-          weekday: "周三"
+          weekday: 3
         });
         break;
       case "3":
         this.setData({
-          weekday: "周四"
+          weekday: 4
         });
         break;
       case "4":
         this.setData({
-          weekday: "周五"
+          weekday: 5
         });
         break;
       case "5":
         this.setData({
-          weekday: "周六"
+          weekday: 6
         });
         break;
       case "6":
         this.setData({
-          weekday: "周末"
+          weekday: 7
         });
         break;
     }
@@ -80,49 +79,26 @@ Page({
 
   // 创建课程
   do_create: function() {
-    // 星期
-    var date = this.data.weekday;
-    switch (date) {
-      case "周一":
-        this.setData({
-          weekday: 1
+    u.request(
+      'PUT', '/class',
+      {
+        class_name: this.data.class_name,
+        weekday: this.data.weekday,
+        start: this.data.start,
+        end: this.data.end,
+        teacher_id: wx.getStorageSync('user_id'),
+        course_id: this.data.course_id,
+      },
+      (res) => {
+        wx.showToast({
+          title: _('success'),
+          duration: 1000
         });
-        break;
-      case "周二":
-        this.setData({
-          weekday: 2
-        });
-        break;
-      case "周三":
-        this.setData({
-          weekday: 3
-        });
-        break;
-      case "周四":
-        this.setData({
-          weekday: 4
-        });
-        break;
-      case "周五":
-        this.setData({
-          weekday: 5
-        });
-        break;
-      case "周六":
-        this.setData({
-          weekday: 6
-        });
-        break;
-      case "周日":
-        this.setData({
-          weekday: 7
-        });
-        break;
-    }
-    // 课程时间
-    var start = this.data.start;
-    var end = this.data.end;
-    // 创建
+        setTimeout(() => {
+          wx.navigateBack();
+        }, 1000);
+      }
+    )
   },
 
   onLoad: function (options) {
@@ -133,8 +109,8 @@ Page({
 
   clear_information: function () {
     this.setData({
-      class_name: ""
-    })
+
+    });
   },
 
   // 下拉更新

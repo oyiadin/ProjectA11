@@ -1,3 +1,7 @@
+<wxs module="_" src="../../i18n.wxs" />
+<block style="display:none">{{_.setLang(langIndex)}}</block>
+
+
 <view class="page">
   <view class="page__hd block">
     <view class="page__title">直播活动列表</view>

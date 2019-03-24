@@ -1,3 +1,7 @@
+<wxs module="_" src="../../i18n.wxs" />
+<block style="display:none">{{_.setLang(langIndex)}}</block>
+
+
 <view class="page-body">
   <view class="page-section tc">
     <video id="myVideo" src="{{src}}" binderror="videoErrorCallback" danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video>

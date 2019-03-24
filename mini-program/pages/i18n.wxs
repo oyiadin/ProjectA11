@@ -9,7 +9,7 @@ var T = function (x) {
 }
 
 var setLang = function (langIndex) {
-  localeIndex = langIndex;
+  localeIndex = langIndex || 0;
 }
 
 module.exports = {

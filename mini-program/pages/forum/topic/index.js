@@ -1,5 +1,7 @@
 var u = getApp().utils;
 var mydate = new Date()
+var _ = require('../../i18n.js')._;
+
 
 
 Page({

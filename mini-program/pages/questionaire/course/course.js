@@ -1,3 +1,6 @@
+var _ = require('../../i18n.js')._;
+
+
 Page({
     data:{
         radioItems:[

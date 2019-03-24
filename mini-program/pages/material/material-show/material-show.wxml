@@ -1,3 +1,7 @@
+<wxs module="_" src="../../i18n.wxs" />
+<block style="display:none">{{_.setLang(langIndex)}}</block>
+
+
 <view class="section tc page">
 
   <block wx:if="{{in_(['mp4', 'avi'])}}">

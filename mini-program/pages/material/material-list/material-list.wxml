@@ -1,3 +1,7 @@
+<wxs module="_" src="../../i18n.wxs" />
+<block style="display:none">{{_.setLang(langIndex)}}</block>
+
+
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__hd">
     <view class="page__title">教学材料</view>

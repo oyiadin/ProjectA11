@@ -1,8 +1,11 @@
-<!--pages/misc/index.wxml-->
+<wxs module="_" src="../i18n.wxs" />
+<block style="display:none">{{_.setLang(langIndex)}}</block>
+
+
 <view class="page">
   <view class="page__hd">
-    <view class="page__title">首页</view>
-    <view class="page__desc">应用中心</view>
+    <view class="page__title">{{_.T('index')}}</view>
+    <view class="page__desc">{{_.T('app_center')}}</view>
   </view>
   <view class="page__bd">
     <view class="weui-grids">

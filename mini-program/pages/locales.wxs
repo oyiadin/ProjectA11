@@ -10,7 +10,15 @@ var locales = [
     credential: '登录凭证',
     sex: '性别',
     other_info: '其他信息',
-    name: '姓名'
+    name: '姓名',
+    index: '首页',
+    app_center: '应用中心',
+    checkin: '课堂签到',
+    verify_code: '输入签到码',
+    submit: '提交',
+    checkin_manage: '考勤管理',
+    create_check: '创建一次新的签到活动',
+    date_s_checkin: '的签到情况',
   },
 
   {
@@ -19,12 +27,20 @@ var locales = [
     welcome: 'Welcome back!',
     welcome2: 'Welcome!',
     password: 'Password',
-    password_confirm: 'Confirm Password',
+    password_confirm: 'Confirm',
     captcha: 'Captcha',
     credential: 'Account Credentials',
     sex: '性别',
     other_info: 'Other Information',
-    name: 'Name'
+    name: 'Name',
+    index: 'Homepage',
+    app_center: 'Apps Center',
+    verify_code: 'Please fill in the verification code',
+    submit: 'Submit',
+    checkin_manage: 'Checkin Activities Management',
+    create_check: 'Create a new checkin code',
+    date_s_checkin: "'s checkin status",
+
   }
 ];
 

@@ -1,12 +1,15 @@
+<wxs module="_" src="../../../i18n.wxs" />
+<block style="display:none">{{_.setLang(langIndex)}}</block>
+
+
 <view class="page">
   <view class="page__hd">
-    <view class="page__title">签到管理菜单</view>
-    <view class="page__desc">check-in-menu</view>
+    <view class="page__title">{{_.T('checkin_manage')}}</view>
   </view>
   <view class="weui-btn-area">
     <navigator url="../start-check-in/start-check-in">
       <button class="weui-btn" type="primary">
-        创建一次新的签到活动
+        {{_.T('create_checkin')}}
       </button>
     </navigator>
   </view>
@@ -14,7 +17,7 @@
         wx:for="{{activities}}" wx:key="{{item.code_id}}">
     <navigator url="../checked-in-list/checked-in-list?code_id={{item.code_id}}">
       <button class="weui-btn" type="default">
-        查看{{item.date}}的签到情况
+        {{item.date}}{{_.T('date_s_checkin')}}
       </button>
     </navigator>
   </view>

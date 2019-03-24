@@ -1,4 +1,7 @@
-<!--pages/notification/notificatin_detail/notification_detail.wxml-->
+<wxs module="_" src="../../i18n.wxs" />
+<block style="display:none">{{_.setLang(langIndex)}}</block>
+
+
 <view class="page article">
         <view class="title">注意！注意！</view>
     <view class="prop">

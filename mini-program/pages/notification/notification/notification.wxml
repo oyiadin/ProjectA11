@@ -1,4 +1,7 @@
-<!--pages/notification/notification/notification.wxml-->
+<wxs module="_" src="../../i18n.wxs" />
+<block style="display:none">{{_.setLang(langIndex)}}</block>
+
+
 <view class="page">
   <view class="page__hd block">
     <view class="page__title">通知中心</view>

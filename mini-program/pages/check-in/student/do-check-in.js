@@ -1,4 +1,5 @@
 var u = getApp().utils;
+var _ = require('../../i18n.js')._;
 
 
 function fail_handler(res) {

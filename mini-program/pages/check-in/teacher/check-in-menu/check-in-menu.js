@@ -1,4 +1,6 @@
 var u = getApp().utils;
+var _ = require('../../../i18n.js')._;
+
 
 
 Page({

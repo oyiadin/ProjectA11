@@ -1,7 +1,11 @@
+<wxs module="_" src="../../i18n.wxs" />
+<block style="display:none">{{_.setLang(langIndex)}}</block>
+
+
 <view class="page">
   <view class="page__hd">
-    <view class="page__title">课堂签到</view>
-    <view class="page__desc">输入签到码</view>
+    <view class="page__title">{{_.T('checkin')}}</view>
+    <view class="page__desc">{{_.T('verify_code')}}</view>
   </view>
   <form bindsubmit="formSubmit">
     <view class='content'>
@@ -11,7 +15,7 @@
     </view>
     <input name="password" type='number' password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
     <view class="weui-footer weui-footer_fixed-bottom">
-      <button class="weui-btn" type="primary" plain="true" formType="submit" bindtap='submit_code'>提交</button>
+      <button class="weui-btn" type="primary" plain="true" formType="submit" bindtap='submit_code'>{{_.T('submit')}}</button>
     </view>
   </form>
 </view>

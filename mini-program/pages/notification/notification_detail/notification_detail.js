@@ -1,4 +1,6 @@
-// pages/notification/notificatin_detail/notification_detail.js
+var _ = require('../../i18n.js')._;
+
+
 Page({
 
   /**

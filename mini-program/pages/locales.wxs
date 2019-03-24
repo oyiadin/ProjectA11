@@ -1,0 +1,33 @@
+var locales = [
+  {
+    login: '登录',
+    register: '注册',
+    welcome: '欢迎回来！',
+    welcome2: '欢迎光临！',
+    password: '密码',
+    password_confirm: '确认密码',
+    captcha: '验证码',
+    credential: '登录凭证',
+    sex: '性别',
+    other_info: '其他信息',
+    name: '姓名'
+  },
+
+  {
+    login: 'Login',
+    register: 'Register',
+    welcome: 'Welcome back!',
+    welcome2: 'Welcome!',
+    password: 'Password',
+    password_confirm: 'Confirm Password',
+    captcha: 'Captcha',
+    credential: 'Account Credentials',
+    sex: '性别',
+    other_info: 'Other Information',
+    name: 'Name'
+  }
+];
+
+module.exports = {
+  locales: locales
+};

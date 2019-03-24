@@ -1,0 +1,18 @@
+var localeIndex;
+
+var module_locales = require('./locales.wxs');
+var locales = module_locales.locales;
+
+
+var T = function (x) {
+  return locales[localeIndex][x];
+}
+
+var setLang = function (langIndex) {
+  localeIndex = langIndex;
+}
+
+module.exports = {
+  T: T,
+  setLang: setLang
+};

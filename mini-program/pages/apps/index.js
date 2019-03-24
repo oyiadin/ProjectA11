@@ -1,19 +1,20 @@
 var u = getApp().utils;
+var _ = require('../i18n.js')._;
 
 
 Page({
   data: {
     apps: [
       {
-        title: '通知中心',
+        title: _('notif_center'),
         url: '../notification/notification/notification',
       }, 
       {
-        title: '课程列表',
+        title: _('course_list'),
         url: '../course/courses-list/courses-list',
       },  
       {
-        title: '观看直播',
+        title: _('watch_live'),
         url: '../live/student/pick',
       }, 
     ]
@@ -26,14 +27,14 @@ Page({
     if (role == 0) {  // 学生
       this.setData({
         apps: this.data.apps.concat({
-          title: '课堂签到',
+          title: _('checkin'),
           url: '../check-in/student/do-check-in'
         })
       });
     } else if (role == 1) {  // 教师
       this.setData({
         apps: this.data.apps.concat({
-          title: '课程直播中心',
+          title: _('live_center'),
           url: '../live/teacher/index?user_id=' + user_id,
         })
       });
